@@ -1,0 +1,17 @@
+<name>Scale Sprite</name>
+<group>moan</group>
+<synopsis>Starts a sprite scaling</synopsis>
+<syntax>Scale Sprite <i>spriteNum, xScaleDelta, yScaleDelta, speed</i></syntax>
+<desc>
+The 'Scale Sprite' command sets sprite <i>spriteNum</i> scaling at a specified speed for <i>xScaleDelta</i> units in the x-axis and <i>yScaleDelta</i> units in the y-axis. Once it has started scaling it will continue to do so until it reaches the final size, or you issue it another scale command.
+
+1 unit is equal to the sprite's original (unscaled) size. The deltas are relative amounts and are added to the sprite's current scale values.
+
+The <i>speed</i> is specified in units/frame.  For example passing 1 means scale the sprite up to the final size at a rate of 1 unit per frame. If you pass in a negative number as the speed, this is instead interpreted as the number of steps to complete the scale in. For example, passing -5 means complete the scale in 5 equal steps, no matter what the deltas are.
+
+To test if a sprite has finishing scaling use the @@Sprite Scaling@@ function.
+To stop the sprite before its scale finishes, issue another sclae command with 0 for the x and y deltas.
+
+See also:
+	The @@'S'cale@@ moan program function.
+</desc>

@@ -1,0 +1,13 @@
+TNT Linked List Library
+Version History
+
+21/2/00	:	CLinkedListT
+			Now stores the list count and last element in variables for quick access. Currently still uses the old code
+			but checks againsts the stored value for test purposes.
+			Added append and link element commands for shared list elements.
+			Made AddIndexer and RemoveIndexer const routines.
+
+			CListElementT
+			Removed default argument from constructor to get rid of all them bugs where you forget to pass "this" to the
+			constructor
+			

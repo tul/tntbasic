@@ -1,0 +1,47 @@
+<HTML>  
+<HEAD>
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>Raw Key Char</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+  <META NAME="AppleTitle" CONTENT="Raw Key Char">
+  <META NAME="AppleTarget" CONTENT="_right">
+  <META NAME="DESCRIPTION" CONTENT="Extracts the character from a raw key">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="349"
+HEIGHT="177">
+  <TR VALIGN="TOP">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">Raw Key Char</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD HEIGHT="41">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva">Extracts the character from a raw key</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Syntax</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="43">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial"><i>charString</i> = Keyboard Raw Char (<i>rawKey</i>)</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Description</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="40">
+      <BLOCKQUOTE>
+        <FONT SIZE="-1" FACE="Geneva"><p>Takes a <i>rawkey</i> as returned from the <A HREF="../commands/keyboardrawkey.htm">Keyboard Raw Key</A> command and extracts the character from it and returns it as a string.</p><p>You can use this to read what a user is typing into your program.</p><p>Eg:<br></FONT><FONT COLOR="#000000" SIZE="-2" FACE="Monaco,Arial"><br><FONT COLOR="#0000FF">int</FONT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rawKey<br><FONT COLOR="#0000FF">str</FONT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;char<br><FONT COLOR="#4985c6">Print</FONT> "Type some letters!"<br><FONT COLOR="#0000FF">repeat</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="#4985c6">Wait Key Press</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;rawKey = <FONT COLOR="#4985c6">Keyboard Raw Key</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;char = <FONT COLOR="#4985c6">Raw Key Char</FONT> (rawKey)<br>&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="#0000FF">if</FONT> char &lt;&gt; ""<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="#4985c6">Print</FONT> "You typed ";char<br>&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="#0000FF">end if</FONT><br><FONT COLOR="#0000FF">forever</FONT><br></FONT><FONT SIZE="-1" FACE="Geneva"></p><p>For more information on raw keys and working with the keyboard please refer to the <A HREF="../guides/keyboard_guide.htm">Keyboard Input Guide</A>.</p><p>The <A HREF="../guides/keyboard_guide.htm#stringeditor">String Editor</A> can also be used as an easy way to let people enter text into your program.</p>See also the <A HREF="../commands/keyboardrawkey.htm">Keyboard Raw Key</A>, <A HREF="../commands/rawkeyscancode.htm">Raw Key Scancode</A>, <A HREF="../commands/rawkeymodifier.htm">Raw Key Modifier</A> and <A HREF="../commands/rawkeyascii.htm">Raw Key Ascii</A> commands.<br></FONT>
+      </BLOCKQUOTE>
+    </TD>
+  </TR>
+  <TR VALIGN="TOP">
+    <TD ALIGN="CENTER" HEIGHT="34"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../io/io_frameset.htm">Table of contents</A></FONT></TD> 
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

@@ -1,0 +1,233 @@
+<!DOCTYPE html public "-//w3c//dtd html 4.0 transitional//en">
+<HTML>  
+<HEAD>
+  <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Mac">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+  <META NAME="GENERATOR" CONTENT="Mozilla/4.61 (Macintosh; I; PPC) [Netscape]">
+  <TITLE>Sound</TITLE>
+</HEAD>
+<BODY BACKGROUND="../gfx/chalk.gif">
+
+<P><IMG SRC="../gfx/sound.gif" NOSAVE BORDER="0" HEIGHT="110"
+WIDTH="215" NATURALSIZEFLAG="3" ALIGN="BOTTOM"><IMG SRC="../gfx/thinbarrel.gif"
+WIDTH="48" HEIGHT="110" ALIGN="BOTTOM" BORDER="0" NATURALSIZEFLAG="3"><BR>
+<FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Loading Sounds">Loading
+Sounds</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Playing a Sound">Playing
+a Sound</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Looping a Sound">Looping
+a Sound</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Stopping a Sound">Stopping
+a Sound</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Loading Music">Loading
+Music</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Playing Music">Playing
+Music</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Stopping Music">Stopping
+Music</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Music and Timing">Music
+and Timing</A></FONT></P>
+
+<P><A NAME="Loading Sounds"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Loading Sounds<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">Sounds can
+be placed into a TNT Basic program by adding them to the resources
+as a Sound ('snd ') resource.&nbsp; They cannot be loaded directly
+though.&nbsp; In order to load sounds, a Sound Bank ('SnBk') resource
+needs to be created.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Once the resource contains
+one of these then it can be loaded simply be calling the function
+<A HREF="../commands/loadsounds.htm">Load Sounds</A>.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Load Sounds</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 128</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This loads all the
+sounds in bank 128 into memory ready to be played.</FONT></P>
+
+<P><A NAME="Playing a Sound"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Playing a Sound<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">Once a sound
+bank has been loaded, any sound contained in it can be played.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">int </FONT><FONT
+ COLOR="#000000" SIZE="-2" FACE="Monaco">channel=</FONT><FONT
+ COLOR="#0000ff" SIZE="-2" FACE="Monaco">Play Sound</FONT><FONT
+ SIZE="-2" FACE="Monaco"> (0)</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This plays the first
+sound that was in the sound bank.&nbsp; The number after the <A
+HREF="../commands/playsound.htm">Play Sound</A> statement is the
+index into the sound bank of the sound to be played.</FONT></P>
+
+<P><A HREF="../commands/playsound.htm"><FONT SIZE="-1" FACE="Geneva,Helvetica">Play
+Sound</FONT></A><FONT SIZE="-1" FACE="Geneva,Helvetica"> plays
+the sound at default volume with equal balance through each speaker.&nbsp;
+To create additional effects (e.g. volume control, stereo panning)
+extra parameters can be passed.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">int </FONT><FONT
+ COLOR="#000000" SIZE="-2" FACE="Monaco">channel=</FONT><FONT
+ COLOR="#0000ff" SIZE="-2" FACE="Monaco">Play Sound</FONT><FONT
+ SIZE="-2" FACE="Monaco"> (0,100,50,25)</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">The first number is
+the index into the bank of the sound to be played.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">The second number is
+the 'balance' of the sound, this means how much of the sound comes
+from each speaker.&nbsp; A value of 100 means the sound comes
+entirely from the right speaker and a value of 0 means it comes
+entirely from the left speaker.&nbsp; Any value in between these
+means the sound will be balanced accordingly between the speakers.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">The third number is
+the volume the sound should be played at.&nbsp; This can be any
+value between 255 (as loud as possible) and 0 (silent).</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">The fourth number is
+the 'priority' of the sound.&nbsp; TNT Basic can only play 4 sounds
+at any one time, if more than four sounds are currently being
+played TNT Basic uses a priority system to decide which 4 should
+be played.&nbsp; The higher the priority, the more likely it is
+to be played because it will stop a lower priority sound so it
+can be heard.&nbsp; Priority can be any value between 0 (lowest)
+and 65535 (highest).</FONT></P>
+
+<P><A NAME="Looping a Sound"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Looping a Sound<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">There are some
+sound effects that you would like the user to hear continuously
+(e.g. rain, wind).&nbsp; These can be done by setting a sound
+to loop (i.e. as soon as it finishes it starts again) using the
+command <A HREF="../commands/loopsound.htm">Loop Sound</A>.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Loop Sound</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 0,100,50</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">The first number is
+the sound to be looped continuously.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">The second number is
+the balance of the sound.&nbsp; This works exactly the same as
+<A HREF="../commands/playsound.htm">Play Sound</A>.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">The third number is
+the volume of the sound.&nbsp; Again, this works exactly the same
+as <A HREF="../commands/playsound.htm">Play Sound</A>.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Looping sounds do not
+have a priority.&nbsp; This is because they are playing continuously
+and cannot be interrupted, they are automatically set by TNT Basic
+to have the highest priority possible.</FONT></P>
+
+<P><A NAME="Stopping a Sound"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Stopping a Sound<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">Once a sound
+has been set looping it will loop continuously until the program
+eventually finishes.&nbsp; Most likely, you will stop the sound
+from looping yourself at certain parts of the game. This can be
+done using the command <A HREF="../commands/stopsound.htm">Stop
+Sound</A>.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Stop Sound</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 0</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This command stops
+sound 0 immediately.</FONT></P>
+
+<P><A NAME="Loading Music"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Loading Music<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">Music can be
+placed in a TNT Basic program by adding it into the resources
+as a Music Module ('MADI').&nbsp; The music file can then be loaded
+into the program with the command <A HREF="../commands/loadmusic.htm">Load
+Music</A>.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Load Music</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 128</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This command loads
+music resource 128 into memory ready to be played.</FONT></P>
+
+<P><A NAME="Playing Music"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Playing Music<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">The currently
+loaded music can then be played easily with the command <A HREF="../commands/playmusic.htm">Play
+Music</A>.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Play Music</FONT></P>
+
+<P><A NAME="Stopping Music"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Stopping Music<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">The music will
+loop continuously (once it has finished it starts again) until
+the program finishes.&nbsp; In order to stop the music currently
+being played call the command <A HREF="../commands/stopmusic.htm">Stop
+Music</A>.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Stop Music</FONT></P>
+
+<P><A NAME="Music and Timing"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Music and Timing<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">TNT Basic has
+specialised commands for timing music with the program.</FONT></P>
+
+<P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Helvetica">Getting
+the Music Position<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">The current
+position of the music can be obtained by using the command <A
+HREF="../commands/musicposition.htm">Music Position</A>.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">while Music Position</FONT><FONT
+ SIZE="-2" FACE="Monaco">&lt;60</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">wend</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Stop Music</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This piece of code
+waits until the music has been playing for over 1 second and then
+stops it.&nbsp; The number that <A HREF="../commands/musicposition.htm">Music
+Position</A> returns is measured in 60ths of a second.&nbsp; This
+means that for every second of music that is played the music
+position will increase by 60.</FONT></P>
+
+<P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Helvetica">Setting
+the Music Position<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">Music does
+not necessarily have to be played from beginning to end either.
+The command <A HREF="../commands/setmusicposition.htm">Set Music
+Position</A> changes the position the music is currently being
+played from.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Set Music Position</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 120</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This sets the music
+position to be 2 seconds into the song.&nbsp; When the music is
+played it will start from 2 seconds into the song.</FONT></P>
+
+<P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Helvetica">Getting
+the Music Length<BR>
+</FONT></B><FONT COLOR="#000000" SIZE="-1" FACE="Geneva,Helvetica">The
+full length of the music can be obtained using the command </FONT><FONT
+ SIZE="-1" FACE="Geneva,Helvetica"><A HREF="../commands/musiclength.htm">Music
+Length</A></FONT><FONT COLOR="#000000" SIZE="-1" FACE="Geneva,Helvetica">.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">while Music Position</FONT><FONT
+ COLOR="#000000" SIZE="-2" FACE="Monaco">&lt;</FONT><FONT COLOR="#0000ff"
+ SIZE="-2" FACE="Monaco">Music Length</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">wend</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Stop Music</FONT></P>
+
+<P><FONT COLOR="#000000" SIZE="-1" FACE="Geneva,Helvetica">This
+piece of code waits until the music has reached the end and then
+stops it.</FONT></P>
+
+<P><CENTER><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A HREF="../tutor/tutor_frameset.htm">Table
+of contents</A></FONT></CENTER>
+
+</BODY>
+</HTML>

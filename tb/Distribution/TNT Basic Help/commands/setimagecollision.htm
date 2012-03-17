@@ -1,0 +1,67 @@
+<HTML>  
+<HEAD>
+  <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Mac">
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>Set Image Collision</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+  <META NAME="AppleTitle" CONTENT="Set Image Collision">
+  <META NAME="AppleTarget" CONTENT="_right">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="349"
+HEIGHT="201">
+  <TR VALIGN="TOP">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">Set
+      Image Collision</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD HEIGHT="41">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva">Sets the collision information
+        for an image.</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Syntax</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="39">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">Set Image Collision <I>useMask</I>,<I>tolerance</I>,<I>image<BR>
+        </I>Set Image Collision <I>useMask</I>,<I>tolerance</I>,<I>image,bank</I></FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Description</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="68">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva">This command is used to specify
+        the type of collision an image should perform.</FONT></P>
+        <P><I><FONT SIZE="-1" FACE="Geneva">useMask</FONT></I><FONT SIZE="-1"
+         FACE="Geneva"> is a boolean value containing whether or not
+        the image should perform mask based collision. If this value
+        is false then it simply uses a rectangle to perform collision,
+        if it is true then it handles collision based on the images shape.</FONT></P>
+        <P><I><FONT SIZE="-1" FACE="Geneva">tolerance</FONT></I><FONT
+         SIZE="-1" FACE="Geneva"> is used in conjunction with mask collision.
+        It is a value of how sensitive to collision that image is. This
+        is a value between 0 (least sensitive) and 255 (most sensitive).</FONT></P>
+        <P><I><FONT SIZE="-1" FACE="Geneva">image</FONT></I><FONT SIZE="-1"
+         FACE="Geneva"> is the index into a bank of the image to alter
+        the collision information for</FONT></P>
+        <P><I><FONT SIZE="-1" FACE="Geneva">bank</FONT></I><FONT SIZE="-1"
+         FACE="Geneva"> is an optional parameter specifying a bank to
+        get the image from. If this is not specified then the default
+        image bank is used.</FONT>
+      </BLOCKQUOTE>
+    </TD>
+  </TR>
+  <TR VALIGN="TOP">
+    <TD ALIGN="CENTER" HEIGHT="34"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../imag/imag_frameset.htm">Table of contents</A></FONT></TD> 
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

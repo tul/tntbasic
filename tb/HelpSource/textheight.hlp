@@ -1,0 +1,10 @@
+<name>Text Height</name>
+<group>draw</group>
+<synopsis>Calculates the current text height in pixels</synopsis>
+<syntax><i>height</i> = Text Height</syntax>
+<desc>
+Calculates the height in pixels that any string will occupy if drawn on the current canvas with the current font settings by the @@Draw Text@@ command.
+
+See also:
+	The @@Text Width@@, @@Text Descent@@ and @@Draw Text@@ commands.
+</desc>

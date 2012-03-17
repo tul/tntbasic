@@ -1,0 +1,208 @@
+drawing to the screen
+
+Message: 5
+Cc: John Stauffer <stauffer@apple.com>, mac-games-dev@lists.apple.com,
+  Hong-Jun Yoon <hongjuny72@yahoo.com>
+From: David Hill <davidh@apple.com>
+Subject: Re: Full Screen double buffering
+Date: Wed, 28 Jan 2004 13:43:36 -0800
+To: John Stiles <JStiles@blizzard.com>
+
+While we'd rather you use OpenGL in most cases, have you looked at 
+CreateNewPortForCGDisplayID from QuickDraw.h?
+
+/*
+   Developers need a way to go from a CGDirectDisplay environment to 
+Quickdraw.
+   The following is equivalent to CreateNewPort(), but instead of 
+taking the
+   portPixMap from the current GDevice, it uses the GDevice 
+corresponding to
+   the CGSDisplayID passed in. If the CGSDisplayID is invalid, the 
+mainDevice
+   is used instead.
+*/
+/*
+ *  CreateNewPortForCGDisplayID()
+ *
+ *  Mac OS X threading:
+ *    Not thread safe
+ *
+ *  Availability:
+ *    Mac OS X:         in version 10.0 and later in 
+ApplicationServices.framework
+ *    CarbonLib:        not available in CarbonLib 1.x, is available 
+on Mac OS X version 10.0 and later
+ *    Non-Carbon CFM:   not available
+ */
+extern CGrafPtr
+CreateNewPortForCGDisplayID(UInt32 inCGDisplayID)             
+AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+
+
+If you find cases where using CopyBits to blit to this port doesn't 
+work, file bugs.  It is far more likely that CopyBits will continue to 
+work in cases where writing directly to the screen fails.
+
+Dave
+
+
+
+On Jan 28, 2004, at 7:41 AM, John Stiles wrote:
+
+Unfortunately, if you've captured the screen using CGDisplayCapture, 
+there is no way to draw to it in 2D without blitting pixels directly 
+to the screen. There is an API to get the base address and row bytes; 
+there is NOT an API to blit from a CGrafPtr anything like that.
+
+I wrestled with this system long long ago (i.e. OS X 10.0.x) and tried 
+to come up with ways to get CopyBits to work right on a captured 
+display, but never got anything that worked 100%, and blitting worked 
+perfectly. So I haven't rocked the boat too much on this one.
+
+
+On Jan 27, 2004, at 6:29 PM, John Stauffer wrote:
+
+Writing directly to the screen is not recommended and will not be 
+guaranteed to work in the future.
+
+John
+
+On Jan 24, 2004, at 2:27 PM, Hong-Jun Yoon wrote:
+
+Hi! All,
+
+I'm looking for means of double buffering for 2D full
+screen game development in OS X.
+What I've been trying so far is using CGDirectDisplay
+function. After I grab the base address, simply tried
+memcpy() from my local memory which seems little bit
+unsatisfactory.
+Does anyone knows smart way to deal with? If there's
+something like what DirectDraw did, that would be the
+best. By the way, many of guys did actually try with
+OpenGL just for double buffering.   I'm wondering that
+might be the way to go.
+Thanks in advance.
+
+June
+_______________________________________________
+mac-games-dev mailing list | mac-games-dev@lists.apple.com
+Help/Unsubscribe/Archives: 
+http://www.lists.apple.com/mailman/listinfo/mac-games-dev
+Do not post admin requests to the list. They will be ignored.
+_____________
+
+
+Message: 6
+Cc: mac-games-dev@lists.apple.com, Nikolay Iontchev
+  <niontchev@renlearn.ca>
+From: Geoff Stahl <gstahl@apple.com>
+Subject: Re: VBL sync'd page flipping (was Reading keys)
+Date: Thu, 23 Oct 2003 08:56:49 -0700
+To: Jens Bauer <fs.dev@objc-source.org>
+
+A couple issues.  First a VRAM to VRAM blit takes no CPU and is done at  
+VRAM memory speeds on the GPU.  Second be careful of the assumptions  
+you make about the back buffer...  For your design I suspect something  
+like this would be appropriate...
+
+- establish x Memory buffers in ARGB or RGBA format (or RGB for that  
+matter).  There should be be at least two but much many more will not  
+likely help you.  Then establish each of these as a named texture  
+(texture object).
+- draw your content into the current buffer as you desire
+- use OpenGL to get this buffer to the screen by using it as a texture  
+(using the object id) and drawing a full screen quad with this single  
+texture (use care with Rage128 and power of two textures as non-power  
+of two are not supported in this hardware).  You can set the client  
+storage flag and the texture range hint to shared for this texture.   
+OpenGL, if able, will then not make any copies of the texture and will  
+do a GPU DMA to get the data for drawing to the card using little to no  
+CPU time in drawing the texture.
+- issue a swap (VBL syncd) to the card to swap this frame to the screen  
+(this takes the OpenGL back buffer with the drawn texture and copies it  
+to the front buffer in hardware) (a nice thing here is you get  
+automatic scaling and windowed support if you like so if need be you  
+can always work on a single sized buffer)
+- move to the next buffer
+- when moving between buffers you should use the apple fence extension  
+and fence against the texture object you are about to use.  This will  
+block (or you can use the test version which will return a boolean)  
+until the GPU is done with the object.  You can use this to figure out  
+how many buffers you need to be fully async with no waiting on the GPU  
+(you could actually scale the app on the fly if you wanted adding  
+buffers until you test never failed; if test fails use new buffer, else  
+use oldest used buffer)
+- repeat at step two using your buffer in a round robin fashion
+
+This is the fastest data path to the screen and much higher bandwidth  
+and less CPU then previous generation machines.  See the Texture Range  
+sample code for an example of this technique, it is at  
+<http://developer.apple.com/samplecode/Sample_Code/Graphics_3D/ 
+TextureRange.htm>. Note you can play with the sliders to get the  
+optimal performance noting that if you VBL sync that will severely  
+reduce you data rate due to frame rate limitations (though you could  
+use bigger frames to again increase your net data throughput).
+
+Oh, the one assumption...  The above is obviously straight forward as  
+the content (when you come back to the buffer) of each buffer is x  
+frames old, where x is the number of buffers in use.  If you used two  
+buffers and ping pong between them you would get results similar to  
+page flipping where your current buffer is two frames old to start.   
+OpenGL context have a "backing store" parameter which can be queried to  
+see if the back buffer is valid after swaps.  In most (if not all)  
+cases this will be false.  In non-full screen cases it is most likely  
+that the back buffer will always be valid (even though the bit is set)  
+but in full screen cases true page flipping can be enabled and thus the  
+back store will not still have the frames data in it after the swap.   
+Since the above technique does not care about the back buffer this  
+should not affect you, though it is good to have the whole story.
+
+Hope this makes sense, have a look at the sample for more insights.
+
+On Oct 23, 2003, at 12:40 AM, Jens Bauer wrote:
+
+Hi Geoff,
+
+On Wednesday, Oct 22, 2003, at 23:38 Europe/Copenhagen, Geoff Stahl  
+wrote:
+
+Again, VBL syncing and page flipping are two very different things.
+What do you really need?  I am pretty positive that you care about VBL
+syncing and do not really care about page flipping (but might think  
+you
+do).  I still submit that I have not seen a full screen app that
+benefits substantially from page flipping versus a VRAM to VRAM blit.
+
+If the card can emulate page-flipping by using a VRAM to VRAM blit,  
+it'd be the same thing, right ?
+-Eg. I have 16 different buffers on the card that is the same size as  
+the screen, so that I only have to update the changes?
+
+If the emulation is just as fast as page-flipping, I'd have no problem  
+using the emulation, but if it eats CPU-time, I'd prefer  
+page-flipping.
+
+For my needs, I'll have to think about how to do this. I may be able  
+to benefit from using both.
+
+1: modify VRAM[buffer] to reflect current game data (view  
+representation)
+2: do VRAM[buffer++ & 15] to VRAM[offscreen]
+3: on vsync, flip page (swap offscreen and onscreen)
+
+It'd be better to do it this way, rather than blitting directly to the  
+displayed screen on vsync, as it'd just give me the normal flickering.
+---
+Geoff Stahl
+3D Software Engineer
+Apple
+
+
+---------------------
+TEXTURE RANGE DESCRIPTION
+Description
+
+
+This demo shows the fundamental techniques required to fast texture upload performance: This is an updated and improved version of the texture range demo. There are 3 levels of optimization to implement to get the full benefit. Depending on what you're looking to do you can get anywhere from a 70% performance boost to a 800% performance boost. The first optimization is good for anything you're doing, the second two are only of non-power of two textures. 1) Using GL_UNPACK_CLIENT_STORAGE_APPLE This sequence should get you a ~70% texture performance improvement because this eliminates one data copy. Beware of of the fact that this tells OpenGL to use the app copy of the data. So don't trash your copy until you've deleted the texture from OpenGL. Create the texture with: glBindTextures( target, &texID); glPixelStorei(GL_UNPACK_CLIENT_STORAGE_APPLE, 1); glTexImage2D(target, 0, GL_RGBA, width, height, 0, GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV, image_ptr); Update the texture with: glTexSubImage2D(target, 0, 0, 0, width, height, GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV, image_ptr); 2) Enabling GL_TEXTURE_RECTANGLE_EXT. This will allow you to draw non-power of two textures. Be aware that using non-power of two textures also changes the textures coords from normalized coords to pixel coords. Make sure you check for the GL_TEXTURE_RECTANGLE_EXT extension before enabling. The Rage128 doesn't fulling support this extension. I'm working to add some code to the attached demo to show how to best optimize on the Rage128. Create the texture with: glBindTexture(GL_TEXTURE_RECTANGLE_EXT, &texID); glPixelStorei(GL_UNPACK_CLIENT_STORAGE_APPLE, 1); glTexParameteri(GL_TEXTURE_RECTANGLE_EXT, GL_TEXTURE_MIN_FILTER, GL_NEAREST); glTexParameteri(GL_TEXTURE_RECTANGLE_EXT, GL_TEXTURE_MAG_FILTER, GL_NEAREST); glTexParameteri(GL_TEXTURE_RECTANGLE_EXT, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE); glTexParameteri(GL_TEXTURE_RECTANGLE_EXT, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE); glTexImage2D(GL_TEXTURE_RECTANGLE_EXT, 0, GL_RGBA, width, height, 0, GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV, image_ptr); Update the texture with: glTexSubImage2D(GL_TEXTURE_RECTANGLE_EXT, 0, 0, 0, width, height, GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV, image_ptr); 3) Texture Range. This is a hint to OpenGL telling the system that you want VRAM or AGP texturing. Set the GL_TEXTURE_STORAGE_HINT_APPLE to GL_STORAGE_CACHED_APPLE or GL_STORAGE_SHARED_APPLE for requesting VRAM or AGP texturing respectively. GL_STORAGE_PRIVATE_APPLE is the default and specifies OpenGL normal texuring path. Additionally, you can use glTextureRangeAPPLEto specify an area of memory to be mapped vice each individual texture. This is useful for tiled or multiple textures in contiguous memory. Create the texture with: glBindTexture(GL_TEXTURE_RECTANGLE_EXT, &texID); if(texture_range) glTextureRangeAPPLE(GL_TEXTURE_RECTANGLE_EXT, IMAGE_COUNT * width * height * (IMAGE_DEPTH >> 3), image_ptr); else glTextureRangeAPPLE(GL_TEXTURE_RECTANGLE_EXT, 0, NULL); glTexParameteri(GL_TEXTURE_RECTANGLE_EXT, GL_TEXTURE_STORAGE_HINT_APPLE , GL_STORAGE_CACHED_APPLE); glPixelStorei(GL_UNPACK_CLIENT_STORAGE_APPLE, 1); glTexParameteri(GL_TEXTURE_RECTANGLE_EXT, GL_TEXTURE_MIN_FILTER, GL_NEAREST); glTexParameteri(GL_TEXTURE_RECTANGLE_EXT, GL_TEXTURE_MAG_FILTER, GL_NEAREST); glTexParameteri(GL_TEXTURE_RECTANGLE_EXT, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE); glTexParameteri(GL_TEXTURE_RECTANGLE_EXT, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE); glTexImage2D(GL_TEXTURE_RECTANGLE_EXT, 0, GL_RGBA, width, height, 0, GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV, image_ptr); Update the texture with: glTexSubImage2D(GL_TEXTURE_RECTANGLE_EXT, 0, 0, 0, width, height, GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV, image_ptr); With all 3 of these options correctly managed, what you get is async AGP/PCI DMA transfers straight from your memory to texture memory. Meaning that the driver never touches the pixels with the CPU. Requirements: ProjectBuilder, Mac OS X v10.2 or later Keywords: OpenGL, performance, texture, texture range, client storage, texture rectangle, non-power of two

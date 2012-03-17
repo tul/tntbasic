@@ -1,0 +1,20 @@
+Build requirements
+------------------
+You need to use Xcode 3 to compile TNT Basic (eg Xcode 3.2.6). It won't compile in Xcode 4 as it refernces APIs which
+Apple have finally killed off with Xcode 4. It is possible to install Xcode 3 on OS X Lion, you just need to hack around
+with the Xcode installer - instructions are only a google away.
+
+Support for Xcode 4 will be added as soon as possible.
+
+Building the help
+-----------------
+A lot of the documentation is stored in HTML inside 'tb/Distribution/TNT Basic Help'. However, a move is being
+made to the more flexible .hlp files, which are stored in 'tb/Help Source'. If you change any HTML based
+documentation, please consider moving it to the more modern .hlp file at the same time. It doesn't take long
+to do.
+To build the HTML documentation from the .hlp files, open a terminal, cd into tb/HelpSource and type:
+'formathelp.pl -t', this will build a commands index of all the commands that are currently documented, it will
+then use this commands index to automatically hyperlink the documentation. You only need to do this command rarely,
+read the comments at the top of the formathelp.pl for more information.
+Next type 'formathelp.pl' this will convert all .hlp files to HTML using the tbformat tool built at step 3 to
+format any TNT Basic source code into HTML. Currently, formathelp.pl only converts to HTML.

@@ -1,0 +1,13 @@
+<name>Sprite Exists</name>
+<group>spri</group>
+<synopsis>Tells if a sprite currently exists</synopsis>
+<syntax><i>exists</i> = Sprite Exists (<i>spriteID</i>)</syntax>
+<desc>
+A sprite exists if it has been created with the @@Sprite@@ command.
+
+Once a sprite is created, it will stay in existence until a @@Sprite Off@@ command is used to remove it.
+
+The 'Sprite Exists' command lets you check if the sprite <i>spriteID</i> currently exists.
+
+See also the @@Sprite@@ and @@Sprite Off@@ commands.
+</desc>

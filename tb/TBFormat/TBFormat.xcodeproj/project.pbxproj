@@ -1,0 +1,244 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4D3512710926DFDC00FF650C /* TBFormat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D3512700926DFDC00FF650C /* TBFormat.cpp */; };
+		4D3512D109279C7200FF650C /* lex.basic.c in Sources */ = {isa = PBXBuildFile; fileRef = 4D3512D009279C7100FF650C /* lex.basic.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8DD76F690486A84900D96B5E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstPath = usr/share/man/man1;
+			dstSubfolderSpec = 1;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		4D3512700926DFDC00FF650C /* TBFormat.cpp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = TBFormat.cpp; sourceTree = "<group>"; };
+		4D3512D009279C7100FF650C /* lex.basic.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = lex.basic.c; path = ../Source/Parser/lex.basic.c; sourceTree = SOURCE_ROOT; };
+		4D3512F30927A7BC00FF650C /* xcode_prefix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xcode_prefix.h; sourceTree = "<group>"; };
+		8DD76F6C0486A84900D96B5E /* tbformat */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = tbformat; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DD76F660486A84900D96B5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* tbproject */ = {
+			isa = PBXGroup;
+			children = (
+				4D3512D009279C7100FF650C /* lex.basic.c */,
+				08FB7795FE84155DC02AAC07 /* Source */,
+				C6859E8C029090F304C91782 /* Documentation */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+				4D3512F30927A7BC00FF650C /* xcode_prefix.h */,
+			);
+			name = tbproject;
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				4D3512700926DFDC00FF650C /* TBFormat.cpp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DD76F6C0486A84900D96B5E /* tbformat */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C6859E8C029090F304C91782 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Documentation;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8DD76F620486A84900D96B5E /* tbformat */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4DC61015098C690A00670E44 /* Build configuration list for PBXNativeTarget "tbformat" */;
+			buildPhases = (
+				8DD76F640486A84900D96B5E /* Sources */,
+				8DD76F660486A84900D96B5E /* Frameworks */,
+				8DD76F690486A84900D96B5E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = tbformat;
+			productInstallPath = "$(HOME)/bin";
+			productName = tbproject;
+			productReference = 8DD76F6C0486A84900D96B5E /* tbformat */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 4DC61019098C690A00670E44 /* Build configuration list for PBXProject "TBFormat" */;
+			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 08FB7794FE84155DC02AAC07 /* tbproject */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8DD76F620486A84900D96B5E /* tbformat */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8DD76F640486A84900D96B5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D3512710926DFDC00FF650C /* TBFormat.cpp in Sources */,
+				4D3512D109279C7200FF650C /* lex.basic.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		4DC61016098C690A00670E44 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREFIX_HEADER = xcode_prefix.h;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"TARGET_API_MAC_CARBON=0",
+					"TYPE_BOOL=1",
+					"__MWERKS__=0xffffffff",
+					"_CSTD=std",
+					"_STD=std",
+					"__dest_os=__posixtool__",
+					"PP_Uses_Std_Namespace=1",
+					"WritersBlock=1",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../Source/Parser,
+					"../../mr/**",
+				);
+				INSTALL_PATH = "$(HOME)/bin";
+				PREBINDING = NO;
+				PRODUCT_NAME = tbformat;
+				SYMROOT = ./;
+				ZERO_LINK = NO;
+			};
+			name = Development;
+		};
+		4DC61017098C690A00670E44 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INSTALL_PATH = "$(HOME)/bin";
+				PREBINDING = NO;
+				PRODUCT_NAME = tbformat;
+				ZERO_LINK = NO;
+			};
+			name = Deployment;
+		};
+		4DC61018098C690A00670E44 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INSTALL_PATH = "$(HOME)/bin";
+				PREBINDING = NO;
+				PRODUCT_NAME = tbformat;
+			};
+			name = Default;
+		};
+		4DC6101A098C690A00670E44 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Development;
+		};
+		4DC6101B098C690A00670E44 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Deployment;
+		};
+		4DC6101C098C690A00670E44 /* Default */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Default;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4DC61015098C690A00670E44 /* Build configuration list for PBXNativeTarget "tbformat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DC61016098C690A00670E44 /* Development */,
+				4DC61017098C690A00670E44 /* Deployment */,
+				4DC61018098C690A00670E44 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+		4DC61019098C690A00670E44 /* Build configuration list for PBXProject "TBFormat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DC6101A098C690A00670E44 /* Development */,
+				4DC6101B098C690A00670E44 /* Deployment */,
+				4DC6101C098C690A00670E44 /* Default */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Default;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}

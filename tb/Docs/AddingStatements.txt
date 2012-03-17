@@ -1,0 +1,21 @@
+Adding a statement to TNT Basic
+-------------------------------
+
+1. Add a rule to the lexer, make the action be Return_Statement(tokenId);
+   You should not need to modify the parser.
+
+2. In the UFunctionMgr::MakeStatement add a case for the tokenId you're adding.
+   Make it create the statement and assign it to result.
+   The general expression list passed to makestatement is a list of the parameters passed to
+   the statement. They can be either nums or strs and the seperators can be either ,;to   
+   
+   Your statement constructor is free to throw exceptions (make sure it cleans up proper before
+   throwing).
+   It should ensure the parameter list is valid for its purposes, if not then it should
+   throw an exception reporting the error by using the UTBException class. The error will
+   be logged and parsing will continue.
+   Alternately you can check the parameters before passing them to your constructor.
+   If your statement doesn't accept parameters then you should throw if parameters are passed.
+   
+   IMPORTANT: If the constructor throws an exception it MUST NOT delete the expression list
+   inputted to it, it should only adopt this list if it constructs successfully.

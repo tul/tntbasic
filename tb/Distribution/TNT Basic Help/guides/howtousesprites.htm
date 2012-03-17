@@ -1,0 +1,60 @@
+<HTML>  
+<HEAD>
+  <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Mac">
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>How To Use Sprites</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="349"
+HEIGHT="88">
+  <TR VALIGN="TOP">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">How
+      To Use Sprites</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD HEIGHT="41">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">The common way to implement
+        sprites inside a game is with the following structure...</FONT></P>
+        <P><FONT COLOR="#ff0000" SIZE="-2" FACE="Monaco,Arial">' Initialisation</FONT><FONT
+         COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial"><BR>
+        Load Images</FONT><FONT SIZE="-2" FACE="Monaco,Arial"><BR>
+        ...</FONT></P>
+        <P><FONT COLOR="#ff0000" SIZE="-2" FACE="Monaco,Arial">' Main
+        loop<BR>
+        </FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">while</FONT><FONT
+         SIZE="-2" FACE="Monaco,Arial"> gameRunning</FONT></P>
+        <BLOCKQUOTE>
+          <P><FONT COLOR="#ff0000" SIZE="-2" FACE="Monaco,Arial">' Position
+          Sprites<BR>
+          </FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">Sprite</FONT><FONT
+           SIZE="-2" FACE="Monaco,Arial"> 0,0,0,0<BR>
+          ...</FONT></P>
+          <P><FONT COLOR="#ff0000" SIZE="-2" FACE="Monaco,Arial">' Update
+          the graphics<BR>
+          </FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">Draw
+          Frame</FONT></P></BLOCKQUOTE>
+        <P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">wend</FONT></P>
+        <P><FONT COLOR="#000000" SIZE="-1" FACE="Geneva,Arial">Since
+        the sprites are not rendered directly into the canvas they can
+        be moved around easily just using the </FONT><FONT SIZE="-1"
+         FACE="Geneva,Arial"><A HREF="../commands/sprite.htm">Sprite</A></FONT><FONT
+         COLOR="#000000" SIZE="-1" FACE="Geneva,Arial"> command.</FONT></P>
+        <P><FONT COLOR="#000000" SIZE="-1" FACE="Geneva,Arial">The frame
+        can then be drawn to the screen with all the sprites in the new
+        positions using </FONT><FONT SIZE="-1" FACE="Geneva,Arial"><A
+        HREF="../commands/drawframe.htm">Draw Frame</A></FONT><FONT COLOR="#000000"
+         SIZE="-1" FACE="Geneva,Arial">.</FONT>
+      </BLOCKQUOTE>
+    </TD>
+  </TR>
+  <TR VALIGN="TOP">
+    <TD ALIGN="CENTER" HEIGHT="28"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../spri/spri_frameset.htm">Table of contents</A></FONT></TD>
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

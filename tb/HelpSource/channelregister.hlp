@@ -1,0 +1,33 @@
+<name>Channel Register</name>
+<covers>Set Channel Register</covers>
+<group>moan</group>
+<syntax><i>value</i> = Channel Register (<i>channelId,localRegId</i>)
+<i>value</i> = Channel Register (<i>globalRegId</i>)
+Set Channel Register <i>channelId, localRegId, value</i>
+Set Channel Register <i>globalRegId, value</i></syntax>
+<synopsis>Reads/writes moan channel registers</synopsis>
+<desc>
+The 'Channel Register' and 'Set Channel Register' commands are used to get or set moan registers.
+
+You can read/write either local moan channel registers (which require that you specified a <i>channelId</i>), or global moan registers (for which the channel id is omitted). There are therefore two variants of each command.
+
+<sub>Local Version</sub>
+When <i>channelId</i> is specified, this command will work with the local moan registers of that channel. You can specify the registers by either numeric index or by name. When specifying by numeric index, 0-9 refer to 'R0' - 'R9' and 10 - 12 refer to registers 'x', 'y' and 'i' respectively.
+You can also specify the register by name, using strings such as "R0", "R7", "X", "Y" and "I".
+Registers R0 - R9 are general purpose registers and can be set to anything you like. Registers X, Y and I hold the X, Y and image index of the FIRST sprite or viewport added to the channel. Viewports always have an I register of -1 as they do not support images.
+
+<sub>Global Version</sub>
+When <i>channelId</i> is omitted, the commands work with the shared moan registers. Like the channel specific version, the register can be specified by index or name. 0-25 refers to shared moan register 'RA' to 'RZ'. You can also refer to them with a string, e.g. "RA", "RJ" or "RZ".
+
+Registers can only store integers and cannot store floats or strings.
+
+Examples:
+<tnt>set channel register 0,1,10		' Sets R1 of moan channel 0 to 10
+set channel register 0,"R1",20		' Sets R1 of moan channel 0 to 20
+set channel register "RZ",-3			' Sets global moan register "RZ" to -3
+value = channel register ("RB")		' Gets global moan register "RB"
+value = channel register (7)			' Gets global moan register "RH"
+value = channel register (2,3)		' Gets R3 of moan channel 2</tnt>
+
+See also the @@Advanced Moan Tutorial@@ and the @@'L'et@@ moan function.
+</desc>

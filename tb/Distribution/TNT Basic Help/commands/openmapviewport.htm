@@ -1,0 +1,82 @@
+<HTML>  
+<HEAD>
+  <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Mac">
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>Open Map Viewport</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+  <META NAME="AppleTitle" CONTENT="Open Map Viewport">
+  <META NAME="AppleTarget" CONTENT="_right">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="349"
+HEIGHT="201">
+  <TR VALIGN="TOP">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">Open
+      Map Viewport</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD HEIGHT="41">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva">Creates a viewport and a canvas
+        from a map.</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Syntax</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="39">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">Open Map Viewport <I>canvas,mapLayer,x1,y1
+        </I>to <I>x2,y2</I></FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Description</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="68">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva">This command opens a tile scrolling
+        canvas with the effective size of the total map, but an actual
+        size of only just a little larger than the viewport. This means
+        that as far as you are concerned you have a large canvas to scroll
+        around, however, in terms of memory it only opens a small canvas.</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva">The map used is the currently
+        loaded map. If the canvas is open, it is closed and reopened
+        to be just larger than the viewport size. This canvas is managed
+        by the viewport, you <I>can</I> draw on the canvas yourself,
+        but your changes will just be erased whenever you scroll enough
+        for the map to be redrawn.</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva">If you change the tiles on the
+        map with the 'set map tile' command then the tiles will be updated
+        in the viewport. If you change the currently loaded map then
+        the viewport will redraw with the new map.</FONT></P>
+        <P><B><FONT SIZE="-1" FACE="Geneva">Tile Scrolling</FONT></B><FONT
+         SIZE="-1" FACE="Geneva"><BR>
+        When doing tile scrolling, you open a canvas just a<BR>
+        little larger than the viewport and then scroll only by a few
+        pixels before resetting the scroll back to zero and redrawing
+        the map tiles 1 tile over. This allows a huge map to be scrolled
+        without having to open a canvas as big as the map.</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva">Using a map viewport is a lot
+        easier than doing tile scrolling yourself, TNT Basic takes care
+        of all the map redrawing and scrolling offset for you, you just
+        treat the canvas as a huge canvas the size of the map. You can
+        position your sprites anywhere on the map without having to worry
+        about doing the same coordinate transforms you'd have to perform
+        if doing manual tile scrolling.</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva">The viewport can be removed
+        from the display with the function <A HREF="closeviewport.htm">Close
+        Viewport</A> and scrolled using <A HREF="setviewportoffset.htm">Set
+        Viewport Offset</A>.</FONT>
+      </BLOCKQUOTE>
+    </TD>
+  </TR>
+  <TR VALIGN="TOP">
+    <TD ALIGN="CENTER" HEIGHT="34"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../view/view_frameset.htm">Table of contents</A></FONT></TD> 
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

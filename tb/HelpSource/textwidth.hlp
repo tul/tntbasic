@@ -1,0 +1,10 @@
+<name>Text Width</name>
+<group>draw</group>
+<synopsis>Calculates the width in pixels of some text</synopsis>
+<syntax><i>width</i> = Text Width (<i>string</i>)</syntax>
+<desc>
+Calculates the width in pixels that the given string will occupy if drawn on the current canvas with the current font settings by the @@Draw Text@@ command.
+
+See also:
+	The @@Text Height@@, @@Text Descent@@ and @@Draw Text@@ functions.
+</desc>

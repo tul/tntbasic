@@ -1,0 +1,48 @@
+<HTML>  
+<HEAD>
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>Raw Key Filter</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+  <META NAME="AppleTitle" CONTENT="Raw Key Filter">
+  <META NAME="AppleTarget" CONTENT="_right">
+  <META NAME="DESCRIPTION" CONTENT="Tests if a raw key press is of a certain type">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="349"
+HEIGHT="177">
+  <TR VALIGN="TOP">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">Raw Key Filter</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD HEIGHT="41">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva">Tests if a raw key press is of a certain type</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Syntax</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="43">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">
+<i>result</i> = Raw Key Filter Number (<i>rawKey</i>)<br><i>result</i> = Raw Key Filter Printable (<i>rawKey</i>)<br><i>result</i> = Raw Key Filter Navigation (<i>rawKey</i>)<br><i>result</i> = Raw Key Filter Delete (<i>rawKey</i>)<br></FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Description</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="40">
+      <BLOCKQUOTE>
+        <FONT SIZE="-1" FACE="Geneva"><p>Takes a <i>rawkey</i> as returned from the <A HREF="../commands/keyboardrawkey.htm">Keyboard Raw Key</A> command and tests if it's of the type specified. If it is then <i>result</i> is set to <b>TRUE</b>, if not it's set to <b>FALSE</b>.</p><p><b>Raw Key Filter Number</b><br>Tests if the raw key represents a number between 0-9.<br><b>Raw Key Filter Printable</b><br>Tests if the raw key represents <i>any</i> printable character. Includes all numbers, letters and punctuation.<br><b>Raw Key Filter Navigation</b><br>Tests if the raw key is a cursor movement key. Any raw key that returns TRUE from this filter will only move the cursor.<br><b>Raw Key Filter Delete</b><br>Tests if the raw key is a delete key such as forward delete or backspace. Any raw key that returns TRUE from this filter will possibly delete a character from the string editor.</p><p>These commands are useful if you only want to let certain key presses into your <A HREF="../guides/keyboard_guide.htm#stringeditor">String Editor</A>. For example to only input numbers, only pass raw keys to <A HREF="../commands/stringeditorinput.htm">String Editor Input</A> that return TRUE for 'Raw Key Filter Number'. You may also want to allow navigation keys and delete keys.</p><p>Eg.<br></FONT><FONT COLOR="#000000" SIZE="-2" FACE="Monaco,Arial"><br><FONT COLOR="#0000FF">int</FONT> rawKey = <FONT COLOR="#4985c6">Keyboard Raw Key</FONT><br><FONT COLOR="#0000FF">if</FONT> <FONT COLOR="#4985c6">Raw Key Filter Number</FONT> (rawKey) <FONT COLOR="#0000FF">or</FONT> <FONT COLOR="#4985c6">Raw Key Filter Navigation</FONT> (rawKey) <FONT COLOR="#0000FF">or</FONT> <FONT COLOR="#4985c6">Raw Key Filter Delete</FONT> (rawKey)<br>&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="#4985c6">String Editor Input</FONT> (rawKey)<br><FONT COLOR="#0000FF">end if</FONT><br></FONT><FONT SIZE="-1" FACE="Geneva"></p><p>To test for specific key presses, you can use the <A HREF="../commands/rawkeyascii.htm">Raw Key Ascii</A>, <A HREF="../commands/rawkeyscancode.htm">Raw Key Scancode</A> and <A HREF="../commands/rawkeychar.htm">Raw Key Char</A> commands.</p><p>For more information on raw keys and working with the keyboard please refer to the <A HREF="../guides/keyboard_guide.htm">Keyboard Input Guide</A>.</p>See also the <A HREF="../commands/keyboardrawkey.htm">Keyboard Raw Key</A> and <A HREF="../commands/rawkeyascii.htm">Raw Key Ascii</A> commands.<br></FONT>
+      </BLOCKQUOTE>
+    </TD>
+  </TR>
+  <TR VALIGN="TOP">
+    <TD ALIGN="CENTER" HEIGHT="34"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../io/io_frameset.htm">Table of contents</A></FONT></TD> 
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

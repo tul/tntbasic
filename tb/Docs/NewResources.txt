@@ -1,0 +1,344 @@
+New resource management classes for TB and glyph
+Mark Tully Dec 2002
+
+Section 1 - New resource classes
+--------------------------------
+
+This doc describes a resource management system for tb and glyph with the following properties:
+
+1) All code that uses resources will not care what type of container the resource came from
+   (eg project folder/resfile/compressed folder archive)
+   The code using the resources will not have to know or care or special case.
+2) All resources are reference counted.
+3) Projects can be converted between resource container formats automatically.
+   So current mac resource file projects can be auto converted to data folders, worked with, and then
+   built into (optionally) compressed archive files for distribution.
+4) New resource containers can be added with the creation of a single class, no further changes will be necessary.
+   This also means that all 'real' file access is in one place, instead of being spread all over the code,
+   which means it can also be easily replaced if we go x-platform without any other changes to code.
+
+// CTBResource
+// represents a resource loaded into memory
+// the key thing about this is that it is completely independent of the data source it
+// came from. It could have come from a mac res file, a data project folder, a compressed
+// archive file or whatever else we dream up in the future.
+// Calling code doesn't need to know where it came from.
+class CTBResource : public CListElementT<CTBResource>
+{
+	protected:
+		SInt32		mUsers;		// reference count of num users - when it hits 0 the res is unloaded
+		ResType		mType;		// resouce type - classic 4 byte id, shorter and easier to manage than a folder name and just as unique
+		CCString	mName;		// name of loaded resource - unique within resource type
+		Handle		mData;		// handle of loaded data - for resources like quicktime streams, this can be a handle containing a quicktime data ref instead of the entire qt movie/mp3
+
+	public:
+					STBResource(
+						ResType		inType,
+						CCString	inName,
+						Handle		inData) :
+					CListElementT(this),
+					mType(inType),
+					mName(inName),
+					mData(inData),
+					mUsers(1)
+					{
+					}
+		
+		
+		Handle			GetData()		{ return mData; }
+		const CCString	&GetName()		{ return mName; }
+		ResType			GetType()		{ return mType; }
+		
+		void			IncUsage()		{ mUsers++; }
+		bool			DecUsage()		{ mUsers--; return mUsers<=0; }		// returns true if the resource is no longer in use
+};
+
+// resource manager for a single resource file
+// generic handling of resources that are referenced by a 'restype' 'res name' pair
+class CTBResourceManager
+{
+	protected:
+		CLinkedListT<CTBResource>		mLoadedResources;
+
+		CTBResource						*GetLoadedResource(
+											ResType 	inType,
+											const char	*inName);		// search through mLoadedResources for res with give name name/type, return null if it's not loaded
+
+		// pure virtual functions for loading and unloading resource handles from where ever they're stored
+		// will be overridden by subclass (example later)
+		virtual CTBResource				*LoadResource(
+											ResType		inType,
+											const char	*inName) = NULL;
+		virtual void					UnloadResource(
+											CTBResource	*InResource) = NULL;
+		
+	public:
+
+		// public GetResource function
+		// loads resource if not loaded
+		// increases usage count if the resource is loaded
+		CTBResource						*GetResource(
+											ResType		inType,
+											const char	*inName);
+		{
+			CTBResource	*r=GetLoadedResource(type,inName);
+			if (r)
+				r->IncUsage();
+			else
+			{
+				r=LoadResource(type,inName);				// container specific resource loader, will be overridden for each type, throw on error
+				mLoadedResources.Link(r);
+			}
+			
+			return r;
+		}
+
+		// public ReleaseResouce function
+		// decreases usage count
+		// if hit zero frees resource
+		void							ReleaseResource(
+											CTBResource	*inRes)
+		{
+			if (r->DecUsage())
+			{
+				// not in use
+				UnloadResource(r);					// unload this data, release the handle etc, specific for each container type
+			}
+		}
+}
+
+// implementation of the CTBResourceManager class for a data folder
+class CTBDataFolderResourceManager : public CTBResourceManager
+{
+	protected:
+		FSRef							mProjectFolder;					// fsref of project folder
+	
+		FSRef							GetFolderForResType(
+											ResType		inType);		// returns the fsref of a folder inside 'mProjectFolder' for a given resource type
+																		// eg. 'PICT' may map to folder name 'Pictures'
+																		//	   'snd ' may map to folder name 'Sounds'
+																		//	   'Basc' may map to folder name 'Code'
+																		//		etc
+																		// using res types means all code can carry on working with out change
+																		// will throw if folder is missing
+
+		// loads a file into a handle																		
+		CTBResource						*LoadResource(
+											ResType		inType,
+											const char	*inName);
+		{
+			FSRef		dataTypeFolder;
+			Handle		h;
+			CCString	str;
+
+			dataTypeFolder=GetFolderForType(type,dataTypeFolder);				
+			h=::LoadFilesDataForkIntoHandle(dataTypeFolder,str);				// some helper func to dump a file's contents into a handle.
+																				// QuickTime note: Some files, such as quicktime movies, will not be completely loaded into the handle, but instead a quicktime data ref can be placed into the handle for on demand streaming purposes (see qt docs).
+			
+			return new CTBResource(type,inName,h);			// add error checking
+		}
+
+		// disposes of a loaded resource
+		void							UnloadResource(
+											CTBResource	*inRes)
+		{
+			::DisposeHandle(inRes->GetData());	// just deallocate, no special handling needed
+			delete inRes;
+		}
+
+	public:
+										CTBDataFolderResourceManager()
+										{
+											// blah blah blah
+											// locate folder and make an fsref for it and put it in mProjectFolder
+											// blah blah blah
+										}
+	
+}
+
+// implementation of a mac res file format CTBResourceManager
+class CTBMacResourceManager : public CTBResourceManager
+{
+	protected:
+		SInt16				mRsrcForkRef;		// fsref of resource file fork
+		
+		// loads a resource into a handle
+		CTBResource						*LoadResource(
+											ResType		inType,
+											const char	*inName);
+		{
+			StResFileSaver		safe(mRsrcForkRef);
+			
+			Handle		h=::Get1NamedResource(inType);
+			return new CTBResource(inType,inName,h);		// add error handling
+		}
+
+		// disposes of a loaded handle		
+		void							UnloadResource(
+											CTBResource	*inRes)
+		{
+			::ReleaseHandle(inRes->GetData());
+			delete inRes;
+		}
+		
+	public:
+										CTBMacResourceManager()
+										{
+											// blah blah blah
+											// locate file and open res fork
+											// blah blah blah
+										}	
+}
+
+// can easily implement other resource manager classes to support compressed archive files etc
+// ....
+
+
+///////////////////////////////////////////
+
+So code that uses the resource manager will work with the high level CTBResourceManager class
+
+eg: a draw picture command
+
+'' tnt basic code
+draw picture "mybackdrop.jpg"
+
+// c code
+void DrawPicture(CTBResourceManager *inManager, const char *inFileName)
+{
+	CTBResource		*pic=inManager->GetResource('PICT',inFileName);
+	
+	::DrawPicture((Handle)pic->GetData());
+	
+	inManager->ReleaseResource(pic);
+}
+
+The PICT 'mybackdrop.jpg' could be in a mac resource file, or a project folder or whatever.
+
+///////////////////////////////////////////
+
+Converting old projects
+-----------------------
+To convert:
+
+A folder is created with the same name as the resource file. A sub folder is created for each
+resource type in the original resource file. The sub folders are given the 4 byte name of the
+resource type, eg 'PICT', 'snd ' etc. This is so they can be located from a res type later on.
+These folders are therefore ALWAYS REQUIRED to be called this otherwise we'd need some other
+mechanism for figuring out which subfolder was the picts folder etc.
+
+All resources are copied into files of the name "res id - res name" and placed into their
+correct subfolders. The naming convention "res id - res name" is only necessary for the initial
+conversion, the files can be named whatever the user wishes once the project is converted. It
+is necessary as most resources have only a res id, and often have an empty resource name.
+
+All resources which refer to resources by id will be converted as they are copied accross to refer
+to them by name. The name will be "res id - res name". Again, this is just for the initial conversion
+the filenames can be changed to whatever is required in the future.
+
+File extensions are not necessarily needed, as the file type is implied from the sub folder
+the resource is in. For some resources, like picts, a file extension is used by the file loader
+to determine which quicktime component to use to load the resource, eg .jpg, .pct, .bmp, .mp3, .mov
+etc. But it is only needed for this purpose.
+
+Basic code shouldn't need to be changed as code referenceing things by res id will stil work (see
+next section).
+
+///////////////////////////////////////////
+
+Making old code work
+--------------------
+
+So now everything is referenced by file name, but we still have code like:
+
+'load images 128'
+and
+'draw picture 2000'
+
+...which still uses res ids. We can continue to support this code, and let users
+move over to using file names when they want to. This is better than making users have to edit
+all their code when they mvoe over to project folders and isn't actually any more work for us
+really.
+All the resources were given a file name that began with their resource id when they were
+converted, we just need to add another function to the CTBResourceManager class to get a complete
+file name from a resource id.
+
+void GetFileNameForResId(SInt32 inResId, char *outFullFileName)
+{
+	for each file/resource in res type
+		if the file name/resource name begins with the string 'inResId' followed by a hyphen
+			copy file name to outFullFileName
+			return true
+		end if
+	next
+	
+	return false
+}
+
+This means all tb code can work with file names, and if some old code does use a res id, it will
+try and find the file name which starts with that res id. If it doesn't exist then the user must
+have renamed the file since converting the project and so they can sort the problem out themselves.
+
+///////////////////////////////////////////
+
+Summary:
+
+All code that uses resources will have to use the CTBResourceManager class and will work with
+CTBResource objects.
+
+All code that stores references to resources by res id will have to change to storing the
+resources by their file name instead.
+
+Glyph will have to change to support the project file format (will move over to the CTBResourceManager classes)
+
+GlyphRB (or whatever the x platform real basic version is called) will only support project folders, and will
+have to change to identify sub folders by res types instead of longer names like "Pictures".
+It will otherwise remain unchanged (I think!).
+
+
+Section 2 - Integrating into glyph
+----------------------------------
+
+Glyph has further requirements from the new resource management classes.
+
+1) Must be able to write to the containers, add delete resources, alter meta info for existing resources etc
+2) Must be able to support message broadcasting to let clients know when container has been edited
+3) Must support the creation of new empty containers
+4) Resources will now be indexed by name rather than id. For formats that are indexed solely from an id, a
+   string will have to be used to contain the index. (Think more?)
+5) Currently object model support is implemented - retain?
+
+TResFile should have a CResourceFile that it accesses from? CResourceFile will remain as minimal as possible
+but will support all the features required by glyph and tb. TResFile will contain any glyph specific features.
+Possibly subclass TResFile for different formats if additional features are required.
+
+Should hiero continue to support res ids?
+	1) Code like checkout resource (resid) could find the resource with a name starting with that res id
+	   then check that out. This would allow all blocks/resources still using res ids to continue to work
+	   until the user removes the res id from the beginning of the string.
+	2) Block interface should continue to use handles, but a new API should be added to support resource streams
+			Res receipts will either be associated with a handle or a resource stream.
+			How will streams work with multiple editors?
+			At the moment, all editors share a common read only handle, then the first to write the handle
+			gets to save, and all the others are told to reload.
+			What about if there was no shared handle, but a block had to request a copy of the resource content
+			either as a handle or a read only stream. It would then own this and could do what it wanted with it. When it
+			went to save, the changes would be copied back.
+			i) How would writable streams work with multiple editors?
+			ii) Is there a memory efficient way to manage multiple read only editors for handles?			
+			Receipt checkout levels
+				readonly handle
+				writeable handle		// if writeable handle/stream is requested then no other editors can have it
+				readonly stream
+				writeable stream
+			Resource funcs
+				CResource::GetReadOnlyDataHandle()		// for handle based resources just return handle, for non handle based -- allocate and return handle. owned by resource.
+				
+					
+	3) res specs - how? should these be done of resource name now?
+			currently primary key is (file,type,id)
+			needs to be (file,type,name)
+			parallel api could be added so existing code continues to work - but it will all break as soon as
+			the code is used for a different file format. It's all going to need changing - so do we need
+			a parallel api?
+	4) res infos - what will they be?

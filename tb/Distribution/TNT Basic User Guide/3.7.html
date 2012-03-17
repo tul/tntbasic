@@ -1,0 +1,87 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="Adobe GoLive 5">
+		<title>The Input Section</title>
+	</head>
+
+	<body bgcolor="#ffffff" background="gfx/chalk.gif">
+		<div align="right">
+			<p><a href="3.8.html">Next Page...</a></p>
+		</div>
+		<div align="left">
+			<table cool width="545" height="140" usegridx usegridy showgridx showgridy gridx="16" gridy="16" border="0" cellpadding="0" cellspacing="0">
+				<tr height="16">
+					<td width="80" height="139" rowspan="3" valign="top" align="left" xpos="0"><img src="gfx/redbarrel.gif" width="69" height="110" border="0" align="left"></td>
+					<td width="464" height="16" colspan="3"></td>
+					<td width="1" height="16"><spacer type="block" width="1" height="16"></td>
+				</tr>
+				<tr height="32">
+					<td width="400" height="32" colspan="2" align="left" xpos="80" content valign="top" csheight="32">
+						<h1><font size="5">Chapter 3.7</font></h1>
+					</td>
+					<td width="64" height="32"></td>
+					<td width="1" height="32"><spacer type="block" width="1" height="32"></td>
+				</tr>
+				<tr height="91">
+					<td width="32" height="91"></td>
+					<td width="432" height="91" colspan="2" align="left" xpos="112" content valign="top" csheight="91">
+						<h1><font size="+7">The Input<br>
+								Section</font></h1>
+					</td>
+					<td width="1" height="91"><spacer type="block" width="1" height="91"></td>
+				</tr>
+				<tr height="1" cntrlrow>
+					<td width="80" height="1"><spacer type="block" width="80" height="1"></td>
+					<td width="32" height="1"><spacer type="block" width="32" height="1"></td>
+					<td width="368" height="1"><spacer type="block" width="368" height="1"></td>
+					<td width="64" height="1"><spacer type="block" width="64" height="1"></td>
+					<td width="1" height="1"></td>
+				</tr>
+			</table>
+			<h2>Input Section</h2>
+			<p><i>Unfortunately, at this time TNT Basic's configurable input commands described in this section do not work on Mac OS X. This is due to their reliance on InputSprocket which has since been discontinued. They continue to work normally on Mac OS 8/9. On OS X, you will have to use the keyboard reading commands, as described in the Input/Output section in the TNT Basic Help.</i></p>
+			<p>The input section is where you can create and configure input resources. These give your project access to the high level configurable input commands supported by TNT Basic, allowing the player to change their controls at any time and providing support for keyboard, mice, gamepads, joysticks etc. with no extra cost to you the programmer.</p>
+			<p>To create an input resource select &quot;Create new Input...&quot; from the &quot;Resource&quot; menu. This will result in a dialog like the one on the left of the picture below. When the player configures their keys, they will be presented with a dialog like the one on the right of the picture below:</p>
+			<table border="0" cellpadding="2" cellspacing="2" width="100%">
+				<tr>
+					<td><a href="gfx_views/3_7_1.html" target="_blank"><img src="gfx/isp_small.gif" width="250" height="108" border="0" align="left" alt="input"></a></td>
+					<td valign="top" rowspan="2">Here you can configure the input needs of your game. You can create new input elements by clicking on the create new element buttons 
+						<div align="left">
+							<img src="gfx/pyramid_create.gif" width="34" height="16" border="0" align="absmiddle">. The first button creates a new element before the current one, and the second creates a new element after the current one.
+
+							<p>You can delete elements by using the trashcan <img src="gfx/pyramid_trash.gif" width="10" height="12" border="0" align="absmiddle">.</p>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div align="center">
+							<font size="-2">Left: Hieroglyph Info Editing Window<br>
+								
+								Right: Configure Dialog in TNT Basic<br>
+								
+								(Click to enlarge)</font></div>
+					</td>
+				</tr>
+			</table>
+			<p>Once a new element is created, enter a name and a type for the input element. The name is arbitrary, and can be anything you want. The type should be set from the preset menu by clicking on the small arrow <img src="gfx/pyramid_presets.gif" width="9" height="11" border="0" align="absmiddle">.</p>
+			<p>The types have the following meanings:</p>
+			<p><b>'move'</b><br>
+				
+				An 8-way input such as that provided by a d-pad. You should use this for most games which would not benefit from analogue devices such as steering wheels, mice or analogue joysticks. You would set the name to something like: &quot;Main Character Movement&quot; and then the user could assign the joystick to the characters movement, or individually assign keys to each of the different directions.</p>
+			<p><b>'xaxi' and 'yaxi'</b><br>
+				
+				These are analogue inputs best suited to axis input. These can be used for movement where the distance moved by the controller could be mapped to the distance moved in the game. They return values to your game in the range of -100 to +100 where 100 is maximum and 0 is none. A value of 50 would indicate that the player was pressent the input (e.g. joystick, steering wheel) half way around, 100 would mean all the way.</p>
+			<p>These inputs are best used for games that support analogue input such as driving games or flying games.</p>
+			<p><b>'fire'<br>
+				</b>This is a simple button which can be used for any input in your game that is either on or off. It can be used for fire buttons, change weapon buttons, jump etc.</p>
+			<p>For more information on TNT Basic's input support, see the &quot;Input/Output&quot; chapter in the TNT Basic Help centre.</p>
+		</div>
+		<div align="right">
+			<p><a href="3.8.html">Next Page...</a></p>
+		</div>
+	</body>
+
+</html>

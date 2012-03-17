@@ -1,0 +1,232 @@
+<!DOCTYPE html public "-//w3c//dtd html 4.0 transitional//en">
+<HTML>  
+<HEAD>
+  <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Mac">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+  <META NAME="GENERATOR" CONTENT="Mozilla/4.61 (Macintosh; I; PPC) [Netscape]">
+  <TITLE>Networking</TITLE>
+</HEAD>
+<BODY BACKGROUND="../gfx/chalk.gif">
+
+<P><IMG SRC="../gfx/networking.gif" WIDTH="313" HEIGHT="110" 
+ALIGN="BOTTOM" BORDER="0" NATURALSIZEFLAG="3"><IMG SRC="../gfx/thinbarrel.gif"
+WIDTH="48" HEIGHT="110" ALIGN="BOTTOM" BORDER="0" NATURALSIZEFLAG="3"><BR>
+<FONT SIZE="-1" FACE="Geneva"><A HREF="#Initialising Networking">Initialising
+Networking</A></FONT><BR>
+<FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Hosting and Joining">Hosting
+and Joining</A></FONT><BR>
+<FONT SIZE="-1" FACE="Geneva"><A HREF="#Network Variables">Network
+Global Variables</A></FONT><BR>
+<FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Updating Data">Updating
+Data</A></FONT><BR>
+<FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Network Events">Network
+Events</A></FONT><BR>
+<FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Leaving a Game">Leaving
+a Game</A></FONT></P>
+
+<P><A NAME="Initialising Networking"></A><B><FONT COLOR="#330099"
+ SIZE="+1" FACE="Helvetica,Helvetica">Initialising Networking<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">Before any
+networking commands can be used in TNT Basic networking must first
+be initialised, this is done by calling the command <A HREF="../commands/initialisenetworking.htm">Initialise
+Networking</A>.</FONT> <FONT SIZE="-1" FACE="Geneva,Helvetica">Once
+this is called it does not need to be called again.</FONT></P>
+
+<P><A NAME="Hosting and Joining"></A><B><FONT COLOR="#330099"
+ SIZE="+1" FACE="Helvetica,Helvetica">Hosting and Joining<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">In any TNT
+Basic networked game there just be one host, the host is the person
+who creates the game. When the host creates a game, all other
+players can then join the game. Once the host has all the players
+he or she wants then they can start the game, this then starts
+the game for all the players connected.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">To host a game in TNT
+Basic call the command <A HREF="../commands/hostnetgame.htm">Host
+Net Game</A>.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">int </FONT><FONT
+ COLOR="#000000" SIZE="-2" FACE="Monaco">bool=</FONT><FONT COLOR="#0000ff"
+ SIZE="-2" FACE="Monaco">Host Net Game</FONT><FONT SIZE="-2" FACE="Monaco">
+8,&quot;Game Name&quot;,&quot;Player Name&quot;</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This announces a game
+on the network for a maximum of 8 players, the game is called
+&quot;Game Name&quot;. It also displays the interface for the
+host to choose their name and game name themselves if they want
+to. The two strings passed are just default parameters that are
+displayed in the interface, the user is allowed to alter them
+(Note: if the &quot;Player Name&quot; string is left blank then
+TNT Basic gets the machine owner's name from the system).</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This command returns
+true if the user got enough players and then started the game.&nbsp;
+Otherwise it returns false.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">To join a game in TNT
+Basic call the command <A HREF="../commands/joinnetgame.htm">Join
+Net Game</A>.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">int </FONT><FONT
+ COLOR="#000000" SIZE="-2" FACE="Monaco">bool=</FONT><FONT COLOR="#0000ff"
+ SIZE="-2" FACE="Monaco">Join Net Game</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This command displays
+the dialog which lets the user choose a game that is available
+on the network and then join it. It returns true if the user was
+gathered into a game and then the game started and it returns
+false otherwise.</FONT></P>
+
+<P><A NAME="Network Variables"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Network Global Variables<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">Data is sent
+to and from machines on the network by updating something called
+&quot;Network Global Variables&quot;. A network global variable
+is exactly the same as any other global variable except that instead
+of being global over just program, it is global over the entire
+network. This means the value of the variable is kept the same
+on all machines.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">You can declare network
+global variables like this...</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Helvetica">Network
+Global Int</FONT><FONT SIZE="-2" FACE="Monaco,Helvetica"> intVariable,intArray[10]<BR>
+</FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Helvetica">Network
+Global Float</FONT><FONT SIZE="-2" FACE="Monaco,Helvetica"> floatVariable,floatArray[10]<BR>
+</FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Helvetica">Network
+Global String</FONT><FONT SIZE="-2" FACE="Monaco,Helvetica"> stringVariable,stringArray[10]</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">.. as you can see,
+network variables can be integers, floats or strings and you can
+also create arrays of them. There is a condition with using network
+arrays however, they must all be dimensioned before <A HREF="../commands/initialisenetworking.htm">Initialise
+Networking</A> is called, otherwise an error will be generated.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">You can also define
+another kind of network variable called an important network variable.
+These have a higher priority than ordinary network variables and
+so are updated more often. You can define important network variables
+like this...</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Helvetica">Important
+Network Global Int</FONT><FONT SIZE="-2" FACE="Monaco,Helvetica">
+intVariable,intArray[10]<BR>
+</FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Helvetica">Important</FONT><FONT
+ SIZE="-2" FACE="Monaco,Helvetica"> </FONT><FONT COLOR="#0000ff"
+ SIZE="-2" FACE="Monaco,Helvetica">Network Global Float</FONT><FONT
+ SIZE="-2" FACE="Monaco,Helvetica"> floatVariable,floatArray[10]<BR>
+</FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Helvetica">Important</FONT><FONT
+ SIZE="-2" FACE="Monaco,Helvetica"> </FONT><FONT COLOR="#0000ff"
+ SIZE="-2" FACE="Monaco,Helvetica">Network Global String</FONT><FONT
+ SIZE="-2" FACE="Monaco,Helvetica"> stringVariable,stringArray[10]</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">These should only be
+used for very important network data though, if you define too
+many of these then TNT Basic will be unable to keep them all updated
+regularly so you will lose the benefits of them. These should
+only be used for data that is important to be updated quickly
+and very regularly, this is usually only information about which
+controls the player is currently using.</FONT></P>
+
+<P><A NAME="Updating Data"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Updating Data<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">In order to
+keep the network data updated across the network it is necessary
+to call the command <A HREF="../commands/updatenetdata.htm">Update
+Net Data</A> periodically (ideally every frame). When this command
+is called on the host it does nothing but when a client calls
+this command then it copies the data from the host. That means
+that it will overwrite any data on the client with the host's
+version.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Using this system the
+clients can never become out of sync with the host for a significant
+amount of time, however, this also means that the clients can
+never change any data because the host will always eventually
+overwrite it. To get around this problem there is a function called
+<A HREF="../commands/setnetdata.htm">Set Net Data</A>. This function
+allows a client to send a request to the host to set a specified
+network variable to a specified value. This means that the client
+can then affect variables in the game, but it has to tell the
+host that it is doing so. The host will then update its version
+and then that will be distributed to all the clients in the game.</FONT></P>
+
+<P><A NAME="Network Events"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Network Events<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">During the
+course of a network game several things can happen that affect
+the state of the network.&nbsp; The host can close the game, players
+can leave the game and players can become disconnected.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">If any of these events
+happen then the TNT Basic program is informed automatically.&nbsp;
+Your program can then find out by checking its 'net events'.&nbsp;
+You can set up a net event loop that is similar to the net message
+loop.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">while More Net
+Events</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">&nbsp;&nbsp; ...</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">wend</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Each net event can
+then be dealt with in turn inside the body of the while loop.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">A network event has
+two components: a type and a content.&nbsp; These can be extracted
+using the commands</FONT><FONT FACE="Geneva,Helvetica"> </FONT><FONT
+ COLOR="#0000ff" SIZE="-2" FACE="Monaco">Net Event Type</FONT><FONT
+ FACE="Arial,Helvetica"> </FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">and</FONT><FONT
+ FACE="Geneva,Helvetica"> </FONT><FONT COLOR="#0000ff" SIZE="-2"
+ FACE="Monaco">Net Event Content</FONT><FONT FACE="Arial,Helvetica">.&nbsp;
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">The type can be
+one of three values...</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">NetGameTerminated</FONT>
+<BR>
+<FONT SIZE="-1" FACE="Geneva,Helvetica">This means the host left
+or terminated the game.&nbsp; The content of one of these events
+is left blank.&nbsp; Usually, the program should stop the game
+and inform the user that the game has been terminated.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">NetPlayerLeft</FONT>
+<BR>
+<FONT SIZE="-1" FACE="Geneva,Helvetica">This means that a player
+has left the game.&nbsp; The content of the message is the ID
+of the player that has left.&nbsp; Usually, the program should
+continue the game but inform the other users that this player
+has left the game.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">NetPlayerDisconnected</FONT>
+<BR>
+<FONT SIZE="-1" FACE="Geneva,Helvetica">This means that the program
+has lost contact with a player in the game.&nbsp; The content
+of the message is the ID of the player that has become disconnected.&nbsp;
+Usually, the program should continue the game but inform the other
+users that this player has been disconnected.</FONT></P>
+
+<P><A NAME="Leaving a Game"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Leaving a Game<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">The user may
+decide to leave a network game at any time,</FONT><FONT FACE="Geneva,Helvetica">
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">or they may be
+killed and forced to leave the game.&nbsp; Either way, your program
+needs to inform all the other network players that the user is
+leaving the game.&nbsp; This can be done quite easily in TNT Basic
+by using the command <A HREF="../commands/leavenetgame.htm">Leave
+Net Game</A>.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Leave Net Game</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This command informs
+all the other players that the user has left the game and stops
+communicating with them.&nbsp; Calling this command is necessary
+because otherwise other network players be sent messages saying
+that the user has become disconnected.</FONT></P>
+
+<P><CENTER><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A HREF="../tutor/tutor_frameset.htm">Table
+of contents</A></FONT></CENTER>
+
+</BODY>
+</HTML>

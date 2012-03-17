@@ -1,0 +1,21 @@
+<name>Raw Key Ascii</name>
+<group>io</group>
+<synopsis>Extracts the ascii code of the character from a raw key</synopsis>
+<syntax><i>asciiCode</i> = Raw Key Ascii (<i>rawKey</i>)</syntax>
+<desc>
+Takes a <i>rawkey</i> as returned from the @@Keyboard Raw Key@@ command and extracts the ascii code of the character from it.
+
+More information on the character contained in a raw key on the @@Raw Key Char@@ page, and more information on the meaning of ascii codes can be found on the @@Ascii Codes Explained@@ page.
+
+The 'Raw Key Ascii' command is equivalent to getting the character from a raw key and then getting that character's ascii code.
+
+Eg:
+<tnt>
+int rawkey = Keyboard Raw Key
+str char = Raw Key Char (rawkey)
+int asciiCode = Char to Ascii (char)</tnt>
+
+For more information on raw keys and working with the keyboard please refer to the @@Keyboard Input Guide@@.
+
+See also the @@Char to Ascii@@, @@Ascii to Char@@, @@Keyboard Raw Key@@, @@Raw Key Scancode@@, @@Raw Key Modifier@@ and @@Raw Key Char@@ commands.
+</desc>

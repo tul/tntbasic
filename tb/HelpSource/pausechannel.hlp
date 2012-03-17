@@ -1,0 +1,10 @@
+<name>Pause Channel</name>
+<group>moan</group>
+<syntax>Pause Channel
+Pause Channel <i>channelId</i></syntax>
+<synopsis>Pauses the specified moan channel</synopsis>
+<desc>
+This command pauses moan channel <i>channelId</i>. If no channel is specified, it pauses all currently active channels.
+
+See also @@Resume Channel@@ and @@Channel Paused@@.
+</desc>

@@ -1,0 +1,4 @@
+bottom = y + Text Descent
+top = bottom - Text Height
+leftSide = x
+rightSide = leftSide + Text Width ("tjos os a string")

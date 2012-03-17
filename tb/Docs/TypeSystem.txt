@@ -1,0 +1,21 @@
+TNT Basic type system
+Mark Tully
+20/6/00
+--------------------
+
+Near the end of TNT basics development we decided that it would be better to declare variables before use. Although this
+may seem like it makes it harder for the beginner, it actually makes it easier as it catches typos in var names and use of
+variables in procedures which you thought were global but which actually aren't.
+
+Once it was decided to forward declare vars, I realised that you could also declare their type at the same time meaning that
+we could drop the $ and # from the end of variable names - even better.
+
+The way the type system works now is that there is a single symbol table called the variable table which contains all
+variable names for all 6 types, int, str, float and their respective array variants. The lexer is responsible for maintaining
+this table and the parser now never gets IDENTIFIER tokens as strings but instead gets symbols in the form of INTIDENTIFIER
+etc. If the parser begins to parse a statement were new vars can be declared it records this meaning that the lexer can
+introduce new variables into the symbol table if it detects them. If the program isn't in a var decl mode and a non-existant
+variable is found the lexer throws a var not declared error.
+
+So that is is essence where the type recording comes from. Then the parser needed a serious overhaul in order to use the
+new token names and returned types correctly, this was fairly straight forward though.

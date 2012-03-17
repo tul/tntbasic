@@ -1,0 +1,18 @@
+<name>'F'or</name>
+<group>moan</group>
+<syntax>F <i>reg</i> = <i>startExp</i> T <i>endExp</i> .... N</syntax>
+<synopsis>For loop</synopsis>
+<desc>
+The moan For loop is a little more restricted than the @@For@@ loop in TNT Basic in that it has a fixed step of 1 which cannot be changed.
+
+Moan For loops have to use a register as their loop counter because there are no other variables in moan programs. <i>startExp</i> and <i>endExp</i> are normal moan expressions that can be built up from constants, operators and other registers.
+
+For loops can be nested, as with normal TNT Basic operation.
+
+Example:
+
+<tnt>' Move object horizontally in steps of 20
+"F R0 = 0 T 10; L X = R0 * 20; P; N"</tnt>
+
+See also TNT Basic's @@For@@ loop and the @@Advanced Moan Tutorial@@.
+</desc>

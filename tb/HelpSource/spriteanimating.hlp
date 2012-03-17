@@ -1,0 +1,9 @@
+<name>Sprite Animating</name>
+<group>moan</group>
+<synopsis>Returns true if a sprite animation is in progress</synopsis>
+<syntax><i>animating</i> = Sprite Animating (<i>spriteNum</i>)</syntax>
+<desc>
+Tests if a moan animation started with the @@Animate Sprite@@ command has finished.
+
+Sets <i>animating</i> to true if the animation on sprite <i>spriteNum</i> is still on going, and false if it has finished.
+</desc>

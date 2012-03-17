@@ -1,0 +1,28 @@
+<name>'S'cale</name>
+<group>moan</group>
+<syntax>S <i>xScaleDelta, yScaleDelta, speed</i></syntax>
+<synopsis>Scales sprites attached to a moan channel</synopsis>
+<desc>
+Scales all sprites on a channel by a relative amount of <i>xScaleDelta</i> in the x-axis and <i>yScaleDelta</i> in the y-axis, at a speed of <i>speed</i> units per frame. If <i>speed</i> is negative, it is seen as the number of steps to complete the scale in.
+
+The deltas are relative amounts, which are added to the overall scaling of the sprite.
+
+For example:
+
+"S 1,1,0.1"
+
+Means scale up by 1 units in the x and y axis at a speed of 0.1 units per frame.
+
+NB: 1 unit is equal to the original (unscaled) size of the sprite. So scaling up by 1 unit means to make the final size the current size plus the sprites orignal unscaled size.
+If this particular scale command was ran on an unscaled sprite, it would end up being 2 units in width and height, ie twice its original size.
+
+"S -0.5,-0.5,-1"
+
+Means scale down by 0.5 units in the x and y axis in 1 step (ie one frame).
+
+"Begin: Scale 1.0, 0, 0.3; Scale -1.0, 0, 0.3; Jump Begin"
+
+Means scale the sprite up in the x axis by 1 unit at a rate of 0.3 units a frame, then scale it back down by the same and repeat forever.
+
+See also the @@Scale Sprite@@ command.
+</desc>

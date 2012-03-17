@@ -1,0 +1,542 @@
+Inside BLAST++™
+===============
+
+BLAST++™
+© Mark Tully and TNT Software 1997
+
+Inside BLAST++™ version history
+-------------------------------
+
+0.01  (2/9/97)          First version
+0.02  (23/9/97)         Added refCon documentation for all classes      
+
+This document is intended to be a quick overview and guide to BLAST++. It will guide
+you on how to use and customise BLAST++ for your game.
+
+Notes
+-----
+Edit the “Inside BLAST++™.orig” in WordPerfect. Save it as text with soft returns to
+hard returns. Put it in BBEdit, set the tabs to 6 then DeTab it. Now EasyView views it
+OK.
+
+Overview
+--------
+BLAST++ is an object orientated sprite library designed to replace the ageing BLAST.
+There is a standard base sprite which you can derive from to produce your own sprites
+which will be managed completely by BLAST++ but will contain custom code and data for
+that sprite.
+You should be able to produce any type of sprite using this interface, from pixmap
+bases to actual 3D texture mapped sprites.
+Here’s a hint, concentrate on making the sprite independent and self contained then it
+can be used not just in your future project but other’s can use your new sprite
+without having to hack it.
+This goes for all BLAST++ overrides. I recommend putting them in a file of their own,
+eg “16 bit transparency sprite.cpp”, with an associated header (“16 bit transparency
+sprite.h” in this case) then it’s a simple “add to project” to use it in future.
+As well as a flexible sprite structure BLAST++ has a new SpriteLayer class complete
+with a SpriteLayerManager class.
+A sprite layer can contain any number of sprites (memory permitting). By grouping
+sprites into separate layers and then overlaying them in order complex animated scenes
+can be controlled with ease. Each layer has it’s own clipping rect and origin, you can
+also turn them on and off.
+An example use for this would be to define the inventory at the bottom of the screen
+in a game as another layer. All sprites drawn to this wouldn’t stray into other areas
+of the screen and the coord (0,0) could refer to the top left of the inventory, you
+can move the inventory easily without having to alter code.
+Sprite layers can also be derived from to create special layers for you game. So you
+could create a special layer which y prioritises the draw order so that sprites higher
+up the screen are rendered first for instance.
+The layer manager is used to control the order that layers are drawn in and also the
+destination of the layers graphics.
+Graphic destinations (ie screen,gworld) are controlled by a class called the Blast
+Draw Buffer. This draw buffer contains two ABCPtr (advanced blast copy records) which
+point to bitmaps. The first of the two is the source buffer and the other is the dest
+buffer. The idea is that you draw to one bitmap and then blit the changed area to the
+other buffer (ie double buffering).
+The Draw Buffer class tracks the rectangles which are invalid and then blits them to
+the destination buffer in one go. By deriving from this class you can create classes
+to track the invalid rects in ways more efficient to your game. Change the copy
+routines to do tricks like graphic smoothing, pixel doubling or 8 bit to 16 bit
+conversion on the fly.
+These 4 classes (BLAST Draw Buffer Base, BLAST Sprite Layer, BLAST Layer Manager and
+BLAST Sprite Base) make up the core of BLAST++ and can be used individually or
+combined as a whole to allow you to write practically any game possible.
+
+Creating custom classes
+=======================
+Any classes listed as “Base” are abstract classes, meaning they do FA unless you
+derive and override their member procs.
+Obviously you can add what functions you like to the derived classes, and don’t have
+to derive from the base. You could derive from an already existing derived class, like
+an existing sprite, and adjust it to work better in you game.
+The important thing to do is understand what you are overriding and what BLAST++
+expects the proc to do. As long as you do that you’ll be fine. Some tips are make all
+functions virtual so they can be overridden and don’t use private members but make
+them protected instead.
+Only the main routines are covered here, you’ll have to read the existing code and use
+your common for the other procs.
+In case you didn’t know, when overriding you can still call the original code. Say I
+was overriding a CalcSprite member function with my own. My own could be defined as
+CalcSprites(whatever)
+{
+      // blah blah custom code here
+      ::CalcSprites(whatever)       // call original calc sprites
+      // blah blah custom code here
+}
+This is useful if you just want to tack a head or tail patch onto a routine and is
+always preferable to duplicating the code and changing it a bit (although that is
+sometimes necessary).
+
+When overriding, the refCon field is for your new classes use. It is probably a good
+idea to set the refCon to point at the start of the new “derived” class. Then at a
+later date you can get this refCon and cast it as your derived class to obtain a
+pointer to the class as a whole.
+If a class uses the refCon, it should provide another one for any classes which derive
+from it to use.
+For a class to do this, it would override GetRefCon() and SetRefCon() and make them
+use the new refCon it’s supplying. To use it’s original refCon it would go something
+like <BaseClass>::GetRefCon() and <BaseClass>::SetRefCon() (where <BaseClass> is the
+name of the class you dervived from and whose refCon you wish to access).
+
+Custom Sprites
+--------------
+When creating custom sprites, try mixing in the ingredients like
+BlastSpriteTintIngredient and BlastSpriteTintIngredient. This add new features to you
+sprite and there are notes about them by the class declaration. Try to put new
+features in ingredients where possible (eg a Rotation ingredient) then new sprites can
+be mixed easier.
+Basically there are 4 main procs which need explaining.
+
+RecalcSprite(long xoff,long yoff,Rect &clipRect,Boolean masterRecalc)
+This proc is called on your sprite after it is in position with all it’s attributes
+set (ie scale, angle, image whatever you use). You should calculate the rectangle you
+will occupy and put it in spriteRect. (Don’t forget to add xoff and yoff to the sprite
+coords). You are expected to clip the rect to the passed clip rect and also set the
+needsClip flag to one of 3 values. (NewClipRect is provided for this purpose)
+csNoChange
+csClipped
+csClippedOff
+If clipped off your render won’t be called. If clipped is set then your clipped render
+will be called and if no change is set then the standard renderer will be called.
+You only need to recalculate the rectangle if the needsRecalc or the masterRecalc
+flags are set. If not none of your attributes have changed. It’s important to set
+needsRecalc to true if you change any sprite properties like the image for instance.
+The calc proc will always be called whether the flag is set or not. The flag is for
+the sprites use only and can’t be accessed by the layer or object user.
+
+RenderSprite(long xoff,long yoff,ABCPtr rec)
+This proc is to render the sprite to (x+xoff,y+yoff). x and y are the sprite coords.
+The ABCPtr is the rec to draw into.
+
+RenderSpriteClipped(long xoff,long yoff,ABCPtr rec,Rect &clipRect)
+Similar to above, except clip it. Your sprite rect will contain the rectangle that you
+produced in CalcSprite. NeedsClip will be set to csClipped and clipRect is the same
+rectangle that was passed to CalcSprite.
+
+MoanSprite()
+TBA
+
+Custom Layers
+-------------
+General
+The sprite layer has a LinkedList header which is used to store all the sprites. I
+doubt you’ll have to mess with the way the sprites are stored.
+The origin is how far to offset all graphics which you draw. A flag called
+clipRectUsesOrigin states whether the layer clip rect should be treated as relative to
+the origin or whether it’s in absolute coords. layerHidden states whether the layer is
+visible and masterRecalc flag should be set when something has happened to the layer
+which means all the sprites rectangles need recalculating. Examples are the origins
+changed moving all the sprites or the clipRect has changed.
+
+There are 3 main routines you’ll be overriding
+
+void CalcAllSprites(BlastDrawBufferPtr invalBuffer)
+Here you are supposed to index through all the sprites you have available and call
+their calc proc. If inval buffer is !=0L then call invalBuffer.InvalRect with each
+sprites rect as you process it, but only if it’s not noted as csClipped off. Look at
+the code you’re replacing too see what needs to be done.
+
+Void RenderAllSprites(BlastDrawBufferPtr drawBuffer,Boolean invalAsRender)
+Render all your sprites easy. Render into the source buffer of the draw buffer. If the
+flag invalAsRender is set then call invalRect on each sprites rect if they’re not
+clipped off. 
+
+MoanAllSprites()
+Call each sprites MoanSprite proc.
+
+Custom draw buffers
+-------------------
+There are quite a few procs to override here. When overriding rectangle tracking code
+to watch for invalling of rectangle etc, you should store all data regarding the
+invalidated areas (the low level blit list) in a separate structure which you allocate
+early on and simply keep a ptr to it. That way you can easily do a low level blit list
+swap with another draw buffer of the same class, instantly changing the blit list with
+a 4 byte write.
+By changing the way the buffers are processed you could make it so that scrolling was
+possible. As long as you obey the commands being sent to you, you can do whatever you
+like.
+
+To override blit commands
+There are several although you may not need to override all of them. The suffix SD and
+DS stand for for source to dest and dest to source respectively.
+BlitRectxx(Rect &rect)        blits 1 rect
+BlitAllxx()                   blit the entire buffer
+BlitAllRectsxx()              blit all the rects you’ve been tracking
+It’s quite simple.
+
+Overriding the rect tracking routines
+Tend to be self explanatory. There are three inval rect varients though. InvalRect is
+simple and means that the rect being passed has been clipped to fit on the bit map.
+InvalRectNoClip means the rect hasn’t been clipped and should be clipped to either the
+second rect supplied OR to the rect of the buffer if no second rect is supplied.
+There are the low level blit list operators starting with LL are for operating on the
+low level blit data mentioned earlier. There LLSetBlitList and LLGetBlitList are
+simple enough (NB: BLAST++ does not grab a low level blit list from one buffer class
+and jam it in another different class as it wouldn’t understand it and would probably
+crash. I advise you not to do that either.).
+The LLMergeBlitList is for when you have to merge two blit lists into one. Take the
+supplied blit list (which is in your custom format) and merge it into the current
+one).
+
+The other procs in the draw buffer are self explanatory.
+
+Custom Layer managers
+---------------------
+The default layer manager tracks all the layers by putting them in an array rather
+than a linked list. The problem with linked lists is that when you remove an element
+all the indexes to the following elements change. With arrays Layer 2 is still layer 2
+even when layer 1 is removed. The reason this is not done with sprites is that you are
+more likely to be changing the number of sprites in a layer than changing the number
+of layers. 
+
+Sprite tracking is the action of remembering where sprites will be blitted by all the
+layers so that those areas can be backed up and restored after the operation and also
+so that those areas can be marked as invalid and blitted to screen. SpriteTracking
+flag tells you whether you should do this. You may not need to track the sprite
+position if the user is not stashing and restoring the backdrop where the sprites are
+but is instead redrawing the entire backdrop every frame and blitting the entire
+screen.
+
+Sprite invalling is invalidating areas of the screen which have been changed by the
+layers. (Ie backdrop which has been restored neds to be blitted to screen, areas with
+new sprites need to be blitted to screen). invalSprite flag tells you whether you
+should inval to screen. You may not be doing if the user is doing a full screen copy
+every pass or something like that.
+
+The best way to override the code in the layer manager is to examine the existing code
+and make sure you achieve all that it does. There aren’t really any tricks to this
+class, you just have to know what you’re doing. It’s not too hard to override though.
+The main trickery is in handling the low level blit lists for the draw buffers and
+knowing when to swap the lists so that for instance, the blit list listing all the
+rects backed up (backed up because a sprite will be going there) can be merged into
+the list that’s going to be blitted to screen, saving having to inval all the rects of
+the sprites one by one for a second time as they’re drawn.
+Your best bet is to read the “How to use BLAST++” chapter and the code for the
+original Sprite Layer Manager.
+The only override which comes to mind is a custom RestoreBackdrop() which maybe fills
+the rectangles with a colour instead of copying the backdrop back or something.
+
+How to use BLAST++
+==================
+This chapter tells you what order and when to call the procs of BLAST++. It doesn’t
+really go into detail on what they do. See “Creating custom classes” or the source
+code for that.
+
+How to use a draw buffer
+------------------------
+OK step 1.
+The draw buffer holds two buffers, one is usually the screen and the other is usally a
+gworld. It doesn’t have to be this way, but for the purpose of this example it is.
+The BlastDrawBufferBase is useless in that it contains no code. It’s an abstract class
+don’t instantate it. Instead we’re going to use a standard draw buffer which is bases
+on that class, “BlastStandardBufferA”.
+
+Do this:
+• Open a gworld and construct an ABCRec from it called drawRec
+• Open a window and construct an ABCRec from that called screenRec
+• Create a BlastStandardBufferA called drawBuffer.
+
+Now, get the drawBuffer and set the two abc recs to be the two buffers it uses for
+it’s operations, like so.
+      
+      drawBuffer.SetDestBuffer(&screenRec);
+      drawBuffer.SetSourceBuffer(&drawRec);
+
+That’s set up. Now you can merryly draw to the draw rec and then blit it all to screen
+using the BlitAllSD() where SD is source to dest. You can blit the other way too.
+
+It can be that simple.
+
+Using draw buffer rect tracking
+-------------------------------
+In some games you don’t want to blit the entire screen every pass. In these cases you
+would use rect tracking. It keeps a track of where you’ve drawn to and only blits
+those areas which speeds things up immensly.
+
+During set up call
+      fail=drawBuffer.SetMaxBlitRects(kTotalSprites,kTotalCustomRects);
+kTotalCustomRects is how many rectangles maximum you will be putting to screen in one
+pass, this excluded the sprites blitted by the layer manager.
+kTotalSprites is the number of sprites that are going to that buffer. These are
+treated the same as custom rects except that a sprite is worth 2 custom rects as
+there’s a rect where it was last frame and a rect where it is this frame.
+
+Set the total sprites to 0 and custom rects to whatever.
+Then in your main loop, draw to the draw world and then call the buffer’s InvalRect
+procedure to mark that rect as needing to go to screen. Don’t call more InvalRects
+than your kTotalCustomRects. It won’t crash but it will fail to blit parts of the
+screen. There are also some InvalRectWithClip commands which clip the rect you pass it
+so that it’s on the buffer. If you don’t clip all rects to be on the buffer it WILL
+crash.
+If it’s uncertain whether a rect will be on the buffer or off the buffer call the clip
+version anyway and you’ll be safe. InvalRect (without clipping) is just a fast
+alternative for when you know that the rect you’re invalling is definately on the
+buffer.
+
+Once the drawing is complete and the rects are invalled use BlitAllRectsSD() to blit
+them. Then call ClearBlitList() to wipe all the rects so they can be re-invalled next
+frame. If you don’t wipe them between each frame it either won’t work or it will be
+inefficient.
+
+The other proc you may want to call in a draw buffer is the BlitRectSD() which blits a
+rect immediately without invalling it or storing it in any way.
+
+How to use a sprite
+-------------------
+This is the second stage in you adventure to conquer BLAST++. A sprite is basically an
+image decoder, with a pointer to some image data and a set of coords to write to.
+It doesn’t backup and restore the background so if you keep rendering a sprite across
+the screen they’ll just end up being printed every where instead of in one place. To
+backup the backdrop behind a sprite you can use the BlastLayerManager.
+
+Here’s how to decode a standard 8 bit image sprite. First allocate the sprite you
+want.
+      ImageSprite8      imageSprite;
+Next position it and set it’s image.
+      imageSprite.SetX(320);
+      imageSprite.SetY(240);
+      imageSprite.SetImage(imageHandle);
+Now you can install a tint if you want. You can use the SetLocalTint proc which sets
+the tint for that sprite only, or the set global tint which sets the tint for any
+sprite without a local tint to use. I’m going global.
+      imageSprite.SetGlobalTint(tintHandle);
+The next step is to calculate the sprite. This gets the sprite’s bounding rectangle
+and allows the sprite to perform any other processing needed before rendering. You
+calculate the sprite after you’ve finished messing with is position, image, scale,
+whatever.
+      imageSprite.RecalcSprite(xoff,yoff,clipRect,forceRecalc);
+xoff and yoff are offset which are going to be added to the sprites position. You
+won’t really use these often as it’s easier to simple change the sprite’s position.
+With a lot of sprites though, you can offset them all at once by passing in number
+here. Set them to both to 0.
+The clip rect is the bound rectangle of the draw buffer. You will probably know this,
+if not call the draw buffers GetBoundsRect proc. The sprite automatically works out
+it’s new rect to be clipped to this one.
+A sprite won’t bother to recalculate it’s rectangle if it’s not changed in any way
+since the last time it did it. It will recalculate for instance if you move it or
+change it’s image. You can force it to recalculate by setting the forceRecalc flag.
+You would need to do this if any of the parameters you are passing here (xoff, yoff or
+clipRect) are different to what they where the last time you called this sprites
+RecalcSprite. It does no harm to force a recalc every frame other than to slow things
+down. However, if you don’t recalc when you should have done it be not be clipped
+proper and blit into random memory and crash. Set it to false.
+When the sprite is calculated it sets a variable called needsClip to one of 3 values.
+csNoChange, csClipped and csClippedOff.
+Do this:
+      switch (sprite->needsClip)
+      {
+            case csNoChange:
+                  sprite.RenderSprite(xoff,yoff,rec);
+                  break;
+
+            case csClipped:
+                  sprite.RenderSpriteClipped(xoff,yoff,rec,clipRect);
+                  break;
+
+            case csClippedOff:
+                  break;
+      }
+Here we call the appropiate renderer. The xoff, yoff and clipRect values must be the
+same as the ones in the RecalcSprite proc and they serve the same purpose. If the
+sprite is clipped off the bitmap we don’t bother to render it at all.
+rec is an ABCPtr to render into.
+That’s it.
+
+How to use a layer
+------------------
+Once you can use a sprite it’s easy to use a layer.
+Create a layer like so:
+      BlastSpriteLayer        layer1;
+Then add as many sprites as you like to it using the Layers AddSpriteToLayer proc. You
+don’t need to add them all now. You can add and remove the sprites from the layer at
+any time.
+Next set the layers clip rect to be the desired size, no bigger than the draw buffers
+bounds rect or it will crash. All sprites in this layer are clipped to this rect. By
+default it is an empty rect (0,0,0,0) and if you don’t change it your sprites won’t
+appear.
+If you like you can set the origin of the layer now. (Use SetOrigin()). The origin is
+the position of the screen which is seen as the top left of the layer. Setting the
+origin to (50,50) will mean that a sprite in this layer at the position (0,0) will
+appear on screen at (50,50). The origin can be changed at any time. The origin
+defaults to (0,0).
+You should then set whether the clip rect is in origin coords or screen coords (Use
+SetClipRectUsesOrigin()). A clip rect in screen coords will stop the sprites going off
+the buffer whatever the origin, but a clip rect which moves with the origin could pass
+off the buffer if you aren’t carefull. It can be useful to have it moving with the
+origin in some cases. It defaults to being in screen coords. (ie not using the
+origin).
+You can turn the layer on and off with SetVisability(). It defaults to on, leave it
+that way for this exercise.
+
+From here on, it’s basically the same as sprites.
+Use CalcAllSprites to call each sprites RecalcSpriteProc. If you pass a
+BlastDrawBufferPtr here, all the sprites rectangles are invalled so that you can blit
+them to screen, or backup up the areas of the backdrop where the sprites will go. You
+can pass 0L if you don’t care. Which we don’t.
+      CalcAllSprites(0L);
+Now render the sprites.
+      RenderAllSprites(drawBuffer,invalAsRender);
+The draw buffer is the buffer to draw into and invalAsRender is a boolean. If true the
+sprites rects are invalled as they are rendered so they can be blitted to screen. If
+false, they are merely drawn and not invalled.        
+
+How to set up the sprite layer manager
+--------------------------------------
+The problem you may have noticed with the layers is that they don’t backup the
+backdrop or make any attempt at erasing the sprites after they’ve moved.
+The sprite layer manager handles the blitting, erasure and rect tracking for all the
+layers.
+The technique is to calculate where all the sprites of all the layers will go. Then
+copy all those rectangles into a buffer, the backup buffer. Then draw the sprites and
+blit them to screen. Copy the saved backdrop back over the sprites.
+Fortunately the layer manager handles all of this. This is how to set up the layer
+manager to do the work for you.
+First create a layer manager object such
+      BlastLayerManager                   manager;
+Then you must set the two BlastDrawBuffers which it will be using. It takes a draw
+buffer and a backup buffer (which is optional, more on that next chapter).
+The draw buffer is the same as it always has been. The destination is the final
+screen/bitmap and the source is the draw world. With the backup buffer, the
+destination is the draw world and the source is another gworld which should be the
+same size as the draw buffer (at least while you are using the default class). Set
+them like this:
+      manager.SetDrawBuffer(&drawBuffer);
+      manager.SetBackupBuffer(&backupBuffer);
+Both of these buffers MUST be either the SAME or at least be COMPATABLE classes. The
+compatability must be in the low level blit list. They must understand each others
+blit list formats. This is somewhat important if you like your games to work.
+Once these are installed you can add the layers to the manager. First you set the
+maximum layers you will be using. Although it is possible to change the max layers on
+the fly, it is not smart as it will frag the memory. Set the max to the max possible
+layers you will be using and don’t keep changing it.
+      fail=manager.SetMaxLayers(kMaxLayers);
+Then add your layers.
+      layerIndex=manager.AddLayer(&spriteLayer);
+      otherIndex=manager.AddLayer(&spriteLayer2);
+You will get indexes for your layers as you add them. This is just a number you use to
+access the layers for reordering and things. You don’t need it if you keep the
+spriteLayerPtr instead. It’s wise to keep one of them then you can actually access
+your layers. An index of -1 indicates a fail.
+As long as you add the layers after you’ve set the draw buffer, each layer will have
+it’s clip rect set to the bounding box of the draw world. This is done to insure that
+the layer’s being added aren’t “too big” for the buffer. You can either reset the clip
+rectangle after adding it, or overide the reset behaviour like this
+      layerIndex=manager.AddLayer(&spriteLayer,false);
+If the draw buffer has not been set when a layer is added the clip rect is not reset
+either.
+
+The layer manager is now fully prepped. Here is an example of how to use it.
+
+// At this point all sprites, layers and the layer manager are prepped.
+drawBuffer.InvalAll();  // cause full screen update on first pass as screen is blank
+while (!done)
+{
+      // handle sprite movement etc and check for exit
+
+      ticks=LMGetTicks();
+
+      manager.CalcAllLayers();            // calculate the areas to be blitted
+      manager.StashBackdrop();            // back up areas that sprites will trash
+      manager.RenderAllLayers();          // render the sprites
+      drawBuffer.BlitAllRectsSD();        // blit to screen
+      drawBuffer.ClearBlitList();         // clear the blit list
+      manager.RestoreBackdrop();          // restore the backdrop
+
+      while ((ticks+2)>LMGetTicks());     // 30hz
+}
+
+The calc all layers proc contacts each layer and gets calls it’s calcLayer proc. This
+produces a list of rectangles which stashbackdrop uses to backup all the areas of the
+draw world which will be trashed. Once backed up, sprites are blitted into the
+backworld. The aforementioned blit list is then merged into the list of rects to be
+blitted to screen. This step can happen in either CalcAllLayers or RenderAllLayers,
+see “Intricacies of the sprite layer manager”. Then all rects which are marked are
+blitted to screen. This puts all the sprites on screen. The drawbuffer is then cleared
+of all rects. This is important. The restore backdrop function is now called. This
+copies back the parts of the draw buffer which were trashed when sprites were blitted
+onto them. These rects are then invalled so they will get blitted to screen on the
+next pass. This is why the draw buffer must be reset before RestoreBackdrop and not
+after. There are many more tricks and options you can use, see next chapter.
+
+
+Intricacies of the sprite layer manager
+---------------------------------------
+This chapter describes tricks and optimisations you can use with the sprite layer
+manger.
+
+Static backdrop
+Now, if you have a static backdrop which you are moving sprites over, you can skip the
+stash sprites step. Basically you copy then entire draw world into the backup world
+then you don’t need to keep stashing it every frame.
+      backupBuffer.BlitAllDS();
+Now you can simply rem out the StashBackdrop() line as it’s permanently backed up. Now
+if at any point you change the draw buffer, you should also change the backed up copy
+for this to keep working. Eg, say the backdrop was static, but then the sky over the
+horizon changed colour. You’d change it in the draw world, then blit it into the
+backup world (backupBuffer.BlitRectDS(&skyRect)) or, if you were making a few changes,
+add it as a marked rect, collect them together and blit them all accross. You must
+remember though, the layer manager uses the backupBuffers blit list, so the list be
+empty when you start using the layer manager to calculate the sprites.
+
+Backdrop which changes completely every few frames
+With this type of backdrop, you are best using the default stash and restore
+techniques. They will probably work out faster than redrawing the draw world and
+copying into the backup world.
+
+Backdrop which is re rendered every pass
+This is where your sprites can be speeded up. As you are redrawing the entire backdrop
+every pass, you won’t need to stash and restore the backdrop. The sprites can be left
+there and erased when you do the re render.
+As you aren’t stashing you don’t need the backup buffer. Simply set it to 0L or don’t
+set it up in the first place (it defaults to 0L). Even if it stays set to a valid
+buffer it won’t get used.
+Your draw loop would then look like:
+
+      manager.CalcAllLayers();            // calculate the areas to be blitted
+      manager.RenderAllLayers();          // render the sprites
+      drawBuffer.BlitAllRectsSD();        // blit to screen
+      drawBuffer.ClearBlitList();         // clear the blit list
+
+It should be noted though, that if you are going to be redrawing the entire draw world
+every frame, you are quite likely to be doing full screen blits all the time. If you
+are doing full screen blits then you don’t need to inval the sprites rects on screen.
+Call manager.SetSpriteInvalling(false) during set up to stop any kind of invalling to
+the screen. You can then just blit the blit list you’ve generated, or simply change
+the BlitAllRectsSD() to BlitAllSD().
+A further point is, if you are not backing up the backdrop, and you are not invalling
+the sprites to screen, you at no point even need to build a blit list of the sprites.
+(Remember this blit list is built in either CalcAllLayers or RenderAllLayers and is
+used to backup the backdrop and inval to screen). So you stop it working this out for
+a further speed up by calling manager.SetSpriteTracking(false).
+You do still need to call CalcAllLayers as it performs clipping, and sprite specfic
+calculations.
+
+So your final draw loop may resemble this
+      manager.CalcAllLayers();            // process the sprites
+      manager.RenderAllLayers();          // render the sprites
+      drawBuffer.BlitAllSD();             // blit to screen
+      drawBuffer.ClearBlitList();         // clear the blit list
+
+As you’ve disabled SpriteInvalling, the layer manager won’t inval rectangles in the
+draw buffer. If you are doing a full screen blit you probably won’t be invalling
+rectangles in the draw buffer. So you can delete the ClearBlitList() line aswell.

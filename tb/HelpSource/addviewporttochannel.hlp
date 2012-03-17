@@ -1,0 +1,16 @@
+<name>Add Viewport To Channel</name>
+<group>moan</group>
+<syntax>Add Viewport To Channel <i>canvasId,channelId</i></syntax>
+<synopsis>Adds a viewport to a moan channel</synopsis>
+<desc>
+This command is used to add a viewport to a moan channel. Subsequent programs ran on the moan channel will then affect it.
+
+It is possible to add a viewport to multiple channels. When this is done, the overall effect on the viewport will be a composite of the individual channels.
+
+A viewport can be added to the same channel multiple times, this will cause it to be doubly affected by the channel, ie where a move command would move it x pixels, it will instead move it 2*x pixels.
+
+<i>canvasId</i> is the number of the canvas that the viewport is viewport is viewing, it will be added to the channel.
+<i>channelId</i> is the number of the moan channel to add the viewport to.
+
+See also @@Add Sprite To Channel@@, @@Remove Sprite From Channel@@, @@Remove Viewport From Channel@@.
+</desc>

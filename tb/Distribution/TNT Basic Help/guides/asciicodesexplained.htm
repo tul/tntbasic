@@ -1,0 +1,31 @@
+<HTML>  
+<HEAD>
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>Ascii Codes Explained</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+  <META NAME="AppleTitle" CONTENT="Ascii Codes Explained">
+  <META NAME="AppleTarget" CONTENT="_right">
+  <META NAME="DESCRIPTION" CONTENT="Explains what Ascii codes are">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="472"
+HEIGHT="177">
+  <TR VALIGN="TOP">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">Ascii Codes Explained</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD HEIGHT="40">
+      <BLOCKQUOTE>
+        <FONT SIZE="-1" FACE="Geneva"><p>Computers deal with numbers, not letters or punctuation, and so to get them to work with text we need to represent each and every character as a number.</p><p>The text files that you read and write are actually stored, loaded into memory and manipulated as a sequence of numbers. When the computer displays the data on screen as text, it changes the numbers into characters so that humans can understand it.</p><p>In order for text files to be reliably stored and processed by computers, it is important that they all interpret the data in the same way. To achieve this, a standardised mapping was created that defined what numbers should be used to represent all the characters in the english language. This mapping was called the <b>A</b>merican <b>S</b>tandard for <b>I</b>nformation <b>I</b>nterchange, or <b>ASCII</b> for short.</p><p></blockquote><p><b><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Lower Ascii Table</FONT></b></p></td></tr><tr><td><blockquote><FONT SIZE="-1" FACE="Geneva">The Ascii table is split into two sections, the lower ascii table and the upper ascii table. The lower ascii table defines all numbers beteen 0 and 127 inclusive. This is the officially standardised section of the Ascii table and represents all the most common characters.</p><p>The numbers from 0 to 31 inclusive represent non-printing characters, meaning characters that are not directly displayed. These characters control how the data should be interpretted. They were designed for when text was processed by teletype terminals and as such needed characters to represent actions such as ringing an audible bell, and signalling the beginning or end of a data transmission. Although a lot of these characters are no longer of any use, some of them have become common place.</p><p>The <i>carriage return</i> is the character used by the Macintosh to represent a new line. On UNIX (and in some Mac OS X text files) the <i>line feed</i> is the standard way of designating a new line. On Windows, both a <i>carriage return</i> AND a <i>line feed</i> are used as a pair! The other commonly used control characters include <i>NULL</i>, which often indicates the end of a string of text, <i>tab</i> which is used to assist the layout of text by indenting it and <i>backspace</i> which deletes the previous character.</p><p>All the rest of the characters above 31 in the lower ascii table are printable, except for <i>forward delete</i>, an apparently late addition which, means to delete the next character.</p><p><b>Lower Ascii Table</b><br><img src="../gfx/lowerasciitable.gif"><br></blockquote><p><b><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Upper Ascii Table</FONT></b></p></td></tr><tr><td><blockquote><FONT SIZE="-1" FACE="Geneva">The upper Ascii table has not been officially standardised, and tends to vary from computer to computer and from font to font. Some characters are more standard than others, and your milage may vary, but here's the table for the Macintosh Courier font.</p><p><b>Upper Ascii Table</b><br><img src="../gfx/upperasciitable.gif"></p><p></blockquote><p><b><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Working with Ascii</FONT></b></p></td></tr><tr><td><blockquote><FONT SIZE="-1" FACE="Geneva">TNT Basic supports two commands for converting between characters and their Ascii numbers, these are <A HREF="../commands/chartoascii.htm">Char to Ascii</A> and <A HREF="../commands/asciitochar.htm">Ascii to Char</A>.</p><p>For the most part TNT Basic programs don't need to convert text to their numeric equivalent, but occasionally it is useful, for example when you want to embed a special symbol into a text string.</p><p>Eg:</p><p></FONT><FONT COLOR="#000000" SIZE="-2" FACE="Monaco,Arial"><FONT COLOR="#4985c6">Draw Text</FONT> 10,10,"This is an "+<FONT COLOR="#4985c6">Ascii to Char</FONT>(240)<br></FONT><FONT SIZE="-1" FACE="Geneva"></p><p>If you look up Ascii code 240 you will see that it will display an Apple at the end of the string. A further use it to check for special characters, such as carriage returns which help you format your text.</p><p>Eg, a loop to draw text and move to the next line on a carriage return might look like:<br></FONT><FONT COLOR="#000000" SIZE="-2" FACE="Monaco,Arial"><br><FONT COLOR="#0000FF">int</FONT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i<br><FONT COLOR="#0000FF">for</FONT> i = 1 <FONT COLOR="#0000FF">to</FONT> <FONT COLOR="#4985c6">String Length</FONT> (inputString)<br>&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="#0000FF">str</FONT> myChar = <FONT COLOR="#4985c6">Get Char</FONT> (i,inputString)<br>&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="#0000FF">if</FONT> <FONT COLOR="#4985c6">Char to Ascii</FONT> (myChar) = 13<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MoveToNextLine()<br>&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="#0000FF">else</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DrawCharOnCurrentLine(myChar)<br>&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="#0000FF">end if</FONT><br><FONT COLOR="#0000FF">next</FONT> i</p><p></FONT><FONT SIZE="-1" FACE="Geneva"></p>See also the <A HREF="../commands/chartoascii.htm">Char to Ascii</A>, <A HREF="../commands/asciitochar.htm">Ascii to Char</A> and <A HREF="../commands/rawkeyascii.htm">Raw Key Ascii</A> commands.<br></FONT>
+      </BLOCKQUOTE>
+    </TD>
+  </TR>
+  <TR VALIGN="TOP">
+    <TD ALIGN="CENTER" HEIGHT="34"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../io/io_frameset.htm">Table of contents</A></FONT></TD> 
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

@@ -1,0 +1,11 @@
+<name>Channel Moving</name>
+<group>moan</group>
+<synopsis>Tells whether a moan channel is currently executing a move</synopsis>
+<syntax><i>boolean</i> = Channel Moving (<i>channelId</i>)</syntax>
+<desc>
+This function returns whether the moan channel <i>channelId</i> is currently executing a move command.
+
+It is not affected by pausing the channel, or by turning off auto moaning.
+	
+See also @@Pause Channel@@ and @@Step Moan@@.
+</desc>

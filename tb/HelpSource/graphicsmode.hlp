@@ -1,0 +1,25 @@
+<name>Graphics Mode</name>
+<covers>Graphics Mode Hardware, Window Mode, Window Mode Hardware</covers>
+<group>cv</group>
+<syntax>Graphics Mode <i>screenWidth</i>,<i>screenHeight</i>
+Graphics Mode Hardware <i>screenWidth</i>,<i>screenHeight</i>
+Window Mode <i>screenWidth</i>,<i>screenHeight</i>
+Window Mode Hardware <i>screenWidth</i>,<i>screenHeight</i></syntax>
+<synopsis>Enters graphics mode</synopsis>
+<desc>
+This command causes TNT Basic to enter graphics mode allowing it to use sprites, canvases and perform drawing operations.
+
+The default drawing canvas is opened with the specified dimensions and the screen is cleared with black.
+
+If hardware mode is used then TNT Basic takes advantage of the computers graphics card using OpenGL. This also allows additional effects (e.g. sprite rotation and sprite scaling).
+
+Using the 'Graphics Mode' or 'Graphics Mode Hardware' commands will invoke full screen graphics mode. This will hide the menu bar and dock, and switch the monitor resolution to the best resolution for your game.
+
+The 'Window Mode' and 'Window Mode Hardware' commands will run your game in a window, rather than full screen. This is often useful during development, and also good for less immersive games such as puzzle games.
+
+Note: Currently (TNT Basic 1.3), using 'Window Mode' under OS X will result in a slight performance penalty, meaning your frame rates will be lower than if you used full screen graphics mode.
+
+<i>screenWidth</i> and <i>sceenHeight</i> are the dimensions of the drawable surface that you want to create. When using full screen graphics mode, they can be anything up to the maximum resolution of the monitor. The monitor resolution is automatically switched to the best resolution for your requirements. If there is no exact match then the next resolution up is selected and your game is displayed in the central region of the screen. When using window mode, the window is created at the size requested and placed in the centre of the screen. No resolution switching is done when using window mode.
+
+Common full screen resolutions include 640x480, 800x600 and 1024x768.
+</desc>

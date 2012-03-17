@@ -1,0 +1,60 @@
+Working with global and shared variables in TNT Basic
+Mark Tully
+21/3/00
+
+Each procedure in TNT Basic has it's own variable scope. The program itself also has a seperate variable scope which the
+procedures cannot see.
+
+Often code calls for values to be shared amongs all procedures. Eg constants or globals. AMOS achieved this with two
+mechanisms. Shared Variables and Global Variables. A procedure can declare a variable as shared. When this is done all
+future references to this variable operate on the variable in the root scope, ie the global version of that variable.
+The "Shared" statement was only allowed in Procedures.
+AMOS also allowed a "Global" statement at the root level. This basically said those variables were "shared" for all
+procedures in the program. Both of these are basically global variables, ones whose value is shared accross all scopes.
+
+The shared statments in AMOS were not actual executable statements. If shared appeared anywhere in the AMOS code, even in
+dead code, the variable was shared. ie the sharedness was evaluated at parse time (but in linear order, ie references to the
+variable before the shared statement refer to a local copy)
+
+If a global statement appeared ANYWHERE in the programs main code then that variable is seen as global from the very beginning
+of the code.
+
+An interesting point in AMOS is that if the variable is declared as global and then it's used in the procedure def to receive
+a parameter the parameter is stored in the global. So globals can be updated by the parameter binding code too.
+
+Implementing this in TNT Basic
+------------------------------
+First I extend the variable symbol class to have
+
+VarSymbol
+	bool			mIsRoot;				// indicates this symbol should always access the root storage rather than the
+											// one on the current stack frame. This isn't used in parsing and so only needs
+											// setting later
+	CVarSymbolTable	*mOwner;				// so we can tell which table actually owns this var
+	
+The concept is to have guest symbols. These are from another table and are not owned by the procedures table but are treated
+similarly in every other respect. When accessed they will get and set the value in the root frame as mIsRoot will be set
+for them.
+
+When a shared statement is encountered the parser removes the local symbol from the table and replaces it with one from the
+root table. The problem with this is that statements which use the variable now have a reference to a symbol which has just
+been deleted. To solve this I've just said that the shared statement must be the first statement in a procedure if it's to
+exist at all. This is OK as it doesn't really make sensible code in my opinion to use a local variable with the same name and
+then halfway through the code use SHARED to begin to use the global version. Besides which shared is interpreted at parse time
+and so ignores the control flow and so probably wouldn't work as the user expected anyway.
+With this decision made slight modifications have to be made for parameters to the procedure. Parameters are variables which
+are entered into the procedures table before the shared statement is encountered. If a variables which are used as a parameter
+receptor are then declared as shared the parameter lists will refer to not existant symbols (as they've been deleted and
+replaced by guest symbols from the root table). Now we could patch up the parameter list to refer to the new symbols OR
+we could declare it illegal to declar parameter receptors are shared. The second approcach is less work and also makes more
+sense in the long run as receiving values into globals is very strange as it alters globals before the procedure is even
+entered. It's bad code in my opinion and it more likely to be an accidental naming clash than a cunning implicit assignment.
+So sharing parameters is illegal. The same is true of receiving parameters into variables declared as global in the root
+scope.
+
+For globals they too must be declared before any procedures are declared. This ensures that the procedure knows to import the
+globals into it's symbol table as it is parsed.
+
+Additional checks are made with the globals to check that they are valid for sharing. First it is OK to share a global or
+declare a global global twice. The parser just ignores the second declaration. Second you cannot share array members. eg
+Global gMap[1,1] is invalid and the parser will bitch at you. The same is true of Shared variables.

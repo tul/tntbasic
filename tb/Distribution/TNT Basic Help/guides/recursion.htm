@@ -1,0 +1,54 @@
+<HTML>  
+<HEAD>
+  <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Mac">
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>Recursion</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="349"
+HEIGHT="379">
+  <TR VALIGN="TOP">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">Recursion</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD HEIGHT="330">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">A procedure is able to
+        call other procedures from inside it. It is also able to call
+        itself from inside it. This is known as <B>Recursion</B>.</FONT></P>
+        <P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">Procedure</FONT><FONT
+         SIZE="-2" FACE="Monaco,Arial"> Recurse()<BR>
+        Recurse<BR>
+        </FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">End
+        Proc</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">This procedure repeatedly
+        calls itself. This, however, would cause an infinite loop because
+        it would just keep calling itself and would never stop.</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">In order to prevent this
+        from happening recursive procedures need to be able to keep track
+        of how many times they have been called.</FONT></P>
+        <P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">Procedure</FONT><FONT
+         SIZE="-2" FACE="Monaco,Arial"> Recurse(n)<BR>
+        </FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">if</FONT><FONT
+         SIZE="-2" FACE="Monaco,Arial"> n&gt;0<BR>
+        Recurse(n-1)<BR>
+        </FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">end
+        if</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">This would only call the
+        procedure n times because each time it is called the value of
+        n is reduced. Once n becomes less than or equal to 0, the procedure
+        is no longer called and termination of all the called procedures
+        would begin.</FONT>
+      </BLOCKQUOTE>
+    </TD>
+  </TR>
+  <TR VALIGN="TOP">
+    <TD ALIGN="CENTER" HEIGHT="30"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../proc/proc_frameset.htm">Table of contents</A></FONT></TD>
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

@@ -1,0 +1,11 @@
+RezLibMachO
+Mark Tully
+11/06/06
+
+This directory contains source based on Ian Ollmann's RezLib. It has been modified to work in a MachO project,
+as opposed to being compiled into a CFM library. It is not a complete distribution of RezLib, and will not work
+in CFM based projects. It is simply a compatibility library to get RezLib based projects, such as TNT Basic
+working under Mach. When compiling TNT Basic under CFM, use the original RezLib.
+
+Mark Tully
+tntbasic.com

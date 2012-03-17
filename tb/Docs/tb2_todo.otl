@@ -1,0 +1,114 @@
+todo
+	tb 1.4 beta release todo
+		DONE
+	tb 1.4 source upload todo
+		check third party license notes
+		setup license info on github
+			consider changing license to public domain?
+
+	broken examples
+		Copy Image Test - fails to parse code
+	Would be good to add code to convert these into unit tests
+		could simply read std out and compare to script
+		gfx could be tested via printing of md5 digest of screen
+	Won't compile under XC 4
+	RAA about box isn't semi transparent like it should be
+	About box text states copy right as ending in 2006
+
+future
+	might be beneficial to support either a zip archive format (single file) or DF based resource files?
+
+dyld notes
+	building with the deployment target set to 10.6 or greater will generate exes that will not load on 10.5
+	this is due to the loader using new load commands that are not available on 10.5 machines - generating errors like
+		Unknown required load command 0x80000022
+	this is the new compressed load command: https://developer.apple.com/library/mac/#releasenotes/DeveloperTools/RN-dyld/_index.html
+	set deployment target to 10.5 and it should be fine
+	check load commands by running otool -l on the exe - LC_DYLD_INFO_ONLY will only work on 10.6 machines. deploying to 10.5 will generate both new
+	and old load commands
+
+		
+
+help center notes
+	it is a thing of confusing madness
+	do you need to make help bundles
+		it would seem not
+		an old style folder with a file in it which has the appropriate apple tags would appear to be all that is needed
+		it doesn't even need a help index under 10.4 (or 10.5 can't remember which) upwards - although apple recommend them still
+	how do i register a help book
+		you can provide the pair of keys in your info plist file
+			<key>CFBundleHelpBookFolder</key>
+			<string>TNT Basic Help</string>
+			<key>CFBundleHelpBookName</key>
+			<string>TNT Basic Help</string>
+		the folder is the name of the folder which has your html files in it (ie the direcotry of your help book)
+		the name is apparently the name of the AppleTitle tag of the page you want to open. i also think i've seem mentioned that it's the name of the html file to open within the book
+	can i register programmatically?
+		apparently, you can using AHRegisterHelpBook, but i can't get this to work. always get a -50 back. even if i convert the thing to a .help bundle (with info.plist and everything)
+		on closer reading, it would seem that my error was that i was passing the help bundle to this function, when i should have been passing the app bundle
+		passing the app bundle will cause it to register the help book specified in the apps info.plist. not sure why this is needed, as that help bundle seems to be registered automatically anyway
+		the apple example : OutputBins2PDE uses AHRegisterHelpBook from a printer plugin thing to register the help books in its info.plist
+	can i register multiple help books
+		i have not been able to do this
+		i've tried listing multiple books in an array in under the CFBundleHelpBookFolder, but that doesn't seem to work
+		i've also tried doing it programmatically using AHRegisterHelpBook, but as stated above, that only seems to register a single help book
+	do we need to register multiple help books?
+		well it would be nice. when you list all apps in the help centre, you would get TNT Basic Help and TNT Basic User guide, but it's not a deal breaker
+	work around?
+		the work around i came up with is to combine the help and the user guide into a single book - and just add menu items myself and use AHGotoPage to
+		open the correct index page within the same help book. this seems to do the job
+		however, i am tempted to open the user guide in the web browser anyway, as it doesn't work brilliantly in the help centre - as it's not designed for
+		a small format view particularly
+	notes
+		with a big restructure of the help bundle, you can get it so that you can pass the .help bundle and not have it return a param err
+		the trick is to essentially structure the .help file like an app, and then have the help folder in its resources, and have an info.plist with
+		CFBundleHelpBookFolder and CFBundleHelpBookName defined
+		this makes the AHRegisterHelpBook pass without errors
+		however, you can still only have one book registered it would seem (or at least, i couldn't get both to be registerd at the same time)
+			more specfically, if I called AHRegisterHelpBook with two bundles, only would would be accessible via AHGotoPage passing the name of the book
+			if could comment out one, then the other, and have either one work, but if i had both, only one book would work.
+			the order of the registration didn't seem to determine which book would work, so it must be some other factor (eg alphabetical order)
+			for this test, there was no help book specified in the apps info.plist
+			ia also tried removing the code to register, and instead registering via the info.plist file, but i couldn't get the books to register in this way either
+			again, registering one book or the other worked, but registering both would lead to only one book being available
+			it would seem that you just aren't allowed to have multiple books registered for an app
+
+			
+
+symbol table notes
+	CAssociativeArray maps a string to a data ptr array and entries can be subclassed
+	subclassed into symbol table and symbol entry
+		this adds an index variable, which is presumably used to perform some optimisation or reverse lookup or something
+	subclassed again into variable symbol and variable symbol table
+		this adds some type info on the variable, from an enum, eg int, str, float, etc
+		also whether or not it was a root variable (does this mean global?)
+		undeclared variables are also entered in this, so they are then only reported once
+		each variable symbol is also associated with a CStackFrame
+			this is a shortcut for a symbol which will return either the current stack frame or the root one, depending on whether this symbol is global (mIsRoot==true)
+		this also adds the table complete method, which runs through the symbols and assign the indicies added by the CSymbolEntry subclass
+			it asigns the index on a per type basis, eg int indicies and float indices (etc) are all counted up from zero independently
+			entries are are 'guests' are skipped from this assignment, and so keep the default index of 0
+			undeclared types are also left at the default value of 0
+		THERE ARE TWO CSYMBOLTABLET CLASSES, ONE IN MR AND ONE IN TB -- THAT CAN'T BE RIGHT??
+		each symbol in the variable symbol table is a subclass of CVariableSymbol. eg CIntegerSymbol
+		classes like CIntegerSymbol mix in a storage interface, eg CIntegerStorage
+			presumably, these are used to provide an lvalue interface which can be implemented by variables or array entries
+
+stack frame notes
+	each stack frame has a type, root, procedure or go sub
+	in addition, it has a CVariableStorage class and storage space for results from the procedure
+	the variable storage reserves spaces for all the entries in a symbol table associated with a scope, when that scope is entered at runtime
+	global variables are (presumably) the guests and as such were not counted in the total counts for a symbol table and so will not have storage space reserved for them
+	
+	
+endian and image decoding
+	pixmap buffers which are written to by blast++ are stored in big endian format, with the red component in the high bits
+	blast macros for manipulating colours (including those macros used to do sprite translucency) are all written to assume that red is in the high bits
+		adjusting these macros to work with endian flipped shorts is non trivial, as flipping them splits the green component's bits in such a way that arithmetic is no longer easily possible
+	so, lets assume that blast and all its macros can continue with a r in high bits colour representation
+	we then need to introduce endian flips whenever a colour is read from, or written to a pixmap
+		the alternative of course, is to not use a pixmap format that is effectively in the wrong endian for the system - not sure if this is easily attainable?
+		ARGGHH - there is a gworld flag to do this: kNativeEndianPixMap
+	so, remove all endian flipping code and instead set this flag on all gworlds opened, and you should be good?
+
+

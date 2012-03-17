@@ -1,0 +1,13 @@
+<name>Restart Channel</name>
+<group>moan</group>
+<syntax>Restart Channel
+Restart Channel <i>channelId</i></syntax>
+<synopsis>Restarts the program on a moan channel</synopsis>
+<desc>
+Restarts a moan channel from the beginning, clearing it's local registers.
+Note that all programs affect the sprites from their current location, so often when restarting a program you would want to restore sprite and viewports to their original position (restart channel does not do this).
+
+If <i>channelId</i> is not specified then all channels are restarted.
+
+See also @@Reset Channel@@ and @@Set Channel Program@@.
+</desc>

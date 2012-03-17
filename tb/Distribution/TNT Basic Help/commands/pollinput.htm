@@ -1,0 +1,83 @@
+<HTML>  
+<HEAD>
+  <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Mac">
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>Poll Input</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+  <META NAME="AppleTitle" CONTENT="Poll Input">
+  <META NAME="AppleTarget" CONTENT="_right">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="349"
+HEIGHT="177">
+  <TR VALIGN="TOP">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">Poll
+      Input</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD HEIGHT="41">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva">Returns the value associated
+        with an input element.</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Syntax</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="43">
+      <BLOCKQUOTE>
+        <P><I><FONT SIZE="-1" FACE="Geneva,Arial">value</FONT></I><FONT
+         SIZE="-1" FACE="Geneva,Arial"> = Poll Input (<I>elementID</I>)</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Description</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="40">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva"><b>At the present time, this command does not work on Mac OS X, due to its reliance on Input Sprocket which has been discontinued.</b></FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva">This function is used to get
+        the value of an input element defined in an input resource. To
+        use this command an input resource must be loaded (see <A HREF="loadinput.htm">Load
+        Input</A>) and TNT Basic must be in input mode (see <A HREF="activateinput.htm">Activate
+        Input</A> and <A HREF="deactivateinput.htm">Deactivate Input</A>).</FONT></P>
+        <P><I><FONT SIZE="-1" FACE="Geneva">elementID</FONT></I><FONT
+         SIZE="-1" FACE="Geneva"> refers to the input device in the currently
+        loaded input bank (starting from 0 upwards).</FONT></P>
+        <P><I><FONT SIZE="-1" FACE="Geneva">value</FONT></I><FONT SIZE="-1"
+         FACE="Geneva"> is the value of that device.</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva">For a button it returns:<BR>
+        0 = Not Pressed<BR>
+        1 = Pressed</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva">For a dpad it returns:<BR>
+        0 = Idle<BR>
+        1 = Left<BR>
+        2 = Up-Left<BR>
+        3 = Up<BR>
+        4 = Up-Right<BR>
+        5 = Right<BR>
+        6 = Down-Right<BR>
+        7 = Down<BR>
+        8 = Down-Left</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva">For an x axis it returns in
+        the range:<BR>
+        -100 = Maximum Left<BR>
+        0 = Middle<BR>
+        100 = Maximum Right</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva">For a y axis it returns in the
+        range:<BR>
+        -100 = Maximum Up<BR>
+        0 = Middle<BR>
+        100 = Maximum Down</FONT>
+      </BLOCKQUOTE>
+    </TD>
+  </TR>
+  <TR VALIGN="TOP">
+    <TD ALIGN="CENTER" HEIGHT="34"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../io/io_frameset.htm">Table of contents</A></FONT></TD> 
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

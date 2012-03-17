@@ -1,0 +1,73 @@
+<name>FX Matrix</name>
+<group>draw</group>
+<syntax>FX Matrix <i>matrix[],sourceCanvas to destCanvas</i></syntax>
+<synopsis>Applies a kernal filter to a canvas as it copies it</synopsis>
+<desc>
+FX Matrix is really a bit of a toy command. Basically it allows you to apply what are known as 'kernal filters' to your images. It copies the contents of <i>sourceCanvas</i> to <i>destCanvas</i> applying the kernal filter defined by the array <i>matrix[]</i> as the image is copied.
+
+<b>NOTE:</b> The FX Matrix command does not work in @@Graphics Mode Hardware@@.
+
+<sub>More on kernal filters</sub>
+A kernal filter is a grid of numbers, which are used to calculate a weighted average of all the pixels around a given pixel to generate a result one. The grid is moved across the image, 1 pixel at a time, always operating on the pixel in the centre of the grid, and filtering in it's neighbours as dictated by the weighting given to it by the grid.
+
+This is probably better explained with an example:
+
+If you had the matrix:
+
+0 1 0
+1 2 1
+0 1 0
+
+And applied it to an image, a pixel in the resultant image would be calculated by having 2*the colour value of itself, then 1* the colour value of the pixels above, below, left and right of it. The result would then be divided by the number of pixels factored in to give an average. In this case there were 2+1+1+1+1=6 pixels factored in. This would have the affect of a pixel retaining it's original colour, but being heavily influenced in colour by its neighbours. This results in colour smoothing - or a 'gaussian blur' as photoshop calls it.
+
+You can produce some really crazy convolutions of the image by typing randomly chosen numbers into the matrix. Photoshop has a kernal filter command in it's filter menu, which is what a lot of its plug in filters are based on.
+
+For instance, to emboss an image, you make each pixel have it's original value + the value of the pixel below and right (where the 'light' is shining from), and less the value of the pixel above and left (where the 'shadow' is). If all the image is the same colour, the resultant pixel is the same colour as the original, as the pixel above left and below right cancel each other out. But if there's a colour contrast, such as on the edge of a block of colour, it will become embossed.
+
+An example matrix for embossing is:
+-10 0 0
+0 5 0
+0 0 10
+
+So that's the theory anyway. In TNT Basic, you make these matrices by filling out a 2D array with the numbers.
+
+Eg:
+<tnt>int mymatrix[3,3]
+
+mymatrix[0,0]=-10 'top left
+mymatrix[1,0]=0 'top middle
+mymatrix[2,0]=0 ' top right
+mymatrix[0,1]=0 ' left middle
+mymatrix[1,1]=5 ' middle
+mymatrix[2,1]=0 ' right middle
+mymatrix[0,2]=0 ' bottom left
+mymatrix[1,2]=0 ' bottom middle
+mymatrix[2,2]=10 ' bottom right</tnt>
+
+Or equivalently and probably easier to read:
+<tnt>
+int mymatrix[3,3]
+int i,j
+
+for i=0 to 3
+	for j=0 to 3
+		read mymatrix[i,j]
+	next j
+next i
+
+data -10,0,0
+data 0,5,0
+data 0,0,10</tnt>
+
+Once the matrix is filled out, apply it to your image with the FX Matrix command as so:
+
+FX Matrix mymatrix[],sourceCanvas to destCanvas
+
+Where <i>mymatrix</i> is the matrix to apply, the <i>sourceCanvas</i> is the number of a canvas to read from and <i>destCanvas</i> is the number of the canvas to draw the results in.
+
+The FX Matrix example demonstrates several different FX Matrix effects and can be downloaded from <url>http://www.tntbasic.com/download/examples/files/FX_Matrix_Example.sit</url>.
+
+Unfortunately, the FX Matrix command isn't very fast, so probably won't be able to do real time fx unless you have a fast machine. But it's cool to use on your title screen, or for preprocessing your graphics as the game loads.
+
+See also @@Copy Canvas@@.
+</desc>

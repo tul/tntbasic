@@ -1,0 +1,12 @@
+<name>Unload Sounds</name>
+<group>snd</group>
+<synopsis>Unloads the current sound bank</synopsis>
+<syntax>Unload Sounds</syntax>
+<desc>
+Unloads the currently loaded sound bank, previously loaded with the @@Load Sounds@@ command.
+
+This frees the memory occupied by all the sounds in the sound bank. Any sounds playing from this sound bank when it is unloaded will be stopped.
+
+See also:
+	The @@Load Sounds@@ command.
+</desc>

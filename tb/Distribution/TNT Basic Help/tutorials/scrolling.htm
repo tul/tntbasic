@@ -1,0 +1,159 @@
+<!DOCTYPE html public "-//w3c//dtd html 4.0 transitional//en">
+<HTML>  
+<HEAD>
+  <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Mac">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+  <META NAME="GENERATOR" CONTENT="Mozilla/4.61 (Macintosh; I; PPC) [Netscape]">
+  <TITLE>Scrolling</TITLE>
+</HEAD>
+<BODY BACKGROUND="../gfx/chalk.gif">
+
+<P><IMG SRC="../gfx/scrolling.gif" NOSAVE BORDER="0" HEIGHT="110"
+WIDTH="279" NATURALSIZEFLAG="3" ALIGN="BOTTOM"><IMG SRC="../gfx/thinbarrel.gif"
+WIDTH="48" HEIGHT="110" ALIGN="BOTTOM" BORDER="0" NATURALSIZEFLAG="3"><BR>
+<FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Loading Sounds">How
+is Scrolling done?</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Playing a Sound">Opening
+a Viewport</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Looping a Sound">Scrolling
+a Viewport</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Animating Sprites">Closing
+a Viewport</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Stopping a Sound">Scrolling
+and Sprites</A></FONT></P>
+
+<P><A NAME="Loading Sounds"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">How is Scrolling done?<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">In TNT Basic
+scrolling is done by using something called viewports.&nbsp; A
+viewport is basically a 'portal' to another canvas.&nbsp; When
+a viewport is created on screen, instead of being able to see
+the screen, you can see through to the canvas it points to.&nbsp;
+This 'portal' can be moved around the canvas and therefore can
+create the effect of scrolling view.</FONT></P>
+
+<P><A NAME="Playing a Sound"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Opening a Viewport<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">In order to
+open a viewport, you first have to open a canvas using the command
+<A HREF="../commands/opencanvas.htm">Open Canvas</A>.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Open Canvas</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 1,1000,1000</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This opens canvas 1
+with a width of 1000 and a height of 1000.&nbsp; The reason this
+canvas is so big is because we are going to need to scroll around
+it.&nbsp; Conceptually, this is what we are going to do...</FONT></P>
+
+<P><IMG SRC="../gfx/viewport.gif" NOSAVE BORDER="0" HEIGHT="125"
+WIDTH="192" NATURALSIZEFLAG="3" ALIGN="BOTTOM"></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">We are creating a big
+canvas in the background.&nbsp; Later, we will create a viewport
+which is only a small portion of this canvas.&nbsp; We will be
+able to draw to the canvas, and these drawings will be visible
+on screen because the user will be able to 'see-through' the viewport
+to the canvas it points to.&nbsp; We will also be able to move
+the viewport around the canvas by changing its x and y offsets,
+this will create the effect of scrolling. A viewport can be opened
+using the command <A HREF="../commands/opencanvas.htm">Open Canvas</A>.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Open Viewport</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 1,0,0 </FONT><FONT COLOR="#0000ff" SIZE="-2"
+ FACE="Monaco">to</FONT><FONT SIZE="-2" FACE="Monaco"> 500,480</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This opens a viewport
+to canvas 1.&nbsp; The viewport starts from the top left corner
+of the screen (0,0) and is 500 pixels wide and 480 pixels high.</FONT></P>
+
+<P><A NAME="Looping a Sound"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Scrolling a Viewport<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">Once a viewport
+has been created, it can be scrolled around simply by changing
+its x and y offsets.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">int</FONT><FONT
+ SIZE="-2" FACE="Monaco"> x=0</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">while not Mouse
+Button</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">&nbsp; </FONT><FONT
+ COLOR="#000000" SIZE="-2" FACE="Monaco">x=x+1</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">&nbsp; </FONT><FONT
+ COLOR="#ff0000" SIZE="-2" FACE="Monaco">' Check we do not scroll
+off the side of the canvas</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">&nbsp;&nbsp; if
+</FONT><FONT COLOR="#000000" SIZE="-2" FACE="Monaco">x+</FONT><FONT
+ COLOR="#0000ff" SIZE="-2" FACE="Monaco">Viewport Width </FONT><FONT
+ COLOR="#000000" SIZE="-2" FACE="Monaco">(1) &gt; 1000</FONT>
+<BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">&nbsp;&nbsp;&nbsp;</FONT><FONT
+ COLOR="#000000" SIZE="-2" FACE="Monaco"> </FONT><FONT COLOR="#0000ff"
+ SIZE="-2" FACE="Monaco">&nbsp; </FONT><FONT COLOR="#000000" SIZE="-2"
+ FACE="Monaco">x=1000-</FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Viewport
+Width </FONT><FONT COLOR="#000000" SIZE="-2" FACE="Monaco">(1)</FONT>
+<BR>
+<FONT COLOR="#000000" SIZE="-2" FACE="Monaco">&nbsp; </FONT><FONT
+ COLOR="#0000ff" SIZE="-2" FACE="Monaco">end if</FONT></P>
+
+<P><FONT SIZE="-2" FACE="Monaco">&nbsp;&nbsp; </FONT><FONT COLOR="#0000ff"
+ SIZE="-2" FACE="Monaco">Set Viewport Offset</FONT><FONT SIZE="-2"
+ FACE="Monaco"> 1,x,0</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">&nbsp;&nbsp;
+Draw Frame</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">wend</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This program scrolls
+the viewport from left to right.</FONT></P>
+
+<P><B><FONT SIZE="-1" FACE="Geneva,Helvetica">Note: </FONT></B><FONT
+ SIZE="-1" FACE="Geneva,Helvetica">We have to check that we do
+not go off the sides of the canvas.&nbsp; If we do TNT Basic will
+return an error.&nbsp; In order to do this we get the right edge
+of the viewport (x+<A HREF="../commands/viewportwidth.htm">Viewport
+Width</A>) and check that it is not greater than the right of
+the canvas (1000).&nbsp; If it is then we need to move the viewport
+to be entirely in the canvas.</FONT></P>
+
+<P><A NAME="Animating Sprites"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Closing a Viewport<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">When you have
+finished with the viewport, it can be closed by calling the command
+<A HREF="../commands/closeviewport.htm">Close Viewport</A>.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Close Viewport</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 1</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This closes the viewport
+that leads to canvas 1.&nbsp; In most cases, you will also need
+to close the canvas that it was pointing to using the command
+<A HREF="../commands/closecanvas.htm">Close Canvas</A>.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Close Canvas</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 1</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This closes the background
+canvas.</FONT></P>
+
+<P><A NAME="Stopping a Sound"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Scrolling and Sprites<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">Sprites can
+be placed into different canvases.&nbsp; If a sprite is placed
+into a canvas it is drawn in the viewport and can be scrolled
+over just like the rest of the canvas.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Sprites in canvas 0
+appear over all of the viewports.&nbsp; This is useful for having
+objects that can be moved around all of the screen (e.g. mouse
+cursor, interface stuff).&nbsp; Anything that you want to move
+around all the screen can be put into canvas 0.</FONT></P>
+
+<P><CENTER><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A HREF="../tutor/tutor_frameset.htm">Table
+of contents</A></FONT></CENTER>
+
+</BODY>
+</HTML>

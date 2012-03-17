@@ -1,0 +1,912 @@
+<!DOCTYPE html public "-//w3c//dtd html 4.0 transitional//en">
+<HTML>  
+<HEAD>
+  <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Mac">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+  <META NAME="GENERATOR" CONTENT="Mozilla/4.61 (Macintosh; I; PPC) [Netscape]">
+  <TITLE>Programming</TITLE>
+</HEAD>
+<BODY BACKGROUND="../gfx/chalk.gif">
+
+<P><IMG SRC="../gfx/programming.gif" WIDTH="290" HEIGHT="110"
+ALIGN="BOTTOM" BORDER="0" NATURALSIZEFLAG="3"><IMG SRC="../gfx/thinbarrel.gif"
+WIDTH="48" HEIGHT="110" ALIGN="BOTTOM" BORDER="0" NATURALSIZEFLAG="3"><BR>
+<FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Execution">Execution
+of Programs</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+<A HREF="#Comments">Comments</A></FONT><BR>
+<FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Variables">Variables</A></FONT><FONT
+ SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Integer Variables">Integer
+Variables</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Floating Point Variables">Floating
+Point Variables</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#String Variables">String
+Variables</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Arrays">Arrays</A></FONT><FONT
+ SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Boolean">Boolean
+Expressions</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#If">The
+If Construct</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#For">The
+For Construct</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#While">The
+While Construct</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Repeat">The
+Repeat Construct</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Goto">The
+Goto Statement</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#End">The
+End Statement</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Procedures">Procedures</A></FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">If you have done some
+programming before then you might want to skip this tutorial.&nbsp;
+We are going to cover the basics of writing a program in TNT Basic.</FONT></P>
+
+<P><A NAME="Execution"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Execution of Programs<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">Any program
+written in TNT Basic is built from a sequence of commands. E.g.</FONT></P>
+
+<P><FONT SIZE="-2" FACE="Monaco">Command 1</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">Command 2</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">Command 3</FONT> <BR>
+.<BR>
+.<BR>
+.<BR>
+<FONT SIZE="-2" FACE="Monaco">Command 200</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">etc...</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">When the program is
+executed (run) these commands are read in by the computer and
+obeyed one by one.&nbsp; The computer starts from the top of the
+program and works its way down through the program one command
+at a time.&nbsp; When it reaches the end of the program it stops.</FONT></P>
+
+<P><A NAME="Comments"></A><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Helvetica">Comments<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">When writing
+programs they can easily begin to look confusing and it can be
+difficult to understand what the code is supposed to be doing.
+To help you out TNT Basic allows you to type anything you like
+into the program and get the computer to ignore it. e.g.</FONT></P>
+
+<P><FONT COLOR="#ff0000" SIZE="-2" FACE="Monaco,Helvetica">' This
+is a comment and it will be ignored</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"></FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">A comment must always
+have an apostrophe at the beginning of the line. TNT Basic shows
+you that it understands it should be ignored by displaying it
+in red.</FONT></P>
+
+<P><A NAME="Variables"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Variables<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">Computers would
+be very little use to us if they could not store information.&nbsp;
+TNT Basic programs can store information in something that is
+known as a variable.&nbsp; There are three types of variable support
+in TNT Basic, these are integers, floating point numbers and strings.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">It is usually easier
+to think of a variable as a box.&nbsp; The box has a label on
+the front of it so it can be identified and the box can also have
+one item stored inside it.</FONT></P>
+
+<P><IMG SRC="../gfx/Box.gif" BORDER="0" HEIGHT="114" WIDTH="82"
+NATURALSIZEFLAG="0" ALIGN="BOTTOM"></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">A variable has to be
+created before it can be used.&nbsp; This means you have to define
+what kind of information the variable can hold (integer, floating
+point or string) and what the name of the variable is.&nbsp; E.g.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">int</FONT><FONT
+ SIZE="-2" FACE="Monaco">&nbsp; age</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">float</FONT><FONT
+ SIZE="-2" FACE="Monaco">&nbsp; height</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">string</FONT><FONT
+ SIZE="-2" FACE="Monaco">&nbsp; name</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This defines three
+variables</FONT><FONT FACE="Arial,Helvetica">, </FONT><FONT SIZE="-2"
+ FACE="Monaco,Helvetica">age</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">
+can hold any whole number (...,-4, -3, -2, -1, 0, 1, 2, 3, 4,
+...)</FONT><FONT FACE="Arial,Helvetica">, </FONT><FONT SIZE="-2"
+ FACE="Monaco,Helvetica">height</FONT><FONT FACE="Arial,Helvetica">
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">can hold any decimal
+point number (1.87, 2.00000, 53.56987,...) and</FONT><FONT FACE="Arial,Helvetica">
+</FONT><FONT SIZE="-2" FACE="Monaco,Helvetica">name</FONT><FONT
+ FACE="Arial,Helvetica"> </FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">can
+hold any sequence of letters (&quot;Andrew&quot;,&quot;Bob&quot;,&quot;Carl&quot;,&quot;1234&quot;,&quot;!@&pound;$&quot;).</FONT></P>
+
+<P><A NAME="Integer Variables"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Integer Variables<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">An integer
+variable can be used to contain any whole number (positive or
+negative). E.g.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">int</FONT><FONT
+ SIZE="-2" FACE="Monaco"> number=5</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This line creates a
+variable with the name </FONT><FONT SIZE="-2" FACE="Monaco,Helvetica">number</FONT><FONT
+ SIZE="-1" FACE="Geneva,Helvetica"> and puts the value 5 into
+it.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Try typing this in...</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">int</FONT><FONT
+ SIZE="-2" FACE="Monaco"> number=20</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Print</FONT><FONT
+ SIZE="-2" FACE="Monaco"> number</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">When this program is
+executed it outputs the value 20.&nbsp; That is because the value
+contained inside </FONT><FONT SIZE="-2" FACE="Monaco,Helvetica">number</FONT><FONT
+ SIZE="-1" FACE="Geneva,Helvetica"> is printed to the screen.&nbsp;
+Since</FONT><FONT FACE="Arial,Helvetica"> </FONT><FONT SIZE="-2"
+ FACE="Monaco,Helvetica">number </FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">contains
+20, that is what gets printed.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">int</FONT><FONT
+ SIZE="-2" FACE="Monaco"> number=20</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Print</FONT><FONT
+ SIZE="-2" FACE="Monaco"> number+5</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">The output from this
+program is 25 because it takes the contents of </FONT><FONT SIZE="-2"
+ FACE="Monaco,Helvetica">number </FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">and
+adds 5 onto it.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">The contents of a variable
+do not have to be constant.&nbsp; The value of a variable can
+be set to whatever you like whenever you like.&nbsp; E.g.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">int</FONT><FONT
+ SIZE="-2" FACE="Monaco"> number=10</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">number=number+10</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Print</FONT><FONT
+ SIZE="-2" FACE="Monaco"> number</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This will also output
+20 because, although the value of </FONT><FONT SIZE="-2" FACE="Monaco,Helvetica">number</FONT><FONT
+ FACE="Arial,Helvetica"> </FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">begins
+at 10, it is increased by 10 and then output.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">To a mathematician
+this line may look confusing...</FONT></P>
+
+<P><FONT SIZE="-2" FACE="Monaco">number=number+10</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">What this means is
+that it will extract the value of </FONT><FONT SIZE="-2" FACE="Monaco,Helvetica">number</FONT><FONT
+ SIZE="-1" FACE="Geneva,Helvetica">, add 10 to it and then place
+it back into the variable </FONT><FONT SIZE="-2" FACE="Monaco,Helvetica">number</FONT><FONT
+ SIZE="-1" FACE="Geneva,Helvetica">.&nbsp; In short, it increases
+the value of </FONT><FONT SIZE="-2" FACE="Monaco,Helvetica">number</FONT><FONT
+ SIZE="-1" FACE="Geneva,Helvetica"> by 10.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Any other mathematical
+operation can be performed on an integer.&nbsp; E.g.</FONT></P>
+
+<P><FONT SIZE="-2" FACE="Monaco">number=number-10 </FONT><FONT
+ COLOR="#ff0000" SIZE="-2" FACE="Monaco">' Subtraction</FONT>
+<BR>
+<FONT SIZE="-2" FACE="Monaco">number=number/2&nbsp; </FONT><FONT
+ COLOR="#ff0000" SIZE="-2" FACE="Monaco">' Division</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">number=number*2&nbsp; </FONT><FONT
+ COLOR="#ff0000" SIZE="-2" FACE="Monaco">' Multiplication</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Any number of variables
+can be used in an operation.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">int</FONT><FONT
+ SIZE="-2" FACE="Monaco"> a=4,b=3,c=2,d</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">d=a+b-c</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">After this has been
+executed the value of </FONT><FONT SIZE="-2" FACE="Monaco,Helvetica">d</FONT><FONT
+ SIZE="-1" FACE="Geneva,Helvetica"> is 5 (4+3-2).</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Brackets can also be
+used in maths operations to tell the computer what order it should
+perform sums in.&nbsp; e.g.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">int</FONT><FONT
+ SIZE="-2" FACE="Monaco"> a=4,b=4,c=2,d</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">d=a*b+c</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This can be slightly
+ambiguous because this operation could mean...</FONT></P>
+
+<P><FONT SIZE="-2" FACE="Monaco">d=(a*b)+c</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">or</FONT></P>
+
+<P><FONT SIZE="-2" FACE="Monaco">d=a*(b+c)</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">In this case, the computer
+would choose the first option because multiply (*) has a higher
+precedence than addition (+).&nbsp; Precedence is decided like
+this...</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">*,/&nbsp; Highest</FONT><FONT
+ SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">+,-&nbsp; Lowest</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">If you want the computer
+to perform a certain part of the sum before anything else then
+place brackets around it.</FONT></P>
+
+<P><A NAME="Floating Point Variables"></A><B><FONT COLOR="#330099"
+ SIZE="+1" FACE="Helvetica,Helvetica">Floating Point Variables<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">A floating
+point variable works the same as an integer except it can hold
+any decimal number.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">float</FONT><FONT
+ SIZE="-2" FACE="Monaco"> a=3.14</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Print</FONT><FONT
+ SIZE="-2" FACE="Monaco"> a</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This program would
+output &quot;3.14&quot; because that is the value inside </FONT><FONT
+ SIZE="-2" FACE="Monaco,Helvetica">a</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">.&nbsp;
+Since </FONT><FONT SIZE="-2" FACE="Monaco,Helvetica">a</FONT><FONT
+ SIZE="-1" FACE="Geneva,Helvetica"> is a float it can store the
+part of the number after the decimal point.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">int</FONT><FONT
+ SIZE="-2" FACE="Monaco"> b=3.14</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Print</FONT><FONT
+ SIZE="-2" FACE="Monaco"> b</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This program would
+output &quot;3&quot;.&nbsp; This is because b can only hold whole
+numbers (no decimal points).&nbsp; When a floating point number
+is placed inside an integer the value is truncated (i.e. only
+the part before the decimal point is used).</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Floating point variables
+should only be used if the accuracy is necessary (e.g. measurements).&nbsp;
+If only whole numbers are going to be stored then use an integer
+(e.g. Age).</FONT></P>
+
+<P><A NAME="String Variables"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">String Variables<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">A string variable
+can hold a sequence of characters (letters or symbols).&nbsp;
+These can be used to hold textual information.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">string</FONT><FONT
+ SIZE="-2" FACE="Monaco"> name=&quot;Bob&quot;</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Print</FONT><FONT
+ SIZE="-2" FACE="Monaco"> name</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This program will output
+&quot;Bob&quot;.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Strings can also be
+added together.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">string</FONT><FONT
+ SIZE="-2" FACE="Monaco"> firstName=&quot;Bob&quot;, secondName=&quot;Dylan&quot;</FONT>
+<BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Print</FONT><FONT
+ SIZE="-2" FACE="Monaco"> firstName+&quot; &quot;+secondName</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This program will ouput
+&quot;Bob Dylan&quot; because it has been built up from adding
+all the different strings together in that order.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Strings can also be
+tested for equality just like integers and floats.&nbsp; E.g.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">string</FONT><FONT
+ SIZE="-2" FACE="Monaco"> a=&quot;Hello&quot;,b=&quot;Hello&quot;</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">if</FONT><FONT
+ SIZE="-2" FACE="Monaco"> a=b</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">&nbsp;&nbsp; </FONT><FONT COLOR="#0000ff"
+ SIZE="-2" FACE="Monaco">Print</FONT><FONT SIZE="-2" FACE="Monaco">
+&quot;These strings match&quot;</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">else</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">&nbsp;&nbsp; </FONT><FONT COLOR="#0000ff"
+ SIZE="-2" FACE="Monaco">Print</FONT><FONT SIZE="-2" FACE="Monaco">
+&quot;These strings do not match&quot;</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">end if</FONT></P>
+
+<P><A NAME="Arrays"></A><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Helvetica">Arrays<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">An array can
+hold together a collection of variables (of any type) together
+under a single name. Think of it as a room filled with boxes;
+the room has a name and each box in the room has a number.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">An array is defined
+like this...</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">int</FONT><FONT
+ SIZE="-2" FACE="Monaco"> n[]</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Dim</FONT><FONT
+ SIZE="-2" FACE="Monaco"> n[10]</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Or</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">int</FONT><FONT
+ SIZE="-2" FACE="Monaco"> n[10]</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">The number in the square
+brackets indicates the number of elements (variables) that should
+be created.&nbsp; In this example, there would be 10 integers
+contained inside n.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Arrays of floats and
+strings can also be created.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">float</FONT><FONT
+ SIZE="-2" FACE="Monaco"> number[10]</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">string</FONT><FONT
+ SIZE="-2" FACE="Monaco"> name[10]</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Values can be placed
+in and taken out of the array just like ordinary variables. The
+only difference is that an index into the array is required so
+the computer knows which particular element you want to access.
+The index is from zero, this means that if an array is defined
+to have 10 elements in it the first element will be 0 and the
+last element will be 9.&nbsp; E.g.</FONT></P>
+
+<P><FONT SIZE="-2" FACE="Monaco">n[5]=7</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This gets element 5
+from array </FONT><FONT SIZE="-2" FACE="Monaco,Helvetica">n</FONT><FONT
+ SIZE="-1" FACE="Geneva,Helvetica"> and assigns it the value 7.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Print</FONT><FONT
+ SIZE="-2" FACE="Monaco"> n[5]</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This gets element 5
+from array </FONT><FONT SIZE="-2" FACE="Monaco,Helvetica">n</FONT><FONT
+ SIZE="-1" FACE="Geneva,Helvetica"> and outputs its value.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Only the elements contained
+in the array can be accessed.&nbsp; If you attempt to access an
+array element that is not in the array TNT Basic will cause an
+error.&nbsp; E.g.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">int</FONT><FONT
+ SIZE="-2" FACE="Monaco"> n[10]</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">n[10]=7</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This causes an error
+because </FONT><FONT SIZE="-2" FACE="Monaco,Helvetica">n</FONT><FONT
+ SIZE="-1" FACE="Geneva,Helvetica"> only has 10 elements and (since
+the index starts from zero) the last element of </FONT><FONT SIZE="-2"
+ FACE="Monaco,Helvetica">n</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">
+is 9.&nbsp; This means the array index is &quot;Out Of Bounds&quot;.</FONT></P>
+
+<P><A NAME="Boolean"></A><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Helvetica">Boolean
+Expressions<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">A Boolean expression
+is a mathematical expression that can only ever evaluate to true
+or false.&nbsp; E.g.</FONT></P>
+
+<P><FONT SIZE="-2" FACE="Monaco">a&lt;b</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This expression will
+return true if the value contained inside </FONT><FONT SIZE="-2"
+ FACE="Monaco,Helvetica">a</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">
+is less than the value contained inside </FONT><FONT SIZE="-2"
+ FACE="Monaco,Helvetica">b</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">.&nbsp;
+Otherwise it will evaluate to false.&nbsp; It will not evaluate
+to anything else.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">A Boolean expression
+can be built using any of the following:</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">&gt; Greater than</FONT><FONT
+ SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">&gt;= Greater than
+or equal to</FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">= Equal to</FONT><FONT
+ SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">&lt;= Less than
+or equal to</FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">&lt; Less than</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">They can also be combined
+to make more complicated expressions.&nbsp; E.g.</FONT></P>
+
+<P><FONT SIZE="-2" FACE="Monaco">a&lt;b</FONT><FONT SIZE="-1"
+ FACE="Geneva,Helvetica"> </FONT><FONT COLOR="#0000ff" SIZE="-2"
+ FACE="Monaco">and</FONT><FONT SIZE="-2" FACE="Monaco"> c&lt;d</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">In this example, the
+expression will only evaluate to true if </FONT><FONT SIZE="-2"
+ FACE="Monaco,Helvetica">a</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">
+is less than</FONT><FONT FACE="Arial,Helvetica"> </FONT><FONT
+ SIZE="-2" FACE="Monaco,Helvetica">b </FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">AND
+</FONT><FONT SIZE="-2" FACE="Monaco,Helvetica">c </FONT><FONT
+ SIZE="-1" FACE="Geneva,Helvetica">is less than </FONT><FONT SIZE="-2"
+ FACE="Monaco,Helvetica">d</FONT><FONT FACE="Arial,Helvetica">.</FONT></P>
+
+<P><FONT SIZE="-2" FACE="Monaco">a&lt;b</FONT><FONT SIZE="-1"
+ FACE="Geneva,Helvetica"> </FONT><FONT COLOR="#0000ff" SIZE="-2"
+ FACE="Monaco">or</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">
+</FONT><FONT SIZE="-2" FACE="Monaco">c&lt;d</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This expression will
+only evaluate to true if </FONT><FONT SIZE="-2" FACE="Monaco,Helvetica">a</FONT><FONT
+ SIZE="-1" FACE="Geneva,Helvetica"> is less than </FONT><FONT
+ SIZE="-2" FACE="Monaco,Helvetica">b </FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">OR
+</FONT><FONT SIZE="-2" FACE="Monaco,Helvetica">c </FONT><FONT
+ SIZE="-1" FACE="Geneva,Helvetica">is less than </FONT><FONT SIZE="-2"
+ FACE="Monaco,Helvetica">d</FONT><FONT FACE="Arial,Helvetica">.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">not</FONT><FONT
+ SIZE="-2" FACE="Monaco"> (a=b)</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This expression will
+evaluate to true if</FONT><FONT FACE="Arial,Helvetica"> </FONT><FONT
+ SIZE="-2" FACE="Monaco,Helvetica">a</FONT><FONT FACE="Arial,Helvetica">
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">does NOT equal
+</FONT><FONT SIZE="-2" FACE="Monaco,Helvetica">b</FONT><FONT FACE="Arial,Helvetica">.&nbsp;
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">The not operator
+reverses the true/false value of a Boolean expression.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Any ordinary numerical
+expression can also be used as a Boolean expression. If the numerical
+expression evaluates to zero then it is false, otherwise it true.</FONT></P>
+
+<P><FONT SIZE="-2" FACE="Monaco,Helvetica">5+7<BR>
+5</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"></FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">These numerical expressions
+don't evaluate to zero so therefore they are true.</FONT></P>
+
+<P><FONT SIZE="-2" FACE="Monaco,Helvetica">7-3-4<BR>
+0</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"></FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">These numerical expressions
+do evaluate to zero so therefore they are false.</FONT></P>
+
+<P><A NAME="If"></A><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Helvetica">The
+If Construct<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">The if construct
+is a simple statement which can decide whether or not a piece
+of code should be executed.&nbsp; In its most basic form it looks
+like this:</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">if</FONT><FONT
+ SIZE="-2" FACE="Monaco"> booleanExpression</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">...<BR>
+</FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">end if</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">The code inside the
+if statement is only executed if the Boolean expression is true.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">If statements can also
+have an else case attached. E.g.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">if</FONT><FONT
+ SIZE="-2" FACE="Monaco"> booleanExpression</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">...<BR>
+</FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">else</FONT>
+<BR>
+<FONT SIZE="-2" FACE="Monaco">...<BR>
+</FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">end if</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">The first piece of
+code is executed if the Boolean expression is true, otherwise
+the piece of code after the else statement is executed.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">If statements can also
+have 'else ifs' attached. E.g.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">if</FONT><FONT
+ SIZE="-2" FACE="Monaco"> conditionA</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">... </FONT><FONT COLOR="#ff0000"
+ SIZE="-2" FACE="Monaco">' Section A</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">else if</FONT><FONT
+ SIZE="-2" FACE="Monaco"> conditionB</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">... </FONT><FONT COLOR="#ff0000"
+ SIZE="-2" FACE="Monaco">' Section B</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">else if</FONT><FONT
+ SIZE="-2" FACE="Monaco"> conditionC</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">... </FONT><FONT COLOR="#ff0000"
+ SIZE="-2" FACE="Monaco">' Section C</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">else</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">... </FONT><FONT COLOR="#ff0000"
+ SIZE="-2" FACE="Monaco">' Section D</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">end if</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">If </FONT><FONT SIZE="-2"
+ FACE="Monaco,Helvetica">conditionA</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">
+is true, Section A only is executed.</FONT><FONT SIZE="-1" FACE="Geneva">
+<BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">Otherwise, if </FONT><FONT
+ SIZE="-2" FACE="Monaco,Helvetica">conditionB</FONT><FONT SIZE="-1"
+ FACE="Geneva,Helvetica"> is true, Section B is executed.</FONT><FONT
+ SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">Otherwise, if </FONT><FONT
+ SIZE="-2" FACE="Monaco,Helvetica">conditionC</FONT><FONT SIZE="-1"
+ FACE="Geneva,Helvetica"> is true, Section C is executed.</FONT><FONT
+ SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">If none of the
+above conditions are true then Section D is executed.</FONT></P>
+
+<P><A NAME="For"></A><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Helvetica">The
+For Construct<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">The For construct
+is a simple statement which executes a piece of code a set number
+of times.&nbsp; It also changes the value of a variable on each
+iteration (loop) through the construct.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">It looks like this...</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">for</FONT><FONT
+ SIZE="-2" FACE="Monaco"> n = 1 </FONT><FONT COLOR="#0000ff" SIZE="-2"
+ FACE="Monaco">to</FONT><FONT SIZE="-2" FACE="Monaco"> 10</FONT>
+<BR>
+<FONT SIZE="-2" FACE="Monaco">...</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">next</FONT><FONT
+ SIZE="-2" FACE="Monaco"> n</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">The first time through
+the construct, n is set to 1.&nbsp; The code contained inside
+the for construct is then executed repeatedly until n equals 10.
+The for statement automatically increases the value of n by one
+each time through the loop. However, this can be changed by adding
+a step operator. E.g.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">for</FONT><FONT
+ SIZE="-2" FACE="Monaco"> n = -10 </FONT><FONT COLOR="#0000ff"
+ SIZE="-2" FACE="Monaco">to</FONT><FONT SIZE="-2" FACE="Monaco">
+10 </FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">step</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 2</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">...<BR>
+</FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">next</FONT><FONT
+ SIZE="-2" FACE="Monaco"> n</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">In this example, n
+starts off as -10 and is then increased by 2 each time until it
+reaches the value 10.&nbsp; If no step value is specified then
+it is assumed that the step has a value of 1.</FONT></P>
+
+<P><A NAME="While"></A><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Helvetica">The
+While Construct<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">The While construct
+is a simple statement which decides whether or not a piece of
+code should be executed.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">It looks like this:</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">while</FONT><FONT
+ SIZE="-2" FACE="Monaco"> condition</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">...</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">wend</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">The code contained
+inside the while statement is executed while the condition is
+true.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">If the condition is
+true then the code is executed. The condition is then tested again
+and, if it is true, the code is executed again. This process continues
+until the condition eventually becomes false.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Helvetica">int</FONT><FONT
+ SIZE="-2" FACE="Monaco,Helvetica"> x=0<BR>
+</FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Helvetica">while</FONT><FONT
+ SIZE="-2" FACE="Monaco,Helvetica"> x&lt;10</FONT></P>
+
+<BLOCKQUOTE>
+  <P><FONT SIZE="-2" FACE="Monaco,Helvetica">x=x+1</FONT></P></BLOCKQUOTE>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Helvetica">wend</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This will execute the
+body of the while construct 10 times before </FONT><FONT SIZE="-2"
+ FACE="Monaco,Helvetica">x&lt;10</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">
+eventually evaluates to false.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Note: If the condition
+is false to begin with, then the code is never executed.</FONT><FONT
+ SIZE="-1" FACE="Geneva"> </FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This construct can
+loop forever (infinite loop) if the body of the while loop does
+not eventually change the condition so that it evaluates to false.</FONT></P>
+
+<P><A NAME="Repeat"></A><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Helvetica">The
+Repeat Construct<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">The Repeat
+construct is a simple statement which executes a piece of code
+until a certain condition becomes false.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">It looks like this:</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">repeat</FONT>
+<BR>
+<FONT SIZE="-2" FACE="Monaco">...</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">until</FONT><FONT
+ SIZE="-2" FACE="Monaco"> condition</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">The only difference
+between this and the while construct is that the code is executed
+before the condition is tested.&nbsp; This means that it will
+always be executed at least once.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Repeat statements can
+also be constructed into an infinite loop like this:</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">repeat</FONT>
+<BR>
+<FONT SIZE="-2" FACE="Monaco">...</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">forever</FONT></P>
+
+<P><A NAME="Goto"></A><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Helvetica">The
+Goto Statement<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">The goto statement
+simply moves the flow of control over to a label. e.g.</FONT></P>
+
+<P><FONT SIZE="-2" FACE="Monaco">...</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">Hello:</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">...</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">goto</FONT><FONT
+ SIZE="-2" FACE="Monaco"> Hello</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">...</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Goto will execute an
+unconditional jump to the destination. In order to place a condition
+on the jump it could be wrapped inside an if construct.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Goto should not really
+be used in programs at all. They have a tendency to make code
+unstructured and they make programs difficult to manage when they
+become significantly large.&nbsp; It is much better practice to
+use the other flow control constructs and procedures.</FONT></P>
+
+<P><A NAME="End"></A><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Helvetica">The
+End Statement<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">The end statement
+is simply a command that terminates the TNT Basic program where
+it is. No more code will be executed after this command has been
+called.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">It can be called by
+typing...</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">End</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">...at any point in
+the program.</FONT></P>
+
+<P><A NAME="Procedures"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Procedures</FONT></B> <BR>
+<FONT SIZE="-1" FACE="Geneva,Helvetica">A procedure is a section
+of code that is separate from the rest of the main body. It can
+be called from other points in the code in order to execute it.
+e.g.</FONT></P>
+
+<P><FONT COLOR="#ff0000" SIZE="-2" FACE="Monaco">' Main Body of
+the code</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">...</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">HandleOutput()</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">...</FONT> <BR>
+<FONT COLOR="#ff0000" SIZE="-2" FACE="Monaco">' Procedure Definition</FONT>
+<BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Procedure</FONT><FONT
+ SIZE="-2" FACE="Monaco"> HandleOutput()</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">...</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">End Proc</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">In this example, the
+code that is written inside the body of HandleOutput will be executed
+at the point from where it is called.&nbsp; The procedure definition
+must be placed after the end of the main body of code.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Procedures are very
+useful because they allow the code to be broken down into smaller
+pieces which are simpler to understand.</FONT></P>
+
+<P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Helvetica">Local
+Variables</FONT></B> <BR>
+<FONT SIZE="-1" FACE="Geneva,Helvetica">Inside each procedure
+the variables are completely separate from all the other variables
+throughout the programs. The variables used inside the program
+cannot be used inside the procedure and vice versa.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Variables inside the
+procedure are known as local variables because they are 'local'
+just to that procedure.&nbsp; They can have the same name as variables
+outside the procedure and they will not interfere with each other
+(they behave exactly like two completely different variables).</FONT></P>
+
+<P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Helvetica">Passing
+Values<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">Since procedures
+do not have access to variables outside of their main body, in
+order to give values to the procedure they can be passed in when
+it is called.</FONT></P>
+
+<P><FONT SIZE="-2" FACE="Monaco">...</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">Test(5,n,name)</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">...</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Procedure</FONT><FONT
+ SIZE="-2" FACE="Monaco"> Test(</FONT><FONT COLOR="#0000ff" SIZE="-2"
+ FACE="Monaco">int</FONT><FONT SIZE="-2" FACE="Monaco"> number,</FONT><FONT
+ COLOR="#0000ff" SIZE="-2" FACE="Monaco">int</FONT><FONT SIZE="-2"
+ FACE="Monaco"> otherNumber,</FONT><FONT COLOR="#0000ff" SIZE="-2"
+ FACE="Monaco">string</FONT><FONT SIZE="-2" FACE="Monaco"> name)</FONT>
+<BR>
+<FONT SIZE="-2" FACE="Monaco">...</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">End Proc</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Inside the procedure
+Test:</FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">- The variable
+'number' will contain the value 5.</FONT><FONT SIZE="-1" FACE="Geneva">
+<BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">- The variable
+'otherNumber' will contain the same value of n</FONT><FONT SIZE="-1"
+ FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">- The variable
+'name' will contain the value of name from the point where the
+procedure was called.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">The values are 'copied'
+into the variables inside Test. This means that the variables
+can be changed and used just like all the other variables inside
+Test. If the values of the variables are changed they do not affect
+the values in the main body of code.</FONT></P>
+
+<P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Helvetica">Returning
+Values<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">Procedures
+can return values to the point in the code from which they were
+called. e.g.</FONT></P>
+
+<P><FONT COLOR="#ff0000" SIZE="-2" FACE="Monaco">' Main code</FONT>
+<BR>
+<FONT SIZE="-2" FACE="Monaco">...</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">Test()</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Print Result Int</FONT>
+<BR>
+<FONT SIZE="-2" FACE="Monaco">...</FONT></P>
+
+<P><FONT COLOR="#ff0000" SIZE="-2" FACE="Monaco">' Procedure definition</FONT>
+<BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Procedure</FONT><FONT
+ SIZE="-2" FACE="Monaco"> Test()</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">...</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">End Proc</FONT><FONT
+ SIZE="-2" FACE="Monaco">(n)</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Returning values from
+procedures is useful because it is a convenient way of getting
+a result from a procedure. Only one value can be returned from
+a procedure. The value you choose to return is specified in the
+brackets after the End Proc statement.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">The procedure Test
+can change the value of n and return it. This value can then be
+caught from the point the procedure was called from using the
+Result command.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Result Int</FONT><FONT
+ SIZE="-2" FACE="Monaco">/</FONT><FONT COLOR="#0000ff" SIZE="-2"
+ FACE="Monaco">Result Integer </FONT><FONT COLOR="#000000" SIZE="-1"
+ FACE="Geneva">c</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">ontains
+the returned value if the value returned was an integer.<BR>
+</FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Result Float
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">contains the returned
+value if the value returned was an floating point number.</FONT><FONT
+ SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Result Str</FONT><FONT
+ SIZE="-2" FACE="Monaco,Helvetica">/</FONT><FONT COLOR="#0000ff"
+ SIZE="-2" FACE="Monaco">Result String </FONT><FONT COLOR="#000000"
+ SIZE="-1" FACE="Geneva">c</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">ontains
+the returned value if the value returned was a string.</FONT></P>
+
+<P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Helvetica">Global
+Variables<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">Global variables
+are different to other variables because they can be accessed
+throughout the entire program regardless of whether they are being
+accessed from a procedure or not.</FONT><FONT SIZE="-1" FACE="Geneva">
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">To make a variable
+global (e.g. n) it needs to be declared to be so.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">int</FONT><FONT
+ SIZE="-2" FACE="Monaco"> n</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Global</FONT><FONT
+ SIZE="-2" FACE="Monaco"> n</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This can also be written
+as...</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Global int</FONT><FONT
+ SIZE="-2" FACE="Monaco"> n</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Once this has been
+done it can now be accessed throughout the main code and inside
+all procedures.</FONT></P>
+
+<P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Helvetica">Shared
+Variables<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">Instead of
+making a variable global to all procedures, it is possible to
+make that variable accessible only to the procedures that need
+it.</FONT></P>
+
+<P><FONT SIZE="-2" FACE="Monaco">...</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">String</FONT><FONT
+ SIZE="-2" FACE="Monaco"> output</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">ComposeHello()</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Print</FONT><FONT
+ SIZE="-2" FACE="Monaco"> output</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">...</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Procedure</FONT><FONT
+ SIZE="-2" FACE="Monaco"> ComposeHello()</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Shared String</FONT><FONT
+ SIZE="-2" FACE="Monaco"> output</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">output=&quot;Hello&quot;</FONT>
+<BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">End Proc</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This piece of code
+will output the string &quot;Hello&quot;. This is because it has
+been changed inside the procedure ComposeHello which gained access
+to it using the Shared command.</FONT><FONT SIZE="-1" FACE="Geneva">
+<BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">This technique
+makes code much neater because only the procedures that need the
+variables will have access to them.</FONT></P>
+
+<P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Helvetica">Recursion</FONT></B>
+<BR>
+<FONT SIZE="-1" FACE="Geneva,Helvetica">A procedure is able to
+call other procedures from inside it. It is also able to call
+itself from inside it. This is known as Recursion.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Procedure</FONT><FONT
+ SIZE="-2" FACE="Monaco"> Recurse()</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">Recurse()</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">End Proc</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This procedure repeatedly
+calls itself. This, however, would cause an infinite loop because
+it would just keep calling itself and would never stop.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">In order to prevent
+this from happening recursive procedures need to be able to keep
+track of how many times they have been called.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Procedure</FONT><FONT
+ SIZE="-2" FACE="Monaco"> Recurse(</FONT><FONT COLOR="#0000ff"
+ SIZE="-2" FACE="Monaco">int </FONT><FONT COLOR="#000000" SIZE="-2"
+ FACE="Monaco">n</FONT><FONT SIZE="-2" FACE="Monaco">)</FONT>
+<BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">if</FONT><FONT SIZE="-2"
+ FACE="Monaco"> n&gt;0</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">&nbsp;&nbsp;&nbsp; Recurse(n-1)</FONT>
+<BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">end if</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">End Proc</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This would only call
+the procedure n times because each time it is called the value
+of n is reduced. Once n becomes less than or equal to 0, the procedure
+is no longer called and termination of all the called procedures
+would begin.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva"><HR ALIGN=LEFT></FONT></P>
+
+<P><CENTER><A HREF="../tutor/tutor_frameset.htm"><FONT SIZE="-2"
+ FACE="Geneva,Arial">Table of contents</FONT></A></CENTER>
+
+</BODY>
+</HTML>

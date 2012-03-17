@@ -1,0 +1,70 @@
+<HTML>  
+<HEAD>
+  <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Mac">
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>Set File Position</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+  <META NAME="AppleTitle" CONTENT="Set File Position">
+  <META NAME="AppleTarget" CONTENT="_right">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="349"
+HEIGHT="152">
+  <TR VALIGN="TOP">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">Set
+      File Position</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD HEIGHT="41">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">Sets the current position
+        in a file</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Syntax</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="41">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">Set File Position <I>fileId,
+        pos</I></FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Description</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="17">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">As data is read from or
+        written to a file there is a pointer inside the file which keeps
+        track of how far through the file it has got. This command simply
+        sets the position of this pointer.</FONT></P>
+        <P><I><FONT SIZE="-1" FACE="Geneva,Arial">fileId</FONT></I><FONT
+         SIZE="-1" FACE="Geneva,Arial"> is the id of the file obtained
+        from <A HREF="askopenfile.htm">Ask Open File</A> or <A HREF="openfile.htm">Open
+        File</A>. If the file is not open or invalid then this will cause
+        an error.</FONT></P>
+        <P><I><FONT SIZE="-1" FACE="Geneva,Arial">pos</FONT></I><FONT
+         SIZE="-1" FACE="Geneva,Arial"> is the new position of the file.
+        This is different depending on the data format of the file.</FONT></P>
+        <P><B><FONT SIZE="-1" FACE="Geneva,Arial">Data File</FONT></B><FONT
+         SIZE="-1" FACE="Geneva,Arial"><BR>
+        The position indicates the amount of data that has been stored.
+        Integers and floats are both 4 pieces of data long. A string
+        is the length of the stored string plus 1.</FONT></P>
+        <P><B><FONT SIZE="-1" FACE="Geneva,Arial">Text File</FONT></B><FONT
+         SIZE="-1" FACE="Geneva,Arial"><BR>
+        The position indicates which line of the text file to access.
+        Each piece of data should be stored on a separate line.</FONT>
+      </BLOCKQUOTE>
+    </TD>
+  </TR>
+  <TR VALIGN="TOP">
+    <TD ALIGN="CENTER" HEIGHT="34"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../file/file_frameset.htm">Table of contents</A></FONT></TD> 
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

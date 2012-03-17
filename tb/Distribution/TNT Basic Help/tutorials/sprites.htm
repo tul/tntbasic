@@ -1,0 +1,295 @@
+<!DOCTYPE html public "-//w3c//dtd html 4.0 transitional//en">
+<HTML>  
+<HEAD>
+  <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Mac">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+  <META NAME="GENERATOR" CONTENT="Mozilla/4.61 (Macintosh; I; PPC) [Netscape]">
+  <TITLE>Sprites</TITLE>
+</HEAD>
+<BODY BACKGROUND="../gfx/chalk.gif">
+
+<P><IMG SRC="../gfx/sprites.gif" NOSAVE BORDER="0" HEIGHT="110"
+WIDTH="233" NATURALSIZEFLAG="3" ALIGN="BOTTOM"><IMG SRC="../gfx/thinbarrel.gif"
+WIDTH="48" HEIGHT="110" ALIGN="BOTTOM" BORDER="0" NATURALSIZEFLAG="3"><BR>
+<FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Loading Sounds">What
+is a Sprite?</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Playing a Sound">Loading
+Sprites</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Looping a Sound">Displaying
+and Moving Sprites</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Animating Sprites">Animating
+Sprites</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Stopping a Sound">Stopping
+a Sprite</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Sprite Masks">Sprite
+Masks</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Loading Music">Special
+Effects</A></FONT></P>
+
+<P><A NAME="Loading Sounds"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">What is a Sprite?<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">Sprites are
+graphics (pictures) that can be moved around the screen.&nbsp;
+They are frequently used in games (spaceships, bullets and characters
+are all usually sprites) because they can be moved around quickly
+and easily and can be any shape or size.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">TNT Basic has in-built
+support for sprites and allows you to do special effects with
+them too.</FONT></P>
+
+<P><A NAME="Playing a Sound"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Loading Sprites<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">A Sprite can
+be placed into a TNT basic program by adding a picture resource
+('PICT') to the program.&nbsp; In order to be able to load the
+sprites though, they need to be added into an Image Bank ('ImBk')
+resource.&nbsp; Once this is done, they can be loaded using the
+command <A HREF="../commands/loadimages.htm">Load Images</A>.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Load Images</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 128</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This loads all the
+sprites from image bank 128 into memory, ready to be displayed.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Unlike other banks,
+more than one image bank can be loaded at any time.&nbsp; Therefore,
+the following is possible:</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Load Images</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 128</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Load Images</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 129</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Both image banks will
+now be loaded.&nbsp; Any amount of image banks can be loaded,
+you are only limited by the amount of memory available.</FONT></P>
+
+<P><A NAME="Looping a Sound"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Displaying and Moving Sprites<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">A sprite can
+be displayed very easily using the <A HREF="../commands/sprite.htm">Sprite</A></FONT><FONT
+ FACE="Geneva,Helvetica"> </FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">command.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Sprite</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 0,0,0,0</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This command prepares
+a sprite so it is drawn on calls to <A HREF="../commands/drawframe.htm">Draw
+Frame</A>.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This first number is
+the index of the sprite.&nbsp; The has to be unique for that particular
+sprite, you will see why later.</FONT><FONT SIZE="-1" FACE="Geneva">
+<BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">The second number
+is the x co-ordinate of where to put the sprite.</FONT><FONT SIZE="-1"
+ FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">The third number
+is the y co-ordinate of where to put the sprite.</FONT><FONT SIZE="-1"
+ FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">The fourth number
+is the index of the sprite to get out of the image bank.&nbsp;
+The image is taken from the default sprite bank (usually the last
+one loaded).</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">When <A HREF="../commands/drawframe.htm">Draw
+Frame</A> is called all the currently defined sprites are drawn
+to the screen.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">To create the effect
+of a moving sprite, the position of the sprite simply has to be
+changed between calls to <A HREF="../commands/drawframe.htm">Draw
+Frame</A>.&nbsp; This can be done by redefining sprite 0 to be
+in a different position.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">int</FONT><FONT
+ SIZE="-2" FACE="Monaco"> x=0</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">while not Mouse
+Button<BR>
+<BR>
+&nbsp;&nbsp; Sprite</FONT><FONT SIZE="-2" FACE="Monaco"> 0,x,0,0</FONT>
+<BR>
+<FONT SIZE="-2" FACE="Monaco">&nbsp;&nbsp; x=x+1</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">&nbsp;&nbsp; </FONT><FONT COLOR="#0000ff"
+ SIZE="-2" FACE="Monaco">Draw Frame<BR>
+<BR>
+wend</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This program creates
+the effect of sprite 0 moving across the screen from left to right.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Now you can see why
+the sprite's index has to be unique for each item displayed on
+the screen.&nbsp; If every sprite used index 0 then only the most
+recently defined sprite would be drawn.&nbsp; This is because
+sprite 0 would keep having it's position and image redefined.&nbsp;
+Fortunately, sprite indexes can be whatever number you want but
+just remember to keep each different one unique.</FONT></P>
+
+<P><A NAME="Animating Sprites"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Animating Sprites<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">Sprites can
+also be animated easily.&nbsp; This can be done simply by changing
+the image the sprite is currently displaying.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">int</FONT><FONT
+ SIZE="-2" FACE="Monaco"> image=0<BR>
+<BR>
+</FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">while not
+Mouse Button</FONT></P>
+
+<P><FONT SIZE="-2" FACE="Monaco">&nbsp;&nbsp; </FONT><FONT COLOR="#ff0000"
+ SIZE="-2" FACE="Monaco">' Set the position and image of the sprite</FONT>
+<BR>
+<FONT SIZE="-2" FACE="Monaco">&nbsp;&nbsp; </FONT><FONT COLOR="#0000ff"
+ SIZE="-2" FACE="Monaco">Sprite</FONT><FONT SIZE="-2" FACE="Monaco">
+0,0,0,image</FONT></P>
+
+<P><FONT SIZE="-2" FACE="Monaco">&nbsp;&nbsp; </FONT><FONT COLOR="#ff0000"
+ SIZE="-2" FACE="Monaco">' Increase the frame of animation displayed
+by the sprite</FONT> <BR>
+<FONT SIZE="-2" FACE="Monaco">&nbsp;&nbsp; image=image+1</FONT>
+<BR>
+<FONT SIZE="-2" FACE="Monaco">&nbsp;&nbsp; </FONT><FONT COLOR="#0000ff"
+ SIZE="-2" FACE="Monaco">if</FONT><FONT FACE="Geneva"> </FONT><FONT
+ SIZE="-2" FACE="Monaco">image&gt;4<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;image=0<BR>
+&nbsp;&nbsp;&nbsp;</FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">endif</FONT></P>
+
+<P><FONT SIZE="-2" FACE="Monaco">&nbsp;&nbsp; </FONT><FONT COLOR="#ff0000"
+ SIZE="-2" FACE="Monaco">' Redraw the contents of the screen</FONT>
+<BR>
+<FONT SIZE="-2" FACE="Monaco">&nbsp;&nbsp; </FONT><FONT COLOR="#0000ff"
+ SIZE="-2" FACE="Monaco">Draw Frame</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">wend</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This creates a simple
+looping animation of a sprite.&nbsp; Each of the the images from
+0 to 4 are displayed by the sprite in turn.&nbsp; This is usually
+done so quickly by the computer that the user just sees the sprite
+animate smoothly.</FONT></P>
+
+<P><A NAME="Stopping a Sound"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Stopping a Sprite<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">Once a sprite
+has been defined it will be drawn in the most recently specified
+position every single time <A HREF="../commands/drawframe.htm">Draw
+Frame</A> is called.&nbsp; If you want to stop this from happening
+for some reason (e.g. the sprite gets destroyed) then the sprite
+can be turned off using the command <A HREF="../commands/spriteoff.htm">Sprite
+Off</A>.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Sprite Off</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 0</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This turns off sprite
+0 so it will not be drawn any more.&nbsp; If no number is specified
+after this command then all the sprites are turned off</FONT></P>
+
+<P><A NAME="Sprite Masks"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Sprite Masks<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">Sprites can
+be any shape or size, however, the sprites you have done so far
+have all been rectangular. This is because TNT Basic is just taking
+the picture (which is rectangular) and placing it on the screen.
+In order to produce a sprite with a different shape a 'mask' needs
+to be specified.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">There are two kinds
+of mask in TNT Basic...</FONT></P>
+
+<P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Helvetica">Colour
+Masks<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">These masks
+are quite simple to produce.&nbsp; A colour can be specified for
+each image in the image bank, this colour tells TNT Basic which
+colour in the picture should be used as transparent.&nbsp; This
+means that wherever that colour occurs in the picture will be
+left blank so only all the other colours will be drawn.&nbsp;
+This means that if you have a picture of a spacecraft on a black
+background, by specifying black as the transparent colour, only
+the spacecraft will be drawn.</FONT></P>
+
+<P><B><FONT SIZE="-1" FACE="Geneva,Helvetica">Note:</FONT></B><FONT
+ SIZE="-1" FACE="Geneva,Helvetica"> This also means that black
+cannot be used on the spacecraft unless you want that area to
+be transparent.</FONT></P>
+
+<P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Helvetica">Alpha
+Channel Masks<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">Alpha channel
+masks are slightly more complicated than colour masks.&nbsp; An
+alpha channel mask can be specified for an image by pasting an
+image into the mask section of the image info window. The image
+mask picture is just a grey scale (black, white and all the greys)
+picture. This tells TNT Basic which areas of the sprite should
+be drawn. The white areas should be completely visible and the
+black areas should be invisible.</FONT></P>
+
+<P><A NAME="Loading Music"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Special Effects<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">Sprites do
+not necessarily have to be drawn directly as they are.&nbsp; TNT
+Basic provides some special features which allow you to create
+additional graphical effects.</FONT></P>
+
+<P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Helvetica">Transparencies<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">Sprites can
+be drawn to the screen as if they were slightly transparent using
+the command <A HREF="../commands/setspritetransparency.htm">Set
+Sprite Transparency</A>.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Set Sprite Transparency</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 0,50</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This command sets sprite
+0's transparency level to 50 (50% opaque). Any value between 0
+(completely invisible) to 100 (completely opaque). When a sprite
+0 is drawn it will appear to be see through.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This effect is useful
+for creating lasers, hidden items and ghost effects.</FONT></P>
+
+<P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Helvetica">Colours<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">Instead of
+drawing the sprite, a block of colour can be drawn in the shape
+of the sprite instead using the command <A HREF="../commands/setspritecolour.htm">Set
+Sprite Colour</A>.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Set Sprite Colour</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 0,</FONT><FONT COLOR="#0000ff" SIZE="-2"
+ FACE="Monaco">Make Colour</FONT><FONT SIZE="-2" FACE="Monaco">
+(0,0,0)</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This changes sprite
+0 so that next time it is drawn it is just a block of solid black
+in the shape of sprite 0.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This can combine with
+transparency to produce shadow effects.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Set Sprite Transparency</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 0,50</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Set Sprite Colour</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 0,</FONT><FONT COLOR="#0000ff" SIZE="-2"
+ FACE="Monaco">Make Colour</FONT><FONT SIZE="-2" FACE="Monaco">
+(0,0,0)</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This will produce a
+semi-transparent black sprite in the shape of sprite 0..... just
+like a shadow of sprite 0 would look.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">If you have finished
+using the colour effect it can be turned off.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Set Sprite Colour
+Off</FONT></P>
+
+<P><CENTER><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A HREF="../tutor/tutor_frameset.htm">Table
+of contents</A></FONT></CENTER>
+
+</BODY>
+</HTML>

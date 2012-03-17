@@ -1,0 +1,46 @@
+Why procedures can't be used in an expression (easily)
+------------------------------------------------------
+
+It's all to do with side effecting. An expression is seen as something which can be evaluated without doing any work. The
+mechanics of TNT Basic do not currently allow for an expression to cause the PC to change and stuff.
+
+Imagine the expression
+	result = A() + B() + C(A())
+
+The problems are:
+	1) Evaluation order. Each procedure could change globals which the others depend on.
+	2) Storage of results. Temporary memory would be required for the result of the operation. Ie store the results of
+	   the first call to A(), then B() then A() again then C().
+	3) The assignment statement may now cause the execution of an arbitary number of statements. When a procedure returns
+	   evaluation must be continued at the next statement in the expression, ie the next procedure call.
+	   
+A solution might be to post process all expressions after they've been parsed and change them into a series of statements
+which execute before the statement which includes the expression.
+Eg:
+	result = A() + B() + C(A())
+becomes:
+	temp1=A()
+	temp2=B()
+	temp3=A()
+	temp4=C(temp3)
+	result = temp1 + temp2 + temp4
+
+Of course this would screw up the nice one statement is one instruction policy which was going to make writing a stepping
+debugger so much easier. Oh well.
+
+One of the first things I thought of was storing the temporary result in the actual arith expression node. Ie the arithexp
+which calls the proc would store the result inside of it until it's used. The problem with this is that if the expression
+causes a recursion it will lose the value.
+eg 
+Proc Foo(x)
+	if x>2
+		x=1+Foo(x-1)+Foo(x-2) ' <-- The Foo(x-1) will return and store in the node then Foo(x-2) will call and trash the
+	end if						<-- stored result as it will recall Foo(x-1) you see. Can't believe I spotted that actually.
+EndProc(x)
+
+So temporary results need to be stored on the stack. It should be easy enough to allocate temporary stack variables. They
+only need to be unique for the duration of the expression and can be reused in any other expression in the same scope.
+
+The second work around is the way AMOS did it, a bit of a cheat but it does work. Just use a reserved variable for returning
+all results in and it eliminates the need for a temporary value and you must instead explicitly store the results of each
+call and then combine them.

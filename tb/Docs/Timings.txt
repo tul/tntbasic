@@ -1,0 +1,73 @@
+TB 1.02b1M2
+-----------
+
+Bouncing Splats
+---------------
+
+PB G3/500, OS 9.22: Render times in Ms
+--------------------------------------
+Avg time for viewport render: 0.01466790788
+Avg time for store: 1.00974213
+Avg time for render: 1.032763724
+Avg time for flush: 3.284055945
+Avg time for restore: 0.9064239417
+Avg total time: 6.247653648
+
+OS X 59-60 fps
+--------------
+Avg time for viewport render: 0.01452558502
+Avg time for store: 1.097851036
+Avg time for render: 1.449220871
+Avg time for flush: 11.50983896
+Avg time for restore: 1.265502482
+Avg total time: 15.33693893
+
+
+Fireworks Max
+-------------
+
+PB G3/500, OS 9.22: Render times in Ms
+--------------------------------------
+Avg time for viewport render: 0.02835404058
+Avg time for store: 0.01518146957
+Avg time for render: 0.2751224565
+Avg time for flush: 7.106880362
+Avg time for restore: 0.01924721449
+Avg total time: 7.444785543
+
+OS X 58-59 fps
+--------------
+Avg time for viewport render: 0.009662762791
+Avg time for store: 0.02287825488
+Avg time for render: 0.4952387228
+Avg time for flush: 10.41216366
+Avg time for restore: 0.02829332465
+Avg total time: 10.96823672
+
+
+Tile Scrolling Auto
+-------------------
+
+PB G3/500, OS 9.22: Render times in Ms
+--------------------------------------
+Avg time for viewport render: 7.627822817
+Avg time for store: 0.02115383538
+Avg time for render: 0.4077321523
+Avg time for flush: 37.99130186
+Avg time for restore: 0.02137541032
+Avg total time: 46.06938608
+
+OS X 36-37 fps
+--------------
+Avg time for viewport render: 8.624156575
+Avg time for store: 0.03230953708
+Avg time for render: 0.7496660764
+Avg time for flush: 11.13060483
+Avg time for restore: 0.04254381573
+Avg total time: 20.57928083
+
+
+
+
+
+19.333 for tile auto scroll using blast copy

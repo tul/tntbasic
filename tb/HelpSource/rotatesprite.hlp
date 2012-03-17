@@ -1,0 +1,23 @@
+<name>Rotate Sprite</name>
+<group>moan</group>
+<synopsis>Starts a sprite rotating</synopsis>
+<syntax>Rotate Sprite <i>spriteNum,rotAmount,speed</i></syntax>
+<desc>
+The 'Rotate Sprite' command sets sprite <i>spriteNum</i> rotating at a specified speed for <i>rotAmount</i> degrees clockwise. Once it has started rotating it will continue to do so until it has rotated by a total of <i>rotAmount</i> or you issue it another rotate command.
+
+The <i>speed</i> is specified in degrees/frame, for example passing 1 means move one degree per frame in towards the destination. If you pass in a negative number as the speed, this is instead interpreted as the number of steps to complete the movement in. For example, passing -5 means cover the distance in 5 steps, no matter what the distance is.
+
+If the <i>rotAmount</i> is omitted, then the sprite will rotate at the speed specified in <i>speed</i> forever.
+
+Examples:
+<tnt>Rotate Sprite 1,45,0.1 ' Rotate sprite 1 45 degrees cw at 0.1 degrees per frame</tnt>
+<tnt>Rotate Sprite 1,,-1 ' Rotate sprite 1, 1 degrees per frame anti-clockwise forever</tnt>
+
+To test if a sprite has finishing rotating use the @@Sprite Rotating@@ function.
+To stop the sprite before its rotation finishes, issue another rotate command with 0 for the rotate amount.
+
+NB: 'Rotate Sprite' only works in hardware mode.
+
+See also:
+	The @@'R'otate@@ moan program function.
+</desc>

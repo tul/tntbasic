@@ -1,0 +1,14 @@
+<name>Set Image Offsets</name>
+<group>imag</group>
+<synopsis>Changes the position of the image's offsets</synopsis>
+<syntax>Set Image Offsets <i>image,x,y</i>
+Set Image Offsets <i>image,bankNumber,x,y</i></syntax>
+<desc>
+<i>image</i> is the index into the bank of the image to use.
+
+<i>bankNumber</i> is the id of the image bank to get the image from. If this is not specified then the default image bank is used.
+
+<i>x,y</i> are the new offsets for the image, measured in pixels from the top left corner of the image.
+
+See also @@Set Default Image Bank@@, @@Image X Offset@@ and @@Image Y Offset@@.
+</desc>

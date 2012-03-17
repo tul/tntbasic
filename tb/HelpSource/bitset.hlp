@@ -1,0 +1,13 @@
+<name>Bit Set</name>
+<group>bit</group>
+<syntax><i>newValue</i> = Bit Set (<i>oldValue</i>, <i>bitIndex</i>, <i>onOff</i>)</syntax>
+<synopsis>Sets a bit in a number to 1 or 0</synopsis>
+<desc>
+This command allows you to set the bit at index <i>bit</i> in <i>oldValue</i> to either 1 or 0.
+
+If <i>onOff</i> is passed as 0 then the bit is set to 0. If <i>onOff</i> is non-zero then the bit is set to 1.
+
+The bit indexes are numbered 0 through to 31, where 0 is the least significant bit, and 31 is the most significant bit.
+
+It is possible to test if an individual bit is already set using the @@Bit Test@@ command.
+</desc>

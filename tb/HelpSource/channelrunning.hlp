@@ -1,0 +1,13 @@
+<name>Channel Running</name>
+<group>moan</group>
+<synopsis>Tells whether a moan channel is currently running</synopsis>
+<syntax><i>boolean</i> = Channel Running (<i>channelId</i>)</syntax>
+<desc>
+This function returns whether the moan channel <i>channelId</i> is currently running a program.
+
+If it is running a program it returns true. If it is not running a program, or if it was previously running a program, but that program has ended, it returns false.
+
+It is not affected by pausing the channel, or by turning off auto moaning.
+	
+See also @@Pause Channel@@ and @@Step Moan@@.
+</desc>

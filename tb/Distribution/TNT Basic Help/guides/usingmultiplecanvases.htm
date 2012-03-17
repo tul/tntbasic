@@ -1,0 +1,65 @@
+<HTML>  
+<HEAD>
+  <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Mac">
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>Using Multiple Canvases</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="349"
+HEIGHT="151">
+  <TR VALIGN="TOP">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">Using
+      Multiple Canvases</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD HEIGHT="40">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">The screen has only one
+        canvas attached to it. This is canvas number 0 and all drawing
+        operations in this canvas are applied to the screen.</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">Other canvases can be
+        opened and drawing operations can be performed in them. Drawing
+        can be performed in one of these 'invisible' canvases and then
+        copied to the screen.</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">The reason for doing this
+        is that images can be built without the user having any knowledge
+        of them. They can then be copied to the screen in one move.</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">Copying the image is probably
+        much faster than building it. This means that if the same image
+        needs to be drawn to the screen repeatedly it can be stored in
+        a background canvas and copied to the screen as often as it is
+        needed.</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Handling
+      Multiple Canvases</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="41">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">Lots of canvases can be
+        open at any time. In order to control which one the drawing operations
+        are performed in, the command <A HREF="../commands/canvas.htm">Canvas</A>
+        can be used.</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Copying
+      Between Canvases</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="17">
+      <BLOCKQUOTE><FONT SIZE="-1" FACE="Geneva">The images from each
+        canvas can be copied from one to another using the command <A
+        HREF="../commands/copycanvas.htm">Copy Canvas</A>.</FONT></BLOCKQUOTE>
+    </TD>
+  </TR>
+  <TR VALIGN="TOP">
+    <TD ALIGN="CENTER" HEIGHT="34"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../cv/cv_frameset.htm">Table of contents</A></FONT></TD> 
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

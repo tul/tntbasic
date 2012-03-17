@@ -1,0 +1,13 @@
+Note on OS X icon
+-----------------
+
+It was made by IconComposer from the Mac OS X tool cd-rom. It came from
+Barrel Icon Final.png in the Cinema 4D/TNT Barrel/Finals folder on Durandal.
+
+IconComposer saved it in the data fork, but I used resourcer to copy the DF into
+an icns resource.
+
+Plst
+----
+The plist file contains stuff os x needs to know about tb, it has to be copied into
+plst resource 0. It allows tb to have a nice icon and have drag and drop support

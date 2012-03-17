@@ -1,0 +1,9 @@
+<name>Sprite Scaling</name>
+<group>moan</group>
+<synopsis>Returns true if a sprite is scaling</synopsis>
+<syntax><i>scaling</i> = Sprite Scaling (<i>spriteNum</i>)</syntax>
+<desc>
+Tests if a moan sprite scale started with the @@Scale Sprite@@ command has finished.
+
+Sets <i>scaling</i> to true if the scale of sprite <i>spriteNum</i> is still on going, and false if it has finished.
+</desc>

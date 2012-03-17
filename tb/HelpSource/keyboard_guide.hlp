@@ -1,0 +1,91 @@
+<name>Introduction to Keyboard Reading</name>
+<covers>Keyboard Input Guide</covers>
+<synopsis>Describes all commands relating to reading keypresses from the keyboard</synopsis>
+<type>guide</type>
+<group>io</group>
+<desc>
+This guide will take you through the keyboard reading commands in TNT Basic. You will learn how to read raw keys from the keyboard input queue, and how to edit strings using the TNT Basic's inbuilt string editor.
+<section>The Keyboard Queue</section>
+Every time a key is pressed in a TNT Basic program, it is recorded and added to a queue that your program can read. The keys are recorded as <b>raw keys</b>, which are a way of storing the <i>scancode</i>, <i>character code</i> and <i>modifier keys</i> for the key press in one integer variable.
+
+The <i>character code</i> is simply the letter or number that is painted on the key that was pressed. Different characters can be produced from the same key, depending on what <i>modifier keys</i> are being held down. The modifier keys are <b>command</b>, <b>control</b>, <b>option</b>, <b>shift</b> and <b>caps lock</b>. So if the shift key is being held down when the number "1" is typed, you will get a "!" character instead of a "1".
+
+The <i>scancode</i> of the key is the id number of the key that was pressed, in the example above, different characters were produced from the same key, but the scancode would have been the same. The scancode of the key is constant, regardless of which modifiers were held when it was pressed.
+
+An important difference between scancodes and character codes is that although the scancodes for every Mac keyboard in the world are the same, the characters produced when you press the keys can vary from country to country. This is due to the characters being laid out in a fashion appropriate for the native language of that country. A diagram showing all of the Mac keyboard scancodes, along with the character codes from a US/UK keyboard can be found on the @@Pressed@@ command's help page.
+
+You can read raw keys from the keyboard queue using the @@Keyboard Raw Key@@ command. This will remove one raw key from the queue and return it. The keys are returned in the order that they were typed. The keys are stored in the queue until they are asked for, even if the user lets go of the key, it will stay in the queue until it is removed. If you want to remove all keys from the keyboard queue without reading them, you can use the @@Clear Keyboard@@ command.
+
+If there are no keys in the queue, @@Keyboard Raw Key@@ will return 0. If you want to wait until there are keys in the queue again, you can use the @@Wait Key Press@@ command.
+
+The following example will wait until a key is pressed, retrieve it and print out the raw key code of the pressed key.
+
+<tnt>int pressedKey
+Wait Key Press
+pressedKey=Keyboard Raw Key
+print "The raw code of the pressed key was ";pressedKey
+</tnt>
+
+<section>Working with Raw Keys</section>
+The raw key code isn't much good to us directly, if we want to use it we need to extract information such as the scancode, character code or modifier keys from it. To do this, we use the @@Raw Key Scancode@@, @@Raw Key Char@@ and @@Raw Key Modifier@@ commands.
+
+Here's a simple program to print out what you type until you type an "!".
+
+<tnt>int rawKey
+str charTyped
+print "Type a ! to exit"
+repeat
+	Wait Key Press
+	rawKey=Keyboard Raw Key
+	charTyped=Raw Key Char(rawKey)
+	print "You typed ";charTyped
+until charTyped="!"
+print "Bye!"</tnt>
+
+You may notice when running this example that if you hold down a non-modifier key for any amount of time, you begin getting repeating keys from it; in the same way you would in a word processor. You can turn off key repeating using the @@Keyboard Repeat@@ command. If you want to know if a particular key is still being held you can use the @@Pressed@@ command and pass it the scancode of the key you're interested in.
+
+<anchor>String Editor</anchor><section>The String Editor</section>
+The string editor provides a means of inputting and editing strings using the keyboard. It is similar in concept to a text box in a Mac OS dialog, such as the Mac OS X login window where you can type your name. You can use the string editor to have the user enter information, such as high score entries.
+
+The string editor has two parts, its <i>contents</i> and its <i>cursor position</i>. The contents contain the string that is currently being edited, and the cursor position states how many characters into the contents the text input cursor currently is.
+
+The string editor doesn't get displayed on screen, instead, can read the current string using the @@String Editor Contents@@ and @@String Editor Cursor@@ commands, then draw it in whatever way is most suited for your game. To input a key into the string editor you use the @@String Editor Input@@ command. You can also set the contents or cursor directly using the @@Set String Editor Contents@@ and @@Set String Editor Cursor@@ commands.
+
+Here is an example that lets you enter a string then displays it. Remember that you can use the cursor keys to go back and correct mistakes. Press return when you're finished.
+
+<tnt>Graphics Mode 640,480
+int rawKey
+str final
+repeat
+	DrawStringEditor()
+	Wait Key Press
+	rawKey=Keyboard Raw Key
+	String Editor Input rawKey
+until Raw Key Ascii(rawKey)=13 ' ASCII code 13 is return
+
+Set Pen Colour Black
+Paint Canvas
+Set Pen Colour White
+final="You typed: " + String Editor Contents
+Draw Text 320-Text Width(final)/2,240,final
+final="Press any key to exit"
+Draw Text 320-Text Width(final)/2,280,final
+Draw Frame
+Wait Key Press
+End
+
+' Draws the current contents of the string editor to screen and puts a vertical
+' bar at the current cursor position
+Procedure DrawStringEditor()
+	string  s=String Editor Contents
+	int     curs=String Editor Cursor
+	Set Pen Colour Black
+	Paint Canvas
+	Set Pen Colour White
+	Draw Text 10,40,"String : "+left str(s,curs)+"|"+mid str(s,curs+1,1000000)
+	Draw Frame
+End Proc</tnt>
+
+<section>Summary</section>
+Every key typed into a TNT Basic program is added to a <b>key queue</b> that can be read using @@Keyboard Raw Key@@. You can input the raw keys into the <b>String Editor</b> as a way of editing text. To tell if a particular key is currently held you can use the @@Pressed@@ command which takes a key scancode. The key scancodes are the same on all keyboards, but the character they represent can change from country to country.
+</desc>

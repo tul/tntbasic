@@ -1,0 +1,13 @@
+Arrays in TNT Basic
+Mark Tully
+5/2/00
+
+Arrays in TNT basic are currently the most complex data type. The implementation revolves around three classes. The first is
+the array symbol itself. This symbol entry retrieves an array storage class from the current stack frame. An array storage
+class is an actual array of the data type required and is where all the values are stored. The third and final class is
+the item reference class. This references a single item in the array. Each item reference is stored in the array symbol
+allowing them to be deleted when the array symbol is deleted.
+
+ArraySymbol		: Maps name onto an ArrayStore
+ArrayStore		: Holds a list of values
+ItemReference	: References an item in an ArrayStore

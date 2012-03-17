@@ -1,0 +1,95 @@
+Data Store Streams Ambiguities
+
+Mark Tully
+24/8/99
+Version 1.02
+
+What is a data store marker ordering ambiguity?
+-----------------------------------------------
+A markable data store holds a list of markers which point to data within the data store. If the store is resized then data
+store markers move with the data to keep track of it. Ambiguities happen when two markers are marking the same address
+and one of them resizes the store.
+
+Eg
+	***************************************		Data store
+			/\
+			Markers A and B are here
+
+If marker A resizes the store from where it points from size 0 to size 10 then what should happen to b? Is B supposed to be
+marking the same section of data as A? If so it should stay where it is. Is B supposed to be marking the section of data
+after A? If so it should have it's address increased by 10. Is it supposed to be marking the section of data before A? If so
+it shouldn't have it's address increased.
+This ambiguity is solved by attachments which are attached to the CMarkableDataStore. They operate on a sort markers message
+and take two markers which have the same offset in the data. They examine the markers and return which is first, whether
+they are equal or unknown if the attachment can't solve it. If it's unsolved then that next attachment has a crack at it.
+
+This method of using attachments allows marker ambiguities to be solved in the only way they can - on a case by case basis.
+
+Data store section
+------------------
+Data store section define a range in a data store, they have a start marker and an end marker. They're not supposed to
+overlap as they should define discreet sections of data. However, their boundary markers may touch.
+
+Eg
+	**************************************		Data store
+		/\--Section A-/\
+					  /\--Section B-/\
+
+Here it must be ensured that section B's markers are after section A's otherwise section A could have it's range markers
+messed up if streamB resizes it's storage.
+To solve this a top level section is created in which all other sections must exist in. This section knows the order that it's
+child sections (AKA sub sections) should be in. Whenever there is an ambiguity the between two child sections the parent is
+called to solve it. This is done by the parent adding a attachment to the store to resolve ordering ambiguities.
+Sections inside sections - sounds almost like...
+
+Hierarchical data store sections
+--------------------------------
+And finally, in case you weren't confused enough, we move onto an even more complex issue - hierarchical data store sections.
+The ambiguity issues considered so far have been solved by assuming that if two section markers share the same address then
+one is supposed to be before or after the other.
+
+But what if inside a section there is another sub section? That section lies within the range of another section and so it
+doesn't make sense to say it's before or after the parent section. It's inside it. Take the idea further and you can imagine
+a section inside that one - or even a full hierarchy.
+
+Why?!
+-----
+It's very useful for parsing file formats which contain data organised in a hierarchy. You divide the file up into sections,
+then each of those sections spots the sub sections within it and creates sections for them
+Once this is done for the complete hierarchy each section can independantly edited without worrying about overwriting
+another sections data. If it resizes all other sections move automatically and it all works out.
+
+Basically it allows for a hierarchy of data to be flattened into a linear store and for each node in the hierarchy to be
+edited independantly of the rest of the hierarchy.
+
+OK - so now what's the problem with ambiguity?
+----------------------------------------------
+An example
+	*************************************************************		(Data store)
+	|-------------------------Root section----------------------|
+		|--------Section A-------------|---------Section B------|
+			|----Section C--|-D-|---E--|---------Section F------|
+
+When section E resizes, sections B and F need their start markers moving and A & E needs thier end markers moving. That
+means that, thinking linear for a moment, the marker order for that address must be E(end),A(end),B(start),F(start). If they
+weren't in that order then sections would lose track of their data when E resized.
+
+Add a few more levels to the hierarchy and it's gets hideously confusing and there's ambiguities everywhere. It can be
+solved if each marker has an owning section. When two markers need ordering, their section's position in the hierarchy is
+used to solve the ambiguity.
+
+Each section has two markers, the start and end boundary markers. They can also have custom markers which can be used for
+anything you like. They are automatically made to lie within the sections range when resolving ambiguities. However if two
+custom markers mark the same address of data then the ambiguity cannot be resolved as the standard code doesn't know what the
+markers mean and so can't order them.
+
+So the three classes of ambiguity are
+
+	1)	Container ambiguity - One of the markers belongs to a subsection of the section the other marker belongs to.
+		Eg The end markers of A and E form a container ambiguity.
+		Resolve by figuring out which is the container and making it's markers lie outside of the inner streams markers.
+	2)	Section ambiguity - Two markers from the same section. This happens if a section is 0 in length so that it's start
+		and end markers are on the same address and belong to the same secton
+		Resolve by ordering markers as start<=custom<=end
+	3)	Sub section ambiguity - Two sub sections from a section are touching, what order should they be in. An example is
+		D's end marker and E's start marker. The ambiguity is resolved by A which has the knowledge of the ordering.

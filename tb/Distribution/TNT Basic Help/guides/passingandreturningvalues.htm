@@ -1,0 +1,103 @@
+<HTML>  
+<HEAD>
+  <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Mac">
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>Passing and Returning Values</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="349"
+HEIGHT="398">
+  <TR VALIGN="TOP">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">Passing
+      and Returning Values</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD HEIGHT="18">
+      <BLOCKQUOTE>
+        <P><FONT COLOR="#000000" SIZE="-1" FACE="Geneva,Arial">Procedures
+        do not normally have access to variables outside of their main
+        body. In order to give values to variables they can be passed
+        to the procedure when it is called.</FONT></P>
+        <P><FONT COLOR="#000000" SIZE="-2" FACE="Monaco,Arial">...<BR>
+        Test(5,n,&quot;Bob&quot;)<BR>
+        ...</FONT></P>
+        <P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">Procedure</FONT><FONT
+         COLOR="#000000" SIZE="-2" FACE="Monaco,Arial"> Test(<BR>
+        </FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">int</FONT><FONT
+         COLOR="#000000" SIZE="-2" FACE="Monaco,Arial"> number,<BR>
+        </FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">int</FONT><FONT
+         COLOR="#000000" SIZE="-2" FACE="Monaco,Arial"> otherNumber,<BR>
+        </FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">string</FONT><FONT
+         COLOR="#000000" SIZE="-2" FACE="Monaco,Arial"> name)<BR>
+        ...<BR>
+        </FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">End
+        Proc</FONT></P>
+        <P><FONT COLOR="#000000" SIZE="-1" FACE="Geneva,Arial">Inside
+        the procedure Test:</FONT></P>
+        <P><FONT COLOR="#000000" SIZE="-1" FACE="Geneva,Arial">- The
+        variable number will contain the value 5.<BR>
+        - The variable otherNumber will contain the same value of n<BR>
+        - The variable string$ will contain the value of string$ from
+        the main body of code.</FONT></P>
+        <P><FONT COLOR="#000000" SIZE="-1" FACE="Geneva,Arial">The variables
+        inside Test can be changed and used just like all the other variables
+        inside Test. If the values of the variables are changed they
+        do not affect the values in the main body of code.</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Returning
+      Values</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="327">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">Procedures can return
+        values to the point in the code from which they were called.
+        e.g.</FONT></P>
+        <P><FONT COLOR="#ff0000" SIZE="-2" FACE="Monaco,Arial">' Main
+        code</FONT><FONT SIZE="-2" FACE="Monaco,Arial"><BR>
+        ...<BR>
+        Test()<BR>
+        </FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">Print</FONT><FONT
+         SIZE="-2" FACE="Monaco,Arial"> </FONT><FONT COLOR="#0000ff"
+         SIZE="-2" FACE="Monaco,Arial">Result Int</FONT><FONT SIZE="-2"
+         FACE="Monaco,Arial"><BR>
+        ...</FONT></P>
+        <P><FONT COLOR="#ff0000" SIZE="-2" FACE="Monaco,Arial">' Procedure
+        definition<BR>
+        </FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">Procedure</FONT><FONT
+         SIZE="-2" FACE="Monaco,Arial"> Test()<BR>
+        ...<BR>
+        </FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">End
+        Proc</FONT><FONT SIZE="-2" FACE="Monaco,Arial">(n)</FONT></P>
+        <P><FONT COLOR="#000000" SIZE="-1" FACE="Geneva,Arial">The procedure
+        Test can change the value of </FONT><FONT COLOR="#000000" SIZE="-2"
+         FACE="Monaco,Arial">n</FONT><FONT COLOR="#000000" SIZE="-1"
+         FACE="Geneva,Arial"> and return it. This value can then be caught
+        from the point the procedure was called from using the </FONT><FONT
+         COLOR="#000000" SIZE="-2" FACE="Monaco,Arial">Result</FONT><FONT
+         COLOR="#000000" SIZE="-1" FACE="Geneva,Arial"> command.</FONT></P>
+        <P><B><FONT COLOR="#000000" SIZE="-1" FACE="Geneva,Arial">Result
+        Int/Result Integer</FONT></B><FONT COLOR="#000000" SIZE="-1"
+         FACE="Geneva,Arial"> contains the returned value if the value
+        specified was an integer.</FONT></P>
+        <P><B><FONT COLOR="#000000" SIZE="-1" FACE="Geneva,Arial">Result
+        Float</FONT></B><FONT COLOR="#000000" SIZE="-1" FACE="Geneva,Arial">
+        contains the returned value if the value specified was an floating
+        point number.</FONT></P>
+        <P><B><FONT COLOR="#000000" SIZE="-1" FACE="Geneva,Arial">Result
+        Str/Result String</FONT></B><FONT COLOR="#000000" SIZE="-1" FACE="Geneva,Arial">
+        contains the returned value if the value specified was a string.</FONT>
+      </BLOCKQUOTE>
+    </TD>
+  </TR>
+  <TR VALIGN="TOP">
+    <TD ALIGN="CENTER" HEIGHT="34"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../proc/proc_frameset.htm">Table of contents</A></FONT></TD> 
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

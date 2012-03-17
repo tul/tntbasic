@@ -1,0 +1,66 @@
+Data stores.doc
+
+Mark Tully
+22/8/99
+Version 1.00
+
+What is a data store?
+---------------------
+A data store is an abstract entity which can hold data. The store is seen as a continuous block of data which can be accessed
+randomly and has a finite length. A data store is in pseduo code this:
+
+	Data Store
+		ReadData(offset,outPtr,length)
+		WriteData(offset,inPtr,length)
+		ResizeStorage(offset,wasSize,newSize)
+
+Lots of things lend themselves to this simple idea from files, to handles and ptrs. The idea is that any code which needs to
+rely on a store of data (eg a file format - or data format to be more accurate) can use a data store to access it's data.
+This means that the format can be parsed in memory, over a network, from disk etc without any code changes.
+
+See the CDataStore for an implementation of this idea.
+
+What is a markable data store?
+------------------------------
+Taking the idea a step further allows markers to be put into the data store. These mark a particular bit of data in the store
+and could be analagous to a read/write head on a tape. The cunning bit is that if the storage is resized then the marker
+moves as well to keep track of it's data. An example use of this was in Pyramid where I had a block of data and a number
+of elements pointing to "their" bit of data in the block. If one of the element's resized their data then all the other
+elements had their markers adjusted and so were effectively isolated from the change.
+If you were parsing a data format, you may want to divide the format into independant sections such as a header section,
+a content section and a trailer section. If you mark each of these you can resize and read/write them independantly knowing
+that the markers will continue to keep track of their respective data sections. This idea is used in the TNT Tagged Data
+Storage format to keep track of the tags in the data store. See TNT Tagged Data Storage.doc
+
+Implementation issue
+--------------------
+Trying to avoid clouding the issue too much there is a small point to be made. Markers are held in a sorted list. When a
+resize of the data store happens from a marker, all markers after it have their offsets adjusted. However ambiguity's happen
+when there are two or more markers marking the same offset in the data and one of them resizes.
+
+Eg
+			*******************
+					/\
+					Markers a and b point to here in the store
+
+Marker a issues a request for a resize from size 0 to 10. Does marker b get moved 10 forward, or should it stay at the start
+of the new data with marker a?
+This issue is solved by allowing marker sorting attachments to be added to CMarkableDataStores to resolve ambiguities on a
+implementation dependant basis. These are used to evaluate whether two markers are supposed to be marking the SAME piece of
+data or whether they're marking SEQUENTIAL pieces of data, the first of which has no length.
+
+See the CMarkableDataStore for an implementation of this idea.
+
+CDataStoreStream
+----------------
+PowerPlants streams operate on a similar principle to data stores and when combined a very powerful system is intoduced.
+The CDataStoreStream allows operation on a SECTION of a data store. The section has a beginning offset and an end offset in
+the store. The rest of the store is protected from read and write operations in the stream. If you combine these with your
+data format parsers you can divide your format up into several sections each which has a defined start and end, and a stream
+to do the reading and writing for that section. Each section is shielded from the other making the solution more robust. This
+concept is used int the TNT Tagged Data Storage format to seperate each tag in a tag group from one another.
+
+Multiple CDataStoreStreams can operate on the same section of data, each tracks it's start, end and read/write head using a
+dynamic marker meaning that alterations to the offsets of the streams data section are hidden away.
+
+See CDataStoreStream for an implementation of this idea.

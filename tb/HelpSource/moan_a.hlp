@@ -1,0 +1,15 @@
+<name>'A'nimate</name>
+<group>moan</group>
+<syntax>A <i>count, (image,delay), (image, delay)...</i></syntax>
+<synopsis>Animates all sprites on a moan channel</synopsis>
+<desc>
+Starts an animation that repeats <i>count</i> times. The animation list is made up of pairs of bracketed <i>(image,delay)</i> pairs. If <i>count</i> is -1 then the animation repeats forever.
+
+Example:
+
+"A 1, (1,2), (2,2), (3,2)"
+
+Means show frame 1 for 2 frames, frame 2 for 2 frames then frame 3 for 2 frames. Repeat this sequence once.
+
+See also the @@Animate Sprite@@ command.
+</desc>

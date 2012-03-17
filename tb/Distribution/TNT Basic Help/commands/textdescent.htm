@@ -1,0 +1,47 @@
+<HTML>  
+<HEAD>
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>Text Descent</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+  <META NAME="AppleTitle" CONTENT="Text Descent">
+  <META NAME="AppleTarget" CONTENT="_right">
+  <META NAME="DESCRIPTION" CONTENT="Calculates the descent below baseline in pixels of text">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="349"
+HEIGHT="177">
+  <TR VALIGN="TOP">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">Text Descent</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD HEIGHT="41">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva">Calculates the descent below baseline in pixels of text</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Syntax</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="43">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial"><i>descent</i> = Text Descent</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Description</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="40">
+      <BLOCKQUOTE>
+        <FONT SIZE="-1" FACE="Geneva"><p>Calculates the number of pixels below the baseline that text could descend to when drawn with the <A HREF="../commands/drawtext.htm">Draw Text</A> command.</p><p>The y value passed to the 'Draw Text' command represents the <i>baseline</i> of the text being drawn; however the text descends by up to <i>descent</i> pixels below the baseline due to letters like y, g, j, p and q.</p><p>If text was to be drawn at a point (x,y), then the box it would occupy could be calculated with:</p><p></FONT><FONT COLOR="#000000" SIZE="-2" FACE="Monaco,Arial">bottom = y + <FONT COLOR="#4985c6">Text Descent</FONT><br>top = bottom - <FONT COLOR="#4985c6">Text Height</FONT><br>leftSide = x<br>rightSide = leftSide + <FONT COLOR="#4985c6">Text Width</FONT> ("this string")</p><p></FONT><FONT SIZE="-1" FACE="Geneva"></p>See also:<br>	The <A HREF="../commands/textwidth.htm">Text Width</A>, <A HREF="../commands/textheight.htm">Text Height</A> and <A HREF="../commands/drawtext.htm">Draw Text</A> commands.<br></FONT>
+      </BLOCKQUOTE>
+    </TD>
+  </TR>
+  <TR VALIGN="TOP">
+    <TD ALIGN="CENTER" HEIGHT="34"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../draw/draw_frameset.htm">Table of contents</A></FONT></TD> 
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

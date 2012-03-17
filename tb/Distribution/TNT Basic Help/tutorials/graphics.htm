@@ -1,0 +1,254 @@
+<!DOCTYPE html public "-//w3c//dtd html 4.0 transitional//en">
+<HTML>  
+<HEAD>
+  <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Mac">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+  <META NAME="GENERATOR" CONTENT="Mozilla/4.61 (Macintosh; I; PPC) [Netscape]">
+  <TITLE>Graphics</TITLE>
+</HEAD>
+<BODY BACKGROUND="../gfx/chalk.gif">
+
+<P><IMG SRC="../gfx/graphics.gif" WIDTH="249" HEIGHT="110" ALIGN="BOTTOM"
+BORDER="0" NATURALSIZEFLAG="3"><IMG SRC="../gfx/thinbarrel.gif"
+WIDTH="48" HEIGHT="110" ALIGN="BOTTOM" BORDER="0" NATURALSIZEFLAG="3"><BR>
+<FONT SIZE="-1" FACE="Geneva"><A HREF="#Setting up the screen">Setting
+up the Screen</A> <BR>
+<A HREF="#Setting up the Pen">Setting up the Pen</A> <BR>
+<A HREF="#Drawing to the Screen">Drawing to the Screen</A> <BR>
+<A HREF="#Draw Tracking">Draw Tracking</A> <BR>
+<A HREF="#Canvases">Canvases</A></FONT></P>
+
+<P><A NAME="Setting up the screen"></A><B><FONT COLOR="#330099"
+ SIZE="+1" FACE="Helvetica">Setting up the Screen<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva">Before any graphics can
+be drawn using TNT Basic, the screen must set up.&nbsp; If you
+try to draw without setting up the screen first then TNT Basic
+will return an error saying that it needs to be in Graphics Mode
+first.&nbsp; To switch to <A HREF="../commands/graphicsmode.htm">Graphics
+Mode</A>, use the following command...</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Graphics Mode</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 640,480</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva">This switches to Graphics Mode
+and sets up the screen so it has a width of 640 pixels and a height
+of 480.</FONT></P>
+
+<P><A NAME="Setting up the Pen"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Setting up the Pen<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva">All drawing operations
+are performed using something called a pen.&nbsp; As the name
+suggests, the pen determines what the drawing operation will eventually
+look like.&nbsp; The pen has two different values associated with
+it, colour and transparency.</FONT></P>
+
+<P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica">Colour</FONT></B><FONT
+ SIZE="-1" FACE="Geneva"><BR>
+Colour controls the colour of the pen and hence the colour of
+the final drawing operation, it can be set by calling the command
+<A HREF="../commands/setpencolour.htm">Set Pen Colour</A>.&nbsp;
+This takes one parameter, a colour, which is the new colour for
+the pen.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva">Colours are built up from three
+components: red, green and blue.&nbsp; By mixing different amounts
+of these three colours any colour can be produced using the command
+<A HREF="../commands/makecolour.htm">Make Colour</A>.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Make Colour</FONT><FONT
+ SIZE="-2" FACE="Monaco"> (255,255,255)</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva">This will produce white because
+maximum (255) red, green and blue produce white.&nbsp; Any colour
+can be produced in this way...</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Make Colour</FONT><FONT
+ SIZE="-2" FACE="Monaco"> (255,0,0)&nbsp;&nbsp;&nbsp;&nbsp; </FONT><FONT
+ COLOR="#ff0000" SIZE="-2" FACE="Monaco">' Red</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Make Colour</FONT><FONT
+ SIZE="-2" FACE="Monaco"> (0,255,0)&nbsp;&nbsp;&nbsp;&nbsp; </FONT><FONT
+ COLOR="#ff0000" SIZE="-2" FACE="Monaco">' Green</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Make Colour</FONT><FONT
+ SIZE="-2" FACE="Monaco"> (0,0,255)&nbsp;&nbsp;&nbsp;&nbsp; </FONT><FONT
+ COLOR="#ff0000" SIZE="-2" FACE="Monaco">' Blue</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Make Colour</FONT><FONT
+ SIZE="-2" FACE="Monaco"> (0,0,0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</FONT><FONT COLOR="#ff0000" SIZE="-2" FACE="Monaco">' Black</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva">In order to set the pen colour...</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Set Pen Colour
+Make Colour</FONT><FONT SIZE="-2" FACE="Monaco"> (255,0,0)</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva">This sets the pen colour to red.&nbsp;
+Any drawing operations from now on are performed in red.</FONT></P>
+
+<P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica">Transparency</FONT></B><FONT
+ SIZE="-1" FACE="Geneva"><BR>
+The transparency of the pen specifies how visible the drawing
+operations should be. It can be set using the command <A HREF="../commands/setpentransparency.htm">Set
+Pen Transparency</A>.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Set Pen Transparency</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 100</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva">This specifies that drawing operations
+should be completely visible (opaque).&nbsp; If you type in this...</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Set Pen Transparency</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 50</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva">... and then perform some drawing
+operations, you will notice that they are all slightly 'see-through'.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva">The transparency of a pen can
+be set to anything from 100 (opaque/completely visible) to 0 (transparent/invisible).</FONT></P>
+
+<P><A NAME="Drawing to the Screen"></A><B><FONT COLOR="#330099"
+ SIZE="+1" FACE="Helvetica,Helvetica">Drawing to the Screen<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva">In order to draw to the
+screen any of the standard drawing operations can be used (e.g.
+<A HREF="../commands/line.htm">Line</A>, <A HREF="../commands/rect.htm">Fill
+Rect</A>, <A HREF="../commands/oval.htm">Fill Oval</A> etc.)&nbsp;
+e.g.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Graphics Mode</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 640,480</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Set Pen Colour Make
+Colour</FONT><FONT SIZE="-2" FACE="Monaco"> (255,0,0)</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Fill Rect</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 20,20 </FONT><FONT COLOR="#0000ff" SIZE="-2"
+ FACE="Monaco">to</FONT><FONT SIZE="-2" FACE="Monaco"> 50,50</FONT>
+<BR>
+			<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Wait Mouse Click</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva">This piece of code will draw
+a red rectangle to the screen and then exit when the mouse button
+is pressed.&nbsp; However, if you run the program you will notice
+that nothing appears on the screen.&nbsp; This is because the
+new graphics you have drawn need to be copied to the screen.&nbsp;
+Change the program to be this...</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Graphics Mode</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 640,480</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Set Pen Colour Make
+Colour</FONT><FONT SIZE="-2" FACE="Monaco"> (255,0,0)</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Fill Rect</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 20,20 </FONT><FONT COLOR="#0000ff" SIZE="-2"
+ FACE="Monaco">to</FONT><FONT SIZE="-2" FACE="Monaco"> 50,50</FONT>
+<BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Draw Frame</FONT>
+<BR>
+			<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Wait Mouse Click</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva">The <A HREF="../commands/drawframe.htm">Draw
+Frame</A> command copies all the new graphics to the screen so
+you can now see the red rectangle that was drawn with the <A 
+HREF="../commands/rect.htm">Fill Rect</A> command.</FONT></P>
+
+<P><A NAME="Draw Tracking"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Draw Tracking<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva">When Draw Frame is called
+it copies all newly drawn graphics to the screen.&nbsp; In order
+for it to do this, it needs to have kept track of the areas of
+the screen that have changed and, when Draw Frame is called, copy
+these areas to the screen so the user can see them.&nbsp; This
+process can become quite slow, especially if you are drawing lots
+of things to the screen and TNT Basic has to keep track of a lot
+of areas.&nbsp; Fortunately though, this process can be accelerated.&nbsp;
+If you disable draw tracking using the command <A HREF="../commands/drawtracking.htm">Draw
+Tracking</A>...</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Draw Tracking
+Off</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva">...then TNT Basic no longer bothers
+to keep track of where your drawing operations have been performed.&nbsp;
+Now, when <A HREF="../commands/drawframe.htm">Draw Frame</A> is
+called nothing is copied to the screen.&nbsp; In order to make
+TNT Basic copy graphics to the screen <A HREF="../commands/invalrect.htm">Inval
+Rect</A> must be called.&nbsp; <A HREF="../commands/invalrect.htm">Inval
+Rect</A> forces a specified area of the screen to be updated by
+the next call to <A HREF="../commands/drawframe.htm">Draw Frame</A>.&nbsp;
+This area can be any size or can even be the entire screen.</FONT></P>
+
+<P><A NAME="Canvases"></A><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Helvetica">Canvases</FONT></B>
+<BR>
+<FONT SIZE="-1" FACE="Geneva,Helvetica">As you now know, drawing
+operations are all performed off screen where the user can't see
+them.&nbsp; They are then copied to the screen in one go so, to
+the user, they all appeared at the same time.&nbsp; When these
+drawing operations are performed off screen they are drawn into
+something called a 'canvas'.&nbsp; A canvas is exactly what it
+sounds - a thing that can be drawn on with whatever you like.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Ordinarily, drawing
+operations are performed into canvas 0, this canvas was created
+when Graphics Mode was enabled.&nbsp; Any drawing operations that
+are performed into canvas 0 can be copied to the screen during
+a <A HREF="../commands/drawframe.htm">Draw Frame</A> call.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">You are not limited
+to simply drawing just into canvas 0 though.&nbsp; More than one
+canvas can be opened and drawn in, images can also be copied from
+one canvas to another.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">To create a canvas
+call the function <A HREF="../commands/opencanvas.htm">Open Canvas</A>...</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Open Canvas</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 1,640,480</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This opens canvas number
+1 with the width 640 and the height 480.&nbsp; If canvas 1 already
+exists then it is closed and reopened at this size.</FONT></P>
+
+<P><B><FONT SIZE="-1" FACE="Geneva,Helvetica">Note</FONT></B><FONT
+ SIZE="-1" FACE="Geneva,Helvetica">: Canvas 0 can never be opened
+or closed in this way, TNT Basic needs that canvas for the screen.&nbsp;
+It is opened and closed automatically when entering and leaving
+Graphics Mode and it is always the same size as the screen.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Drawing operations
+can be performed into canvas 1 exactly like they were into canvas
+0 by setting it to the active canvas using the command <A HREF="../commands/canvas.htm">Canvas</A>.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Canvas</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 1</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This sets the currently
+active canvas to canvas 1.&nbsp; That means that from now on any
+drawing operation (e.g. <A HREF="../commands/line.htm">Line</A>,
+<A HREF="../commands/rect.htm">Fill Rect</A>) are drawn into canvas
+1.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">The contents of canvas
+1 can be copied to the screen by using the command <A HREF="../commands/copycanvas.htm">Copy
+Canvas</A> to put them into canvas 0 and then calling <A HREF="../commands/drawframe.htm">Draw
+Frame</A> to update the screen.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Copy Canvas</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 1 </FONT><FONT COLOR="#0000ff" SIZE="-2"
+ FACE="Monaco">to</FONT><FONT SIZE="-2" FACE="Monaco"> 0</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This copies the entire
+contents of Canvas 1 into Canvas 0 ready to be drawn to the screen.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">Canvases use up a lot
+of memory so it is usually a good idea to only keep them open
+while you are actually using them.&nbsp; As soon as you have finished
+with it you can call the command <A HREF="../commands/closecanvas.htm">Close
+Canvas</A>.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Close Canvas</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 1</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">... to close the canvas.&nbsp;
+If the canvas being closed is currently targeted then the targeted
+canvas is reset to 0 again.</FONT></P>
+
+<P><CENTER><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A HREF="../tutor/tutor_frameset.htm">Table
+of contents</A></FONT></CENTER>
+
+</BODY>
+</HTML>

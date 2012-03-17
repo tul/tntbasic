@@ -1,0 +1,83 @@
+TNT Tagged Data storage.doc
+
+Mark Tully
+22/8/99
+Version 1.01
+
+What is it?
+-----------
+A data format parser for parsing tagged information data. The data can be in memory (ptrs/handles), on disk or any other
+conceivable storage device.
+
+Tagged data stores have the advantage of being very flexible and expandable allowing them to be forwards and backwards
+compatible. For this reason they were chosen for the Pyramid template format and the TNT Tagged Data Storage classes were
+created.
+
+Tagged data structures
+----------------------
+The data follows this simple format, this is also known as a tag group:
+
+	UInt32			numTags
+		FourCharCode	tagId
+		UInt32			tagSize
+			.
+			.
+			.
+		FourCharCode	tagId
+		UInt32			tagSize
+			.
+			.
+			.
+
+The idea is that you store your data inside a tag. If the format later needs revising you continue to use the same tag but
+add an ADDITIONAL tag to hold the new data. That way older versions of your program can continue to read the data. It is
+a bit like a resource file except not necessary a file.
+
+Hierarchical tagged data structures
+-----------------------------------
+Taking it to the extreme each tag could have some data then another tag group inside it allowing the format of a tag to be
+expanded. This is analogous to a hierarchical file system, indeed one can be represented byu a tagged data structure.
+
+A tagged data store can store a hierarchy of data where each node is identified inside it's parent node by a unique "tag" id.
+
+Implementation
+--------------
+The parsers for the TNT Tagged Data Storage format operate on data stores. Data stores are explained in Data Stores.doc.
+The CTagGroup class is used for adding/deleteing and the extracting for editing of tags. Construct one of these passing in
+a data store and an offset into the data store for the numTags counter and the CTagGroup does the rest.
+
+Using the CTagGroup you can extract a tag by id. This CTagStream object is a PowerPlant stream derivative and can be used to
+read and write the tag. If the tag itself contains another tag group you can construct a tag group on the tags data to
+extract the tags within. This allows for hierarchical editing of tags.
+
+Simple example
+--------------
+Write a file format for a bitmap picture using TNT Tagged Data Storage.
+
+	1. Decided on the tags. I'd use DIMM (a tag containing two longs defining the width and height), DEPP (a char containing
+	   depth of the image in bits), DATA (the actual bitmap data).
+	  
+	2. Reading/Writing the format
+			
+			2.1 Create a markable tag store to hold the data
+			Create a CFileStore (a derivative of CDataStore) on the file containing the picture.
+			Create a CTaggedDataStore passing in your CFileStore as the data store.
+
+			2.2 Use a tag group to access the data
+			Create a CTagGroup and pass your CTaggedDataStore in. Access and edit the tags using the CTagGroup methods.
+			Eg. GetTagById('DEPP') would return a CTagStream which you could use to read the depth like this
+				
+				TSharedPtr<CTagStream>		depthTag=tagGroup.GetTagById('DEPP');
+				CTagStream					*theTagStreamP=depthTag.GetPtr();
+				char						depth;
+				
+				(*theTagStreamP) >> depth;
+			
+			TSharedPtr's are used as they reference count a tag stream. This allows the CTagStream to be disposed of when
+			there are no TSharedPtrs pointing to it anymore. If a sub tag is extract from a CTagStream (ie hierarchical tags)
+			then they take a TSharedPtr to the parent tag stopping it from being disposed of before the child tag is. If you
+			store a reference to a  CTagStream do so with a TSharedPtr so that it knows you are using it and won't delete
+			itself.
+			
+	3. You can move the format into a resource by replacing the CFileStore with a CHandleStore and loading a resource handle
+	   into the CHandleStore. The rest of your code stays the same. Easy eh?

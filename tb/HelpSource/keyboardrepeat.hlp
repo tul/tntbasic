@@ -1,0 +1,17 @@
+<name>Keyboard Repeat</name>
+<group>io</group>
+<synopsis>Controls key repeating for held keys</synopsis>
+<syntax>
+<i>willRepeat</i> = Keyboard Repeat
+Keyboard Repeat On
+Keyboard Repeat Off
+</syntax>
+<desc>
+When any non-modifier key is held for an amount of time, repeated key presses will be generated for it and placed in the keyboard queue. This emulates standard word processor behaviour where if you hold a key down it is repeated over and over again.
+
+Keyboard repeating defaults to being on when your program starts up, but you can disable it with the <b>Keyboard Repeat Off</b> command. If can be reenabled with <b>Keyboard Repeat On</b> and you can check if it's on or off with <b>Keyboard Repeat</b>.
+
+If you want to tell if a key is currently being held down then use the @@Pressed@@ command with the scancode of the key you're interested in.
+
+See also @@Keyboard Raw Key@@ and @@Pressed@@ commands and the @@Keyboard Input Guide@@.
+</desc>

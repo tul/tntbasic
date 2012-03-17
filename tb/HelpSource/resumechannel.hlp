@@ -1,0 +1,10 @@
+<name>Resume Channel</name>
+<group>moan</group>
+<syntax>Resume Channel
+Resume Channel <i>channelId</i></syntax>
+<synopsis>Resumes a paused moan channel</synopsis>
+<desc>
+This command resumes moan channel <i>channelId</i>, previously paused with the @@Pause Channel@@ command. If no channel is specified, it resumes all currently paused channels.
+
+See also @@Pause Channel@@ and @@Channel Paused@@.
+</desc>

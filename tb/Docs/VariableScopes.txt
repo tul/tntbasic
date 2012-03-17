@@ -1,0 +1,311 @@
+Handling variable scopes and storage in TNT Basic
+© Mark Tully 2000
+21/1/00
+
+	Procedures have different scopes from the root program and from each other. This scope extends to both variables and
+	labels and any other identifiers added in the future.
+	
+	An important change which needs to be made in TNT Basic is that we should not be storing the variable value along with
+	the symbol entry in the table. This is because if a procedure is re-entered it needs a new copy of the variables and
+	it would be very foolish to make a new copy of the symbol table when only a new copy of the memory is needed.
+	
+	So instead of storing the value in the symbol table, the symbol table will instead store the index into a variable
+	block. This is a section of memory containing the current varirable values. The indexes should be completely static.
+	The difficulty is in two areas
+		1)	Construction of the symbol tables (including scope resolution) and assignment of unique indexes in a variable
+			table
+		2)	During execution the management of variable tables to control scope
+	
+	CONSTRUCTION OF SYMBOL TABLES
+	-----------------------------
+	This is done at parse time.
+	A CVarScope class will contain a symbol table for each type of varirable which can be in a scope. Eg, int, intarray,
+	str, strarray etc.
+	
+	During parsing variables are always entered into the var scope which is at the top of a stack. Var scopes are pushed
+	and popped from this stack as scopes are entered and exited in the source code. ie when a procedure token is detected
+	we push a new var scope to capture all the symbols for this procedure. The var scope is popped when the end of the
+	procedure is detected.
+	
+	A special symbol is used for shared or global variables indicated in a procedures scope. This entry refers instead to
+	a entry in the root scope. If the entry does not exist in the root scope it is created.
+
+	MANAGEMENT OF SCOPE DURING EXECUTION
+	------------------------------------
+	So now we have a parsed program with symbols which reference indexes into a variable value table. To execute the
+	code we must create a store which is big enough for the symbols in the symbol table. The machine has within it a stack
+	of variable value tables (vvt). The root vvt is the size of all the root variables in the program, ie the ones in the
+	global scope. When an procedure is called, a new vvt is added to this stack giving the procedure it's own variable
+	store. This is freed when the procedure exits.
+	
+	When a variable is accessed, the index from the symbol table is used to access the correct value from the vvt.
+	All it needs to do is get the top most vvt and access the variable of the index specified.
+	However, if the variable is shared or global the it should be accessed from the root vvt. This is done by marking
+	variables which are shared so that they can get their value from the root vvt instead of the current vvt.
+	
+	A side effect of this is that global or shared variables are always seen as being in the root vvt, this should not be
+	a problem.
+	
+	eg
+		ENTRY NAME			INDEX INTO VARIABLE VALUE TABLE
+		
+		root table
+		A					0
+		B					1
+		C					2
+		
+		procedure "Foo"
+		A					0
+		B					1
+		Shared C			root vvt::2
+		
+		procedure "Bar"
+		A					0
+		B					1
+		C					2
+
+		root vvt	
+		0x00000000
+		0x00000000
+		0x00000000
+		procedure "Foo" vvt
+		0x00000000
+		0x00000000
+	
+	
+		PROCEDURE DoStuff(inX,inY,inZ)
+			blah blah
+		ENDPROC[temp]
+	
+		--> Parse as
+		procHeader : procName openbracket varlist closebracket ENDLINE statementsList ENDPROC ENDLINE
+			{
+				$1->SetVarList($3)		<- These variables are in the procedures symbol table
+				$1->SetCode($6)
+				$$=0
+				gProgram->PopProcScope()
+			}
+		
+		procName : PROCEDURE identifier { $$=new CProcedure(gProgram,$2) ... gProgram->AddProc($$) gProgram->PushProcScope($$) }
+		
+		class CProcedure
+		{
+			protected:
+				CLabelScope		mLabelScope;
+				CVarScope		mVarScope;
+		};
+
+		CProcedure::Call(paramList,program)
+		{
+			// Construct a stack frame including a vvt for the variables
+			CStackFrame			frame(mVarScope,kProcedure,varScope,mLabelScope);
+			
+			program.PushStackFrame(varScope);
+
+			// pushing the label scope would only be needed if labels are being looked up during execution at the moment all
+			// labels are resolved at compile time
+			
+			assign parameters to local variables....
+			
+			statementsList.execute....
+			
+			program.PopStackFrame();
+			
+			// Copy return values into previous stack frame
+			program->SetReturnValues(frame.GetReturnValues())
+		}
+
+	Note the use of stack frames to manage the vvts. A stack frame is:
+		CStackFrame
+		{
+			CVariableValueTable		mVars;			<- Only used for procedures, not for gosubs
+			TTBInt					mResultInt;
+			TTBStr					mResultStr;
+			EType
+			{
+				kProcedure,
+				kGosub
+			}
+			CStatement				*mReturnPC;
+		}
+	"return" statements will only work if the current stack frame is a gosub. Clearly two variations of a stack frame
+	should be used, one for procedures and one for gosubs so that the vvt isn't allocated unless it's needed.
+	"Param" and "Param$" are special variables which when evaluated will return the result of the last procedure called.
+	These are stored in mResultInt and mResultStr respectively.
+
+	THINKING AHEAD - CLASSES
+	------------------------
+	Object orientating TNT Basic would be nice. Let's think what we'd need for the following code snippet.
+	
+	CLASS MyClass
+		MEMBER SetA(inA)
+			A=inA
+		ENDMEMBER
+		
+		MEMBER PrintA
+			Print A
+		ENDMEMBER
+	ENDCLASS
+	
+	The class should contain it's own symbol table. All procedures in the class will use that symbol table. It would be
+	quite a lot of work I reckon, mainly because it would greatly complicate the type handling as an arbitary number of
+	different classes are introduced, each being a different type.
+
+
+**************************************************************************************************************************
+Update for better scoping and potential of OOP
+Mark Tully
+12/12/02
+
+Current state:
+Only two levels of identifier scopes are defined: the root scope (main program vars, globals and shared vars) and procedure
+specific ones.
+
+Need:
+Each higher level construct, like whiles/fors/ifs etc need their own identifier scope which inherits from the parent one.
+This will stop the use of variables out of scope, and allow for future improvements to the compiler where scoping rules
+can be used to optimise the code.
+
+OPP:
+In order to implement OOP, the type system will need an update. Suggest an object type, which has a sub type.
+Q: garbage / reference counting
+	Reference counting adds overhead to every assignment/deletion which is only wasted unless the object is actually being
+	released. Garbage collection can run in the background (eg while waiting for vbl) but could result in poor use of
+	resources if garbage is produced faster than it is collected.
+	
+	Q: Do most games do their allocation at the beginning and or allocate dynamically?
+	A:  Dynamic allocation is very plausable, for example if a user was creating 'bullet' objects in a shoot-em-up these
+		would be being created and destroyed very frequently. Shoot em ups involve a large turn over of sprites and entities
+		in general and could present a problem if tb can't handle dynamic allocation very well.
+		Other games may not be as taxing, of the games produced by tb users so far, shoot em ups are the only one's with an
+		obvious potential for dynamic memory allocation, most others look like they could just allocate statically.
+		Given that tb has to support all cases, we have to ensure that tb can handle dynamic allocation reallocation well.
+	
+	Q: How to handle memory allocation deallocation?
+	A:	Pools
+		Keep a pool of objects of a given class - assumes fixed size for object. Objects can then be created from the free
+		pool with an O(1) complexity. When freed the memory would be immediately available for another creation with
+		minimal fragmentation.
+		New pools would have to be created and linked to existing pools.
+
+	Q: Reference from tb?
+		Pointers
+		--------
+		Would be necessary, typed or untyped? Untyped would mean dynamic binding and implict polymorphism. Would be pretty
+		cool but would lower performance.
+		Can't think why you'd ever want dynamic binding really - it's only useful when passing objects where another bit
+		of code might not be aware of the cababilities of the object due to not knowing it's type. Also leads to weird
+		hierarchies that might be difficult to reason about.
+		Think I'll just do nice simple single inheritence.
+		Every thing can derive from the 'Object' class, which will support some simple primitives such as type introspection
+		and possibly fancy stuff like serialisation.
+		
+			Bullet	mybullet=new Bullet(xOrig,yOrig)
+			
+			mybullet->SetParticleStream(kParticleStreamSmokey)
+			mybullet->Release()
+			
+			procedure Info(Object inOb)
+				inOb->Name()
+				inOb->DoSomething()
+			end proc
+			
+		Typing
+		------
+		Cast down should be implict, eg Object ptr = bullet ptr is cool. Casting up? Could make that implicit but with an
+		exception if the user mistreats it? Exception for null ptr dereference too.
+		
+		Lists
+		-----
+		Need a primitive type for storing lists of objects, more scalable than arrays. Screams of being a templated class.
+		
+		Bullet List		mylist
+		List of bullet	mylist
+		
+		Or extend the array syntax?
+		
+		Current:
+		int				myarray[30]
+		
+		myarray[x]=y
+		
+		New:
+		
+		Bullet			mylist[]		' undefined size - implies list?
+		
+		mylist.Add(new bullet[,index])
+		mylist.Remove(mybullet)
+		mylist.Sort() ?
+		mylist[2]=mybullet				' replace element in list - ambigous, assigning over element 2 or removing element to
+										' and inserting mybullet into the list instead
+
+		
+		list bullet		mylist
+		
+		mylist.Add(ob)
+		mylist.Remove(ob)
+		mylist.Count()
+		
+		for each [bullet] b in mylist	' optional type can be used to restrict iteration to objects of that type or subtype?
+			b->Something()
+		next b
+		
+		Explict deletion
+		----------------
+		Can explictly delete an object to have all references to it set to null?
+			delete mybullet		' removed from all lists and stuff
+		
+		Assignment
+		----------
+		Ambigous between assigning ptr or object:
+			bullet	b=new bullet(1)
+			bullet	c=new bullet(2)
+			
+			b=c		' does b now point to c as a ptr, or does the object b have a copy of c in it?
+			
+		How does Java do it?
+			Think java uses the new operator
+				b=c	' ptr assigment
+				b=new bullet(c)	' create a copy of c and place in b
+			Don't think it has syntax to do a member wise copy?
+		
+		
+		Importing from other modules
+		----------------------------
+		Necessary for any project of any decsent size. Would allow users to share bits of code.
+		
+		Data hiding
+		-----------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

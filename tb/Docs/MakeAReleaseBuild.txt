@@ -1,0 +1,21 @@
+Quick notes on doing a TB release build:
+Mark Tully
+31/1/06
+
+* check you've updated the version history in the user guide
+* check you've bump rerevved tb, tb browser & glyph
+* cd into tb HelpSource and run formathelp.pl to make the help docs
+* cd into the TNT Basic Help directory in the Distribution directory and run "find . -name '*.htm' -exec 'SetFile' '-t' 'TEXT' {} ';'" to make all files into TEXT files, this is necessary for the OS 9 help indexer to work. Do the same in the TNT Basic User Guide dir, execept for .html files rather than .htm files
+* Create new dir
+* Copy in glyph, tb, glyph blocks, examples, bug reporting tool (OS X + 9), User Guide + Commands Help alias files, User Guide, Help
+* Remove all CVS dirs
+* Remove templates not related to TB from Hieroglyph blocks
+* Copy and paste nice icons onto Hieroglyph Blocks and its sub dirs
+* Tidy up release window
+* You can paste TNT Basic Help/gfx/toc_whole.jpg in for the window background using the view options if you want
+* Index the help using the OS 9 indexing tool (see help notes document)
+* Boot into OS 9, tidy up the icons, check it runs etc. also change the creator code of the target of the two aliases (user guide + commands help) so they open in IE
+* ensure you're all committed to cvs
+* tag the db, 'cvs tag release_1_3_1'
+
+TODO: Write a script to automate this!

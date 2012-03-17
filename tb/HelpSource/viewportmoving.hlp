@@ -1,0 +1,9 @@
+<name>Viewport Moving</name>
+<group>moan</group>
+<synopsis>Returns true if a viewport is scrolling</synopsis>
+<syntax><i>moving</i> = Viewport Moving (<i>canvasId</i>)</syntax>
+<desc>
+Tests if a moan viewport scroll started with the @@Move Viewport@@ command has finished.
+
+Sets <i>moving</i> to true if the movement of viewport on canvas <i>canvasId</i> is still on going, and false if it has finished.
+</desc>

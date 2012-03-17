@@ -1,0 +1,17 @@
+<name>Wait Key Press</name>
+<group>io</group>
+<synopsis>Waits until there is a keypress in the keyboard input queue</synopsis>
+<syntax>Wait Key Press</syntax>
+<desc>
+This command will wait until there is at least one keypress in the keyboard input queue. If there are keys already in the queue, then the command will return immediately.
+
+You can use this command to wait until the user presses a key, by emptying the keyboard queue with @@Clear Keyboard@@ and then waiting until a new key is pressed. Eg:
+
+<tnt>Print "Press any key to continue"
+Clear Keyboard
+Wait Key Press</tnt>
+
+The key pressed is then left into the keyboard queue and can be read with the @@Keyboard Raw Key@@ command.
+
+See also the @@Keyboard Input Guide@@, @@Keyboard Raw Key@@, @@Clear Keyboard@@, @@Pressed@@ and @@Wait Mouse Click@@ commands.
+</desc>

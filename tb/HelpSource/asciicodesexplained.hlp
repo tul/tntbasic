@@ -1,0 +1,54 @@
+<name>Ascii Codes Explained</name>
+<group>io</group>
+<synopsis>Explains what Ascii codes are</synopsis>
+<type>guide</type>
+<desc>
+Computers deal with numbers, not letters or punctuation, and so to get them to work with text we need to represent each and every character as a number.
+
+The text files that you read and write are actually stored, loaded into memory and manipulated as a sequence of numbers. When the computer displays the data on screen as text, it changes the numbers into characters so that humans can understand it.
+
+In order for text files to be reliably stored and processed by computers, it is important that they all interpret the data in the same way. To achieve this, a standardised mapping was created that defined what numbers should be used to represent all the characters in the english language. This mapping was called the <b>A</b>merican <b>S</b>tandard for <b>I</b>nformation <b>I</b>nterchange, or <b>ASCII</b> for short.
+
+<section>Lower Ascii Table</section>
+The Ascii table is split into two sections, the lower ascii table and the upper ascii table. The lower ascii table defines all numbers beteen 0 and 127 inclusive. This is the officially standardised section of the Ascii table and represents all the most common characters.
+
+The numbers from 0 to 31 inclusive represent non-printing characters, meaning characters that are not directly displayed. These characters control how the data should be interpretted. They were designed for when text was processed by teletype terminals and as such needed characters to represent actions such as ringing an audible bell, and signalling the beginning or end of a data transmission. Although a lot of these characters are no longer of any use, some of them have become common place.
+
+The <i>carriage return</i> is the character used by the Macintosh to represent a new line. On UNIX (and in some Mac OS X text files) the <i>line feed</i> is the standard way of designating a new line. On Windows, both a <i>carriage return</i> AND a <i>line feed</i> are used as a pair! The other commonly used control characters include <i>NULL</i>, which often indicates the end of a string of text, <i>tab</i> which is used to assist the layout of text by indenting it and <i>backspace</i> which deletes the previous character.
+
+All the rest of the characters above 31 in the lower ascii table are printable, except for <i>forward delete</i>, an apparently late addition which, means to delete the next character.
+
+<sub>Lower Ascii Table</sub>
+<leftimage>lowerasciitable.gif</leftimage>
+<section>Upper Ascii Table</section>
+The upper Ascii table has not been officially standardised, and tends to vary from computer to computer and from font to font. Some characters are more standard than others, and your milage may vary, but here's the table for the Macintosh Courier font.
+
+<sub>Upper Ascii Table</sub>
+<leftimage>upperasciitable.gif</leftimage>
+
+<section>Working with Ascii</section>
+TNT Basic supports two commands for converting between characters and their Ascii numbers, these are @@Char to Ascii@@ and @@Ascii to Char@@.
+
+For the most part TNT Basic programs don't need to convert text to their numeric equivalent, but occasionally it is useful, for example when you want to embed a special symbol into a text string.
+
+Eg:
+
+<tnt>Draw Text 10,10,"This is an "+Ascii to Char(240)</tnt>
+
+If you look up Ascii code 240 you will see that it will display an Apple at the end of the string. A further use it to check for special characters, such as carriage returns which help you format your text.
+
+Eg, a loop to draw text and move to the next line on a carriage return might look like:
+<tnt>
+int		i
+for i = 1 to String Length (inputString)
+	str myChar = Get Char (i,inputString)
+	if Char to Ascii (myChar) = 13
+		MoveToNextLine()
+	else
+		DrawCharOnCurrentLine(myChar)
+	end if
+next i
+</tnt>
+
+See also the @@Char to Ascii@@, @@Ascii to Char@@ and @@Raw Key Ascii@@ commands.
+</desc>

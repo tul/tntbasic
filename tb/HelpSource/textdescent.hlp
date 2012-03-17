@@ -1,0 +1,20 @@
+<name>Text Descent</name>
+<group>draw</group>
+<synopsis>Calculates the descent below baseline in pixels of text</synopsis>
+<syntax><i>descent</i> = Text Descent</syntax>
+<desc>
+Calculates the number of pixels below the baseline that text could descend to when drawn with the @@Draw Text@@ command.
+
+The y value passed to the 'Draw Text' command represents the <i>baseline</i> of the text being drawn; however the text descends by up to <i>descent</i> pixels below the baseline due to letters like y, g, j, p and q.
+
+If text was to be drawn at a point (x,y), then the box it would occupy could be calculated with:
+
+<tnt>bottom = y + Text Descent
+top = bottom - Text Height
+leftSide = x
+rightSide = leftSide + Text Width ("this string")
+</tnt>
+
+See also:
+	The @@Text Width@@, @@Text Height@@ and @@Draw Text@@ commands.
+</desc>

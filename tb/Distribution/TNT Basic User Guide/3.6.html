@@ -1,0 +1,126 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="Adobe GoLive 5">
+		<title>The Maps Section</title>
+	</head>
+
+	<body bgcolor="#ffffff" background="gfx/chalk.gif">
+		<div align="right">
+			<p><a href="3.7.html">Next Page...</a></p>
+		</div>
+		<div align="left">
+			<table cool width="545" height="140" usegridx usegridy showgridx showgridy gridx="16" gridy="16" border="0" cellpadding="0" cellspacing="0">
+				<tr height="16">
+					<td width="80" height="139" rowspan="3" valign="top" align="left" xpos="0"><img src="gfx/redbarrel.gif" width="69" height="110" border="0" align="left"></td>
+					<td width="464" height="16" colspan="3"></td>
+					<td width="1" height="16"><spacer type="block" width="1" height="16"></td>
+				</tr>
+				<tr height="32">
+					<td width="400" height="32" colspan="2" align="left" xpos="80" content valign="top" csheight="32">
+						<h1><font size="5">Chapter 3.6</font></h1>
+					</td>
+					<td width="64" height="32"></td>
+					<td width="1" height="32"><spacer type="block" width="1" height="32"></td>
+				</tr>
+				<tr height="91">
+					<td width="32" height="91"></td>
+					<td width="432" height="91" colspan="2" align="left" xpos="112" content valign="top" csheight="91">
+						<h1><font size="+7">The Maps<br>
+								Section</font></h1>
+					</td>
+					<td width="1" height="91"><spacer type="block" width="1" height="91"></td>
+				</tr>
+				<tr height="1" cntrlrow>
+					<td width="80" height="1"><spacer type="block" width="80" height="1"></td>
+					<td width="32" height="1"><spacer type="block" width="32" height="1"></td>
+					<td width="368" height="1"><spacer type="block" width="368" height="1"></td>
+					<td width="64" height="1"><spacer type="block" width="64" height="1"></td>
+					<td width="1" height="1"></td>
+				</tr>
+			</table>
+			<h2>Maps Section</h2>
+			<p>The maps section is where you compose the tiled maps for your project. These maps are edited by a special plug-in to Hieroglyph called Genesis. To open a map in the Genesis map editor double click on it.</p>
+			<h2><a name="1"></a>What is Genesis?</h2>
+			<p>Genesis is a tool for creating and editing background maps that can be used in games.  A lot of games have a large area (usually much larger than the screen) that the player can move around freely, if these maps were stored as large pictures then the memory required for the backgrounds would be far too much.</p>
+			<p>Fortunately, Genesis maps can used to get around this problem.  Usually, most backgrounds are made up of simple pictures (tiles) that are repeated throughout the map.  Genesis can take a small picture and then break it into tiles of any size (as long as they are all the same size).  It can then be used to produce a map that is simply a large image made up of these smaller 'tiles'.  This saves a lot of memory because all Genesis needs to produce a large image is a small picture of what all the tiles look like and then some data telling it which tiles to put where.</p>
+			<h2><a name="2"></a>What is a Map?</h2>
+			<p>A map is resource that Genesis can produce and edit, it is a series of tiles that are put together to make a much larger image.  These maps can be loaded into TNT Basic easily using specialised commands and then used in games.</p>
+			<h2><a name="3"></a>Creating and Setting up a Map</h2>
+			<p>In the Maps section, choose 'Create new TNT Map...' from the 'Resource' menu.</p>
+			<p><img src="gfx/create_new_map.gif" width="286" height="185" border="0" alt="create new tmap"></p>
+			<p>Once you give the map a name and a number it will be created and then automatically opened for you.</p>
+			<h2><a name="4"></a>Setting the Map Properties</h2>
+			<p>The map that you have created is a small, empty map. You will probably want to make the map larger than this so that you can work with it. You can do this by setting the map dimensions. Choose 'Set Map Dimensions' from the 'Genesis' menu.</p>
+			<p><img src="gfx/set_map_dim.gif" width="235" height="152" border="0" alt="set map dimensions"></p>
+			<p>You should now see a dialog that looks like this:</p>
+			<p><img src="gfx/tmap_info.gif" width="247" height="360" border="0" alt="tmap info"></p>
+			<p>This dialog allows you to change the size of the map and tiles and set the number of tiles to cut out of the picture.</p>
+			<p><b>Map Width/Height</b><br>
+				
+				The size of the map in tiles.</p>
+			<p><b>Tile Width/Height</b><br>
+				
+				The size of the tiles in pixels.</p>
+			<p><b>Tiles</b><br>
+				
+				The number of tiles to cut out of the tile picture.</p>
+			<p><b>Scale Map Centre</b><br>
+				
+				If you have changed the size of the map then certain areas will need to be added or removed. This control lets you choose where to create or remove the tiles from (e.g. if you position the centre at the top left then when the map is scaled the tiles will be added or removed from the bottom left, if you leave it in the centre then the tiles will be created or removed from all sides).</p>
+			<p><b>Setting the Map Tiles</b><br>
+				
+				In order to use some tiles that you have already drawn you must first add the picture to the TNT Basic project. Genesis also has to be told which picture to use, this can be done by choosing 'Set Map Tiles' from the 'Genesis' menu.</p>
+			<p><img src="gfx/set_map_tiles.gif" width="235" height="160" border="0" alt="set map tiles"></p>
+			<p>You can then specify the number of the picture to use as tiles. If you replace the picture with another you don't have to set the map tiles again because Genesis will remember the number of the picture you last set. You can also set the map tiles by dragging a picture from the pictures list and onto the map.</p>
+			<p>Once Genesis has picture to make tiles from it cuts the tiles out (the size of the tiles depends on what has been set in the map dimensions). This means that all of the tiles are extracted from just one picture.</p>
+			<h2><a name="5"></a>Editing Modes</h2>
+			<p>There are 4 different editing modes supported in Genesis.</p>
+			<p><img src="gfx/gsis_edit_modes.gif" width="102" height="48" border="0" alt="edit modes"></p>
+			<p>This is the modes dialog, clicking on each of the buttons switches between the editing modes.</p>
+			<p><img src="gfx/gsis_tile_mode.gif" width="39" height="35" border="0" align="middle"><b>Tile Drawing Mode</b><br>
+				
+				This is the main mode of Genesis and is used for placing and removing tiles.</p>
+			<p><img src="gfx/gsis_object_mode.gif" width="39" height="35" border="0" align="middle"><b>Object Editing Mode</b><br>
+				
+				In this mode, objects can be placed on the map. Objects can be used to represent things in the world (e.g. the Player, Enemies, Power-Ups etc)</p>
+			<p><img src="gfx/gsis_poly_mode.gif" width="39" height="35" border="0" align="middle"><b>Polygon Editing Mode</b><br>
+				
+				In this mode, polygons can be placed on the map. Polygons are made up of a series of rectangles and can be used to specify areas of the map (e.g. Safe Zones)</p>
+			<p><img src="gfx/gsis_easy_mode.gif" width="39" height="35" border="0" align="middle"><b>Easy Draw Mode</b><br>
+				
+				This mode is currently inactive but will be used in future version of Genesis.</p>
+			<h2><a name="6"></a>Editing Tools</h2>
+			<p>The tools in Genesis are similar to the drawing tools in an ordinary paint package.</p>
+			<p><img src="gfx/gsis_pencil.gif" width="33" height="33" border="0" align="middle"><b>Pencil</b><br>
+				
+				Pencil simply places the current tile/object wherever you draw with it.</p>
+			<p><img src="gfx/gsis_rect.gif" width="33" height="33" border="0" align="middle"><b>Rectangle</b><br>
+				
+				This places the current tile/object/polygon at the position and size you draw it. To start drawing this, click the mouse in one corner and then move to the opposite corner while holding the mouse button down.</p>
+			<p><img src="gfx/gsis_line.gif" width="33" height="33" border="0" align="middle"><b>Line</b><br>
+				
+				This places the current tile/object in a line between the specified points. To start drawing with this, click the mouse at the start of the line and then move the mouse to the other end while holding the mouse button down.</p>
+			<p><img src="gfx/gsis_select.gif" width="33" height="33" border="0" align="middle"><b>Selection</b><br>
+				
+				This tool can be used to select, move and delete tiles/objects/polygons.</p>
+			<p><img src="gfx/gsis_pippet.gif" width="33" height="33" border="0" align="middle"><b>Pippet</b><br>
+				
+				This sets the current tile/object/polygon to whatever you click on.</p>
+			<p><img src="gfx/gsis_eraser.gif" width="33" height="33" border="0" align="middle"><b>Eraser</b><br>
+				
+				This removes the tile/object/polygon that you click on.</p>
+			<p><img src="gfx/gsis_paint.gif" width="33" height="33" border="0" align="middle"><b>Paint Can</b><br>
+				
+				This fills an area with the current tile.</p>
+			<p><img src="gfx/gsis_mag.gif" width="33" height="33" border="0" align="middle"><b>Magnify</b><br>
+				
+				This magnifies the map so it is easier ot see. Clicking normally zooms in, option-clicking zooms out.</p>
+		</div>
+		<div align="right">
+			<p><a href="3.7.html">Next Page...</a></p>
+		</div>
+	</body>
+
+</html>

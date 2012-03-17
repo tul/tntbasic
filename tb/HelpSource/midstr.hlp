@@ -1,0 +1,17 @@
+<name>Mid Str</name>
+<group>strs</group>
+<syntax><i>string</i> = Mid Str (<i>theString</i>,<i>start</i>,<i>length</i>)</syntax>
+<synopsis>Gets characters from the middle of a string</synopsis>
+<desc>
+Returns <i>length</i> characters from the middle of <i>theString</i> starting at <i>start</i> characters into the string.
+The first character in the string is at index 1.
+
+Example:
+<tnt>str sub
+str test = "This is my test string"
+sub = mid str (test,2,3)
+print sub</tnt>
+This would output 'his'.
+
+See also @@Left Str@@, @@Right Str@@ and @@Get Char@@.
+</desc>

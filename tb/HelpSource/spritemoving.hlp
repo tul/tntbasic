@@ -1,0 +1,9 @@
+<name>Sprite Moving</name>
+<group>moan</group>
+<synopsis>Returns true if a sprite is moving</synopsis>
+<syntax><i>moving</i> = Sprite Moving (<i>spriteNum</i>)</syntax>
+<desc>
+Tests if a moan sprite movement started with the @@Move Sprite@@ command has finished.
+
+Sets <i>moving</i> to true if the movement of sprite <i>spriteNum</i> is still on going, and false if it has finished.
+</desc>

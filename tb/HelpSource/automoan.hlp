@@ -1,0 +1,18 @@
+<name>Auto Moan</name>
+<group>moan</group>
+<syntax>Auto Moan On
+Auto Moan Off
+<i>boolean</i> = Auto Moaning
+Step Moan</syntax>
+<synopsis>Commands for controlling when moan processing takes place</synopsis>
+<desc>
+Moan channels appear to run their programs in parallel to the main TNT Basic program, but actually moan channels execute inside the @@Draw Frame@@ statement. When 'Draw Frame' is called each active channel is ran for a very short amount of time before the screen is drawn.
+
+If you wish, you can stop this happening with the 'Auto Moan Off' command. This will stop moan channels working, meaning you have to manually step the moan channels using 'Step Moan'. This can be useful if you want to run your moan channels more or less often than once per frame.
+
+You can call 'Step Moan' without turning off auto moaning, in which case you will cause the moan channels to be ran more than once per frame.
+
+'Auto Moan On' will start the moaning happening automatically inside 'Draw Frame' again.
+
+'Auto Moaning' is a function that returns true if auto moan is on (which it is by default) and false if it is not.
+</desc>

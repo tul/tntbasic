@@ -1,0 +1,37 @@
+<name>Raw Key Filter</name>
+<group>io</group>
+<synopsis>Tests if a raw key press is of a certain type</synopsis>
+<syntax>
+<i>result</i> = Raw Key Filter Number (<i>rawKey</i>)
+<i>result</i> = Raw Key Filter Printable (<i>rawKey</i>)
+<i>result</i> = Raw Key Filter Navigation (<i>rawKey</i>)
+<i>result</i> = Raw Key Filter Delete (<i>rawKey</i>)
+</syntax>
+<covers>Raw Key Filter Number, Raw Key Filter Printable, Raw Key filter Navigation, Raw Key Filter Delete</covers>
+<desc>
+Takes a <i>rawkey</i> as returned from the @@Keyboard Raw Key@@ command and tests if it's of the type specified. If it is then <i>result</i> is set to <b>TRUE</b>, if not it's set to <b>FALSE</b>.
+
+<sub>Raw Key Filter Number</sub>
+Tests if the raw key represents a number between 0-9.
+<sub>Raw Key Filter Printable</sub>
+Tests if the raw key represents <i>any</i> printable character. Includes all numbers, letters and punctuation.
+<sub>Raw Key Filter Navigation</sub>
+Tests if the raw key is a cursor movement key. Any raw key that returns TRUE from this filter will only move the cursor.
+<sub>Raw Key Filter Delete</sub>
+Tests if the raw key is a delete key such as forward delete or backspace. Any raw key that returns TRUE from this filter will possibly delete a character from the string editor.
+
+These commands are useful if you only want to let certain key presses into your @@String Editor@@. For example to only input numbers, only pass raw keys to @@String Editor Input@@ that return TRUE for 'Raw Key Filter Number'. You may also want to allow navigation keys and delete keys.
+
+Eg.
+<tnt>
+int rawKey = Keyboard Raw Key
+if Raw Key Filter Number (rawKey) or Raw Key Filter Navigation (rawKey) or Raw Key Filter Delete (rawKey)
+	String Editor Input (rawKey)
+end if</tnt>
+
+To test for specific key presses, you can use the @@Raw Key Ascii@@, @@Raw Key Scancode@@ and @@Raw Key Char@@ commands.
+
+For more information on raw keys and working with the keyboard please refer to the @@Keyboard Input Guide@@.
+
+See also the @@Keyboard Raw Key@@ and @@Raw Key Ascii@@ commands.
+</desc>

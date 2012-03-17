@@ -1,0 +1,47 @@
+<HTML>  
+<HEAD>
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>Regs (X,Y,I,R0-R9,RA-RZ)</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+  <META NAME="AppleTitle" CONTENT="Regs (X,Y,I,R0-R9,RA-RZ)">
+  <META NAME="AppleTarget" CONTENT="_right">
+  <META NAME="DESCRIPTION" CONTENT="Moan registers for reading/writing">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="349"
+HEIGHT="177">
+  <TR VALIGN="TOP">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">Regs (X,Y,I,R0-R9,RA-RZ)</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD HEIGHT="41">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva">Moan registers for reading/writing</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Syntax</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="43">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial"><i>N/A</i></FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Description</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="40">
+      <BLOCKQUOTE>
+        <FONT SIZE="-1" FACE="Geneva"><p>Registers can be used anywhere where integers can. Registers are assigned using the <A HREF="../commands/moan_l.htm">'L'et</A> command, or the <A HREF="../commands/channelregister.htm">Set Channel Register</A> command.</p><p>R0-R9 are local channel registers, these are private for each moan channel.<br>RA-RZ are shared moan registers, these are global across all the moan channels.</p><p>Registers X,Y and I are also local to each channel. X and Y hold the x and y position of the first sprite/viewport that was attached to the channel. I holds the image index of the first sprite attached to the channel. If the first object to be attached was a viewport, then I is always -1.</p>See also the <A HREF="../commands/channelregister.htm">Set Channel Register</A> and <A HREF="../commands/channelregister.htm">Channel Register</A> commands.<br></FONT>
+      </BLOCKQUOTE>
+    </TD>
+  </TR>
+  <TR VALIGN="TOP">
+    <TD ALIGN="CENTER" HEIGHT="34"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../moan/moan_frameset.htm">Table of contents</A></FONT></TD> 
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

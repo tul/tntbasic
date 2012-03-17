@@ -1,0 +1,73 @@
+<HTML>  
+<HEAD>
+  <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Mac">
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>VBL Sync</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+  <META NAME="AppleTitle" CONTENT="Vbl Sync">
+  <META NAME="AppleTarget" CONTENT="_right">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="349"
+HEIGHT="240">
+  <TR VALIGN="TOP">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">VBL
+      Sync</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD HEIGHT="41">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">Enables or disables vertical
+        blank synchronisation</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Syntax</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="41">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">VBL Sync On<BR>
+        VBL Sync Off</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Description</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="107">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">The Mac's monitor has
+        a refresh rate measured in Mz. This rate, or <I>frequency</I>,
+        is the number of times per second that the image on the monitor
+        is redrawn.</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">If the image being drawn
+        is changed mid way through the monitor's refresh, the top half
+        of the monitor will have the old image, and the bottom half will
+        have the new image. This causes a noticable tearing effect.</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">To get around this problem
+        you must wait until the monitor has finished drawing the image
+        and then quickly alter it before it begins the next monitor refresh.
+        The pause between the montior refreshes is called the <I>vertical
+        blank</I> or VBL for short.</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">Synchronising to the VBL
+        can cause lower framerates as the TNT Basic's <A HREF="drawframe.htm">Draw
+        Frame</A> command must wait for the monitor to finish drawing
+        before it can perform the copy. If the tearing is acceptable
+        then turning VBL syncing off allows higher frame rates to be
+        achieved.</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">Digitally driven monitors
+        such as PowerBook screens and Apple Studio Displays do not have
+        a VBL and so VBL syncing is permanetly off when drawing to these.</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">VBL syncing defaults to
+        on.</FONT>
+      </BLOCKQUOTE>
+    </TD>
+  </TR>
+  <TR VALIGN="TOP">
+    <TD ALIGN="CENTER" HEIGHT="8"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../cv/cv_frameset.htm">Table of contents</A></FONT></TD> 
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

@@ -1,0 +1,36 @@
+TNT Basic To Do List
+--------------------
+	
+¥ Overflow protection
+
+¥ Optimisers - look for expressions which are flagged as constant and replace with a constant
+
+¥ Stop Gotos from jumping into for loops
+
+¥ Error messages in TNT Basic.rsrc all have a different tense. Some say what has happened ("Arithmetic Overflow") others
+  say what's gone wrong ("The set creator function has not been called..."). Read over them all together and decided on a
+  tense. Also add parameterised messages
+
+¥ Stop sparks using CProgram class, it can't be a generic TNT Engine if it's tied to TNT Basic can it
+  Suggest creating an abstract CPauseResume class such:
+  	class CPauseResume
+  	{
+  		protected:
+  			bool		mPaused;
+  		public:
+  						CPauseResume() : mPaused(false) {}
+  			virtual void /*e*/ Pause() = 0L;
+  			virtual void /*e*/ Resume() = 0L;
+  			virtual bool IsPaused() { return mPaused; }
+  	}
+  Mix this in with the program and make sparks take a ptr to a CPauseResume object instead of a CProgram object, then it will
+  be TNT Basic indepedent
+¥ Weird scoping rules
+	if 0
+		int x
+	end if
+	x=1
+	
+	is valid. Perhaps if statements should have their own scopes too?
+	
+	Can declare procedures inside if statements etc..

@@ -1,0 +1,62 @@
+// ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+// TNT Basic
+// TNTBasic.PCH
+// © Mark Tully 1999-2000
+// 22/12/99
+// ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+
+/* ***** BEGIN LICENSE BLOCK *****
+*
+* Copyright (c) 1999, Mark Tully and John Treece-Birch
+* All rights reserved.
+*
+* Redistribution and use in source and binary forms, with or without modification,
+* are permitted provided that the following conditions are met:
+*
+* * Redistributions of source code must retain the above copyright notice, this list
+*   of conditions and the following disclaimer.
+* * Redistributions in binary form must reproduce the above copyright notice, this
+*   list of conditions and the following disclaimer in the documentation and/or other
+*   materials provided with the distribution.
+*
+* THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
+* EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+* WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+* IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+* INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+* NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+* PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+* WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+* OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+* THE POSSIBILITY OF SUCH DAMAGE.
+*
+* ***** END LICENSE BLOCK ***** */
+
+#ifdef __MWERKS__
+#pragma precompile_target "TNTBasic.PCH.out"
+#elif __GNUC__
+// stop stdlib new throwing exceptions, tnt code always checks for a NULL return
+// TODO - test if this actually suppresses the exceptions
+#include <new>
+void *operator new(size_t size) throw();
+#endif
+
+#define			Debug_Signal						1		// enable signalpstr etc
+#define			TARGET_API_MAC_CARBON				1		// use carbon api calls
+#define			CARBON								1		// mr uses carbon
+#define			PP_Target_Carbon					1		// pp uses carbon
+#define			CALL_IN_SPOCKETS_BUT_NOT_IN_CARBON	1		// use sprockets, even tho it's not in carbon
+#define			qDebug								0		// Produce BkgConsole output
+#define			BLAST_DEBUG							1		// Whether blast verifies it's ptrs and stuff. Set to 0 in release versions.
+#define			TB_DEBUG							1		// When true allows extra debugging actions
+
+// log all thrown exceptions to the output file
+class LException;
+void LogThrow(const char *inFunc, const char *inFileName, long inLineNo, const LException &inException);
+#define Throw_Err(err)		do { try { LException::Throw(err); } catch(const LException &e) { LogThrow(__func__,__FILE__,__LINE__,e); throw; } } while (0)
+
+#include		<math.h>
+#include		<PP_ClassHeaders.cp>
+#include		<iostream>
+
+#include		"TNTBasic_Prefix.h"

@@ -1,0 +1,38 @@
+<name>String Editor Input</name>
+<group>io</group>
+<synopsis>Types a key into the string editor</synopsis>
+<syntax>String Editor Input (<i>rawKey</i>)</syntax>
+<desc>
+The string editor allows you to take key presses from the user and use them to edit a string of text in a similar manner to a word processor. An overview of the string editor can be found in the @@String Editor@@ section of the @@Keyboard Input Guide@@.
+
+This command types in the <i>rawKey</i> passed into the string editor. It will appear at the current string editor cursor position. If the rawKey represents a cursor key then the string editors cursor will be moved. If it represents a backspace or foward delete then a character will be deleted from the string editor. If the it represents a normal printable character it is entered into the string editor.
+
+The <i>rawKey</i> should be obtained from @@Keyboard Raw Key@@. Because your program is responsible for taking raw keys from @@Keyboard Raw Key@@ and passing them to the 'String Editor Input' command, you have the opportunity of filtering the keys being typed. The @@Raw Key Filter@@ commands are very useful in this.
+
+Eg, to input numbers until return is pressed:
+<tnt>
+int		rawKey
+int		asciiCode
+print "Type in a number"
+' just let numbers through, no
+' letters or punctuation. we
+' could let navigation keys
+' through such as cursor
+' movement, but as we're not
+' displaying the text being
+' edited we'll ignore those too
+repeat
+	Wait Key Press
+	rawKey = Keyboard Raw Key
+	asciiCode = Raw Key Ascii(rawKey)
+	if Raw Key Filter Number(rawKey)
+		String Editor Input(rawKey)
+	end if
+until asciiCode=13	' ascii 13 is return
+print "You typed the number ";
+print String Editor Contents</tnt>
+
+To see an example of how to display the text being edited, see the @@String Editor@@ section. To learn more about Ascii codes see the @@Ascii Codes Explained@@ page.
+
+See also the @@String Editor Contents@@ and @@String Editor Cursor@@ commands.
+</desc>

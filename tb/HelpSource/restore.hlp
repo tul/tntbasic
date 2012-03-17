@@ -1,0 +1,24 @@
+<name>Restore</name>
+<group>misc</group>
+<syntax>Restore <i>label</i></syntax>
+<synopsis>Selects the Data statements to be read with Read</synopsis>
+<desc>
+Normally a @@Read@@ command reads from the next unread @@Data@@ statement. You can change this behaviour by using the @@Restore@@ command to manually select the data statements to be read to be the first ones following a given <i>label</i>.
+
+Example:
+<tnt>int	a,b
+read a,b
+print a,b
+read a,b
+print a,b
+restore beginning
+read a,b
+print a,b
+
+beginning:
+data 1,2
+data 3,4</tnt>
+This example would print the numbers 1 2 3 4 and then move the read position to the label 'beginning' and read and print the numbers 1 and 2 again.
+
+See also @@Read@@ and @@Data@@.
+</desc>

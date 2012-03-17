@@ -1,0 +1,4 @@
+Debugger worries
+----------------
+
+Some basic statements generate more statements than 1, eg read statement, global statements which use assigments

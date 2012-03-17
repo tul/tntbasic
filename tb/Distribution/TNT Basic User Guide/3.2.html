@@ -1,0 +1,158 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="Adobe GoLive 5">
+		<title>The Code Section</title>
+	</head>
+
+	<body bgcolor="#ffffff" background="gfx/chalk.gif">
+		<div align="right">
+			<p><a href="3.3.html">Next Page...</a></p>
+		</div>
+		<div align="left">
+			<table cool width="545" height="140" usegridx usegridy showgridx showgridy gridx="16" gridy="16" border="0" cellpadding="0" cellspacing="0">
+				<tr height="16">
+					<td width="80" height="139" rowspan="3" valign="top" align="left" xpos="0"><img src="gfx/redbarrel.gif" width="69" height="110" border="0" align="left"></td>
+					<td width="464" height="16" colspan="3"></td>
+					<td width="1" height="16"><spacer type="block" width="1" height="16"></td>
+				</tr>
+				<tr height="32">
+					<td width="400" height="32" colspan="2" align="left" xpos="80" content valign="top" csheight="32">
+						<h1><font size="5">Chapter 3.2</font></h1>
+					</td>
+					<td width="64" height="32"></td>
+					<td width="1" height="32"><spacer type="block" width="1" height="32"></td>
+				</tr>
+				<tr height="91">
+					<td width="32" height="91"></td>
+					<td width="432" height="91" colspan="2" align="left" xpos="112" content valign="top" csheight="91">
+						<h1><font size="+7">The Code<br>
+								Section</font></h1>
+					</td>
+					<td width="1" height="91"><spacer type="block" width="1" height="91"></td>
+				</tr>
+				<tr height="1" cntrlrow>
+					<td width="80" height="1"><spacer type="block" width="80" height="1"></td>
+					<td width="32" height="1"><spacer type="block" width="32" height="1"></td>
+					<td width="368" height="1"><spacer type="block" width="368" height="1"></td>
+					<td width="64" height="1"><spacer type="block" width="64" height="1"></td>
+					<td width="1" height="1"></td>
+				</tr>
+			</table>
+			<h2>Code Section</h2>
+			<p>This section is where you &quot;code&quot; your game. Coding is the process of writing instructions to control your game. Coding in TNT Basic isn't hard, see the Learn To Code tutorials in the TNT Basic help system for more information!</p>
+			<h2><a name="1"></a>TNT Basic Code Editor</h2>
+			<h2></h2>
+			<table border="0" cellpadding="1" cellspacing="2" width="64">
+				<tr>
+					<td><img src="gfx/code_pane.gif" width="453" height="176" border="0" align="left" alt="code section"></td>
+				</tr>
+				<tr>
+					<td>
+						<div align="center">
+							<font size="-2">Hieroglyph Code Section</font></div>
+					</td>
+				</tr>
+			</table>
+			<p>The TNT Basic code editor is where all your coding takes place. As you type, your code is colour coded by a technique called syntax highlighting.</p>
+			<p>Words highlighted in <font color="blue">blue</font> represent control flow statements.<br>
+				
+				Words in <font color="#4985c6">granite</font> represent language commands.<br>
+				
+				Finally words in <font color="red">red</font> represent comments. Comments are ignored by TNT Basic and they allow you to make notes throughout your code.</p>
+			<p>The code editor eases your navigation through your project as it gets large by providing you with a procedures popup (you can learn more about procedures in the TNT Basic help system). The procedures popup allows you to quickly locate any procedure by name, meaning you can zip around your code quickly, without requiring you to remember exactly where everything is.</p>
+			<p>The code editor also features handy features like a powerful find and replace, line number read out, indentation commands and remming commands.</p>
+			<p><a name="2"></a><b>Indentation Commands</b><br>
+				
+				There are two commands in the Edit menu when using the code editor: Indent Left and Indent Right. These commands move the selected lines left or right by one indentation level.<br>
+				
+				By convention, indenting is used to make code more readable. Generally, all statements inside a control statement are indented. For example:</p>
+			<pre><font color="blue">if</font> a=3
+    <font color="#4985c6"> print</font> &quot;This line is indented in the code editor&quot;
+<font color="blue">end if</font></pre>
+			<p>You can indent a line by placing tabs at the beginning, you do not generally use spaces to indent lines. The indentation commands are make things easier, especially when used via their shortcut keys cmd-[ and cmd-].</p>
+			<p>You do not have to indent code, it is merely done to make things easier to read.</p>
+			<p><b>Remming Commands</b><br>
+				
+				The remming commands provide an easy way to rem or un-rem a block of text. When text is remmed it is ignored by TNT Basic. Rems appear in red in the code editor. Choose &quot;Rem Selection&quot; and &quot;Unrem Selection&quot; to rem and un-rem selected rows of text.</p>
+			<h2><a name="3"></a>Find and Replace</h2>
+			<p>The code editor's find and replace feature is accessed by choosing &quot;Find&quot; from the &quot;Search&quot; menu. You are then presented with a dialog like the following:</p>
+			<table border="0" cellpadding="1" cellspacing="2" width="64">
+				<tr>
+					<td><img src="gfx/find_replace.gif" width="453" height="165" border="0" alt="find and replace" align="left"></td>
+				</tr>
+				<tr>
+					<td>
+						<div align="center">
+							<font size="-2">Hieroglyph Code Find and Replace Window</font></div>
+					</td>
+				</tr>
+			</table>
+			<p>The options for the find dialog are as follows:</p>
+			<blockquote>
+				<p><b>Start From Top</b><br>
+					
+					When checked, this begins the search for the find string from the top of the code, otherwise it begins the search from the current cursor position downwards.</p>
+				<p><b>Match Whole Word</b><br>
+					
+					When checked, only entire words are that match the find string are found; if your find string is inside another word then it doesn't count.</p>
+				<p>For example: if searching for the word &quot;ring&quot; with &quot;Match Whole Word&quot; off, results would be found in the words &quot;bring&quot;, &quot;colouring&quot; and &quot;ringing&quot;. If &quot;Match Whole Word&quot; is on, only the separated word &quot;ring&quot; will be found.</p>
+				<p><b>Case Sensitive</b><br>
+					
+					If this is set, then a lower case letter and upper case letter are seen as different, if not set, they are seen as equal.</p>
+			</blockquote>
+			<p>The buttons in the find window operate as follows:</p>
+			<blockquote>
+				<p><b>Find</b><br>
+					
+					Finds the next occurance of the find string by moving down the document.</p>
+				<p><b>Find All</b><br>
+					
+					Finds all occurances of the find string and displays them at the top of the window.</p>
+				<p><b>Replace</b><br>
+					
+					Replaces the next occurance of the find string with the replace string.</p>
+				<p><b>Replace All</b><br>
+					
+					Replaces all occurances of the find string with the replace string.</p>
+			</blockquote>
+			<p>These commands can also be accessed from the &quot;Search&quot; menu directly. You will also find the following commands in the search menu:</p>
+			<blockquote>
+				<p><b>Enter Find String</b><br>
+					
+					Takes the currently selected text and places it into the find window's &quot;Find&quot; string box</p>
+				<p><b>Enter Replace String</b><br>
+					
+					Takes the currently selected text and places it into the find window's &quot;replace&quot; string box.</p>
+				<p><b>Replace Selection</b><br>
+					
+					If the selected text is equal to the find string, replace it with the replace string.</p>
+				<p><b>Find Definition</b><br>
+					
+					Find the definition of the selected TNT Basic command in the TNT Basic help centre. If the selected text is not a command then search the help centre for any articles referring to the text.</p>
+				<p>For example: hilighting the word &quot;sprite&quot; and selecting &quot;Find Definition&quot; will take you to the command definition of the TNT Basic &quot;sprite&quot; command. Selecting the words &quot;moving sprites&quot; and choosing &quot;Find Definition&quot; will find all articles relating to moving sprites.</p>
+			</blockquote>
+			<h2><a name="4"></a>The Note Bar</h2>
+			<h2></h2>
+			<table border="0" cellpadding="1" cellspacing="2" width="64">
+				<tr>
+					<td><img src="gfx/code_pane_w_errors.gif" width="453" height="195" border="0" align="middle" alt="code pane with errors"></td>
+				</tr>
+				<tr>
+					<td>
+						<div align="center">
+							<font size="-2">Hieroglyph Code Section With Errors Displayed</font></div>
+					</td>
+				</tr>
+			</table>
+			<p>The note bar is displayed at the top of the code section when you try to run a project that has errors in the code. The errors in the code are all listed in the note bar and you can flick through them easily and correct them as you go.</p>
+			<p>You can click the up and down arrows to move between the errors. (You can also use cmd-opt-up/down as short cut keys). To close the note bar click the close box in the top left corner.</p>
+			<p>If you select find all from the search menu, all the search results are collated together and placed in the note bar. You can then quickly review the search results.</p>
+		</div>
+		<div align="right">
+			<p><a href="3.3.html">Next Page...</a></p>
+		</div>
+	</body>
+
+</html>

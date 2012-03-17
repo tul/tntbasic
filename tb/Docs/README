@@ -1,0 +1,11 @@
+Mark Tully
+23/10/05
+
+Some of the docs in this directory are very old. Most were notes I made during TB's development and
+contain ideas that were either implemented, discarded or are still on my 'todo list' :)
+
+All of them should be taken with a pinch of salt regarding their accuracy, often the doc was written
+before the code, then the code would follow and improve upon the design outlined in the doc. The
+code is the only true place to find out how things work!
+
+Mark

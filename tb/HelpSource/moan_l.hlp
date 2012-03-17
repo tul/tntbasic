@@ -1,0 +1,15 @@
+<name>'L'et</name>
+<group>moan</group>
+<syntax>L <i>Rx</i> = <i>exp</i></syntax>
+<synopsis>Assign register with a number</synopsis>
+<desc>
+Sets register <i>Rx</i> to <i>exp</i>.
+
+Examples:
+
+"L R0 = 7"			' Let local register 0 equal 7
+"L RA = R0"			' Let shared register A equal local register 0
+"L R3 = 7+(2^5)"	' Let local register 3 equal 39
+
+See also the @@Set Channel Register@@ command.
+</desc>

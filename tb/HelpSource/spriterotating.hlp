@@ -1,0 +1,9 @@
+<name>Sprite Rotating</name>
+<group>moan</group>
+<synopsis>Returns true if a sprite is rotating</synopsis>
+<syntax><i>rotating</i> = Sprite Rotating (<i>spriteNum</i>)</syntax>
+<desc>
+Tests if a moan sprite rotation started with the @@Rotate Sprite@@ command has finished.
+
+Sets <i>rotating</i> to true if the rotation of sprite <i>spriteNum</i> is still on going, and false if it has finished.
+</desc>

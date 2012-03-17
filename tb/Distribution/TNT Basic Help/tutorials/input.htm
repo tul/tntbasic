@@ -1,0 +1,214 @@
+<!DOCTYPE html public "-//w3c//dtd html 4.0 transitional//en">
+<HTML>  
+<HEAD>
+  <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Mac">
+  <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+  <META NAME="GENERATOR" CONTENT="Mozilla/4.61 (Macintosh; I; PPC) [Netscape]">
+  <TITLE>Input</TITLE>
+</HEAD>
+<BODY BACKGROUND="../gfx/chalk.gif">
+
+<P><IMG SRC="../gfx/input.gif" NOSAVE BORDER="0" HEIGHT="110"
+WIDTH="213" NATURALSIZEFLAG="3" ALIGN="BOTTOM"><IMG SRC="../gfx/thinbarrel.gif"
+WIDTH="48" HEIGHT="110" ALIGN="BOTTOM" BORDER="0" NATURALSIZEFLAG="3"><BR>
+<FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Loading Sounds">Simple
+Input</A></FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><A HREF="#Playing a Sound">Complex
+Input</A></FONT></P>
+
+<P><A NAME="Loading Sounds"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Simple Input<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">The first type
+of input available in TNT Basic is simple input.&nbsp; These commands
+can be used to test if certain buttons on the keyboard are pressed.&nbsp;
+The first group of commands are the <A HREF="../commands/directioncontrols.htm">Direction
+Controls</A>...</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Up&nbsp;&nbsp;&nbsp;
+</FONT><FONT COLOR="#ff0000" SIZE="-2" FACE="Monaco">' Test the
+up arrow on the keyboard</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Down&nbsp; </FONT><FONT
+ COLOR="#ff0000" SIZE="-2" FACE="Monaco">' Test the down arrow
+on the keyboard</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Left&nbsp; </FONT><FONT
+ COLOR="#ff0000" SIZE="-2" FACE="Monaco">'</FONT><FONT COLOR="#0000ff"
+ SIZE="-2" FACE="Monaco"> </FONT><FONT COLOR="#ff0000" SIZE="-2"
+ FACE="Monaco">Test the left arrow on the keyboard</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Right </FONT><FONT
+ COLOR="#ff0000" SIZE="-2" FACE="Monaco">' Test the right arrow
+on the keyboard</FONT> <BR>
+<FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Space </FONT><FONT
+ COLOR="#ff0000" SIZE="-2" FACE="Monaco">' Test the space bar
+on the keyboard</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">These commands return
+true or false depending on whether or not their button is pressed.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">There is also a command
+for testing any button on the keyboard.&nbsp; Any of these keys
+can be tested using the <A HREF="../commands/pressed.htm">Pressed</A>
+function.</FONT></P>
+
+<P><IMG SRC="../gfx/keyboardkeys.jpg" NOSAVE BORDER="0" HEIGHT="105"
+WIDTH="388" NATURALSIZEFLAG="3" ALIGN="BOTTOM"></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">In order to test a
+button one of these key codes needs to be passed to the function.</FONT></P>
+
+<P><IMG SRC="../gfx/keyboardcodes.jpg" NOSAVE BORDER="0" HEIGHT="105"
+WIDTH="388" NATURALSIZEFLAG="3" ALIGN="BOTTOM"></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Pressed</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 122</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This command tests
+if the F1 button has been pressed.</FONT></P>
+
+<P><B><FONT SIZE="-1" FACE="Geneva,Helvetica">Note:</FONT></B><FONT
+ SIZE="-1" FACE="Geneva,Helvetica"> Do not use the escape button
+for input because that is already used by TNT Basic.</FONT></P>
+
+<P><A NAME="Playing a Sound"></A><B><FONT COLOR="#330099" SIZE="+1"
+ FACE="Helvetica,Helvetica">Complex Input</FONT></B><FONT SIZE="+1"
+ FACE="Helvetica"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica"><b>At the present time, these commands do not work on Mac OS X, due to their reliance on Input Sprocket which has been discontinued.</b></FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This type of input
+is more complex to set up in TNT Basic but is much more powerful.&nbsp;
+Whereas simple input can only work with the keyboard and mouse,
+this works with all kinds of input device (e.g. joysticks, game
+pads etc) and automatically provides an interface for the user
+to configure controls for the game.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">To set up complex input
+you first need to create an Input Sprocket Setup ('INPT') resource.&nbsp;
+The controls for what your game needs can be set up inside this.</FONT></P>
+
+<P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Helvetica">Loading
+Input</FONT></B><FONT SIZE="-1" FACE="Helvetica"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">Before any input
+testing can be performed the input resource you created needs
+to be loaded into memory, this can be done using <A HREF="../commands/loadinput.htm">Load
+Input</A>.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Load Input</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 128</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This loads input resource
+128 into memory ready to be tested.</FONT></P>
+
+<P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Helvetica">Configuring
+Input<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">Complex input
+automatically provides an interface for the user to configure
+the controls for the game.&nbsp; This is provided in all TNT Basic
+games that use complex input.&nbsp; When playing a TNT Basic game,
+if you press escape it will pause and display a menu.&nbsp; There
+is a menu option which will allow the user to configure their
+controls.</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">It is also possible
+to display the interface yourself.&nbsp; If you call the command
+<A HREF="../commands/editinput.htm">Edit Input</A>...</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Edit Input</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">... while an input
+resource is loaded then it will display the interface for configuring
+controls.</FONT></P>
+
+<P><B><FONT SIZE="-1" FACE="Geneva,Helvetica">Note</FONT></B><FONT
+ SIZE="-1" FACE="Geneva,Helvetica">: It is usually not good practice
+to display this interface every time the game is run.&nbsp; Instead,
+let the user select an option to configure controls and then call
+the <A HREF="../commands/editinput.htm">Edit Input</A> command.</FONT></P>
+
+<P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Helvetica">Activating
+and Deactivating Input<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">After an input
+resource has been loaded it can then be activated, only when input
+is active can it be tested. It can be activated using the command
+<A HREF="../commands/activateinput.htm">Activate Input</A>.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Activate Input</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This command activates
+the currently load input resource so it is ready to be tested.&nbsp;
+When input is active the mouse will not move and simple input
+will not work, complex and simple input can never be used at the
+same time.&nbsp; Fortunately, you only ever need to use one at
+once and to disable complex input and enable simple input again
+TNT Basic provides the command <A HREF="../commands/deactivateinput.htm">Deactivate
+Input</A>.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Deactivate Input</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This will return the
+input to normal.</FONT></P>
+
+<P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Helvetica">Testing
+Input<BR>
+</FONT></B><FONT SIZE="-1" FACE="Geneva,Helvetica">Once an input
+resource is loaded and activated it can be tested using the command
+<A HREF="../commands/pollinput.htm">Poll Input</A>.</FONT></P>
+
+<P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Poll Input</FONT><FONT
+ SIZE="-2" FACE="Monaco"> 0</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">This tests the first
+input device in your input resource and returns the value for
+it.&nbsp; This value can vary depending on what kind of device
+it was...</FONT></P>
+
+<P><B><FONT SIZE="-1" FACE="Geneva,Helvetica">For a button it
+returns:</FONT></B><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">0 = Not Pressed</FONT><FONT
+ SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">1 = Pressed</FONT></P>
+
+<P><B><FONT SIZE="-1" FACE="Geneva,Helvetica">For a dpad it returns:</FONT></B><FONT
+ SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">0 = Idle</FONT><FONT
+ SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">1 = Left</FONT><FONT
+ SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">2 = Up-Left</FONT><FONT
+ SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">3 = Up</FONT><FONT
+ SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">4 = Up-Right</FONT><FONT
+ SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">5 = Right</FONT><FONT
+ SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">6 = Down-Right</FONT><FONT
+ SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">7 = Down</FONT><FONT
+ SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">8 = Down-Left</FONT></P>
+
+<P><B><FONT SIZE="-1" FACE="Geneva,Helvetica">For an x axis it
+returns in the range:</FONT></B><FONT SIZE="-1" FACE="Geneva">
+<BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">-100 = Maximum
+Left</FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">0 = Middle</FONT><FONT
+ SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">100 = Maximum Right</FONT></P>
+
+<P><B><FONT SIZE="-1" FACE="Geneva,Helvetica">For a y axis it
+returns in the range:</FONT></B><FONT SIZE="-1" FACE="Geneva">
+<BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">-100 = Maximum
+Up</FONT><FONT SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">0 = Middle</FONT><FONT
+ SIZE="-1" FACE="Geneva"> <BR>
+</FONT><FONT SIZE="-1" FACE="Geneva,Helvetica">100 = Maximum Down</FONT></P>
+
+<P><FONT SIZE="-1" FACE="Geneva,Helvetica">It is then up to your
+program to decide how to change the game depending on these values.</FONT></P>
+
+<P><CENTER><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A HREF="../tutor/tutor_frameset.htm">Table
+of contents</A></FONT></CENTER>
+
+</BODY>
+</HTML>

@@ -1,0 +1,19 @@
+<name>'M'ove</name>
+<group>moan</group>
+<syntax>M <i>xdist, ydist, speed</i></syntax>
+<synopsis>Move objects attached to a moan channel</synopsis>
+<desc>
+Moves all sprites and viewports on a channel by a relative offset of <i>xdist,ydist</i> at a speed of <i>speed</i> pixels per frame. If <i>speed</i> is negative, it is seen as the number of steps to complete the movement in.
+
+For example:
+
+"M 10,10,-10"
+
+Means move 10 pixels right and 10 pixels down in 10 steps.
+
+"M -10,-10,1"
+
+Means move 10 pixels up and 10 pixels left at a speed of 1 pixel per frame.
+
+See also the @@Move Sprite@@ and @@Move Viewport@@ commands.
+</desc>

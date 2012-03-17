@@ -1,0 +1,11 @@
+<name>Char to Ascii</name>
+<group>io</group>
+<synopsis>Converts a character into an ascii code</synopsis>
+<syntax><i>asciiCode</i> = Char to Ascii (<i>charStr</i>)</syntax>
+<desc>
+This command can be used to get the ascii code of a character.
+
+More information on Ascii codes can be found on the @@Ascii Codes Explained@@ page.
+
+See also the @@Ascii to Char@@ and @@Raw Key Ascii@@ commands.
+</desc>

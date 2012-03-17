@@ -1,0 +1,47 @@
+<HTML>  
+<HEAD>
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>Scale Sprite</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+  <META NAME="AppleTitle" CONTENT="Scale Sprite">
+  <META NAME="AppleTarget" CONTENT="_right">
+  <META NAME="DESCRIPTION" CONTENT="Starts a sprite scaling">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="349"
+HEIGHT="177">
+  <TR VALIGN="TOP">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">Scale Sprite</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD HEIGHT="41">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva">Starts a sprite scaling</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Syntax</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="43">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">Scale Sprite <i>spriteNum, xScaleDelta, yScaleDelta, speed</i></FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Description</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="40">
+      <BLOCKQUOTE>
+        <FONT SIZE="-1" FACE="Geneva"><p>The 'Scale Sprite' command sets sprite <i>spriteNum</i> scaling at a specified speed for <i>xScaleDelta</i> units in the x-axis and <i>yScaleDelta</i> units in the y-axis. Once it has started scaling it will continue to do so until it reaches the final size, or you issue it another scale command.</p><p>1 unit is equal to the sprite's original (unscaled) size. The deltas are relative amounts and are added to the sprite's current scale values.</p><p>The <i>speed</i> is specified in units/frame.  For example passing 1 means scale the sprite up to the final size at a rate of 1 unit per frame. If you pass in a negative number as the speed, this is instead interpreted as the number of steps to complete the scale in. For example, passing -5 means complete the scale in 5 equal steps, no matter what the deltas are.</p><p>To test if a sprite has finishing scaling use the <A HREF="../commands/spritescaling.htm">Sprite Scaling</A> function.<br>To stop the sprite before its scale finishes, issue another sclae command with 0 for the x and y deltas.</p>See also:<br>	The <A HREF="../commands/moan_s.htm">'S'cale</A> moan program function.<br></FONT>
+      </BLOCKQUOTE>
+    </TD>
+  </TR>
+  <TR VALIGN="TOP">
+    <TD ALIGN="CENTER" HEIGHT="34"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../moan/moan_frameset.htm">Table of contents</A></FONT></TD> 
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

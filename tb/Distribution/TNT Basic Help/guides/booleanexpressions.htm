@@ -1,0 +1,112 @@
+<HTML>  
+<HEAD>
+  <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Mac">
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>Boolean Expressions</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="349"
+HEIGHT="707">
+  <TR VALIGN="TOP">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">Boolean
+      Expressions</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD HEIGHT="236">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">A boolean expression is
+        an expression which eventually evaluates to either True or False.</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">These are used as conditions
+        inside <A HREF="../flco/flco_frameset.htm">Flow Control</A> statements.</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">A boolean expression is
+        built using the following:</FONT></P>
+        <P><B><FONT SIZE="-1" FACE="Geneva,Arial">&gt;</FONT></B><FONT
+         SIZE="-1" FACE="Geneva,Arial"> Greater than<BR>
+        <B>&gt;= </B>Greater than or equal to<BR>
+        <B>&lt; </B>Less than<BR>
+        <B>&lt;=</B> Less than or equal to<BR>
+        <B>=</B> Equal to<BR>
+        <B>&lt;&gt;</B> Not equal to</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">These are used inside
+        the flow control conditions e.g.</FONT></P>
+        <P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">if</FONT><FONT
+         SIZE="-2" FACE="Monaco,Arial"> a&lt;b<BR>
+        ...<BR>
+        </FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">end
+        if</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Combining
+      Boolean Expressions</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="239">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">Boolean expressions can
+        also be combined in the following ways...</FONT></P>
+        <P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">if</FONT><FONT
+         SIZE="-2" FACE="Monaco,Arial"> a&lt;b </FONT><FONT COLOR="#0000ff"
+         SIZE="-2" FACE="Monaco,Arial">and</FONT><FONT SIZE="-2" FACE="Monaco,Arial">
+        c&lt;d<BR>
+        ...<BR>
+        </FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">end
+        if</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">In this example, the boolean
+        expression only evaluates to true if a is less than b AND c is
+        less than d.</FONT></P>
+        <P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">if</FONT><FONT
+         SIZE="-2" FACE="Monaco,Arial"> a&lt;b </FONT><FONT COLOR="#0000ff"
+         SIZE="-2" FACE="Monaco,Arial">or</FONT><FONT SIZE="-2" FACE="Monaco,Arial">
+        c&lt;d<BR>
+        ...<BR>
+        </FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">end
+        if</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">In this example, the boolean
+        expression only evaluates to true if a is less than b OR c is
+        less than d.</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">A not operator is also
+        available...</FONT></P>
+        <P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">if</FONT><FONT
+         SIZE="-2" FACE="Monaco,Arial"> </FONT><FONT COLOR="#0000ff"
+         SIZE="-2" FACE="Monaco,Arial">not</FONT><FONT SIZE="-2" FACE="Monaco,Arial">
+        a=b<BR>
+        ...<BR>
+        </FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">end
+        if</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">This boolean expression
+        only evaluates to true if a DOES NOT equal b. The not operator
+        reverses the true/false value of a boolean expression.</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Numeric
+      expressions as booleans</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="179">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">Numeric expressions can
+        also be placed inside conditions. They are evaluated like this:</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">0 - False<BR>
+        not 0 - True</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">e.g.</FONT></P>
+        <P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">if</FONT><FONT
+         SIZE="-2" FACE="Monaco,Arial"> a<BR>
+        ...<BR>
+        </FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">end
+        if</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">The body of the code will
+        be executed as long as </FONT><FONT SIZE="-2" FACE="Monaco,Arial">a</FONT><FONT
+         SIZE="-1" FACE="Geneva,Arial"> does not equal 0.</FONT>
+      </BLOCKQUOTE>
+    </TD>
+  </TR>
+  <TR VALIGN="TOP">
+    <TD ALIGN="CENTER" HEIGHT="34"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../expr/expr_frameset.htm">Table of contents</A></FONT></TD> 
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

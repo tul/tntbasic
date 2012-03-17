@@ -1,0 +1,47 @@
+<HTML>  
+<HEAD>
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>Graphics Mode</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+  <META NAME="AppleTitle" CONTENT="Graphics Mode">
+  <META NAME="AppleTarget" CONTENT="_right">
+  <META NAME="DESCRIPTION" CONTENT="Enters graphics mode">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="349"
+HEIGHT="177">
+  <TR VALIGN="TOP">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">Graphics Mode</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD HEIGHT="41">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva">Enters graphics mode</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Syntax</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="43">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">Graphics Mode <i>screenWidth</i>,<i>screenHeight</i><br>Graphics Mode Hardware <i>screenWidth</i>,<i>screenHeight</i><br>Window Mode <i>screenWidth</i>,<i>screenHeight</i><br>Window Mode Hardware <i>screenWidth</i>,<i>screenHeight</i></FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Description</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="40">
+      <BLOCKQUOTE>
+        <FONT SIZE="-1" FACE="Geneva"><p>This command causes TNT Basic to enter graphics mode allowing it to use sprites, canvases and perform drawing operations.</p><p>The default drawing canvas is opened with the specified dimensions and the screen is cleared with black.</p><p>If hardware mode is used then TNT Basic takes advantage of the computers graphics card using OpenGL. This also allows additional effects (e.g. sprite rotation and sprite scaling).</p><p>Using the 'Graphics Mode' or 'Graphics Mode Hardware' commands will invoke full screen graphics mode. This will hide the menu bar and dock, and switch the monitor resolution to the best resolution for your game.</p><p>The 'Window Mode' and 'Window Mode Hardware' commands will run your game in a window, rather than full screen. This is often useful during development, and also good for less immersive games such as puzzle games.</p><p>Note: Currently (TNT Basic 1.3), using 'Window Mode' under OS X will result in a slight performance penalty, meaning your frame rates will be lower than if you used full screen graphics mode.</p><p><i>screenWidth</i> and <i>sceenHeight</i> are the dimensions of the drawable surface that you want to create. When using full screen graphics mode, they can be anything up to the maximum resolution of the monitor. The monitor resolution is automatically switched to the best resolution for your requirements. If there is no exact match then the next resolution up is selected and your game is displayed in the central region of the screen. When using window mode, the window is created at the size requested and placed in the centre of the screen. No resolution switching is done when using window mode.</p>Common full screen resolutions include 640x480, 800x600 and 1024x768.<br></FONT>
+      </BLOCKQUOTE>
+    </TD>
+  </TR>
+  <TR VALIGN="TOP">
+    <TD ALIGN="CENTER" HEIGHT="34"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../cv/cv_frameset.htm">Table of contents</A></FONT></TD> 
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

@@ -1,0 +1,36 @@
+ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+TNT Library
+CSortableOutlineTable.doc
+©ÊMark Tully and TNT Software 1998-1999
+Email : mark@tntbasic.com
+6/1/99
+ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+
+What is it?
+ÑÑÑÑÑÑÑÑÑÑÑ
+CSortableOutlineTable is a version of LOutlineTable which allows the items to be sorted and resorted with different sort keys.
+Basing a table on this is how I implement by Finder replica list views.
+
+Inserting items
+ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+The LOutlineTable function InsertItem is dissallowed. It has been replaced with InsertSortedItem. This is used to insert a
+standard LOutlineItem (or sub class of it) into the another LOutlineItem in the table. It is inserted in the correct
+position. Read the rem by it for more information if needed.
+
+Removing items
+ÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
+Sames as LOutlineTable.
+
+LComparator
+ÑÑÑÑÑÑÑÑÑÑÑ
+You can change the comparator at any time using GetComparator() and SetComparator(). If you do so you will need to...
+
+Sorting
+ÑÑÑÑÑÑÑ
+The table can be resorted at any time by using the Sort function. Easy.
+
+Cheers
+
+Mark Tully
+TNT Software
+6/1/99

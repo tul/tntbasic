@@ -1,0 +1,47 @@
+<HTML>  
+<HEAD>
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>String Editor Input</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+  <META NAME="AppleTitle" CONTENT="String Editor Input">
+  <META NAME="AppleTarget" CONTENT="_right">
+  <META NAME="DESCRIPTION" CONTENT="Types a key into the string editor">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="349"
+HEIGHT="177">
+  <TR VALIGN="TOP">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">String Editor Input</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD HEIGHT="41">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva">Types a key into the string editor</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Syntax</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="43">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">String Editor Input (<i>rawKey</i>)</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Description</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="40">
+      <BLOCKQUOTE>
+        <FONT SIZE="-1" FACE="Geneva"><p>The string editor allows you to take key presses from the user and use them to edit a string of text in a similar manner to a word processor. An overview of the string editor can be found in the <A HREF="../guides/keyboard_guide.htm#stringeditor">String Editor</A> section of the <A HREF="../guides/keyboard_guide.htm">Keyboard Input Guide</A>.</p><p>This command types in the <i>rawKey</i> passed into the string editor. It will appear at the current string editor cursor position. If the rawKey represents a cursor key then the string editors cursor will be moved. If it represents a backspace or foward delete then a character will be deleted from the string editor. If the it represents a normal printable character it is entered into the string editor.</p><p>The <i>rawKey</i> should be obtained from <A HREF="../commands/keyboardrawkey.htm">Keyboard Raw Key</A>. Because your program is responsible for taking raw keys from <A HREF="../commands/keyboardrawkey.htm">Keyboard Raw Key</A> and passing them to the 'String Editor Input' command, you have the opportunity of filtering the keys being typed. The <A HREF="../commands/rawkeyfilter.htm">Raw Key Filter</A> commands are very useful in this.</p><p>Eg, to input numbers until return is pressed:<br></FONT><FONT COLOR="#000000" SIZE="-2" FACE="Monaco,Arial"><br><FONT COLOR="#0000FF">int</FONT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rawKey<br><FONT COLOR="#0000FF">int</FONT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;asciiCode<br><FONT COLOR="#4985c6">print</FONT> "Type in a number"<br><FONT COLOR="#FF0000">' just let numbers through, no</FONT><br><FONT COLOR="#FF0000">' letters or punctuation. we</FONT><br><FONT COLOR="#FF0000">' could let navigation keys</FONT><br><FONT COLOR="#FF0000">' through such as cursor</FONT><br><FONT COLOR="#FF0000">' movement, but as we're not</FONT><br><FONT COLOR="#FF0000">' displaying the text being</FONT><br><FONT COLOR="#FF0000">' edited we'll ignore those too</FONT><br><FONT COLOR="#0000FF">repeat</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="#4985c6">Wait Key Press</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;rawKey = <FONT COLOR="#4985c6">Keyboard Raw Key</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;asciiCode = <FONT COLOR="#4985c6">Raw Key Ascii</FONT>(rawKey)<br>&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="#0000FF">if</FONT> <FONT COLOR="#4985c6">Raw Key Filter Number</FONT>(rawKey)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="#4985c6">String Editor Input</FONT>(rawKey)<br>&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="#0000FF">end if</FONT><br><FONT COLOR="#0000FF">until</FONT> asciiCode=13&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="#FF0000">' ascii 13 is return</FONT><br><FONT COLOR="#4985c6">print</FONT> "You typed the number ";<br><FONT COLOR="#4985c6">print</FONT> <FONT COLOR="#4985c6">String Editor Contents</FONT><br></FONT><FONT SIZE="-1" FACE="Geneva"></p><p>To see an example of how to display the text being edited, see the <A HREF="../guides/keyboard_guide.htm#stringeditor">String Editor</A> section. To learn more about Ascii codes see the <A HREF="../guides/asciicodesexplained.htm">Ascii Codes Explained</A> page.</p>See also the <A HREF="../commands/stringeditorcontents.htm">String Editor Contents</A> and <A HREF="../commands/stringeditorcursor.htm">String Editor Cursor</A> commands.<br></FONT>
+      </BLOCKQUOTE>
+    </TD>
+  </TR>
+  <TR VALIGN="TOP">
+    <TD ALIGN="CENTER" HEIGHT="34"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../io/io_frameset.htm">Table of contents</A></FONT></TD> 
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

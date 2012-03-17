@@ -1,0 +1,7 @@
+<name>Step Moan</name>
+<group>moan</group>
+<syntax>Step Moan</syntax>
+<synopsis>Causes all moan channels to advance one step</synopsis>
+<desc>
+Please refer to the @@Auto Moan@@ help page for usage.
+</desc>

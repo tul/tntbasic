@@ -1,0 +1,28 @@
+help viewer notes
+
+the commands listing is contained in the auto-generated file 'toc.htm'
+
+on os 9 this is stored in the help folder
+on ox x this is stored in the user's cache folder, in side com.apple.helpviewer/tnt basic help
+
+on os x, the code to generate the toc listing seems to be broken (it only ever contains Abs)
+the problem is, this broken toc.htm in the cache folder, overrides any valid one that might
+exist in the help folder, which means that you can't actually get an index.
+if you delete it from the cache and delete the template file that generates the toc from
+the tb help folder, then it will use the toc.htm that's there and work.
+
+in order to avoid this, before distributing, delete the toctmpl.htm file, this will stop
+the index being regenerated. move the toc.htm (a good up-to-date version) into a sub dir
+toc/toc.htm.
+Relink the link in inittoc.htm.
+Relink all resources refered to from toc/toc.htm.
+
+*********
+When making the indexes. Previously I've used the Mac OS 9 Help Indexer from Apple Help SDK 1.0. You need to change all the OS 9 file types to TEXT otherwise it will skip the file and it won't be indexed (no warnings)
+
+It doesn't matter whether the line endings are Mac or Unix as far as I can tell.
+
+The OS X help indexer seems to exit if you try and produce old style help indexes. And the new Tiger style ones don't seem to work (as in they get no hits)
+
+**********
+Thinking about it, I'm pretty sure I could just auto generate this listing with formathelp.pl....

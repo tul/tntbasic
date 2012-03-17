@@ -1,0 +1,9 @@
+To build, you need to first make the TNT Basic parsers by doing
+
+cd $TBROOT/tb/Source/Parsers
+make
+
+then just open the XCode project and build it.
+
+Mark Tully
+13/11/05

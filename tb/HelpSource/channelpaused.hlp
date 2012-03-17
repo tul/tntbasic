@@ -1,0 +1,9 @@
+<name>Channel Paused</name>
+<group>moan</group>
+<syntax><i>boolean</i> = Channel Paused (<i>channelId</i>)</syntax>
+<synopsis>Tests whether a specified moan channel is paused</synopsis>
+<desc>
+Returns whether or not moan channel <i>channelId</i> is paused.
+	
+See also @@Pause Channel@@ and @@Resume Channel@@.
+</desc>

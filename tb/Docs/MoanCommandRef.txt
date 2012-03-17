@@ -1,0 +1,372 @@
+MoanCommandRef.txt
+Mark Tully
+15/2/02
+
+------------------------------------------------------------------------------------------
+SECTION 1
+------------------------------------------------------------------------------------------
+
+Moan Language Commands:
+
+All moan commands are a single upper case letter. All lower case letters are ignored. Moan
+commands are separated by either a space or a ;
+Lower case letters can be written into moan programs as comments.
+
+Don't foget to read the Moan tutorials!
+
+-------------
+
+M xdist, ydist, speed							move object
+
+Moves all sprites and viewports on a channel by a relative offset of xdist,ydist at a speed
+of speed pixels a frame. If speed is negative, it is seen as the number of steps to complete
+the movement in. For example,
+
+M 10,10,-10
+
+Means move 10 pixels right and 10 pixels down in 10 steps.
+
+"M -10,-10,1"
+
+Means move 10 pixels up and 10 pixels left at a speed of 1 pixel per frame.
+
+See also the 'Move Sprite' and 'Move Viewport' commands.
+
+-------------
+
+A count, (image,delay), (image, delay)...		animate a sprite
+
+Starts an animation that repeats count times. The animation list is made up of pairs of
+bracketed (image,delay) pairs. If count is -1 then the animation is repeated forever.
+
+Example:
+
+"A 1, (1,2), (2,2), (3,2)"
+
+Means show frame 1 for 2 frames, frame 2 for 2 frames then frame 3 for 2 frames. Repeat this
+sequence once.
+
+See also the 'Animate Sprite' command.
+
+-------------
+
+RA-RZ, R0-R9									register reference
+
+Registers can be used anywhere where integers can. Registers are assigned using the 'Let'
+command, or the 'set channel reg' command.
+
+R0-R9 are local channel registers, these are private for each moan channel.
+RA-RZ are shared moan registers, these are global across all the moan channels.
+
+See also the 'set channel reg' and 'channel reg' commands.
+
+--------------
+
+X|Y|I											registers for x,y and current sprite frame
+
+These special registers contain the current x,y location of the sprite/viewport, and also the
+current frame index. If the object on the moan channel is a viewport, then I has no affect and
+is always set to -1.
+
+If multiple sprites/viewports are on the same channel then these refer to the first sprite on
+the channel.
+
+--------------
+
+L Rx = exp										Assign register with a number
+
+Sets the register specifed to be equal to the value specified.
+
+Examples:
+
+"L R0 = 7"			' Let local register 0 equal 7
+"L RA = R0"			' Let shared register A equal local register 0
+"L R3 = 7+(2^5)"	' Let local register 3 equal 39
+
+See also the 'set channel reg' command.
+
+--------------
+
+F reg = exp T exp .... N						For loop
+
+The moan For loop is a little more restricted than the For loop in TNT Basic, as in moan all
+For loops have a step of 1. This cannot be changed.
+
+For loops can be nested, as with normal TNT Basic operation.
+
+Example:
+
+"F R0 = 0 T 10; L X = R0 * 20; N"
+
+See also TNT Basic's 'For' loop.
+
+---------------
+
+J A	- J Z										Jump to label
+A:	- Z:										Label declaration
+
+Any upper case letter followed by a : declares a label that can be jumped to with a Jump
+command. When using the Jump command, the label is not followed by a :
+
+Example:
+
+"A: J A"		' This is an infinite loop
+"Arm: J Arm"	' Lower case letters are ignored in labels also
+
+See also TNT Basic's 'Goto' and 'Labels'.
+
+---------------
+
+I exp JA - JZ									If then jump to label
+
+If statements in moan are very simple and quite restrictive. An If statement may only have
+a Jump statement as its body and nothing else. The expressions can contain standard TNT Basic
+comparions such as =, >, <, >=, <= and <>. They cannot contain 'and', 'or' or 'not'.
+
+Example:
+
+"I R0>R1 J E; M 10,10,10; E:"					' Only do the move if R0 > R1
+"If R0>R1 then Jump End; Move 10,10,10; End:"	' Same with lower case letters inserted for comments
+
+See also TNT Basic's 'If then' statement.
+
+---------------
+
+P												Pause
+
+The Pause command causes a moan program to wait until the next frame has been drawn to screen
+before continuing. It is very rarely needed, as move and anim commands automatically wait
+until a frame is drawn before changing the position or frame. However, if modifiying X,Y or I
+registers directly in a loop, you will have to Pause your program for the new values to
+have chance to be drawn to screen before changing them again.
+
+See the 'Advance Moan Tutorial' for example usage.
+
+------------------------------------------------------------------------------------------
+SECTION 2
+------------------------------------------------------------------------------------------
+
+High Level Moan Commands
+------------------------
+
+Every sprite has a private non-programmable moan channel, this can be used with the high level
+TB commands to simply move or animate a sprite without having to make a moan program.
+
+* Move Sprite spriteNum, xDist, yDist, speed
+* Move Viewport canviasId, xDist, yDist, speed
+
+	These two commands are used to set movements in motion for sprites and viewports respectively.
+
+	The 'move sprite' commands sets a sprite moving at a specified speed for xDist pixels to the right and
+	yDist pixels downwards. Once the object has started moving it will continue to do so until
+	it reaches the destination or you issue another move command to the same object.
+	The 'move viewport' command is a bit of a misnomer, instead of moving the viewport it actually
+	scrolls it (see 'set viewport offset'), otherwise the command is functionally equivalent
+	to the 'move sprite' command.
+
+	The speed is specified in pixels/frame, for example passing 1 means move one pixel per frame
+	in towards the destination. If you pass in a negative number as the speed, this is instead
+	interpreted as the number of steps to complete the movement in. For example, passing -5 means
+	cover the distance in 5 steps, no matter what the distance is.
+
+	To test if a sprite has finishing moving use the 'sprite moving' function.
+	To stop the sprite before its movement finishes, issue another 'move' op with 0 for the
+	x and y distances.
+	
+	See also:
+		The 'M'ove moan program function.
+
+* boolean = sprite moving (spritenum)
+* boolean = viewport moving (canvasId)
+
+	Tests if a movement began with the move sprite/move viewport command has completed. Returns true if it
+	is still on going, false if it has finished.
+
+* Animate Sprite spriteNum,repeatCount, frame,delay to frame,delay to ...
+
+	Starts a sprite animating for 'repeatCount' times through the sequence specified. You can
+	specify any number of frames of animation in the list (limited only by memory).
+	
+	The delay is specified in frames, the frame is specified as an index into the sprite's
+	current bank (exactly the same as with the sprite command).
+	
+	Once started the animation will continue indefinitely until it either completes, or another
+	animation is started. You can start an emtpy animation to stop the animation.
+	
+	E.g.
+		animate sprite 1,0,		' stops an animation
+	
+	To test if an animation is still animating use 'sprite animating'
+	
+	See also:
+		The 'A'nimate moan program function.
+		
+* boolean = Sprite Animating (spriteNum)
+
+	Tests if an animation began with the 'animate sprite' command has completed. Returns true
+	if it is still on going, false if it has finished.
+
+------------------------------------------------------------------------------------------
+SECTION 3
+------------------------------------------------------------------------------------------
+
+Moan runtime compiler
+---------------------
+It is also possible to make a program that can be ran on a moan channel. A moan channel is a
+mini virtual machine that runs a program, maintaining a set of registers.
+Please see the 'Moan Tutorial' for more information.
+
+* set channel program	channelId,progString
+	channelId is any number. progString is a moan program. You may pass an empty string to
+	clear the program. The programs are written according to the Moan language spec, described
+	in the 'Moan Tutorial', a command listing for which appears here. <<<<<< HYPERLINK THIS <<<<<
+	Setting the program clears the local registers for the channel.
+	
+	See also 'channing running', 'restart channel' and 'reset channel'.
+
+* boolean = channel moving (channelId)
+* boolean = channel animating (channelId)
+* boolean = channel running (channelId)
+	
+	'channel running' returns true if the moan channel is running a program, false if not.
+	'channel moving' returns true if the moan channel is currently executing a move command,
+	false if not.
+	'channel animating' returns true if the moan channel is currently executing an anim
+	command, false if not.
+
+	These functions are not affected by pausing the channel, or by turning off auto moaning.
+	
+	See also 'pause channel' and 'step moan'.
+
+* add sprite to channel		sprite,channelId
+* add viewport to channel	canvasId,channelid
+
+	These two are commands are used to add either a sprite or a viewport to a moan channel.
+	Subsequent programs ran on the moan channel will then affect the object.
+	
+	It is possible to add a sprite/viewport to multiple channels. When this is done, the
+	object will be affected by both channels.
+	
+	An object can be added to the same channel multiple times, this will cause the object
+	to be doubly affected by the channel, ie where a move command would move it x pixels, it
+	will instead move it 2*x pixels.
+	
+	See also 'remove sprite from channel', 'remove viewport from channel'.
+
+* remove sprite from channel	sprite[,channelId]
+* remove viewport from channel	sprite[,channelId]
+
+	These two commands are used to remove either a sprite or a viewport from a channel,
+	previously added with 'add sprite to channel' or 'add viewport to channel'.
+	
+	If a channelId is not specified, the sprite/viewport is removed from all channels it is
+	on.
+	
+	When a sprite of viewport is killed/closed, they are automatically removed from all moan
+	channels.
+	
+	See also 'add sprite to channel' and 'add viewport to channel'.
+
+* auto moan on
+* auto moan off
+* boolean = auto moaning
+* step moan
+
+	Moan channels appear to run their programs in parallel to the main TNT Basic program, but
+	actually moan channels execute inside the 'draw frame' statement. When 'draw frame' is
+	called each active channel is ran for a very short amount of time before the screen is
+	drawn.
+	
+	If you wish, you can stop this happening with the 'auto moan off' command. This will
+	stop moan channels working, meaning you have to manually step the moan channels using
+	'step moan'. This can be useful if you want to run your moan channels more or less often
+	than once per frame.
+	
+	You can call 'step moan' without turning off auto moaning, in which case you will cause
+	the moan channels to be ran more than once per frame.
+	
+	'auto moan on' will start the moaning happening automatically inside 'draw frame' again.
+	
+	'auto moaning' is a function that returns true if auto moan is on (which it is by default).
+
+* pause channel [channelId]
+
+	Pauses the specified moan channel.
+	
+	If no channel is specified it pauses all currently active channels.
+	
+	See also 'Resume channel' and 'is channel paused'.
+	
+* resume channel [channelId]
+
+	Resumes a channel paused with the 'pause channel' command.
+	
+	If no channel is specified all paused channels are resumed.
+	
+	See also 'Pause channel' and 'is channel paused'.
+
+* boolean = channel paused (channelId)
+
+	Returns whether or not the specified channel is paused.
+	
+	See also 'pause channel' and 'resume channel'.
+
+* reset channel [channelId]
+
+	Resets the specified moan channel.
+	
+	This involves resetting the program on the channel and removing any sprites/viewports
+	that are attached to it.
+	
+	If you do not specify a channel then all active channels are reset.
+	Reseting all channels also resets the global moan registers.
+	
+	See also 'restart channel'.
+	
+* restart channel [channelId]
+
+	Restarts a channel from the beginning, clearing it's local registers. Note that all
+	programs affect the sprites from their current location, so often when restarting a
+	program you would want to restore sprite and viewports to their original position.
+	
+	If a channelId is not specified then all channels are restarted.
+	
+	See also 'reset channel' and 'set channel program'.
+
+* value = channel reg (channelId,reg)
+* set channel reg channelId, reg, value
+
+	These two commands are used to get or set registers in a channels local moan channel.
+	channelId is the channel to get or set the registers of. You can specify the registers
+	by either numeric index or by name. When specifying by index, 0-9 refer to 'R0' - 'R9' and
+	10 - 12 refer to 'x', 'y' and 'i' respectively.
+	
+	You can also specify the register by name, using strings such as "R0", "R7", "X", "Y" and
+	"I".
+	
+* value = channel reg (reg)
+* set channel reg reg,value
+
+	When the channelId is omitted, the registers access are the shared moan registers. Like
+	the channel specific version, the register can be specified by index or name.
+	0-25 refers to shared moan register 'RA' to 'RZ'. You can also refer to them with a string,
+	e.g. "RA", "RJ" or "RZ".
+	
+	Registers can only store integers and cannot store floats or strings.
+	
+	See also the 'Advanced Moan Tutorial' and the 'L'et moan function.
+
+
+Possibly
+--------
+channel sprites count	channelId
+channel viewports count	channelId
+
+get nth channel sprite	channelId,n
+get nth channel viewport	channelId,n
+
+count sprite channels sprite
+count viewport channels viewport
+
+get nth sprite channel sprite,n
+get nth viewport channel viewport,n

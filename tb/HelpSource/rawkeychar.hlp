@@ -1,0 +1,29 @@
+<name>Raw Key Char</name>
+<group>io</group>
+<synopsis>Extracts the character from a raw key</synopsis>
+<syntax><i>charString</i> = Keyboard Raw Char (<i>rawKey</i>)</syntax>
+<desc>
+Takes a <i>rawkey</i> as returned from the @@Keyboard Raw Key@@ command and extracts the character from it and returns it as a string.
+
+You can use this to read what a user is typing into your program.
+
+Eg:
+<tnt>
+int		rawKey
+str		char
+Print "Type some letters!"
+repeat
+	Wait Key Press
+	rawKey = Keyboard Raw Key
+	char = Raw Key Char (rawKey)
+	if char <> ""
+		Print "You typed ";char
+	end if
+forever</tnt>
+
+For more information on raw keys and working with the keyboard please refer to the @@Keyboard Input Guide@@.
+
+The @@String Editor@@ can also be used as an easy way to let people enter text into your program.
+
+See also the @@Keyboard Raw Key@@, @@Raw Key Scancode@@, @@Raw Key Modifier@@ and @@Raw Key Ascii@@ commands.
+</desc>

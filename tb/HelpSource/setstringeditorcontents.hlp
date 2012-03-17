@@ -1,0 +1,11 @@
+<name>Set String Editor Contents</name>
+<group>io</group>
+<synopsis>Sets the current contents of the string editor</synopsis>
+<syntax>Set String Editor Contents (<i>newStr</i>)</syntax>
+<desc>
+The string editor allows you to take key presses from the user and use them to edit a string of text in a similar manner to a word processor. An overview of the string editor can be found in the @@String Editor@@ section of the @@Keyboard Input Guide@@.
+
+This command sets the text in the string editor to the string you pass. If the current cursor position in the string editor is past the end of the new string then the cursor is moved to the end of the new string. You can read the current string editor contents with the @@String Editor Contents@@ command.
+
+See also @@String Editor Contents@@, @@String Editor Input@@, @@String Editor Cursor@@.
+</desc>

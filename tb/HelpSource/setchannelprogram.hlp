@@ -1,0 +1,14 @@
+<name>Set Channel Program</name>
+<group>moan</group>
+<synopsis>Installs a moan program into a moan channel</synopsis>
+<syntax>Set Channel Program	<i>channelId,progString</i></syntax>
+<desc>
+<i>channelId</i> is the moan channel to install the program on, it can be any number.
+<i>progString</i> is a moan program. You may pass an empty string to clear the program.
+
+The programs are written according to the Moan language spec, described in the @@Moan Tutorial@@.
+
+Setting the program clears the local registers for the channel.
+
+See also @@Channel Running@@, @@Restart Channel@@ and @@Reset Channel@@.
+</desc>

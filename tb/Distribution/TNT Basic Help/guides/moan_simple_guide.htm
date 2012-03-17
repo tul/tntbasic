@@ -1,0 +1,194 @@
+<HTML>  
+<HEAD>
+  <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Mac">
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>Introduction To Moan</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="472"
+HEIGHT="0">
+  <TR VALIGN="TOP" height="18">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">Introduction To Moan</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD>
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva">This tutorial introduces you to Moan, TNT Basic's powerful MOvement and ANimation system.</FONT></P>
+						<p><font size="-1" face="Geneva">Moan allows you to set sprites and viewports moving or animating with one simple command. Once started you can forget about them and they'll keep going on their own! No more need to track their positions or their destinations, just fire and forget!</font></p>
+					</BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Outline</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD>
+      <BLOCKQUOTE>
+        <P><FONT COLOR="#000000" SIZE="-1" FACE="Geneva,Arial">Moan actually consists of two sets of commands: the </FONT><font color="#000000" size="-1" face="Geneva,Arial"><b>high level</b></font><font color="#000000" size="-1" face="Geneva,Arial"> set and the </font><font color="#000000" size="-1" face="Geneva,Arial"><b>low level</b></font><font color="#000000" size="-1" face="Geneva,Arial"> set.</font></P>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">The high level set consists of quick and easy to use commands that allow you to set animations or movements off for each sprite in turn.</font></p>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">The low level set allows you to install miniture programs into sprites or viewports to control their movement and animation. These programs run in parallel to your main program and are programmed in the Moan runtime compiler language.</font></p>
+					</BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Making Something Move</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+				<td>
+					<blockquote>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">Here's a simple program to move sprite 1 50 pixels to the right at a speed of 1 pixel a frame, try it out:<br>
+								<br>
+							</font><font size="-1" face="Monaco,Arial" color="#4985c6">sprite</font><font color="#000000" size="-1" face="Monaco,Arial"> 1,100,100,1	</font><font size="-1" face="Monaco,Arial" color="red">' put the sprite on the screen</font><font color="#000000" size="-1" face="Monaco,Arial"><br>
+							</font><font size="-1" face="Monaco,Arial" color="#4985c6">move sprite</font><font color="#000000" size="-1" face="Monaco,Arial"> 1,50,0,1	</font><font size="-1" face="Monaco,Arial" color="red">' set it moving</font><font color="#000000" size="-1" face="Monaco,Arial"><br>
+							</font><font size="-1" face="Monaco,Arial" color="blue">while not</font><font color="#000000" size="-1" face="Monaco,Arial"> </font><font size="-1" face="Monaco,Arial" color="#4985c6">mouse button</font><font color="#000000" size="-1" face="Monaco,Arial">	</font><font size="-1" face="Monaco,Arial" color="red">' run until the mouse is pressed</font><font color="#000000" size="-1" face="Monaco,Arial"><br>
+								    </font><font size="-1" face="Monaco,Arial" color="#4985c6">draw frame</font><font color="#000000" size="-1" face="Monaco,Arial"><br>
+							</font><font size="-1" face="Monaco,Arial" color="blue">wend</font><font color="#000000" size="-1" face="Monaco,Arial">	<br>
+							</font><font color="#000000" size="-1" face="Geneva,Arial"><br>
+								You can also use the <a href="../commands/moveviewport.htm">Move Viewport</a> command to set viewports scrolling in a similar manner.<br>
+								You can test if a movement is finished for a sprite or viewport using the <a href="../commands/spritemoving.htm">Sprite Moving</a> and <a href="../commands/viewportmoving.htm">Viewport Moving</a> functions.</font></p>
+					</blockquote>
+					<p><b><font color="#330099" size="-1" face="Helvetica,Arial">Making Something Animate</font></b></p>
+				</td>
+			</TR>
+			<tr>
+				<td>
+					<blockquote>
+						<font color="#000000" size="-1" face="Geneva,Arial">You can use similarly simple programs to animate sprites too.</font>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">The following program animates sprite 1, showing image 0 for 5 frames, image 1 for 5 frames then image 2 for 10 frames, in a loop. The -1 is the number of times to loop the animation, -1 means forever, any other number will repeat the animation that number of times.</font></p>
+						<p><font size="-1" face="Monaco,Arial" color="#4985c6">sprite</font><font color="#000000" size="-1" face="Monaco,Arial"> 1,100,100,1 </font><font size="-1" face="Monaco,Arial" color="red">' put the sprite on the screen</font><font color="#000000" size="-1" face="Monaco,Arial"><br>
+							</font><font size="-1" face="Monaco,Arial" color="#4985c6">animate sprite</font><font color="#000000" size="-1" face="Monaco,Arial"> 1,-1, 0,5 </font><font size="-1" face="Monaco,Arial" color="blue">to</font><font color="#000000" size="-1" face="Monaco,Arial"> 1,5 </font><font size="-1" face="Monaco,Arial" color="blue">to</font><font color="#000000" size="-1" face="Monaco,Arial"> 2,10 </font><font size="-1" face="Monaco,Arial" color="red">' set anim going</font><font color="#000000" size="-1" face="Monaco,Arial"><br>
+							</font><font size="-1" face="Monaco,Arial" color="blue">while not</font><font color="#000000" size="-1" face="Monaco,Arial"> </font><font size="-1" face="Monaco,Arial" color="#4985c6">mouse button</font><font color="#000000" size="-1" face="Monaco,Arial"> </font><font size="-1" face="Monaco,Arial" color="red">' run until the mouse is pressed</font><font color="#000000" size="-1" face="Monaco,Arial"><br>
+								    </font><font size="-1" face="Monaco,Arial" color="#4985c6">draw frame</font><font color="#000000" size="-1" face="Monaco,Arial"><br>
+							</font><font size="-1" face="Monaco,Arial" color="blue">wend</font><font color="#000000" size="-1" face="Monaco,Arial"> </font></p>
+					</blockquote>
+					<p><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">The Moan Language</FONT></B></p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<blockquote>
+						<font color="#000000" size="-1" face="Geneva,Arial">It was mentioned briefly before that Moan has two sets of commands. The second set, introduced here, is for manipulating and programming <i>Moan Channels</i>.</font>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">A Moan channel is a way of connecting movement and animation commands to several sprites, or viewports, at the same time. For example, by attaching all your sprites to the same channel, and then issuing a moan move command to the channel, you can move all sprites at once.</font></p>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">The fun doesn't stop there however, you can write mini-programs that run inside the channels in parallel to your main TNT Basic program. These programs can perform complex behaviours that once initiated from your main program can be forgetten about until they are finished.</font></p>
+					</blockquote>
+					<p><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Programming In Moan</FONT></B></p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<blockquote>
+						<font color="#000000" size="-1" face="Geneva,Arial">Moan programs are written in strings and are installed into channels at runtime. They are manipulated in exactly the same way as normal strings, and so can be joined or modified or generated by your program on the fly.</font>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">The first thing to note about moan programming is that it <b>is</b> different to programming TNT Basic. There are very few moan commands, this is to make it very simple to compile the programs quickly at runtime. All moan commands are composed of a single UPPER CASE letter, here is an example moan program:</font></p>
+						<p><font size="-1" face="Monaco,Arial" color="blue">str</font><font color="#000000" size="-1" face="Monaco,Arial"> myMoanProgram = &quot;M 50,0,1&quot;</font><font color="#000000" size="-1" face="Geneva,Arial"><br>
+							</font></p>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">Can you guess what it does? It's actually a Moan <a href="../commands/moan_m.htm">'M'ove</a> command. This program will move all items attached to the channel by 50 pixels horizontally, 0 pixels vertically and at a speed of 1 pixel a frame. It's equivalent to the high level moan command:</font></p>
+						<p><font size="-1" face="Monaco,Arial" color="#4985c6">move sprite</font><font color="#000000" size="-1" face="Monaco,Arial"> 1,50,0,1</font><font color="#000000" size="-1" face="Geneva,Arial"><br>
+							</font></p>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">Except that command will only move sprite 1, whereas the moan program, if put into a moan channel, would move everything attached to the channel.</font></p>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">It was mentioned that moan programs only consist of single upper case letters; what about the lower case ones? All lower case letters are completely ignored by the moan compiler, this means you can insert them throughout the moan program as comments, to remind you what's going on:</font></p>
+						<p><font size="-1" face="Monaco,Arial" color="blue">str</font><font color="#000000" size="-1" face="Monaco,Arial"> myMoanProgram2 = &quot;Move everything 50,0,1&quot;</font></p>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">or even:</font></p>
+						<p><font size="-1" face="Monaco,Arial" color="blue">str</font><font color="#000000" size="-1" face="Monaco,Arial"> myMoanProgram3 = &quot;Marigolds 50,0,1&quot;</font></p>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">Remember, you can only do this with lower case letters, upper case letters are interpreted as commands! When reading a moan program, just ignore all the lowercase letters and you'll see what the moan compiler sees.</font></p>
+					</blockquote>
+					<p><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Errors in Moan Programs</FONT></B></p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<blockquote>
+						<font color="#000000" size="-1" face="Geneva,Arial">What happens if you make an error in your moan program? As moan strings are not compiled until your program installs them into a channel, any errors in the program will not be brought to your attention until after your program is running.<br>
+						</font><font color="#000000" size="-1" face="Geneva,Arial">This means any moan program errors will cause runtime errors rather than compile errors, runtime errors are not displayed in Hieroglyph, but are reported in TNT Basic's console window.</font>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">The most common error with a moan program is when you accidentally capitalise a word when you shouldn't. The capitalising causes the moan compiler to think it's a command. Moan will try its best to report errors to you, but sometimes it underlines the word after an error by mistake. In general, it will point you to roughtly where the error is though.	</font></p>
+					</blockquote>
+					<p><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Using a Channel to Make Something Move</FONT></B></p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<blockquote>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">Now that you understand the basics of moan programs, lets install one into a moan channel and get it to move some sprites around. First define your moan program:</font></p>
+						<p><font size="-1" face="Monaco,Arial" color="blue">str</font><font color="#000000" size="-1" face="Monaco,Arial"> myMoanProgram = &quot;Move 50,0,1&quot;</font></p>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">Now install it into a moan channel (choose any channel id, zero is used here):</font></p>
+						<p><font size="-1" face="Monaco,Arial" color="#4985c6">set channel program</font><font color="#000000" size="-1" face="Monaco,Arial"> 0,myMoanProgram</font></p>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">Now put a sprite on screen and attach it to the channel:</font></p>
+						<p><font size="-1" face="Monaco,Arial" color="#4985c6">sprite</font><font color="#000000" size="-1" face="Monaco,Arial"> 1,100,100,1<br>
+							</font><font size="-1" face="Monaco,Arial" color="#4985c6">add sprite to channel</font><font color="#000000" size="-1" face="Monaco,Arial"> 1,0</font></p>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">That's it, now everytime <a href="../commands/drawframe.htm">Draw Frame</a> is called sprite 1 will have moved a bit further, try it with:</font></p>
+						<p><font size="-1" face="Monaco,Arial" color="blue">while not</font><font color="#000000" size="-1" face="Monaco,Arial"> </font><font size="-1" face="Monaco,Arial" color="#4985c6">mouse button<br>
+								    draw frame</font><font color="#000000" size="-1" face="Monaco,Arial"><br>
+							</font><font size="-1" face="Monaco,Arial" color="blue">wend</font></p>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">Try adding more sprites to the channel and see what happens!</font></p>
+					</blockquote>
+					<p><b><font color="#330099" size="-1" face="Helvetica,Arial">Linking Several Moan Commands</font></b></p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<blockquote>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">You can link moan commands together in sequence, each one will be executed when the previous command finishes. Moan commands are seperated by either a space or a semi-colon ';'.</font></p>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">For example:</font></p>
+						<p><font size="-1" face="Monaco,Arial" color="blue">str</font><font color="#000000" size="-1" face="Monaco,Arial"> myProg=&quot;Move right 100,0,2; Move left -100,0,2&quot;</font></p>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">or</font></p>
+						<p><font size="-1" face="Monaco,Arial" color="blue">str</font><font color="#000000" size="-1" face="Monaco,Arial"> myProg2=&quot;M 100,0,2 M -100,0,2&quot;</font></p>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">Both programs have the same affect as the lower case letters and ; are ignored.</font></p>
+					</blockquote>
+					<p><b><font color="#330099" size="-1" face="Helvetica,Arial">Making Something Animate</font></b></p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<blockquote>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">Animation is just as easy in moan, just use the <a href="../commands/moan_a.htm">'A'nim</a> command. Its syntax is:</font></p>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">A <i>numloops, (frame,delay), (frame,delay),</i> ....</font></p>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">Where <i>numloops</i> is the number of times to run the entire anim sequence for, -1 meaning forever. It is the same as the high level <a href="../commands/animatesprite.htm">Animate Sprite</a> command introduced earlier.</font></p>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">Example:</font></p>
+						<p><font size="-1" face="Monaco,Arial" color="blue">str</font><font color="#000000" size="-1" face="Monaco,Arial"> myprog=&quot;A -1,(1,2),(2,2),(3,2)&quot;</font></p>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">That program shows image 1 for 2 frames, image 2 for 2 frames, image 3 for 2 frames and then repeats. Try it with the sprite movement example earlier.</font></p>
+					</blockquote>
+					<p><b><font color="#330099" size="-1" face="Helvetica,Arial">Multi-Channel Moaning</font></b></p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<blockquote>
+						<font color="#000000" size="-1" face="Geneva,Arial">Moan commands run in sequence, if you have an animate command followed by a move command, the move command will not start until the animation is finished. If the animation is set to loop forever then the movement will never start. How do you get around this?</font>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">To get moan commands to run in parallel, you must install them onto separate moan channels. You could set one channel up to control sprite animation, and the other to control movement.</font></p>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">When a sprite or viewport is on two different channels, the results of the movement/animation from each channel are combined before the sprite is drawn. If one channel moves everything upwards, and another channel moves everything right, then a sprite that is on both of these channels would move up and right.</font></p>
+					</blockquote>
+					<p><b><font color="#330099" size="-1" face="Helvetica,Arial">Adding Wind To Your Programs</font></b></p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<blockquote>
+						<font color="#000000" size="-1" face="Geneva,Arial">A good use of multi-channel moaning is to have one channel set aside for moving all sprites at once. Try this out on your existing game, you don't need to be using any other moan channels.</font>
+						<p><font size="-1" face="Monaco,Arial" color="#4985c6">set channel program</font><font color="#000000" size="-1" face="Monaco,Arial"> 1,&quot;Move 10000,0,1&quot;<br>
+							</font><font size="-1" face="Monaco,Arial" color="#4985c6">add sprite to channel</font><font color="#000000" size="-1" face="Monaco,Arial"> 0,1<br>
+							</font><font size="-1" face="Monaco,Arial" color="#4985c6">add sprite to channel</font><font color="#000000" size="-1" face="Monaco,Arial"> 1,1<br>
+							</font><font size="-1" face="Monaco,Arial" color="#4985c6">add sprite to channel</font><font color="#000000" size="-1" face="Monaco,Arial"> 2,1<br>
+							</font><font size="-1" face="Monaco,Arial" color="red">' ... add all your game's sprites ...</font></p>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">Now, you will find that when you play your game, all the sprites drift slowly off the side of the screen! By modifying the program you can produce a simple wind affect in any direction.</font></p>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">NB: A better way of adding wind is to set up a loop using labels, this is covered in the <a href="moan_advanced_guide.htm">Advanced Moan Tutorial</a>.</font></p>
+					</blockquote>
+					<p><b><font color="#330099" size="-1" face="Helvetica,Arial">Conclusion</font></b></p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<blockquote>
+						<font color="#000000" size="-1" face="Geneva,Arial">This tutorial introduced </font><font color="#000000" size="-1" face="Geneva,Arial"><b>Moan</b></font><font color="#000000" size="-1" face="Geneva,Arial">, TNT Basic's powerful MOvement and ANimation system.</font>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">Moan has two levels that you can work at. The first consists of high level commands that can be used to move or animate individual sprites or viewports easily.</font></p>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">The second set is centred around the use of programmable moan channels, which can be used to move/animate several viewports or sprites at once</font><font color="#000000" size="-1" face="Geneva,Arial">.</font></p>
+						<p><font color="#000000" size="-1" face="Geneva,Arial">You should now continue your moaning with the <a href="moan_advanced_guide.htm">Advanced Moan Tutorial</a>.</font></p>
+					</blockquote>
+				</td>
+			</tr>
+			<TR VALIGN="TOP">
+    <TD ALIGN="CENTER"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../moan/moan_frameset.htm">Table of contents</A></FONT></TD> 
+  </TR>
+		</TABLE>
+
+</BODY>
+</HTML>

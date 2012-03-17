@@ -1,0 +1,18 @@
+Using the Broadcast and Listener classes
+----------------------------------------
+By Mark Tully
+Thanks to Metrowerks PowerPlant for inspiration
+
+What do they do?
+----------------
+Essensially they offer a means of communication between objects. When a broadcaster broadcasts a message, all listeners which
+have been added to it receive the message.
+
+Example use
+-----------
+What this means is that you can be real cunning in the way you implement things. You can put a broadcaster in an object
+and when that object is deleted, all listeners are informed.
+
+You can also use the TSafePointer object which holds a pointer and returns 0L if the pointer was deallocated.
+Just create one with TSafePointer<T> (where T is the type of pointer) and pass params (broadcaster,pointer). If the
+broadcaster dies then the pointer is set to 0L, simple.

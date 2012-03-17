@@ -1,0 +1,17 @@
+<name>Remove Viewport From Channel</name>
+<group>moan</group>
+<syntax>Remove Viewport From Channel <i>canvasId</i>
+Remove Viewport From Channel <i>canvasId,channelId</i></syntax>
+<synopsis>Removes a viewport from a moan channel</synopsis>
+<desc>
+This command is used to remove a viewport from a moan channel, previously added with @@Add Viewport To Channel@@.
+
+If <i>channelId</i> is not specified, the viewport is removed from all the moan channels it is on.
+
+When a viewport closed, it is automatically removed from all moan channels.
+
+<i>canvasId</i> is the canvas that the viewport to be removed from the moan channel is viewing.
+<i>channelId</i> is the optional moan channel to remove the viewport from.
+
+See also @@Remove Sprite From Channel@@, @@Add Sprite To Channel@@ and @@Add Viewport To Channel@@.
+</desc>

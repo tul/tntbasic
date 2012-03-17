@@ -1,0 +1,57 @@
+<HTML>  
+<HEAD>
+  <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Mac">
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>Shared Variables</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="349"
+HEIGHT="273">
+  <TR VALIGN="TOP">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">Shared
+      Variables</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD HEIGHT="227">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">Instead of making a variable
+        global to all procedures, it is possible to make that variable
+        accessible only to the procedures that need it.</FONT></P>
+        <P><FONT SIZE="-2" FACE="Monaco">...<BR>
+        </FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">String</FONT><FONT
+         SIZE="-2" FACE="Monaco"> output<BR>
+        ComposeHello()<BR>
+        </FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Print</FONT><FONT
+         SIZE="-2" FACE="Monaco"> output<BR>
+        ...<BR>
+<BR>
+        </FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Procedure</FONT><FONT
+         SIZE="-2" FACE="Monaco"> ComposeHello()<BR>
+        </FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">Shared</FONT><FONT
+         SIZE="-2" FACE="Monaco"> </FONT><FONT COLOR="#0000ff" SIZE="-2"
+         FACE="Monaco">String</FONT><FONT SIZE="-2" FACE="Monaco"> output<BR>
+        output=&quot;Hello&quot;<BR>
+        </FONT><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">End Proc</FONT></P>
+        <P><FONT COLOR="#000000" SIZE="-1" FACE="Geneva">This piece of
+        code will output the string &quot;Hello&quot;. This is because
+        it has been changed inside the procedure </FONT><FONT COLOR="#000000"
+         SIZE="-2" FACE="Monaco">ComposeHello</FONT><FONT COLOR="#000000"
+         SIZE="-1" FACE="Geneva"> which gained access to it using the
+        </FONT><FONT COLOR="#000000" SIZE="-2" FACE="Monaco">Shared</FONT><FONT
+         COLOR="#000000" SIZE="-1" FACE="Geneva"> command.</FONT></P>
+        <P><FONT COLOR="#000000" SIZE="-1" FACE="Geneva">This technique
+        makes code much neater because only the procedures that need
+        the variables will have access to them.</FONT>
+      </BLOCKQUOTE>
+    </TD>
+  </TR>
+  <TR VALIGN="TOP">
+    <TD ALIGN="CENTER" HEIGHT="27"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../proc/proc_frameset.htm">Table of contents</A></FONT></TD> 
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

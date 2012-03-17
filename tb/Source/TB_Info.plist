@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleGetInfoString</key>
+	<string>1.41</string>
+	<key>CFBundleVersion</key>
+	<string>141</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.41</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>© Mark Tully &amp; John Treece-Birch, 1999-2012</string>
+	<key>CFBundleIconFile</key>
+	<string>BarrelIcon</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.tntbasic.tb</string>
+	<key>CFBundleName</key>
+	<string>TNT Basic</string>
+	<key>CFBundleSignature</key>
+	<string>TNTb</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array/>
+			<key>CFBundleTypeName</key>
+			<string>Any file</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>****</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>rsrc</string>
+				<string>basc</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>129</string>
+			<key>CFBundleTypeName</key>
+			<string>TNT Basic Project</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>TEXT</string>
+				<string>rsrc</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleHelpBookFolder</key>
+	<string>TNT Basic Help</string>
+	<key>CFBundleHelpBookName</key>
+	<string>TNT Basic Help</string>
+</dict>
+</plist>

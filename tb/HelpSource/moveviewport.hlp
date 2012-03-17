@@ -1,0 +1,15 @@
+<name>Move Viewport</name>
+<group>moan</group>
+<synopsis>Starts a viewport scrolling</synopsis>
+<syntax>Move Viewport <i>canvasId,xDist,yDist,speed</i></syntax>
+<desc>
+The 'Move Viewport' command sets the viewport to canvas <i>canvasId</i> scrolling at a specified speed for <i>xDist</i> pixels to the right and <i>yDist</i> pixels downwards. Once it has started moving it will continue to do so until it reaches the destination or you issue it another move command.
+
+The <i>speed</i> is specified in pixels/frame, for example passing 1 means move one pixel per frame in towards the destination. If you pass in a negative number as the speed, this is instead interpreted as the number of steps to complete the movement in. For example, passing -5 means cover the distance in 5 steps, no matter what the distance is.
+
+To test if a viewport has finishing scrolling use the @@Viewport Moving@@ function.
+To stop the viewport before its movement finishes, issue another 'move' command with 0 for the x and y distances.
+
+See also:
+	The @@'M'ove@@ moan program function.
+</desc>

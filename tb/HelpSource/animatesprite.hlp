@@ -1,0 +1,19 @@
+<name>Animate Sprite</name>
+<group>moan</group>
+<synopsis>Starts a sprite animating</synopsis>
+<syntax>Animate Sprite <i>spriteNum,repeatCount, frame,delay</i> to <i>frame,delay</i> to ...</syntax>
+<desc>
+Starts a sprite animating for 'repeatCount' times through the sequence specified. You can specify any number of frames of animation in the list (limited only by memory).
+
+The delay is specified in frames, the frame is specified as an index into the sprite's current bank (exactly the same as with the sprite command).
+
+Once started the animation will continue indefinitely until it either completes, or another animation is started. You can start an emtpy animation to stop the animation.
+
+E.g.
+<tnt>	animate sprite 1,0,		' stops an animation</tnt>
+
+To test if an animation is still animating use @@Sprite Animating@@.
+
+See also:
+	The @@'A'nimate@@ moan program function.
+</desc>

@@ -1,0 +1,20 @@
+TNT Music Engine Documentation
+Mark Tully
+31/10/01
+
+The music library consists of two parts: the UTNTMusicManager class and the CMusicDriver
+abstract class.
+
+Essentially the the UTNTMusicManager is called to upon to load, play, access and otherwise
+process music. In turn it makes use of abstract music drivers that can play music of different
+formats.
+
+So far there are two drivers, a tracker driver for playing MODs etc: CMikModDriver and CMODDriver
+and a QT driver that plays MP3s CQTMusicDriver.
+
+CMADDriver is more complete than CMikModDriver. I abandoned CMikModDriver cos it was lo
+quality sound and it was difficult to support functions for getting length of the music and
+getting/setting the play head position.
+
+Basically, just add CMADDriver and CQTMusicDriver to the project and forget about them. Do
+all the work through CTNTMusicManager and you'll be fine.

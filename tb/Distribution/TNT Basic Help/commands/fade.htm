@@ -1,0 +1,81 @@
+<HTML>  
+<HEAD>
+  <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Mac">
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>Fade</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+  <META NAME="AppleTitle" CONTENT="Fade">
+  <META NAME="AppleTarget" CONTENT="_right">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="349"
+HEIGHT="194">
+  <TR VALIGN="TOP">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">Fade</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD HEIGHT="41">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">Changes the colour balance
+        of the screen</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Syntax</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="93">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">Fade Up<BR>
+        Fade Up <I>timeTaken</I><BR>
+        Fade Down<BR>
+        Fade Down <I>timeTaken<BR>
+        </I>Fade To <I>red, green, blue, percent, timeTaken</I></FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Description</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="7">
+      <BLOCKQUOTE>
+        <P><B><FONT SIZE="-1" FACE="Geneva">Fade Up</FONT></B><FONT SIZE="-1"
+         FACE="Geneva"> fades the gamma of the screen up to normal level.</FONT></P>
+        <P><B><FONT SIZE="-1" FACE="Geneva">Fade Down </FONT></B><FONT
+         SIZE="-1" FACE="Geneva">fades the gamma of the screen to complete
+        black.</FONT></P>
+        <P><I><FONT SIZE="-1" FACE="Geneva">time taken</FONT></I><FONT
+         SIZE="-1" FACE="Geneva"> specifies how long it should take to
+        do this and is measured in milliseconds (1/1000th of a second).
+        If no parameter is passed then it defaults to 1 second (1000
+        milliseconds).</FONT></P>
+        <P><B><FONT SIZE="-1" FACE="Geneva">Fade To</FONT></B><FONT SIZE="-1"
+         FACE="Geneva"> is a more powerful fade command. It can specify
+        colours and percentages to fade between.</FONT></P>
+        <P><I><FONT SIZE="-1" FACE="Geneva">red</FONT></I><FONT SIZE="-1"
+         FACE="Geneva">, <I>green</I> and <I>blue</I> are the colour
+        components to fade to. Each of these can be a value between 0
+        and 255. They are mixed together to produce one colour.</FONT></P>
+        <P><I><FONT SIZE="-1" FACE="Geneva">percent</FONT></I><FONT SIZE="-1"
+         FACE="Geneva"> is the percentage (between 0 and 100) of how
+        much to fade the screen to.</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva">This command can be used in
+        a sequence e.g.</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva">Fade To 255,0,0,0,1000<BR>
+        Fade To 0,255,0,0,1000<BR>
+        Fade To 0,0,255,0,1000<BR>
+        Fade To 0,0,0,100,1000</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva">This sequence will fade the
+        screen to red, then across to blue, and finally green. It then
+        fades up from green to normal. Each of these phases takes one
+        second so the entire transition would take 4 seconds.</FONT>
+      </BLOCKQUOTE>
+    </TD>
+  </TR>
+  <TR VALIGN="TOP">
+    <TD ALIGN="CENTER" HEIGHT="34"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../cv/cv_frameset.htm">Table of contents</A></FONT></TD> 
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

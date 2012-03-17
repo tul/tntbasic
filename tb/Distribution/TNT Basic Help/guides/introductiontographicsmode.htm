@@ -1,0 +1,118 @@
+<HTML>  
+<HEAD>
+  <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Mac">
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>Introduction to Graphics Mode</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="349"
+HEIGHT="401">
+  <TR VALIGN="TOP">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">Introduction
+      to Graphics Mode</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD HEIGHT="168">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">TNT Basic has two modes
+        for displaying its output...</FONT></P>
+        <P><B><FONT SIZE="-1" FACE="Geneva,Arial">Text Mode</FONT></B><FONT
+         SIZE="-1" FACE="Geneva,Arial"> <BR>
+        In this mode, only numbers and strings can be output.</FONT></P>
+        <P><B><FONT SIZE="-1" FACE="Geneva,Arial">Graphics Mode</FONT></B><FONT
+         SIZE="-1" FACE="Geneva,Arial"><BR>
+        In this mode, complex images can be built up from different components.</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">Graphics mode is what
+        would be used for most games since it can handle any image.</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">How
+      does graphics mode work?</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="36">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva">Graphical images are composed
+        of 'pixels'. A pixel is a small square which has a specific colour.
+        An image is composed of thousands of these tiny squares layed
+        out in a grid.</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva">An image may be built out of
+        10 pixels across and 20 pixels down. Each pixel has a unique
+        x and y co-ordinate. The x co-ordinate can range between 0 and
+        9, the y co-ordinate can range between 0 and 19. Every individual
+        pixel in the image can be refered to by its x,y co-ordinate.</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva">The colour of each pixel is
+        built from three components. These three components are the primary
+        colours red, green and blue. Each of these components has a value
+        between 0 and 255, from this any colour can be built by mixing
+        them in the correct amounts. e.g</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva"></FONT><TABLE WIDTH="283" BORDER="1"
+        CELLSPACING="2" CELLPADDING="0">
+          <TR>
+            <TD WIDTH="33%"></TD>
+            <TD WIDTH="23%"><B><FONT SIZE="-1" FACE="Geneva">Red</FONT></B></TD>
+            <TD WIDTH="22%"><B><FONT SIZE="-1" FACE="Geneva">Green</FONT></B></TD>
+            <TD WIDTH="22%"><B><FONT SIZE="-1" FACE="Geneva">Blue</FONT></B></TD>
+          </TR>
+          <TR>
+            <TD WIDTH="33%"><B><FONT SIZE="-1" FACE="Geneva">Black</FONT></B><FONT
+               SIZE="-1" FACE="Geneva">&nbsp;</FONT></TD>
+            <TD WIDTH="23%"><FONT SIZE="-1" FACE="Geneva">0</FONT></TD>
+            <TD WIDTH="22%"><FONT SIZE="-1" FACE="Geneva">0</FONT></TD>
+            <TD WIDTH="22%"><FONT SIZE="-1" FACE="Geneva">0</FONT></TD>
+          </TR>
+          <TR>
+            <TD WIDTH="33%"><B><FONT SIZE="-1" FACE="Geneva">White</FONT></B></TD>
+            <TD WIDTH="23%"><FONT SIZE="-1" FACE="Geneva">255</FONT></TD>
+            <TD WIDTH="22%"><FONT SIZE="-1" FACE="Geneva">255</FONT></TD>
+            <TD WIDTH="22%"><FONT SIZE="-1" FACE="Geneva">255</FONT></TD>
+          </TR>
+          <TR>
+            <TD WIDTH="33%"><B><FONT SIZE="-1" FACE="Geneva">Green</FONT></B></TD>
+            <TD WIDTH="23%"><FONT SIZE="-1" FACE="Geneva">0</FONT></TD>
+            <TD WIDTH="22%"><FONT SIZE="-1" FACE="Geneva">255</FONT></TD>
+            <TD WIDTH="22%"><FONT SIZE="-1" FACE="Geneva">0</FONT></TD>
+          </TR>
+          <TR>
+            <TD WIDTH="33%"><B><FONT SIZE="-1" FACE="Geneva">Yellow</FONT></B></TD>
+            <TD WIDTH="23%"><FONT SIZE="-1" FACE="Geneva">255</FONT></TD>
+            <TD WIDTH="22%"><FONT SIZE="-1" FACE="Geneva">255</FONT></TD>
+            <TD WIDTH="22%"><FONT SIZE="-1" FACE="Geneva">0</FONT></TD>
+          </TR>
+        </TABLE></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">What
+      Graphics Mode Can Do</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="144">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">There are different types
+        of graphics techniques that can be used in graphics mode...</FONT></P>
+        <P><B><FONT SIZE="-1" FACE="Geneva,Arial">Canvases</FONT></B><FONT
+         SIZE="-1" FACE="Geneva,Arial"><BR>
+        These hold an image (i.e. a large collection of pixels). These
+        can also be refered to as a bitmap.</FONT></P>
+        <P><B><FONT SIZE="-1" FACE="Geneva,Arial">Sprites</FONT></B><FONT
+         SIZE="-1" FACE="Geneva,Arial"><BR>
+        These are used to represent any piece of graphic that can be
+        moved around the screen. TNT Basic can move these around the
+        screen easily and quickly and they can be any shape or size.</FONT></P>
+        <P><B><FONT SIZE="-1" FACE="Geneva,Arial">Drawing</FONT></B><FONT
+         SIZE="-1" FACE="Geneva,Arial"><BR>
+        Drawing simple shapes, lines and plotting individual pixels can
+        also be done in TNT Basic. This can be done in any colour.</FONT>
+      </BLOCKQUOTE>
+    </TD>
+  </TR>
+  <TR VALIGN="TOP">
+    <TD ALIGN="CENTER" HEIGHT="34"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../cv/cv_frameset.htm">Table of contents</A></FONT></TD> 
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

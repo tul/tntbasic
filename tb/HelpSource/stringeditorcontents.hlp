@@ -1,0 +1,13 @@
+<name>String Editor Contents</name>
+<group>io</group>
+<synopsis>Returns the current contents of the string editor</synopsis>
+<syntax><i>contentStr</i> = String Editor Contents</syntax>
+<desc>
+The string editor allows you to take key presses from the user and use them to edit a string of text in a similar manner to a word processor. An overview of the string editor can be found in the @@String Editor@@ section of the @@Keyboard Input Guide@@.
+
+The 'String Editor Contents' command returns the current string that is in the string editor. You can use this along with the @@String Editor Cursor@@ command to get all the information you need to draw the text being edited on the screen. An example of this can be found in the @@String Editor@@ section.
+
+You can change the string being edited with @@Set String Editor Contents@@ and can let the user edit it by inputting raw keys from the @@Keyboard Raw Key@@ command with the @@String Editor Input@@ command.
+
+See also the @@Set String Editor Contents@@, @@String Editor Input@@, @@String Editor Cursor@@ and @@Set String Editor Cursor@@ commands.
+</desc>

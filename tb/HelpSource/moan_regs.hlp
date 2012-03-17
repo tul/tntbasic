@@ -1,0 +1,14 @@
+<name>Regs (X,Y,I,R0-R9,RA-RZ)</name>
+<group>moan</group>
+<synopsis>Moan registers for reading/writing</synopsis>
+<syntax><i>N/A</i></syntax>
+<desc>
+Registers can be used anywhere where integers can. Registers are assigned using the @@'L'et@@ command, or the @@Set Channel Register@@ command.
+
+R0-R9 are local channel registers, these are private for each moan channel.
+RA-RZ are shared moan registers, these are global across all the moan channels.
+
+Registers X,Y and I are also local to each channel. X and Y hold the x and y position of the first sprite/viewport that was attached to the channel. I holds the image index of the first sprite attached to the channel. If the first object to be attached was a viewport, then I is always -1.
+
+See also the @@Set Channel Register@@ and @@Channel Register@@ commands.
+</desc>

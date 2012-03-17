@@ -1,0 +1,13 @@
+.DS_Store
+*.swp
+.#*
+*.sit
+*.zip
+*.img
+*.build
+build
+*.mode1
+*.pbxuser
+tags
+*.mode1v3
+*.swo

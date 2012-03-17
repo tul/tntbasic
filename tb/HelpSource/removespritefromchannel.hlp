@@ -1,0 +1,17 @@
+<name>Remove Sprite From Channel</name>
+<group>moan</group>
+<syntax>Remove Sprite From Channel <i>spriteNum</i>
+Remove Sprite From Channel <i>spriteNum,channelId</i></syntax>
+<synopsis>Removes a sprite from a moan channel</synopsis>
+<desc>
+This command is used to remove a sprite from a moan channel, previously added with @@Add Sprite To Channel@@.
+
+If <i>channelId</i> is not specified, the sprite is removed from all the moan channels it is on.
+
+When a sprite killed, it is automatically removed from all moan channels.
+
+<i>spriteNum</i> is the sprite to remove from the moan channel.
+<i>channelId</i> is the optional moan channel to remove the sprite from.
+
+See also @@Remove Viewport From Channel@@, @@Add Sprite To Channel@@ and @@Add Viewport To Channel@@.
+</desc>

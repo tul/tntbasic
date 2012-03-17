@@ -1,0 +1,18 @@
+<name>String Editor Cursor</name>
+<group>io</group>
+<synopsis>Returns the position of the string editor cursor</synopsis>
+<syntax><i>cursorPos</i> = String Editor Cursor</syntax>
+<desc>
+The string editor allows you to take key presses from the user and use them to edit a string of text in a similar manner to a word processor. An overview of the string editor can be found in the @@String Editor@@ section of the @@Keyboard Input Guide@@.
+
+This command returns the index into the string editor contents of the text insertion point where newly typed characters will appear. On the Macintosh, it is usually represented by a flashing vertical bar.
+
+A cursor index of 0 means at the beginning of the string, 1 is after the first character, 2 is after the second and so on. The index will therefore range from 0 to:
+
+<tnt>String Length (String Editor Contents)</tnt>
+...inclusive.
+
+You can set the cursor position with @@Set String Editor Cursor@@.
+
+See also @@Set String Editor Cursor@@, @@String Editor Contents@@, @@String Editor Input@@.
+</desc>

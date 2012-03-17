@@ -1,0 +1,21 @@
+<name>Clear Keyboard</name>
+<group>io</group>
+<synopsis>Removes all keys from the keyboard input queue</synopsis>
+<syntax>Clear Keyboard</syntax>
+<desc>
+The keyboard input queue records all the unprocessed keypresses that your user has typed into your game. You can read these keypresses one at a time using the @@Keyboard Raw Key@@ command, after which they will be removed from the queue.
+
+Calling 'Clear Keyboard' will <i>discard</i> all the keys that haven't yet been read from the queue. This is a useful thing to do before inputting a string from the user, eg before they enter their name into the high score table. This is because the keyboard input queue will likely still contain many keypresses from when the user was playing the game, keypresses that you don't want to be typed into the highscore table as soon as you start reading it.
+(For information on easily inputting strings from the user, see the @@String Editor@@ suite of commands).
+
+Clearing the keyboard input queue is functionally equivalent to calling @@Keyboard Raw Key@@ until it returns 0.
+
+Eg:
+
+<tnt>while Keyboard Raw Key = 0
+wend</tnt>
+
+Note that when your program is first ran, the keyboard queue is cleared, so the only keys in the queue will be ones typed since your program started.
+
+See also the @@Keyboard Input Guide@@ and @@Keyboard Raw Key@@ command.
+</desc>

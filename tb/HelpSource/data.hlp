@@ -1,0 +1,29 @@
+<name>Data</name>
+<group>misc</group>
+<syntax>Data <i>expression,expression...</i></syntax>
+<synopsis>Declares values that can be read with the Read command</synopsis>
+<desc>
+The @@Data@@ command declares a value that can be read into a variable using the @@Read@@ command. You can specify multiple values on a line if you wish, or separate them over multiple lines, it makes no difference to the @@Read@@ command.
+
+Example:
+<tnt>
+int		i,number,score
+string	name
+
+read number
+for i=0 to number
+	read score,name
+	print name;" got score ";score
+next i
+
+' default data to be read into high score table
+data 4  ' number of high score entries
+data 100,"Mark"
+data 75,"John"
+data 60,"Fred"
+data 0,"Metal"</tnt>
+
+More documentation can be found with the @@Read@@ command.
+
+See also the @@Restore@@ command.
+</desc>

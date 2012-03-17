@@ -1,0 +1,15 @@
+<name>Set String Editor Cursor</name>
+<group>io</group>
+<synopsis>Sets the position of the string editor cursor</synopsis>
+<syntax>Set String Editor Cursor (<i>index</i>)</syntax>
+<desc>
+The string editor allows you to take key presses from the user and use them to edit a string of text in a similar manner to a word processor. An overview of the string editor can be found in the @@String Editor@@ section of the @@Keyboard Input Guide@@.
+
+This command sets the index into the current string editor contents of the text insertion point where newly typed characters will appear to <i>index</i>.
+
+A cursor index of 0 means at the beginning of the string, 1 is after the first character, 2 is after the second and so on. The <i>index</i> passed is automatically clipped to a valid range, if you set it to a really big number it will place the index at the end of the string editor.
+
+You can read the current string editor cursor index with @@String Editor Cursor@@.
+
+See also the @@String Editor Contents@@, @@String Editor Cursor@@ and @@String Editor Input@@ commands.
+</desc>

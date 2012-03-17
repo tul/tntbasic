@@ -1,0 +1,47 @@
+<HTML>  
+<HEAD>
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>Channel Register</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+  <META NAME="AppleTitle" CONTENT="Channel Register">
+  <META NAME="AppleTarget" CONTENT="_right">
+  <META NAME="DESCRIPTION" CONTENT="Reads/writes moan channel registers">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="349"
+HEIGHT="177">
+  <TR VALIGN="TOP">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">Channel Register</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD HEIGHT="41">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva">Reads/writes moan channel registers</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Syntax</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="43">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial"><i>value</i> = Channel Register (<i>channelId,localRegId</i>)<br><i>value</i> = Channel Register (<i>globalRegId</i>)<br>Set Channel Register <i>channelId, localRegId, value</i><br>Set Channel Register <i>globalRegId, value</i></FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Description</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="40">
+      <BLOCKQUOTE>
+        <FONT SIZE="-1" FACE="Geneva"><p>The 'Channel Register' and 'Set Channel Register' commands are used to get or set moan registers.</p><p>You can read/write either local moan channel registers (which require that you specified a <i>channelId</i>), or global moan registers (for which the channel id is omitted). There are therefore two variants of each command.</p><p><b>Local Version</b><br>When <i>channelId</i> is specified, this command will work with the local moan registers of that channel. You can specify the registers by either numeric index or by name. When specifying by numeric index, 0-9 refer to 'R0' - 'R9' and 10 - 12 refer to registers 'x', 'y' and 'i' respectively.<br>You can also specify the register by name, using strings such as "R0", "R7", "X", "Y" and "I".<br>Registers R0 - R9 are general purpose registers and can be set to anything you like. Registers X, Y and I hold the X, Y and image index of the FIRST sprite or viewport added to the channel. Viewports always have an I register of -1 as they do not support images.</p><p><b>Global Version</b><br>When <i>channelId</i> is omitted, the commands work with the shared moan registers. Like the channel specific version, the register can be specified by index or name. 0-25 refers to shared moan register 'RA' to 'RZ'. You can also refer to them with a string, e.g. "RA", "RJ" or "RZ".</p><p>Registers can only store integers and cannot store floats or strings.</p><p>Examples:<br></FONT><FONT COLOR="#000000" SIZE="-2" FACE="Monaco,Arial"><FONT COLOR="#4985c6">set channel register</FONT> 0,1,10&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="#FF0000">' Sets R1 of moan channel 0 to 10</FONT><br><FONT COLOR="#4985c6">set channel register</FONT> 0,"R1",20&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="#FF0000">' Sets R1 of moan channel 0 to 20</FONT><br><FONT COLOR="#4985c6">set channel register</FONT> "RZ",-3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="#FF0000">' Sets global moan register "RZ" to -3</FONT><br>value = <FONT COLOR="#4985c6">channel register</FONT> ("RB")&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="#FF0000">' Gets global moan register "RB"</FONT><br>value = <FONT COLOR="#4985c6">channel register</FONT> (7)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="#FF0000">' Gets global moan register "RH"</FONT><br>value = <FONT COLOR="#4985c6">channel register</FONT> (2,3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="#FF0000">' Gets R3 of moan channel 2</FONT><br></FONT><FONT SIZE="-1" FACE="Geneva"></p>See also the <A HREF="../guides/moan_advanced_guide.htm">Advanced Moan Tutorial</A> and the <A HREF="../commands/moan_l.htm">'L'et</A> moan function.<br></FONT>
+      </BLOCKQUOTE>
+    </TD>
+  </TR>
+  <TR VALIGN="TOP">
+    <TD ALIGN="CENTER" HEIGHT="34"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../moan/moan_frameset.htm">Table of contents</A></FONT></TD> 
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

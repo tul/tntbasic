@@ -1,0 +1,132 @@
+<HTML>  
+<HEAD>
+  <META NAME="GENERATOR" CONTENT="Adobe PageMill 3.0 Mac">
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>Networking Guide</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="472"
+HEIGHT="991">
+  <TR VALIGN="TOP">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">Networking
+      Guide</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD HEIGHT="41">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva">This ia brief guide of how to
+        implement networking in a game.</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Network
+      Variables</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="314">
+      <BLOCKQUOTE>
+        <P><FONT COLOR="#000000" SIZE="-1" FACE="Geneva,Arial">In order
+        to send and receive any data over the network you must first
+        define some network variables. This can be done like this...</FONT></P>
+        <P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">Network
+        Global int</FONT><FONT COLOR="#999999" SIZE="-2" FACE="Monaco,Arial">
+        </FONT><FONT COLOR="#000000" SIZE="-2" FACE="Monaco,Arial">networkInt</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva">This defines an integer that
+        is shared over the network. When the host computer changes the
+        value of this variable, it is updated on all the client machines
+        that are connected to the game.</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva">If a client wants to change
+        the value of the variable then it must send a message to the
+        host telling it that it has done it.</FONT></P>
+        <P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">Set Net
+        Data</FONT><FONT COLOR="#999999" SIZE="-2" FACE="Monaco,Arial">
+        </FONT><FONT COLOR="#000000" SIZE="-2" FACE="Monaco,Arial">networkInt,2</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva">This asks the host to change
+        the value of networkInt to the value 2. Once the host has done
+        this, it will then be sent to all the other clients on the network.</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva">These two things won't do anything
+        however if you don't allow TNT Basic some time to update the
+        network values. This can be done by calling the command Update
+        Net Data.</FONT></P>
+        <P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">Update
+        Net Data</FONT></P>
+        <P><FONT SIZE="-1" FACE="Geneva">When this is called TNT Basic
+        sends all the network messages it needs to update all the machines
+        on the network.</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Event
+      Loop</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="332">
+      <BLOCKQUOTE>
+        <P><FONT COLOR="#000000" SIZE="-1" FACE="Geneva,Arial">Events
+        tell you if any players were disconnected, left the game or the
+        game was terminated by the host. Net events can be handled like
+        this...</FONT></P>
+        <P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">while</FONT><FONT
+         SIZE="-2" FACE="Monaco,Arial"> More Net Events</FONT></P>
+        <BLOCKQUOTE>
+          <P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">if</FONT><FONT
+           SIZE="-2" FACE="Monaco,Arial"> Net Event Type=NetGameTerminated</FONT></P>
+          <BLOCKQUOTE>
+            <P><FONT COLOR="#ff0000" SIZE="-2" FACE="Monaco,Arial">' Terminate
+            the game</FONT></P></BLOCKQUOTE>
+          <P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">else if</FONT><FONT
+           SIZE="-2" FACE="Monaco,Arial"> Net Event Type=NetPlayerLeft</FONT></P>
+          <BLOCKQUOTE>
+            <P><FONT COLOR="#ff0000" SIZE="-2" FACE="Monaco,Arial">' Inform
+            player that someone has left the<BR>
+            ' game. Net Event Content contains<BR>
+            ' the player's id.</FONT></P></BLOCKQUOTE>
+          <P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">else if</FONT><FONT
+           SIZE="-2" FACE="Monaco,Arial"> Net Event Type=NetPlayerDisconnected</FONT></P>
+          <BLOCKQUOTE>
+            <P><FONT COLOR="#ff0000" SIZE="-2" FACE="Monaco,Arial">' Inform
+            player that someone has been<BR>
+            ' disconnected from the game.<BR>
+            ' Net Event Content contains<BR>
+            ' the player's id.</FONT></P></BLOCKQUOTE>
+          <P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">end if</FONT></P></BLOCKQUOTE>
+        <P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco,Arial">wend</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Game
+      Structure</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="251">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva">The main loop for a networking
+        game should be handled something like this...</FONT></P>
+        <P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">while</FONT><FONT
+         SIZE="-2" FACE="Monaco"> gameRunning</FONT></P>
+        <BLOCKQUOTE>
+          <P><FONT SIZE="-2" FACE="Monaco">HandleControls()<BR>
+          HandleNetworking()<BR>
+          HandlePhysics()<BR>
+          UpdateGraphics()</FONT></P></BLOCKQUOTE>
+        <P><FONT COLOR="#0000ff" SIZE="-2" FACE="Monaco">wend</FONT></P>
+        <P><FONT COLOR="#000000" SIZE="-1" FACE="Geneva">HandleControls
+        should handle the input from the player on this machine.</FONT></P>
+        <P><FONT COLOR="#000000" SIZE="-1" FACE="Geneva">HandleNetworking
+        should contain all the code necessary to update net data and
+        process events.</FONT></P>
+        <P><FONT COLOR="#000000" SIZE="-1" FACE="Geneva">HandlePhysics
+        should take all the game changes that occured inside HandleControls
+        and HandleNetworking and apply the to the game.</FONT></P>
+        <P><FONT COLOR="#000000" SIZE="-1" FACE="Geneva">UpdateGraphics
+        should redraw the graphics for the player.</FONT>
+      </BLOCKQUOTE>
+    </TD>
+  </TR>
+  <TR VALIGN="TOP">
+    <TD ALIGN="CENTER" HEIGHT="34"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../net/net_frameset.htm">Table of contents</A></FONT></TD> 
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

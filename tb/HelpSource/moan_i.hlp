@@ -1,0 +1,18 @@
+<name>'I'f</name>
+<group>moan</group>
+<synopsis>If then jump to label</synopsis>
+<syntax>I <i>exp</i> J <i>label</i></syntax>
+<desc>									
+If statements in moan are very simple and quite restrictive.
+
+An If statement may only have a Jump statement as its body and nothing else. The expressions can contain standard TNT Basic comparisons such as =, >, <, >=, <= and <>. They cannot contain 'and', 'or' or 'not'.
+
+Example:
+<tnt>' Only do the move if R0 > R1
+"I R0>R1 J E; M 10,10,10; E:"
+
+' Same with lower case letters inserted for comments
+"If R0>R1 then Jump End; Move 10,10,10; End:"</tnt>
+
+See also TNT Basic's @@If... Then...@@ statement.
+</desc>

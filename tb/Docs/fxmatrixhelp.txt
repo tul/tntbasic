@@ -1,0 +1,52 @@
+Hi Matthew,
+
+FX Matrix is really a bit of a toy command. Basically it allows you to apply what are known as 'kernal filters' to your images. A kernal filter is a grid of numbers, which are used to calculate a weighted average of all the pixels around a given pixel to generate a result one. The grid is moved across the image, 1 pixel at a time, always operating on the pixel in the centre of the grid, and filtering in it's neighbours as dictated by the weighting given to it by the grid.
+
+This is probably better explained with an example:
+
+If you had the matrix:
+
+0 1 0
+1 2 1
+0 1 0
+
+And applied it to an image, a pixel in the resultant image would be calculated by having 2*the colour value of itself, then 1* the colour value of the pixels above, below, left and right of it. The result would then be divided by the number of pixels factored in to give an average. In this case there were 2+1+1+1+1=6 pixels factored in. This would have the affect of a pixel retaining it's original colour, but being heavily infulenced in colour by its neighbours. This results in colour smoothing - or a 'gaussian blur' as photoshop calls it.
+
+You can produces some really crazy convolutions of the image by typing randomly chosen numbers into the matrix. Photoshop has a kernal filter command in it's filter menu, which is what a lot of it's plug in filters are based on.
+
+For instance, to emboss an image, you make each pixel have it's original value + the value of the pixel above and left (where the 'light' is shining from), and less the value of the pixel below and right (where the 'shadow' is). If all the image is the same colour, the resultant pixel is the same colour as the original, as the pixel above left and below right cancel each other out. But if there's a colour contrast, such as on the edge of a block of colour, it will become embossed.
+
+An example matrix for embossing is:
+-10 0 0
+0 5 0
+0 0 10
+
+So that's the theory anyway. In TNT Basic, you make these matrices by filling out a 2D array with the numbers.
+
+Eg
+int  mymatrix[3,3]
+
+mymatrix[0,0]=-10  'top left
+mymatrix[1,0]=0 'top middle
+mymatrix[2,0]=0 ' top right
+mymatrix[0,1]=0 ' left middle
+mymatrix[1,1]=5 ' middle
+mymatrix[2,1]=0  ' right middle
+mymatrix[0,2]=0  ' bottom left
+mymatrix[1,2]=0  ' bottom middle
+mymatrix[2,2]=10 ' bottom right
+
+Once the matrix is filled out, apply it to your image with the FX Matrix command as so:
+
+FX Matrix mymatrix[],sourceCanvas to destCanvas
+
+Where 'mymatrix' is the matrix to apply, the sourceCanvas is the number of a canvas to operate on and destCanvas is the number of the canvas to place the results in.
+
+The FX Matrix example demonstrates several different FX Matrix effects and can be downloaded from [url]http://www.tntbasic.com/download/examples/files/FX_Matrix_Example.sit[/url].
+
+You can read more about it in TNT Basic's help, available on your hard disk or online at [url]http://www.tntbasic.com/learn/help/commands/fxmatrix.htm[/url].
+
+Hope this helps!
+
+Mark
+

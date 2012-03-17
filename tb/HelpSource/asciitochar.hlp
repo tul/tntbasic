@@ -1,0 +1,20 @@
+<name>Ascii to Char</name>
+<group>io</group>
+<synopsis>Converts an ascii code into a character string</synopsis>
+<syntax><i>charStr</i> = Ascii to Char (<i>asciiCode</i>)</syntax>
+<desc>
+This command will convert an ascii value into the character it represents and return it in a string.
+
+This is useful in order to work with characters that are hard to directly type into strings, such as <b>carriage returns</b> which represent when a new line should be started in a text string.
+
+Eg:
+<tnt>
+' the ascii code for a carriage return is 13
+' the ascii code for the apple symbol is 240
+print "My string with a new line"+ascii to char(13)+"in the middle of it"
+print "Isn't "+ascii to char(240)+" great?"</tnt>
+
+A listing of the ascii codes can be found on the @@Ascii Codes Explained@@ page.
+
+See also the @@Char to Ascii@@ and @@Raw Key Ascii@@ commands.
+</desc>

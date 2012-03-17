@@ -1,0 +1,18 @@
+<name>Keyboard Raw Key</name>
+<group>io</group>
+<synopsis>Reads a key from the keyboard input queue</synopsis>
+<syntax><i>rawKey</i> = Keyboard Raw Key</syntax>
+<desc>
+Reads a raw key from TNT Basic's keyboard input queue, if the queue is empty (because the user has not typed anything) then 0 is returned. When a key is returned, it is removed from the queue and won't be returned again.
+
+The keys are returned in the order they were typed by the user. They are stored in the key queue until you ask for them, and remain there even after the user has released the key.
+For memory reasons, TNT Basic only remembers the last 20 keys pressed, so if your game isn't reading the keys the user is typing, eventually they will be <i>forgotten</i> as the most recently typed keys replace them. However, as long as you are reading the keys resonably often, you will not miss any.
+
+Raw keys are discussed at length in the @@Keyboard Input Guide@@, and so only a brief guide to their usage will be listed here.
+
+A raw key is a way of storing a key presses' <i>character</i>, <i>scancode</i> and its <i>modifier keys</i> all in a single integer variable. Once a raw key is returned from the 'Keyboard Raw Key' command, you can get access to these parts using the @@Raw Key Char@@, @@Raw Key Scancode@@ and @@Raw Key Modifier@@ commands respectively.
+
+See also @@Clear Keyboard@@, @@Wait Key Press@@, @@Pressed@@ and @@Keyboard Repeat@@.
+
+For an introduction and general overview of the keyboard commands, refer to the @@Keyboard Input Guide@@.
+</desc>

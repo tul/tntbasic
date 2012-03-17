@@ -1,0 +1,21 @@
+<name>Raw Key Modifier</name>
+<group>io</group>
+<synopsis>Tests if a modifier key was held when a rawkey was typed</synopsis>
+<syntax>
+<i>wasHeld</i> = Raw Key Modifier Caps Lock
+<i>wasHeld</i> = Raw Key Modifier Control
+<i>wasHeld</i> = Raw Key Modifier Command
+<i>wasHeld</i> = Raw Key Modifier Shift
+<i>wasHeld</i> = Raw Key Modifier Option
+</syntax>
+<covers>Raw Key Modifier Caps Lock, Raw Key Modifier Control, Raw Key Modifier Shift, Raw Key Modifier Option, Raw Key Modifier Command</covers>
+<desc>
+Takes a <i>rawkey</i> as returned from the @@Keyboard Raw Key@@ command and tests if the modifier key specified was being held when the key was typed.
+A result of <i>TRUE</i> will be returned if the modifier was held, and <i>FALSE</i> if it wasn't.
+
+TNT Basic does not differentiate between the left and right modifier keys, so if you have a left shift key and a right shift key on your keyboard, they will both test positive for the 'Raw Key Modifier Shift' command.
+
+For more information on raw keys and working with the keyboard please refer to the @@Keyboard Input Guide@@.
+
+See also the @@Keyboard Raw Key@@, @@Raw Key Char@@ and @@Raw Key Scancode@@ commands.
+</desc>

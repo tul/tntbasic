@@ -1,0 +1,18 @@
+<name>'J'ump</name>
+<group>moan</group>
+<synopsis>Jumps to a label and continues execution</synopsis>
+<syntax>J <i>label</i>
+A:</syntax>
+<desc>
+A Jump command is the moan equivalent of the TNT Basic @@Goto@@ command.
+
+Any upper case letter followed by a : declares a label that can be jumped to with a Jump
+command. When using the Jump command, the label is not followed by a :
+
+Example:
+
+"A: J A"		' This is an infinite loop
+"Arm: J Arm"	' Lower case letters are ignored in labels also
+
+See also TNT Basic's @@Goto@@ statement.
+</desc>

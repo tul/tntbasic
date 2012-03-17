@@ -1,0 +1,23 @@
+<name>'R'otate</name>
+<group>moan</group>
+<syntax>R <i>rotAmount, speed, forever</i></syntax>
+<synopsis>Rotates sprites attached to a moan channel</synopsis>
+<desc>
+Rotates all sprites on a channel by a relative amount of <i>rotAmount</i> degrees clockwise at a speed of <i>speed</i> degrees per frame. If <i>speed</i> is negative, it is seen as the number of steps to complete the rotation in. If <i>forever</i> is non-zero then the the sprite will continue to rotate in the direction indicated by <i>rotAmount</i> forever.
+
+For example:
+
+"R 90,-10,0"
+
+Means rotate 90 pixels clockwise in 10 steps.
+
+"R -1,10,1"
+
+Means rotate 10 degrees a frame anti-clockwise forever.
+
+"R 720,0.5,0"
+
+Means rotate the sprite 720 degrees (that's 2 complete rotations) clockwise at half a degree a frame.
+
+See also the @@Rotate Sprite@@ command.
+</desc>

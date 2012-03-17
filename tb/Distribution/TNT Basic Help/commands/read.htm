@@ -1,0 +1,47 @@
+<HTML>  
+<HEAD>
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>Read</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+  <META NAME="AppleTitle" CONTENT="Read">
+  <META NAME="AppleTarget" CONTENT="_right">
+  <META NAME="DESCRIPTION" CONTENT="Reads values from data statements into variables">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="349"
+HEIGHT="177">
+  <TR VALIGN="TOP">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">Read</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD HEIGHT="41">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva">Reads values from data statements into variables</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Syntax</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="43">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">Read <i>variableA</i><br>Read <i>variableA,variableB,....</i></FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Description</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="40">
+      <BLOCKQUOTE>
+        <FONT SIZE="-1" FACE="Geneva"><p>The <A HREF="../commands/read.htm">Read</A> command will assign the list of variables passed with corresponding values from the next unread <A HREF="../commands/data.htm">Data</A> statement.<br>This allows you to specify all of your data in one section of your code while having the code that works with the data in another.</p><p>Example:<br></FONT><FONT COLOR="#000000" SIZE="-2" FACE="Monaco,Arial"><FONT COLOR="#0000FF">int</FONT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n<br><FONT COLOR="#0000FF">float</FONT>&nbsp;&nbsp;&nbsp;&nbsp;f<br><FONT COLOR="#0000FF">string</FONT>&nbsp;&nbsp;&nbsp;&nbsp;s</p><p><FONT COLOR="#0000FF">read</FONT> n,f,s<br><FONT COLOR="#4985c6">print</FONT> n,f,s</p><p><FONT COLOR="#FF0000">'...other code can go here...</FONT></p><p><FONT COLOR="#0000FF">data</FONT> 5,2.73,"Hello"<br></FONT><FONT SIZE="-1" FACE="Geneva"><br>This example first declares three variables, an integer called n, a floating point variable called f and a string called s. It then uses the <A HREF="../commands/read.htm">Read</A> command to assign values to n,f,s from the first unread <A HREF="../commands/data.htm">Data</A> statement.</p><p>The types of values in the <A HREF="../commands/data.htm">Data</A> statement must match the types of variables they are being read into, in this case an integer value followed by a floating point value followed by a string value.</p><p>The example then goes on to print the values out. This example would result in the printing of "5 2.73 Hello".</p><p>Once a value has been read from a data statement, the data statement will not be read again unless you explicitly position the read pointer using the <A HREF="../commands/restore.htm">Restore</A> command.</p><p>The <A HREF="../commands/data.htm">Data</A> statements need not be anywhere near the <A HREF="../commands/read.htm">Read</A> commands that read them. Data statements are conventionally placed at the end of programs.</p><p>If a <A HREF="../commands/read.htm">Read</A> statement is used inside a procedure, it can only read <A HREF="../commands/data.htm">Data</A> statements within that same procedure. Conversely, <A HREF="../commands/read.htm">Read</A> commands outside of procedures cannot read <A HREF="../commands/data.htm">Data</A> statements inside procedures.</p>See also <A HREF="../commands/data.htm">Data</A> and <A HREF="../commands/restore.htm">Restore</A>.<br></FONT>
+      </BLOCKQUOTE>
+    </TD>
+  </TR>
+  <TR VALIGN="TOP">
+    <TD ALIGN="CENTER" HEIGHT="34"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../misc/misc_frameset.htm">Table of contents</A></FONT></TD> 
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

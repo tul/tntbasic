@@ -1,0 +1,6 @@
+Cacheing issues
+---------------
+
+32 byte aligned 32 byte cachelines
+
+Prefetch: dcbt or dst

@@ -1,0 +1,39 @@
+TNT Basic README
+Mark Tully
+16/3/12
+
+TNT Basic is a Mac OS X based games creation kit, inspired by François Lionet's fantastic AMOS games creation tool
+on the Amiga. Its aim is to allow anyone, regardless of previous experience to learn programming and to make their
+own games.
+
+TNT Basic has been knocking around for over 10 years now and it consists of two main parts, the TNT Basic interpreter
+and the Hieroglyph editor. Both parts were open sourced in 2005 on sourceforge.net. In 2012 the project was
+was rekindled, and the interpreter was updated to work on Mac OS X Lion. At the time of writing, Hieroglyph has not
+yet been updated. The source for the updated interpreter is now available on github, a new editor will be forthcoming.
+
+For more information, please visit http://www.tntbasic.com/ or follow @tnt_basic on Twitter.
+
+Repository overview
+-------------------
+
+tb
+	Here you'd find the source for TNT Basic itself. The user guide and the help html files can also be found in
+	here, as well as a tool called 'tbformat' that will process a text file with TNT Basic source in it and produce
+	a HTML file with syntax highlighting. There are several TNT Basic code examples in here too which didn't see
+	public release.
+	The HelpSource directory contains .hlp files which are used to generate the html help files used in the manual.
+	Not all pages in the manual are produced from .hlp files, but they should all be moved over as the .hlp format
+	is more flexible and allows for better format control and potentially coversion to other formats such as PDF.
+
+mr
+	This is a legacy directory name standing for 'Marks Routines' which was the precursor to 'TNT Library'. It's
+	basically all useful source code that John and I ever wrote, ever. TB and Glyph use a lot of it, but there's
+	loadsa stuff in there that they don't use, and loadsa stuff that's very old and crusty that we wrote when we
+	were first learning C. It is truly a source archive.
+	Incidentally, this is where you will find the BLAST and BLAST++ sprite and graphics libraries, as well as
+	the rest of the engines that run TNT Basic, such as the Sparks networking library and the Kaboom sound library.
+	If you wanted to create a game outside of TB, this is probably where you'd be grabbing source from.
+
+third_party
+	This directory contains source code that was originally written by authors other than Mark Tully and John Treece-Birch.
+

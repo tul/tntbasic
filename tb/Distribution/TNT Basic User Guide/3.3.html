@@ -1,0 +1,209 @@
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="Adobe GoLive 5">
+		<title>The Graphics Section</title>
+	</head>
+
+	<body bgcolor="#ffffff" background="gfx/chalk.gif">
+		<div align="right">
+			<p><a href="3.4.html">Next Page...</a></p>
+		</div>
+		<div align="left">
+			<table cool width="545" height="140" usegridx usegridy showgridx showgridy gridx="16" gridy="16" border="0" cellpadding="0" cellspacing="0">
+				<tr height="16">
+					<td width="80" height="139" rowspan="3" valign="top" align="left" xpos="0"><img src="gfx/redbarrel.gif" width="69" height="110" border="0" align="left"></td>
+					<td width="464" height="16" colspan="3"></td>
+					<td width="1" height="16"><spacer type="block" width="1" height="16"></td>
+				</tr>
+				<tr height="32">
+					<td width="400" height="32" colspan="2" align="left" xpos="80" content valign="top" csheight="32">
+						<h1><font size="5">Chapter 3.3</font></h1>
+					</td>
+					<td width="64" height="32"></td>
+					<td width="1" height="32"><spacer type="block" width="1" height="32"></td>
+				</tr>
+				<tr height="91">
+					<td width="32" height="91"></td>
+					<td width="432" height="91" colspan="2" align="left" xpos="112" content valign="top" csheight="91">
+						<h1><font size="+7">The Graphics<br>
+								Section</font></h1>
+					</td>
+					<td width="1" height="91"><spacer type="block" width="1" height="91"></td>
+				</tr>
+				<tr height="1" cntrlrow>
+					<td width="80" height="1"><spacer type="block" width="80" height="1"></td>
+					<td width="32" height="1"><spacer type="block" width="32" height="1"></td>
+					<td width="368" height="1"><spacer type="block" width="368" height="1"></td>
+					<td width="64" height="1"><spacer type="block" width="64" height="1"></td>
+					<td width="1" height="1"></td>
+				</tr>
+			</table>
+			<h2>Graphics Section</h2>
+			<p>
+			</p>
+			<table border="0" cellpadding="1" cellspacing="2" width="64" align="left">
+				<tr>
+					<td><a href="gfx_views/g_1.html" target="_blank"><img src="gfx/gfx_pane_small.gif" width="250" height="201" border="0" align="left" alt="graphics section"></a></td>
+				</tr>
+				<tr>
+					<td>
+						<div align="center">
+							<font size="-2">Hieroglyph Graphics Section<br>
+								
+								(Click to enlarge)</font></div>
+					</td>
+				</tr>
+			</table>The graphics section is where you compose all the graphics that are in your game. It is divided into two tables, the left table contains all the picture resources available in your project. You can import new pictures by choosing &quot;Create new picture&quot; from the &quot;Resource&quot; menu when the table is selected. You can also copy and paste pictures from other applications, or drag and drop them from the Finder or other applications into the leftmost table. Once imported you can double click on a picture to view it in a separate window.
+			<p>The right most table shows the image banks available in your project. An image bank is a list of pictures that are loaded together and made available to your program for tasks such as sprite animation. Images are mostly used for sprite animation, for example, an image bank could contain all the images of your game's main character running.</p>
+			<p>Your project can have multiple image banks. These are accessed through the image bank popup at the top of the window. You can create new entries in your image bank by dragging pictures from the left most table. You can also use dragging to rearrange entries in the image bank.</p>
+			<p>Entries in an image bank are not just references to your project's pictures, because each image bank entry also has associated with it a transparency mask, collision detection settings and hotspot settings. These settings are edited in the &quot;Image Info&quot; palette.<br>
+				
+				The &quot;Image Info&quot; palette edits the currently selected image bank entry. You can select multiple image bank entries to apply your changes to all of them simultaneously.</p>
+			<h2><a name="1"></a>The Image Info Palette</h2>
+			<p></p>
+			<table border="0" cellpadding="1" cellspacing="2" width="64" align="left">
+				<tr>
+					<td><img src="gfx/image_info_window.gif" width="199" height="301" border="0" align="left" alt="image info"></td>
+				</tr>
+				<tr>
+					<td>
+						<div align="center">
+							<font size="-2">Hieroglyph Image Info Palette</font></div>
+					</td>
+				</tr>
+			</table>
+			
+			The image info palette is used to control settings for entries in your image banks. Here you can change the transparency mask of your image, adjust its collision detection settings and change its hotspot settings.
+
+			<p>The top thumbnail shows a preview of your image with the mask applied to it. The lower thumbnail shows the mask that is being used on the image. The mask controls which parts of the picture are transparent. It can be set to a simple colour or to a grey scale transparency mask.</p>
+			<p><a name="2"></a><b>Changing the Image Mask<br>
+				</b>To set the image mask to a simple colour, double click in the mask preview box (the lower box), this will open a colour picker dialog from which you can select the transparency colour. If you hold down the option key you can pick a colour from anywhere on the screen.<br>
+				
+				Once selected, any parts of the picture that are equal to the mask colour will be transparent.</p>
+			<p>You can also use mulitple levels of transparency, to make some pixels fully transparent, some semi-transparent and some opaque. This can useful for softening the edges of your images by making the edges 50% translucent for instance. This technique is also known as anti-aliasing and can make your graphics appear much smoother on screen.</p>
+			<p>To use multiple levels of transparency you need a grey scale mask. First make a greyscale mask in your preferred paint program. It should be exactly the same size as your image picture but use only greys. Colour the image black where you wish it to be transparent and white where you wish it to be opaque (solid). Use any level of grey inbetween to represent semi-transparent. Once you greyscale mask is ready, copy it to the clipboard. In Hieroglyph, select the image bank entry that you want to apply the mask to and click once on in the mask thumbnail box. It will become highlighted. Now select paste from Hieroglyph's edit menu to paste the greyscale mask into the mask box. Your image will now have a greyscale mask and multiple levels of transparency.</p>
+			<p><a name="3"></a><b>Changing the Hotspot Settings</b><br>
+				
+				When images are used in TNT Basic, be it by sprites, buttons or commands such as &quot;paste image&quot;, they are always placed at a point on the screen.</p>
+			<p>Imagine the screen as a cork board which images are stuck to with pins. The images can be any size but are always pinned with a single pin that occupies exactly one pixel. The hotspot defines exactly where in the image the pin goes through when pinning the image to the cork board.</p>
+			<p>If we draw a 50x50 pixel image at the point (100,100) it might occupy the rectangle from (100,100) to (150,150) for example, or it might occupy the rectangle from (75,75) to (125,125); it depends where the pin, the hotspot, is placed.</p>
+			<p>The image hotspot is used to define how the image is drawn relative to the point that it is positioned at. The image's hotspot is a point inside the image that is always aligned with the point it is drawn to on the screen.</p>
+			<p>You can set the hotspot to any once of nine presets by using the relative hotspot setting in the &quot;Image Info&quot; palette. You can set it to:</p>
+			<ul>
+				<li>Top Left
+
+				<li>Top
+
+				<li>Top Right
+
+				<li>Left
+
+				<li>Middle
+
+				<li>Right
+
+				<li>Bottom Left
+
+				<li>Bottom
+
+				<li>Bottom Right
+
+			</ul>
+			<p>Alternately, you can specify an absolute hotspot by using the &quot;Absolute Hotspot&quot; setting from the menu. Here you can type in an (x,y) co-ordinate for the hotspot of your image, allowing you to set it exactly as you want. This option is useful for aligning frames of animation.</p>
+			<p>The hotspot is allowed to lie outside of the image, for example if could be set to negative values or to values greater than the height/width of the image.</p>
+			<p><a name="4"></a><b>Setting a Collision Mask</b><br>
+				
+				Collision masks are used in association with TNT Basic's &quot;sprite col&quot; command to detect collisions between sprites. A collision is when two sprites overlap on screen. This can be used to detect if missiles have hit a ship, or if a baddie has touched the main character, for example.</p>
+			<p>The collision settings for individual images can be controlled in the collision settings part of the image info palette. The image's collision mask can be set to two values: fast and exact.</p>
+			<p><b>Fast Collision Masks</b><br>
+				
+				If the &quot;fast&quot; option is used, the mask is set to the bounding rectangle of the image. This means if two image's bounding rectangles overlap are determined to be touching. It is called fast because it is very quick for TNT Basic to test for collisions with rectangular collision masks.</p>
+			<p>A problem with using a rectangle as a collision mask occurs when your image has lots of indentations. Consider the following image:</p>
+		</div>
+		<div align="center">
+			<table border="0" cellpadding="1" cellspacing="2" width="64">
+				<tr>
+					<td><img src="gfx/phoenix_plain.gif" width="160" height="160" border="0" align="middle" alt="space ship"></td>
+				</tr>
+				<tr>
+					<td>
+						<div align="center">
+							<font size="-2">Spaceship image</font></div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div align="left">
+			<p>Using a rectangle mask, the collision mask, overlayed here in blue, would look like the following:</p>
+		</div>
+		<div align="center">
+			<table border="0" cellpadding="1" cellspacing="2" width="64">
+				<tr>
+					<td><img src="gfx/phoenix_cr.gif" width="160" height="160" border="0" align="middle" alt="space ship"></td>
+				</tr>
+				<tr>
+					<td>
+						<div align="center">
+							<font size="-2">Spaceship image with fast collision mask and shrink image bounds to contents off</font></div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div align="left">
+			<p>If a bullet was to touch any of the blue pixels the ship would be destroyed!</p>
+			<p>The &quot;fast&quot; option is best used if you have a lot of sprites on screen, if pixel perfect collision detection is not important, if your image is fairly rectangular anyway or if the image is so small that the rectangle is pretty much the same as the image anyway (e.g. for a bullet).</p>
+			<p><b>Shrink Image Bounds to Contents</b><br>
+				
+				The &quot;Shrink Image Bounds to Contents&quot; option is useful with the &quot;fast&quot; method as it makes the bounding rectangle the smallest possible that will capture the image. Here is the spaceship again with shrunk bounds on and off:</p>
+		</div>
+		<div align="center">
+			<table border="0" cellpadding="1" cellspacing="2" width="330">
+				<tr>
+					<td><img src="gfx/phoenix_cr.gif" width="160" height="160" border="0" align="middle" alt="space ship"></td>
+					<td><img src="gfx/phoenix_cr_sb.gif" width="160" height="160" border="0" align="middle" alt="space ship"></td>
+				</tr>
+				<tr>
+					<td>
+						<div align="center">
+							<font size="-2">Spaceship image with fast collision mask and <b>shrink image bounds to contents off</b></font></div>
+					</td>
+					<td>
+						<div align="center">
+							<font size="-2">Spaceship image with fast collision mask and <b>shrink image bounds to contents on</b></font></div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div align="left">
+			<p>As you can see, the left image is senstive to being hit over a much larger image than the image on the right. This makes the image on the right harder to hit, it is also more accurate. Collision detection is equally fast whether shrink image bounds to contents is on or off.</p>
+			<p><b>Exact Collision Masks</b><br>
+				
+				
+				When absolute accuracy is needed, it is best to use the exact collision mask mode. This ensures pixel perfect collision detection at the cost of making your game run a little slower. When turned on for the spaceship image above the collision mask looks like the following:</p>
+		</div>
+		<div align="center">
+			<table border="0" cellpadding="1" cellspacing="2" width="64">
+				<tr>
+					<td><img src="gfx/phoenix_exact.gif" width="160" height="160" border="0" align="middle" alt="space ship with exact"></td>
+				</tr>
+				<tr>
+					<td>
+						<div align="center">
+							<font size="-2">Spaceship image with exact collision mask enabled</font></div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div align="left">
+			<p>Now the player cannot complain that the bullet was only a near miss because the collision detection is pixel perfect!</p>
+			<p>In exact mode, the collision mask is generated from the transparency mask settings. If the transparency mask is set to a solid colour then the collision mask is simply solid (hit-able) where the mask is white and empty (miss-able) where it is black.</p>
+			<p>If the transparency mask is a grey scale mask then you can use the slider bar to decide how opaque the image has to be in order to be hit. A sensitivity of 0% will mean that only the most opaque areas of the image will be hit-able, ie those that are 100% pure white (absolutely opaque). A sensitivity of 100% will mean that everything is hit-able except where the mask is 100% pure black (absolutely transparent).</p>
+		</div>
+		<div align="right">
+			<p><a href="3.4.html">Next Page...</a></p>
+		</div>
+	</body>
+
+</html>

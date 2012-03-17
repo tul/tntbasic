@@ -1,0 +1,15 @@
+<name>Raw Key Scancode</name>
+<group>io</group>
+<synopsis>Extracts the scancode from a raw key</synopsis>
+<syntax><i>scancode</i> = Raw Key Scancode (<i>rawkey</i>)</syntax>
+<desc>
+Takes a <i>rawkey</i> as returned from the @@Keyboard Raw Key@@ command and extracts the keyboard scancode from it.
+
+Each key on the keyboard has a unique identifier called its <b>scancode</b>. This is independent of what modifier keys were being held when the key was typed, unlike the character part of the raw key (see @@Raw Key Char@@) which is derived from both the scancode of the key and the modifier keys.
+
+A listing of all the scancodes and the keys they belong to can for a US/UK keyboard can be found on the @@Pressed@@ commands help page. The scancodes will be the same for keyboards from different countries, although the characters produced by those keys might be different, due to differing keyboard layouts.
+
+For more information on raw keys and working with the keyboard please refer to the @@Keyboard Input Guide@@.
+
+See also the @@Keyboard Raw Key@@, @@Raw Key Char@@, @@Raw Key Modifier@@ and @@Raw Key Ascii@@ commands.
+</desc>

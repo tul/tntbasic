@@ -1,0 +1,11 @@
+tbformat is a tool that reads TNT Basic source code from it's standard input
+and tags them up according to syntax highlighting rules.
+
+e.g.
+
+cat test.tb | tbformat
+
+It is used by the help building script: formathelp.pl.
+
+Mark Tully
+13/11/05

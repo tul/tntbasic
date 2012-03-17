@@ -1,0 +1,9 @@
+<name>Left Str</name>
+<group>strs</group>
+<syntax><i>string</i> = Left Str (<i>theString</i>,<i>length</i>)</syntax>
+<synopsis>Gets characters from the beginning of a string</synopsis>
+<desc>
+Returns <i>length</i> characters from the beginning of <i>theString</i>.
+
+See also @@Right Str@@ and @@Mid Str@@.
+</desc>

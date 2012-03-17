@@ -1,0 +1,12 @@
+<name>Bit Test</name>
+<group>bit</group>
+<syntax><i>result</i> = Bit Test (<i>value</i>,<i>bit</i>)</syntax>
+<synopsis>Tests if a bit in a number is set</synopsis>
+<desc>
+This command will return <b>true</b> if the bit at index <i>bit</i> in <i>value</i> is 1, and <b>false</b> if the bit is 0.
+
+The bit indexes are numbered 0 through to 31, where 0 is the least significant bit, and 31 is the most significant bit.
+
+You can set an individual bit using @@Bit Set@@.
+</desc>
+

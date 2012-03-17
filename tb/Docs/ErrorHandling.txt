@@ -1,0 +1,36 @@
+Error handling in bison explained
+(as best I can figure it anyway)
+---------------------------------
+Mark Tully
+11/7/00
+
+
+Bison is a bottom up parser which parses grammers using a 1 look ahead token to choose rules. If it looks at the next token
+and finds that it isn't what is expected it automatically shifts a special wildcard token called error onto the stack.
+If you have a rule which contains the error token this could now be reduced swallowing the error.
+The error token will match any number of tokens until a synchronisation token is met, that is a valid expected token which
+can legally follow the error token(s).
+
+As far as I can figure if your error catching expression ENDS in the error token you should called yyclearin as part of your
+action. This clears the token which caused the error, if you have a synchronisation token following the error token directly
+you don't seem to need to do this. I don't understand why exactly.
+
+If you want to see what's going on turn on debugging in the bison control panel and set basicdebug=true in main(). That
+generates a parse trace which will be extremely long if your code is >1 line long. You have been warned.
+
+Pretty much all error handling in TNT Basic is inside the genExpList. This is a list of expressions. It handles all errors
+except the case of a single expression which is in error.
+ie handles:
+	beep 1,if
+	beep if,1
+	beep 1,if,1 etc..
+	
+	but not
+	beep if
+So the code using the genExpList should have a duplicate rule with error replacing genExpList in order to catch all errors.
+When the genExpList comes back OK you should check if it contains errors before using it by called CGeneralExpressionErr::
+ContainsErrors.
+Use genExpList as much as possible for lists.
+
+Use genExp in place of numExpression and strExpression and check if the result is an error with CGeneralExpressionErr::ContainsErrs
+Also create an identical statement with "error" replacing genExp.

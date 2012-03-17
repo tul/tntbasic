@@ -1,0 +1,11 @@
+<name>'P'ause</name>
+<group>moan</group>
+<syntax>P</syntax>
+<synopsis>Wait for frame to be drawn</synopsis>
+<desc>
+The Pause command causes a moan program to wait until the next frame has been drawn to screen before continuing.
+
+It is very rarely needed, as @@'M'ove@@ and @@'A'nimate@@ commands automatically wait until a frame is drawn before changing the position or frame. However, if modifiying X, Y or I registers directly in a loop, you will have to 'Pause' your program for the new values to have chance to be drawn to screen before changing them again.
+
+See the @@Advanced Moan Tutorial@@ for example usage.
+</desc>

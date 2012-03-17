@@ -1,0 +1,34 @@
+<name>Read</name>
+<group>misc</group>
+<syntax>Read <i>variableA</i>
+Read <i>variableA,variableB,....</i></syntax>
+<synopsis>Reads values from data statements into variables</synopsis>
+<desc>
+The @@Read@@ command will assign the list of variables passed with corresponding values from the next unread @@Data@@ statement.
+This allows you to specify all of your data in one section of your code while having the code that works with the data in another.
+
+Example:
+<tnt>int		n
+float	f
+string	s
+
+read n,f,s
+print n,f,s
+
+'...other code can go here...
+
+data 5,2.73,"Hello"</tnt>
+This example first declares three variables, an integer called n, a floating point variable called f and a string called s. It then uses the @@Read@@ command to assign values to n,f,s from the first unread @@Data@@ statement.
+
+The types of values in the @@Data@@ statement must match the types of variables they are being read into, in this case an integer value followed by a floating point value followed by a string value.
+
+The example then goes on to print the values out. This example would result in the printing of "5 2.73 Hello".
+
+Once a value has been read from a data statement, the data statement will not be read again unless you explicitly position the read pointer using the @@Restore@@ command.
+
+The @@Data@@ statements need not be anywhere near the @@Read@@ commands that read them. Data statements are conventionally placed at the end of programs.
+
+If a @@Read@@ statement is used inside a procedure, it can only read @@Data@@ statements within that same procedure. Conversely, @@Read@@ commands outside of procedures cannot read @@Data@@ statements inside procedures.
+
+See also @@Data@@ and @@Restore@@.
+</desc>

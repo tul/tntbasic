@@ -1,0 +1,47 @@
+<HTML>  
+<HEAD>
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>Clear Keyboard</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+  <META NAME="AppleTitle" CONTENT="Clear Keyboard">
+  <META NAME="AppleTarget" CONTENT="_right">
+  <META NAME="DESCRIPTION" CONTENT="Removes all keys from the keyboard input queue">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="349"
+HEIGHT="177">
+  <TR VALIGN="TOP">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">Clear Keyboard</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD HEIGHT="41">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva">Removes all keys from the keyboard input queue</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Syntax</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="43">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial">Clear Keyboard</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Description</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="40">
+      <BLOCKQUOTE>
+        <FONT SIZE="-1" FACE="Geneva"><p>The keyboard input queue records all the unprocessed keypresses that your user has typed into your game. You can read these keypresses one at a time using the <A HREF="../commands/keyboardrawkey.htm">Keyboard Raw Key</A> command, after which they will be removed from the queue.</p><p>Calling 'Clear Keyboard' will <i>discard</i> all the keys that haven't yet been read from the queue. This is a useful thing to do before inputting a string from the user, eg before they enter their name into the high score table. This is because the keyboard input queue will likely still contain many keypresses from when the user was playing the game, keypresses that you don't want to be typed into the highscore table as soon as you start reading it.<br>(For information on easily inputting strings from the user, see the <A HREF="../guides/keyboard_guide.htm#stringeditor">String Editor</A> suite of commands).</p><p>Clearing the keyboard input queue is functionally equivalent to calling <A HREF="../commands/keyboardrawkey.htm">Keyboard Raw Key</A> until it returns 0.</p><p>Eg:</p><p></FONT><FONT COLOR="#000000" SIZE="-2" FACE="Monaco,Arial"><FONT COLOR="#0000FF">while</FONT> <FONT COLOR="#4985c6">Keyboard Raw Key</FONT> = 0<br><FONT COLOR="#0000FF">wend</FONT><br></FONT><FONT SIZE="-1" FACE="Geneva"></p><p>Note that when your program is first ran, the keyboard queue is cleared, so the only keys in the queue will be ones typed since your program started.</p>See also the <A HREF="../guides/keyboard_guide.htm">Keyboard Input Guide</A> and <A HREF="../commands/keyboardrawkey.htm">Keyboard Raw Key</A> command.<br></FONT>
+      </BLOCKQUOTE>
+    </TD>
+  </TR>
+  <TR VALIGN="TOP">
+    <TD ALIGN="CENTER" HEIGHT="34"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../io/io_frameset.htm">Table of contents</A></FONT></TD> 
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

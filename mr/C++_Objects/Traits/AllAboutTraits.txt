@@ -1,0 +1,106 @@
+All about "Traits"
+------------------
+Mark Tully
+10/4/98
+
+Introduction
+------------
+Traits are a concept I came up with to minimise code duplication in a set of closely related classes.
+
+Example
+-------
+Take the TNT List View. It has several classes, the basic plain list view is TListView. Then there's TSortedListView, which
+is a derivative of TListView and automatically sorts the list as you add cells to it. However, I want to add a drag and drop
+feature to the classes. So I have to create two new classes, TSortedListViewDrag and TListViewDrag. That involves creating
+two new classes when the Drag and drop code for the two is very similar, if not identical.
+
+Imagine I went ahead and wrote two copies anyway, then I decided to make the classes take advantage of the MacOS8 appearance
+manager. At this point I have TListView, TSortedListView, TListViewDrag and TSortedListViewDrag. Doing the appearance one
+would generate TListViewOS8, TSortedListViewOS8, TListViewDragOS8 and TSortedListViewDragOS8. Plus the original 4.
+Can you see how every time I add a new feature to the class I have to write double the amount of existing classes to write a
+complete suite of classes to support the feature? Bugger eh?
+
+What is needed is a way to take the MacOS 8 list code, the sorting list code and the drag and drop list code and be able to
+combine them automatically into the 8 classes. Well now you can using Traits. To create the previous 8 classes would involve
+writing the orignal TListView class, then writing the three traits classes, then you can mix and match traits onto the
+orignal TListView class to make up new classes.
+
+Mix2Classes(MyListViewType,TMacOS8Trait,TListView);		// Creates a type called MyListViewType which is a TListView with
+														// MacOS8 appearance manager features.
+Mix3Classes(MyListViewType2,TMacOS8Trait,TDragTrait,TListView);		// Creates a type called MyListViewType2 which is a
+																	// TListView with MacOS8 and drag and drop features.
+																	
+
+Limitations
+-----------
+
+Seems to useful to be true? Well it's got it's limitations, first you need to understand what the compiler is seeing.
+
+Mix2Classes(MyListViewType,TMacOS8Trait,TListView)
+Creates a class MyListViewType which is a TMacOS8Trait class with TListView as it's base. Essensially you've done this.
+
+typedef class TMacOS8Trait : public TListView
+{
+	functions to give a list view mac os 8 features
+} TMacOS8Trait;
+
+Except the class is called MyListViewType (or whatever you entered into the macro).
+So MyListViewType is a TListView overidden by a TMacOS8Trait.
+
+Follow? Good.
+
+Now take the 3 mix example. That creates a MyListViewType2 by taking a TListView overidding it with a TDragTrait then 
+overidding that combination with TMacOS8Trait.
+If you swapped the TMacOS8Trait and TDragTrait around in the macro then it would create a TListView overidden with a
+TMacOS8Trait with that combination overidden by a TDragTrait. So, yes, order in the macro does make a difference.
+
+But, what if TDragTrait had to act differently under MacOS8, what if it hilited in red under MacOS8, but blue under system 7.
+That's the limitation. Sometimes a trait actually has to change other traits. In this case the MacOS8 trait needs to change
+features of the Drag trait.
+So you need a special one, a TMacOS8DragTrait which does the drags differently for macos 8 and implements the appearence
+manager stuff too. But you can create one by mixing the traits with another class which combines the two properly.
+
+Mix3Classes(TMacOS8DragTrait,TOS8DragObject,TMacOS8Trait,TDragTrait);
+
+The new object in each case is TMacOS8DragTrait which gives the features of both TMacOS8Trait and TDragTrait but gets them
+to work in harmony thanks to the code supplied by the TOS8DragObject code.
+
+How to write a trait class
+--------------------------
+Write a class which derives from the original and does what you want. Call it a trait. Then make it into a template
+class which takes another class as it's template parameter. Set up your class defination to derive from the class passed.
+eg
+if you had
+
+	typedef class MissileFiringRobot : public Robot
+	{
+		// code to override robot class to make it fire missiles
+	} MissileFiringRobot;
+	
+you'd change it to...
+
+	template <class T>
+	class TMissileFiringTrait : public T
+	{
+		// same as it was in here
+	};
+
+Your code definations would need to be moved into the header file next to the class declaration and every function would
+need "template <class T>" writing on the line above and adding <T> after the class qualifier.
+eg
+template <class T>
+void TMissileFiringTrait<T>::DoNullEvent()
+{
+	// No further changes to the code in here
+}
+
+Then mix it in with the original robot class to get back to what you had. Read up on C++ templates in Learn C++ on the mac by
+Dave Mark.
+
+
+
+
+
+
+
+

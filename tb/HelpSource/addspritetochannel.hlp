@@ -1,0 +1,16 @@
+<name>Add Sprite To Channel</name>
+<group>moan</group>
+<syntax>Add Sprite To Channel <i>sprite,channelId</i></syntax>
+<synopsis>Adds a sprite to a moan channel</synopsis>
+<desc>
+This command is used to add a sprite to a moan channel. Subsequent programs ran on the moan channel will then affect it.
+
+It is possible to add a sprite to multiple channels. When this is done, the overall effect on the sprite will be a composite of the individual channels.
+
+A sprite can be added to the same channel multiple times, this will cause it to be doubly affected by the channel, ie where a move command would move it x pixels, it will instead move it 2*x pixels.
+
+<i>spriteNum</i> is the number of the sprite to add to the channel.
+<i>channelId</i> is the number of the moan channel to add the sprite to.
+
+See also @@Add Viewport To Channel@@, @@Remove Sprite From Channel@@ and @@Remove Viewport From Channel@@.
+</desc>

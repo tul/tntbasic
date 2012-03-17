@@ -1,0 +1,23 @@
+Arithmetic Expressions in TNT Basic
+Mark Tully
+20/5/00
+
+Premise
+-------
+An arithmetic expression is either an integer or a float. The idea is to allow the user to use the two interchangably. If
+the situation demands an int and a float is passed then it should be automatically coerced. If the same value is passed to
+a context where a float is needed then the accuracy of the float should not be lost.
+
+Structure
+---------
+CArithExpession is a class which can either be a float or an int. It has two evaluate functions, EvaluateInt and
+EvaluateFloat. The one called depends on the context of the code using the arithexpression.
+A sub expression will override either EvaluateInt or EvaluateFloat. If EvalauteFloat is overridden then CArithExpression::mIsFloat
+MUST be set to true. This can be done by passing true to CArithExpression's constructor.
+
+EvaluateInt will automatically convert the results of EvaluateFloat if mIsFloat is set to true.
+EvaluateFloat will automatically convert the results of EvaluateInt if mIsFloat is set to false.
+
+Arithmetic
+----------
+When operating a float to an int the results is an float. This follows C's rule of returning the largest data type.

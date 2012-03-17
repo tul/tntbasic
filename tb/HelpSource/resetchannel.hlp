@@ -1,0 +1,12 @@
+<name>Reset Channel</name>
+<group>moan</group>
+<syntax>Reset Channel
+Reset Channel <i>channelId</i></syntax>
+<synopsis>Resets a moan channel</synopsis>
+<desc>
+Resetting a moan channel means clearing the program from the channel, resetting its local registers and removing any sprites or viewports that are attached to it. This puts the channel back into its start state.
+
+<i>channelId</i> is the channel to reset, if you do not specify a channel then all active channels are reset. Resetting all channels also resets the global moan registers.
+
+See also @@Restart Channel@@.
+</desc>

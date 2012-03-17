@@ -1,0 +1,13 @@
+<name>Bit Shift</name>
+<group>bit</group>
+<syntax><i>result</i> = Bit Shift (<i>value</i>,<i>shift</i>)</syntax>
+<synopsis>Shifts the bits in a number to the left or right</synopsis>
+<desc>
+This command will move (also known as shift) the bits in a number to the left or right.
+
+If you pass in a positive <i>shift</i>, the bits in <i>value</i> will be shifted to the left, making the number bigger. If you pass in a negative shift the bits will be shifted to the right making it smaller.
+
+Each bit shifted will either increase or decrease the <i>value</i> by a power of two. Eg a shift of 1 to the left will double the value, and a shift to 2 to the right will quarter it.
+
+See also the @@Bit Set@@, @@Bit Test@@, @@Bit And@@, @@Bit Or@@ and @@Bit Xor@@ commands.
+</desc>

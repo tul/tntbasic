@@ -1,0 +1,13 @@
+Interrupting cow
+----------------
+
+21/12/01
+Since we moved to RezLib, our interrupts have never been as accurate under OS 9. When the
+displays running at x Hz, our vbl proc tends to be called at x-10 Hz. This is a bit annoying
+but I can't really see anything we can do about it.
+
+The previous version used a dsp call, I don't know how dsp did it under the hood, but RezLib
+uses SlotVInstall, which is clearly wanting...
+
+To test the VBL timing in TNT Basic, set the CheckVBLTimer macro to true in CGraphicsContext16.h
+then see the results output in bkg console when the context is deleted.

@@ -1,0 +1,47 @@
+<HTML>  
+<HEAD>
+  <META HTTP-EQUIV="content-type" CONTENT="text/html;charset=iso-8859-1">
+  <TITLE>Keyboard Raw Key</TITLE>
+  <META NAME="DP" CONTENT="1.9.1/3.1.1">
+  <META NAME="AppleTitle" CONTENT="Keyboard Raw Key">
+  <META NAME="AppleTarget" CONTENT="_right">
+  <META NAME="DESCRIPTION" CONTENT="Reads a key from the keyboard input queue">
+</HEAD>
+<BODY BGCOLOR="#ffffff" BACKGROUND="../gfx/chalk.gif">
+
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="349"
+HEIGHT="177">
+  <TR VALIGN="TOP">
+    <TD HEIGHT="18"><B><FONT COLOR="#330099" SIZE="+1" FACE="Helvetica,Arial">Keyboard Raw Key</FONT></B></TD> 
+  </TR>
+  <TR>
+    <TD HEIGHT="41">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva">Reads a key from the keyboard input queue</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Syntax</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="43">
+      <BLOCKQUOTE>
+        <P><FONT SIZE="-1" FACE="Geneva,Arial"><i>rawKey</i> = Keyboard Raw Key</FONT></P></BLOCKQUOTE>
+
+      <P><B><FONT COLOR="#330099" SIZE="-1" FACE="Helvetica,Arial">Description</FONT></B>
+    </TD>
+  </TR>
+  <TR>
+    <TD HEIGHT="40">
+      <BLOCKQUOTE>
+        <FONT SIZE="-1" FACE="Geneva"><p>Reads a raw key from TNT Basic's keyboard input queue, if the queue is empty (because the user has not typed anything) then 0 is returned. When a key is returned, it is removed from the queue and won't be returned again.</p><p>The keys are returned in the order they were typed by the user. They are stored in the key queue until you ask for them, and remain there even after the user has released the key.<br>For memory reasons, TNT Basic only remembers the last 20 keys pressed, so if your game isn't reading the keys the user is typing, eventually they will be <i>forgotten</i> as the most recently typed keys replace them. However, as long as you are reading the keys resonably often, you will not miss any.</p><p>Raw keys are discussed at length in the <A HREF="../guides/keyboard_guide.htm">Keyboard Input Guide</A>, and so only a brief guide to their usage will be listed here.</p><p>A raw key is a way of storing a key presses' <i>character</i>, <i>scancode</i> and its <i>modifier keys</i> all in a single integer variable. Once a raw key is returned from the 'Keyboard Raw Key' command, you can get access to these parts using the <A HREF="../commands/rawkeychar.htm">Raw Key Char</A>, <A HREF="../commands/rawkeyscancode.htm">Raw Key Scancode</A> and <A HREF="../commands/rawkeymodifier.htm">Raw Key Modifier</A> commands respectively.</p><p>See also <A HREF="../commands/clearkeyboard.htm">Clear Keyboard</A>, <A HREF="../commands/waitkeypress.htm">Wait Key Press</A>, <A HREF="../commands/pressed.htm">Pressed</A> and <A HREF="../commands/keyboardrepeat.htm">Keyboard Repeat</A>.</p>For an introduction and general overview of the keyboard commands, refer to the <A HREF="../guides/keyboard_guide.htm">Keyboard Input Guide</A>.<br></FONT>
+      </BLOCKQUOTE>
+    </TD>
+  </TR>
+  <TR VALIGN="TOP">
+    <TD ALIGN="CENTER" HEIGHT="34"><FONT SIZE="-2" FACE="Geneva,Arial"><HR><A
+      HREF="../io/io_frameset.htm">Table of contents</A></FONT></TD> 
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>

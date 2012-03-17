@@ -1,0 +1,9 @@
+<name>Right Str</name>
+<group>strs</group>
+<syntax><i>string</i> = Right Str (<i>theString</i>,<i>length</i>)</syntax>
+<synopsis>Gets characters from the end of a string</synopsis>
+<desc>
+Returns <i>length</i> characters from the end of <i>theString</i>.
+
+See also @@Left Str@@ and @@Mid Str@@.
+</desc>
