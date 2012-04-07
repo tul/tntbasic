@@ -111,4 +111,16 @@ endian and image decoding
 		ARGGHH - there is a gworld flag to do this: kNativeEndianPixMap
 	so, remove all endian flipping code and instead set this flag on all gworlds opened, and you should be good?
 
+more endian woes
+	snd problems
+		when reading and writing snd resources under intel from the resource manager they will be endian flipped, so that the on disk version is always big endian
+		this means if a project is converted from rsrc -> tbproj using powerpc, the resources will be stored into the tbproj in big endian format
+		because tbproj files are not endian flipped when reading / writing, the data is the wrong endian when read on intel from these files
+	solution
+		the tbproj format should also endian flip the data on reading / writing to maintain the big endian formatting of the data
+		it will have to do this explicitly in the CResourceContainer layer
+		
+
+
+
 

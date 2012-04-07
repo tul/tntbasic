@@ -108,6 +108,12 @@ class CBundleResFile : public CResourceContainer
 		void							MacifyFileName(
 											Str255			ioFileName);
 
+		Handle /*e*/					ApplyEndianFlip(
+											ResType			inType,
+											Handle			inHandle,
+											bool			inCanModifyOriginalHandle,
+											bool			inDataIsLittleEndian);
+
 	public:
 										CBundleResFile(
 											const FSSpec	*inSpec,

@@ -49,6 +49,7 @@
 #include "Utility Objects.h"
 #include "MoreFiles.h"
 #include "MoreFilesExtras.h"
+#include "UResourceMgr.h"
 #include "Root.h"
 
 static const TFolderIterator::TFolderIteratorFlags		kResTypeIteratingFlags=TFolderIterator::kResolveFolderAliases|TFolderIterator::kReturnFolders|TFolderIterator::kIgnoreBrokenAliases|TFolderIterator::kIgnoreInvisibles;
@@ -100,6 +101,11 @@ CResource *CBundleResFile::LoadResource(
 		// load into a handle
 		Handle				handle=ReadResourceData(inType,inId,resName,&spec);
 		UHandleReleaser		rel(handle);
+
+#if TARGET_RT_LITTLE_ENDIAN
+		// it's ok to modify this data directly here as the handle was newly allocated and read from disk
+		ApplyEndianFlip(inType,handle,true,false);
+#endif
 		
 		res=new CBundleResource(this,inType,inId,resName,handle,true);
 		ThrowIfMemFull_(res);
@@ -163,6 +169,47 @@ void CBundleResFile::ChangeResourceInfoSelf(
 	}
 }
 
+// will apply an endian flip to the data if it is a format that is endian flipped by the OS 'automagically'
+// this is done to remain compatable with Mac OS Resource files, which also have this behaviour
+// if allowed to modify the original handle, then it is flipped in place
+// if not, a new handle is allocated and returned, and the caller is responsible for disposing of it
+// if flipped in place, null is returned, indicating there is no additional handle to release
+// inDataIsLittleEndian indicates the endianess of the data contained in inHandle currently
+Handle CBundleResFile::ApplyEndianFlip(
+	ResType			inType,
+	Handle			inHandle,
+	bool			inCanModifyOriginalHandle,
+	bool			inDataIsLittleEndian)
+{
+	Handle			result=0;
+
+	if (UResFlip::HasFlipper(inType))
+	{
+		Handle		flip=inHandle;
+
+		//ECHO("Flipping resource of type "  << ((SInt8*)&inType)[0] << ((SInt8*)&inType)[1] << ((SInt8*)&inType)[2] << ((SInt8*)&inType)[3] << "\n");
+		if (!inCanModifyOriginalHandle)
+		{
+			result=inHandle;
+			ThrowIfOSErr_(::HandToHand(&result));
+			flip=result;
+		}
+		UHandleReleaser	rel(result);
+		UHandleLocker	lock(flip);
+		OSStatus	err=::CoreEndianFlipData(
+			kCoreEndianResourceManagerDomain,
+			inType,
+			0,
+			*flip,
+			::GetHandleSize(flip),
+			inDataIsLittleEndian);
+		ThrowIfOSErr_(err);
+		rel.Release();
+	}
+
+	return result;
+}
+
 // ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 //		¥ AddResourceSelf							/*e*/
 // ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
@@ -176,6 +223,17 @@ void CBundleResFile::AddResourceSelf(
 	bool			inAdopt)
 {
 	UHandleReleaser	rel(inDataHandle,inAdopt);
+
+#if TARGET_RT_LITTLE_ENDIAN
+	// if we're a little endian machine writing to our big endian file format, perform an endian flip on the data if necessary
+	Handle			newHandle;
+	newHandle=ApplyEndianFlip(inType,inDataHandle,inAdopt,true);
+	UHandleReleaser	rel2(newHandle,true);
+	if (newHandle)
+	{
+		inDataHandle=newHandle;
+	}
+#endif
 	
 	SaveHandleToFile(inType,inId,inName,inDataHandle,true);
 }
