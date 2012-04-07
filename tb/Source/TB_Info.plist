@@ -5,11 +5,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleGetInfoString</key>
-	<string>1.41</string>
+	<string>1.42</string>
 	<key>CFBundleVersion</key>
-	<string>141</string>
+	<string>142</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.41</string>
+	<string>1.42</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>© Mark Tully &amp; John Treece-Birch, 1999-2012</string>
 	<key>CFBundleIconFile</key>

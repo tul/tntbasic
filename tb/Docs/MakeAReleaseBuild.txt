@@ -1,3 +1,24 @@
+Short notes on making an OS X Lion build (no editor)
+
+In Xcode, in TB_Info.plist, update the 3 version numbers.
+Edit Version.h and update the 4 version numbers.
+Build a release build.
+Take the previous releaes archive, and duplicate it
+Edit the version .rtf file and update it with the changes
+Replace the exe
+Select exe and rtf, and use the finder Compress 2 items to make the archive
+Name the archive TNT_Basic_1.<version>_Beta.zip
+Tag the source using a format like tb_142_release
+Upload archive to tntbasic.com
+Update DB for tbtools table and link to new release with the correct version number
+Make a post in the forums and on the news page
+Tweet about it
+Fin.
+
+Legacy:
+
+Some of the below may still be relevant.
+
 Quick notes on doing a TB release build:
 Mark Tully
 31/1/06

@@ -814,6 +814,7 @@
 	1.4 (24/1/12)			Updated to work on Intel properly - now officially an OS X only app (finally...)
 	1.41 (14/2/12)			Now able to load tbprojs again
 							Should run on OS 10.5 Leopard now
+	1.42 (7/4/12)			Fixed sounds not playing from tbproj files under Lion
 */
 
 // Version info
@@ -821,12 +822,12 @@
 
 #define	verMajor		1
 #define	verSub			4
-#define	verSubSub		1
+#define	verSubSub		2
 #define	verUnderName	kTBLangVersion // this goes under the name
 
-#define	verVersionText	"1.41, © TNT Software 1999-2012" // This goes by the Version: field in the get info box
-#define	verShortText	"1.41"
-#define mainFunc	  	tb_1_41				// encode version into the name of 'main' so that the version number will be visible in the OS X crash logs
+#define	verVersionText	"1.42, © TNT Software 1999-2012" // This goes by the Version: field in the get info box
+#define	verShortText	"1.42"
+#define mainFunc	  	tb_1_42				// encode version into the name of 'main' so that the version number will be visible in the OS X crash logs
 #define verStage		final
 
-#define verShortTextP	"\p1.41"
+#define verShortTextP	"\p1.42"
