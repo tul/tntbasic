@@ -1,0 +1,2 @@
+cp ../libwebsockets/lib/.libs/libwebsockets.a .
+cp ../libwebsockets/lib/libwebsockets.h .

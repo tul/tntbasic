@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D14C30B1536363300D9CE98 /* libwebsockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D14C3091536363300D9CE98 /* libwebsockets.a */; };
+		4D14C30C1536363300D9CE98 /* libwebsockets.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D14C30A1536363300D9CE98 /* libwebsockets.h */; };
 		4D41AA070A3C8BA4007F22EF /* LStdPushButtonImp.cp in Sources */ = {isa = PBXBuildFile; fileRef = 4D41AA060A3C8BA4007F22EF /* LStdPushButtonImp.cp */; };
 		4D41AA3E0A3C8C2A007F22EF /* UVolume.cp in Sources */ = {isa = PBXBuildFile; fileRef = 4D41AA3D0A3C8C2A007F22EF /* UVolume.cp */; };
 		4D41ABF00A3C9B68007F22EF /* OpenPlay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D41ABEF0A3C9B68007F22EF /* OpenPlay.framework */; };
@@ -920,6 +922,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4D14C3091536363300D9CE98 /* libwebsockets.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebsockets.a; path = ../third_party/libwebsockets.built/libwebsockets.a; sourceTree = SOURCE_ROOT; };
+		4D14C30A1536363300D9CE98 /* libwebsockets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = libwebsockets.h; path = ../third_party/libwebsockets.built/libwebsockets.h; sourceTree = SOURCE_ROOT; };
 		4D41AA060A3C8BA4007F22EF /* LStdPushButtonImp.cp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = LStdPushButtonImp.cp; path = "../third_party/PowerPlant/PowerPlant/Appearance Classes/Std Implementations/LStdPushButtonImp.cp"; sourceTree = SOURCE_ROOT; };
 		4D41AA3D0A3C8C2A007F22EF /* UVolume.cp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = UVolume.cp; path = "../third_party/PowerPlant/PowerPlant/_In Progress/_Debugging Classes/Utilities/UVolume.cp"; sourceTree = SOURCE_ROOT; };
 		4D41AA6B0A3C8DF2007F22EF /* PDebug.C */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = PDebug.C; path = ../third_party/BkgConsoleLibs/PLibs/Base/PDebug.C; sourceTree = SOURCE_ROOT; };
@@ -2245,12 +2249,23 @@
 				4DEF4D070A100C8A00DAA4BB /* AGL.framework in Frameworks */,
 				4DEE9EDF0A1567CB003F65EB /* OpenGL.framework in Frameworks */,
 				4D41ABF00A3C9B68007F22EF /* OpenPlay.framework in Frameworks */,
+				4D14C30B1536363300D9CE98 /* libwebsockets.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D14C3081536361600D9CE98 /* libwebsockets */ = {
+			isa = PBXGroup;
+			children = (
+				4D14C3091536363300D9CE98 /* libwebsockets.a */,
+				4D14C30A1536363300D9CE98 /* libwebsockets.h */,
+			);
+			name = libwebsockets;
+			path = ../third_party/RezLibMachO;
+			sourceTree = "<group>";
+		};
 		4D9FC5650A33401B00894472 /* RezLibMachO */ = {
 			isa = PBXGroup;
 			children = (
@@ -2268,6 +2283,7 @@
 			children = (
 				4DE1774F14CBA074001F7371 /* TNT Basic Help */,
 				4DE1757D14C4F1BA001F7371 /* Resources */,
+				4D14C3081536361600D9CE98 /* libwebsockets */,
 				4D9FC5650A33401B00894472 /* RezLibMachO */,
 				4DD0CE1009CE3E4F00E34038 /* Imported Files */,
 				4DD0CE1609CE3E4F00E34038 /* Support */,
@@ -4724,6 +4740,7 @@
 				4D6151A50A3C2734006E490C /* RLCocoaMachODisplay.h in Headers */,
 				4D6151A70A3C2734006E490C /* RLDisplayMachO.h in Headers */,
 				4D529A5214C101AA008A7B87 /* MySndPlayDB.h in Headers */,
+				4D14C30C1536363300D9CE98 /* libwebsockets.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5273,6 +5290,11 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+				);
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../third_party/libwebsockets.built\"";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "TNT Basic";
 				REZ_SCRIPT_TYPE = Roman;
@@ -5337,6 +5359,11 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+				);
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../third_party/libwebsockets.built\"";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "TNT Basic";
 				REZ_SCRIPT_TYPE = Roman;
