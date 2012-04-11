@@ -34,6 +34,7 @@
 
 #include "UEditServer.h"
 #include "libwebsockets.h"
+#include "Root.h"
 
 static void do404(
 	struct libwebsocket *inWsi)
@@ -87,6 +88,39 @@ static int Callback_HTTP(
 	return 0;
 }
 
+struct SCmdConnection
+{
+	int blah;
+};
+
+static int Callback_Cmd(
+	struct libwebsocket_context			*inContext,
+	struct libwebsocket					*inWsi,
+	enum libwebsocket_callback_reasons	inReason,
+	void								*inUser,
+	void								*inData,
+	size_t								inLen)
+{
+	SCmdConnection	*connection=(SCmdConnection*)inUser;
+	switch (inReason)
+	{
+		case LWS_CALLBACK_ESTABLISHED:
+			// init connection object here
+			break;
+
+		case LWS_CALLBACK_CLOSED:
+			// shutdown connection object here
+			break;
+
+		case LWS_CALLBACK_RECEIVE:
+			// process cmd here
+			ECHO("Received cmd : ");
+			UBkgConsole::gLogFile->write((const char*)inData,inLen);
+			ECHO("\n");
+			break;
+	}
+}
+
 static libwebsocket_context *sContext=NULL;
 static const int kEditServerPort=7676;
 
@@ -96,6 +130,11 @@ static struct libwebsocket_protocols sProtocols[] = {
 		"http-only",		/* name */
 		Callback_HTTP,		/* callback */
 		0					/* per_session_data_size */
+	},
+	{
+		"tb-cmd-protocol",		/* name */
+		Callback_Cmd,			/* callback */
+		sizeof(SCmdConnection)	/* per_session_data_size */
 	},
 	{
 		NULL, NULL, 0		/* End of list */
