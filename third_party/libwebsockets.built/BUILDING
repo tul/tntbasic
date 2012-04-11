@@ -1,0 +1,5 @@
+in third_party/libwebsockets
+./configure --prefix=/Users/mark/local --enable-nofork CC="gcc -arch i386"
+make
+in third_pary/libwebsockets.build
+sh update

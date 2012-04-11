@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4D14C30B1536363300D9CE98 /* libwebsockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D14C3091536363300D9CE98 /* libwebsockets.a */; };
 		4D14C30C1536363300D9CE98 /* libwebsockets.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D14C30A1536363300D9CE98 /* libwebsockets.h */; };
+		4D14C31D1536403600D9CE98 /* UEditServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D14C31B1536403600D9CE98 /* UEditServer.cpp */; };
+		4D14C31E1536403600D9CE98 /* UEditServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D14C31C1536403600D9CE98 /* UEditServer.h */; };
 		4D41AA070A3C8BA4007F22EF /* LStdPushButtonImp.cp in Sources */ = {isa = PBXBuildFile; fileRef = 4D41AA060A3C8BA4007F22EF /* LStdPushButtonImp.cp */; };
 		4D41AA3E0A3C8C2A007F22EF /* UVolume.cp in Sources */ = {isa = PBXBuildFile; fileRef = 4D41AA3D0A3C8C2A007F22EF /* UVolume.cp */; };
 		4D41ABF00A3C9B68007F22EF /* OpenPlay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D41ABEF0A3C9B68007F22EF /* OpenPlay.framework */; };
@@ -924,6 +926,8 @@
 /* Begin PBXFileReference section */
 		4D14C3091536363300D9CE98 /* libwebsockets.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libwebsockets.a; path = ../third_party/libwebsockets.built/libwebsockets.a; sourceTree = SOURCE_ROOT; };
 		4D14C30A1536363300D9CE98 /* libwebsockets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = libwebsockets.h; path = ../third_party/libwebsockets.built/libwebsockets.h; sourceTree = SOURCE_ROOT; };
+		4D14C31B1536403600D9CE98 /* UEditServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UEditServer.cpp; path = Source/UEditServer.cpp; sourceTree = "<group>"; };
+		4D14C31C1536403600D9CE98 /* UEditServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UEditServer.h; path = Source/UEditServer.h; sourceTree = "<group>"; };
 		4D41AA060A3C8BA4007F22EF /* LStdPushButtonImp.cp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = LStdPushButtonImp.cp; path = "../third_party/PowerPlant/PowerPlant/Appearance Classes/Std Implementations/LStdPushButtonImp.cp"; sourceTree = SOURCE_ROOT; };
 		4D41AA3D0A3C8C2A007F22EF /* UVolume.cp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = UVolume.cp; path = "../third_party/PowerPlant/PowerPlant/_In Progress/_Debugging Classes/Utilities/UVolume.cp"; sourceTree = SOURCE_ROOT; };
 		4D41AA6B0A3C8DF2007F22EF /* PDebug.C */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = PDebug.C; path = ../third_party/BkgConsoleLibs/PLibs/Base/PDebug.C; sourceTree = SOURCE_ROOT; };
@@ -3480,6 +3484,8 @@
 			isa = PBXGroup;
 			children = (
 				4DD0D10409CE3E7C00E34038 /* Graphics */,
+				4D14C31B1536403600D9CE98 /* UEditServer.cpp */,
+				4D14C31C1536403600D9CE98 /* UEditServer.h */,
 				4DD0D12E09CE3E7D00E34038 /* UDataFolderManager.h */,
 				4DD0D12D09CE3E7D00E34038 /* UDataFolderManager.cpp */,
 				4DD0D12F09CE3E7D00E34038 /* BuiltAppPlst.r */,
@@ -4741,6 +4747,7 @@
 				4D6151A70A3C2734006E490C /* RLDisplayMachO.h in Headers */,
 				4D529A5214C101AA008A7B87 /* MySndPlayDB.h in Headers */,
 				4D14C30C1536363300D9CE98 /* libwebsockets.h in Headers */,
+				4D14C31E1536403600D9CE98 /* UEditServer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5226,6 +5233,7 @@
 				4D529A2D14C0FFA9008A7B87 /* OSX-PlugImport.c in Sources */,
 				4D529A4814C1018D008A7B87 /* Mac-SoundManager.c in Sources */,
 				4D529A5114C101AA008A7B87 /* MySndPlayDB.c in Sources */,
+				4D14C31D1536403600D9CE98 /* UEditServer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

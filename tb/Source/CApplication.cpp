@@ -104,6 +104,7 @@
 #include		"UHelp.h"
 #include		"MoreFiles.h"
 #include		"UCursorManager.h"
+#include		"UEditServer.h"
 
 // Background console debugging support
 // Use ECHO() to output things to a file in the "Console" folder in the preferences directory. Run
@@ -383,6 +384,7 @@ CApplication::CApplication() :
 		if (mAppletMode==false)
 		{
 			UHelp::Init();
+			UEditServer::Initialise();
 			
 			// process other prefs
 			if (!CFPrefsGetBool(kShowFPSPrefsStr,mShowFPS))
@@ -436,6 +438,7 @@ CApplication::~CApplication()
 	CGraphicsContext::Shutdown();
 //	UMusicManager::ShutDown();
 	UTNTMusicManager::ShutDown();
+	UEditServer::Shutdown();
 
 	UBkgConsole::CloseLogFile();
 }
@@ -1893,6 +1896,8 @@ void CApplication::UseIdleTime(
 	const EventRecord&	inMacEvent)
 {
 	inheritedApp::UseIdleTime(inMacEvent);
+
+	UEditServer::Tick();
 	
 	Try_
 	{
