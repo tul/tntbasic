@@ -1,10 +1,9 @@
 todo
-	tb 1.4 beta release todo
-		DONE
-	tb 1.4 source upload todo
-		check third party license notes
-		setup license info on github
-			consider changing license to public domain?
+	next steps
+		try and get it compiling under XC4?
+		add ability to open projects and export to tbproj files
+		add basic web edit api?
+		port it to nacl?
 
 	broken examples
 		Copy Image Test - fails to parse code

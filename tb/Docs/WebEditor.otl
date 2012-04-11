@@ -1,0 +1,111 @@
+http editor interface
+	/project/listall
+		desc:
+			returns list of the open projects
+		params:
+			none
+		example results:
+		{
+			result : 0,
+			resultstr : "ok",
+			data:
+			{
+				projects:
+					[
+						{
+							projectid : uid
+							path : path to file (file://)
+							readonly: false
+						}
+					]
+			}
+		}
+
+	/project/open
+		desc:
+			opens a project from path
+		params:
+			path = path to the local project file to open. should follow the file:// format
+		example result:
+			{
+				result : 0,
+				resultstr : "ok"
+				{
+					projectid : <uid of the opened project>
+				}
+			}
+
+	/project/close
+		desc:
+			closes an open project
+		params:
+			projectid = project to close
+
+	/project/listresources/
+		desc:
+			list all the resources within a project
+		params:
+			projectid = id of project
+			restype = 4 char code of resource type to list (optional)
+		example results:
+			{
+				result : 0,
+				resultstr : "ok",
+				data:
+				{
+					resources:
+						[
+							{
+								type: 'PICT'
+								list :
+								[
+									{
+										id: 128
+										name: "My pic"
+									}
+								]
+							}
+						]
+				}
+			}
+
+	/project/addresource/
+		desc:
+			creates a new resource
+		params:
+			projectid = id of the project
+			restype = 4 char code of the resource type to add
+			resid = id of resource to add
+			resname = name
+			data = <blob>
+
+	/project/updateresource/
+		desc:
+			updates the contents of an existing resource
+		params:
+			projectid = id of the project
+			restype = 4 char code of the resource type to add
+			resid = id of resource to add
+			data = <blob>
+
+	/project/deleteresource/
+		desc:
+			removes a resource from the project
+		params:
+			projectid = id of the project
+			restype = 4 char code of the resource type to delete
+			resid = id of the resource to delete
+
+	/project/moveresource/
+		desc:
+			moves a resource within a project
+		params:
+			projectid = id of the project
+			restype = 4 char code of the current resource type
+			resid = id of the current resource
+			newrestype = new type
+			newresid = new resource id
+			newresname = new name
+
+
+		
