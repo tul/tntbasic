@@ -121,12 +121,21 @@
 							    	}										\
 							    } while (false)
 
+	#define AssertThrowStr_(test,msg)	\
+								do {										\
+							        if (!(test))							\
+							        {										\
+							        	SignalStringLiteral_(#test);		\
+							    		ThrowStr_(kTNTErr_AssertionFailed,msg);	\
+							    	}										\
+							    } while (false)
+
 
 	#if TARGET_OS_MAC==1
 		#define ThrowStr_(err,pstr)		  	PP_PowerPlant::LException::Throw(err,pstr)
 		#define ThrowAEErr_(err,aeRecord)	CAEDescException::Throw(err,aeRecord,true)
 		#define Catch_(err)					catch(const PP_PowerPlant::LException &err)
-		#define ErrCode_(err)				err.GetErrorCode()
+		#define ErrCode_(err)				(err).GetErrorCode()
 	#endif	// other platforms are define in UException.h in MR:CrossPlatform:(NonMac)
 
 	#define Debug_(str)			do { SignalString_(str); Throw_(kTNTErr_InternalError); } while (false)

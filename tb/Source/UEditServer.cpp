@@ -1,7 +1,7 @@
 // **************************************************************************************************************************
 // TNT Basic
 // UEditServer.cpp
-// © Mark Tully 2012
+// Â© Mark Tully 2012
 // 11/4/12
 // **************************************************************************************************************************
 
@@ -34,6 +34,9 @@
 
 #include "UEditServer.h"
 #include "libwebsockets.h"
+#include "jansson.h"
+#include <vector>
+#include "TNT_Debugging.h"
 #include "Root.h"
 
 static void do404(
@@ -88,10 +91,88 @@ static int Callback_HTTP(
 	return 0;
 }
 
-struct SCmdConnection
+struct SCmdHandler
 {
-	int blah;
+	char						name[64];
+	UEditServer::TCmdCallback	callback;
 };
+
+static std::vector<SCmdHandler>			s_handlers;
+
+static int FindCmdHandler(
+	const char							*inCommandName)
+{
+	int result=-1;
+	for (int i=0, m=s_handlers.size(); i<m; i++)
+	{
+		if (strcasecmp(inCommandName,s_handlers[i].name)==0)
+		{
+			result=i;
+			break;
+		}
+	}
+	return result;
+}
+
+/*e*/
+// registers a command callback making it accesible via the json web API
+// copies the command name specified
+void UEditServer::RegisterCmdHandler(
+	const char							*inCommandName,
+	TCmdCallback						inCallback)
+{
+	SCmdHandler	h;
+	int			l=strlen(inCommandName);
+	AssertThrowStr_(l<sizeof(h.name),"\pCmd name too long");
+	memcpy(h.name,inCommandName,l+1);
+	h.callback=inCallback;
+	s_handlers.push_back(h);
+}
+
+/*e*/
+// unregisters the cmd handler passed
+void UEditServer::UnregisterCmdHandler(
+	const char							*inCommandName,
+	TCmdCallback						inCallback)
+{
+	int			idx=FindCmdHandler(inCommandName);
+	AssertThrowStr_(idx!=-1,"\pCmd not registered");
+	s_handlers.erase(s_handlers.begin()+idx);
+}
+
+void CmdError(
+	UEditServer::SCmdConnection			*inConnection,
+	int									inErrCode,
+	const char							*inStr)
+{
+	static const int	kJsonReplyLen=1024;
+	char				reply[LWS_SEND_BUFFER_PRE_PADDING+kJsonReplyLen+LWS_SEND_BUFFER_POST_PADDING];
+	char				*jsonData=reply+LWS_SEND_BUFFER_PRE_PADDING;
+
+	snprintf(jsonData,kJsonReplyLen,
+		"{ status : %d , statusstr : \"%s\" }",
+		inErrCode,
+		inStr);
+
+	ECHO("CmdError : " << reply << "\n");
+
+	int	res=libwebsocket_write(inConnection->wsi,(unsigned char*)jsonData,strlen(jsonData),LWS_WRITE_TEXT);
+	if (res!=0)
+	{
+		ECHO("CmdError : error writing to websocket " << res << "\n");
+	}
+}
+
+void CmdException(
+	UEditServer::SCmdConnection			*inConnection,
+	LException							*inErr)
+{
+	unsigned char		errStr[257];
+
+	ErrStr_(*inErr,errStr);
+	errStr[errStr[0]+1]=0;
+	CmdError(inConnection,ErrCode_(*inErr),(char*)errStr+1);
+}
 
 static int Callback_Cmd(
 	struct libwebsocket_context			*inContext,
@@ -101,15 +182,20 @@ static int Callback_Cmd(
 	void								*inData,
 	size_t								inLen)
 {
-	SCmdConnection	*connection=(SCmdConnection*)inUser;
+	UEditServer::SCmdConnection	*connection=(UEditServer::SCmdConnection*)inUser;
 	switch (inReason)
 	{
 		case LWS_CALLBACK_ESTABLISHED:
 			// init connection object here
+			memset(connection,0,sizeof(*connection));
 			break;
 
 		case LWS_CALLBACK_CLOSED:
 			// shutdown connection object here
+			if (connection->curCmd)
+			{
+				json_decref(connection->curCmd);
+			}
 			break;
 
 		case LWS_CALLBACK_RECEIVE:
@@ -117,6 +203,7 @@ static int Callback_Cmd(
 			ECHO("Received cmd : ");
 			UBkgConsole::gLogFile->write((const char*)inData,inLen);
 			ECHO("\n");
+			CmdError(connection,-1,"TOOD :)");
 			break;
 	}
 }
@@ -134,7 +221,7 @@ static struct libwebsocket_protocols sProtocols[] = {
 	{
 		"tb-cmd-protocol",		/* name */
 		Callback_Cmd,			/* callback */
-		sizeof(SCmdConnection)	/* per_session_data_size */
+		sizeof(UEditServer::SCmdConnection)	/* per_session_data_size */
 	},
 	{
 		NULL, NULL, 0		/* End of list */
@@ -161,6 +248,7 @@ void UEditServer::Shutdown()
 		libwebsocket_context_destroy(sContext);
 		sContext=NULL;
 	}
+	s_handlers.clear();
 }
 
 void UEditServer::Tick()

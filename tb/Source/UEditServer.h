@@ -35,10 +35,30 @@
 #ifndef __UEDITSERVER_H__
 #define __UEDITSERVER_H__
 
+#include "jansson.h"		// for json_t type, which can't be fwd declared
+
+struct libwebsocket;
+
 namespace UEditServer
 {
+	struct SCmdConnection
+	{
+		json_t					*curCmd;
+		struct libwebsocket		*wsi;
+	};
+
+	typedef void (*TCmdCallback)(json_t *inCmd, SCmdConnection *inClient);
+
+
 	void /*e*/		Initialise();
 	void			Shutdown();
+
+	void /*e*/		RegisterCmdHandler(
+						const char			*inCommandName,
+						TCmdCallback		inCallback);
+	void /*e*/		UnregisterCmdHandler(
+						const char			*inCommandName,
+						TCmdCallback		inCallback);
 
 	void			Tick();
 };
