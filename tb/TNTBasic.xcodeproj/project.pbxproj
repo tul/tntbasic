@@ -11,6 +11,9 @@
 		4D14C30C1536363300D9CE98 /* libwebsockets.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D14C30A1536363300D9CE98 /* libwebsockets.h */; };
 		4D14C31D1536403600D9CE98 /* UEditServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4D14C31B1536403600D9CE98 /* UEditServer.cpp */; };
 		4D14C31E1536403600D9CE98 /* UEditServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D14C31C1536403600D9CE98 /* UEditServer.h */; };
+		4D14C36E153A2AFF00D9CE98 /* jansson.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D14C36C153A2AFF00D9CE98 /* jansson.h */; };
+		4D14C36F153A2AFF00D9CE98 /* libjansson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D14C36D153A2AFF00D9CE98 /* libjansson.a */; };
+		4D14C38C153A39C400D9CE98 /* jansson_config.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D14C38B153A39C400D9CE98 /* jansson_config.h */; };
 		4D41AA070A3C8BA4007F22EF /* LStdPushButtonImp.cp in Sources */ = {isa = PBXBuildFile; fileRef = 4D41AA060A3C8BA4007F22EF /* LStdPushButtonImp.cp */; };
 		4D41AA3E0A3C8C2A007F22EF /* UVolume.cp in Sources */ = {isa = PBXBuildFile; fileRef = 4D41AA3D0A3C8C2A007F22EF /* UVolume.cp */; };
 		4D41ABF00A3C9B68007F22EF /* OpenPlay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D41ABEF0A3C9B68007F22EF /* OpenPlay.framework */; };
@@ -928,6 +931,9 @@
 		4D14C30A1536363300D9CE98 /* libwebsockets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = libwebsockets.h; path = ../third_party/libwebsockets.built/libwebsockets.h; sourceTree = SOURCE_ROOT; };
 		4D14C31B1536403600D9CE98 /* UEditServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UEditServer.cpp; path = Source/UEditServer.cpp; sourceTree = "<group>"; };
 		4D14C31C1536403600D9CE98 /* UEditServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UEditServer.h; path = Source/UEditServer.h; sourceTree = "<group>"; };
+		4D14C36C153A2AFF00D9CE98 /* jansson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jansson.h; path = ../third_party/jansson.built/jansson.h; sourceTree = SOURCE_ROOT; };
+		4D14C36D153A2AFF00D9CE98 /* libjansson.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjansson.a; path = ../third_party/jansson.built/libjansson.a; sourceTree = SOURCE_ROOT; };
+		4D14C38B153A39C400D9CE98 /* jansson_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jansson_config.h; path = ../third_party/jansson.built/jansson_config.h; sourceTree = SOURCE_ROOT; };
 		4D41AA060A3C8BA4007F22EF /* LStdPushButtonImp.cp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = LStdPushButtonImp.cp; path = "../third_party/PowerPlant/PowerPlant/Appearance Classes/Std Implementations/LStdPushButtonImp.cp"; sourceTree = SOURCE_ROOT; };
 		4D41AA3D0A3C8C2A007F22EF /* UVolume.cp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = UVolume.cp; path = "../third_party/PowerPlant/PowerPlant/_In Progress/_Debugging Classes/Utilities/UVolume.cp"; sourceTree = SOURCE_ROOT; };
 		4D41AA6B0A3C8DF2007F22EF /* PDebug.C */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; name = PDebug.C; path = ../third_party/BkgConsoleLibs/PLibs/Base/PDebug.C; sourceTree = SOURCE_ROOT; };
@@ -2254,6 +2260,7 @@
 				4DEE9EDF0A1567CB003F65EB /* OpenGL.framework in Frameworks */,
 				4D41ABF00A3C9B68007F22EF /* OpenPlay.framework in Frameworks */,
 				4D14C30B1536363300D9CE98 /* libwebsockets.a in Frameworks */,
+				4D14C36F153A2AFF00D9CE98 /* libjansson.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2268,6 +2275,16 @@
 			);
 			name = libwebsockets;
 			path = ../third_party/RezLibMachO;
+			sourceTree = "<group>";
+		};
+		4D14C36B153A2ADF00D9CE98 /* jansson */ = {
+			isa = PBXGroup;
+			children = (
+				4D14C38B153A39C400D9CE98 /* jansson_config.h */,
+				4D14C36C153A2AFF00D9CE98 /* jansson.h */,
+				4D14C36D153A2AFF00D9CE98 /* libjansson.a */,
+			);
+			name = jansson;
 			sourceTree = "<group>";
 		};
 		4D9FC5650A33401B00894472 /* RezLibMachO */ = {
@@ -2287,6 +2304,7 @@
 			children = (
 				4DE1774F14CBA074001F7371 /* TNT Basic Help */,
 				4DE1757D14C4F1BA001F7371 /* Resources */,
+				4D14C36B153A2ADF00D9CE98 /* jansson */,
 				4D14C3081536361600D9CE98 /* libwebsockets */,
 				4D9FC5650A33401B00894472 /* RezLibMachO */,
 				4DD0CE1009CE3E4F00E34038 /* Imported Files */,
@@ -4748,6 +4766,8 @@
 				4D529A5214C101AA008A7B87 /* MySndPlayDB.h in Headers */,
 				4D14C30C1536363300D9CE98 /* libwebsockets.h in Headers */,
 				4D14C31E1536403600D9CE98 /* UEditServer.h in Headers */,
+				4D14C36E153A2AFF00D9CE98 /* jansson.h in Headers */,
+				4D14C38C153A39C400D9CE98 /* jansson_config.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5301,8 +5321,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
 				);
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../third_party/libwebsockets.built\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/../third_party/jansson.built\"";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "TNT Basic";
 				REZ_SCRIPT_TYPE = Roman;
@@ -5370,8 +5392,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",
 				);
 				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/../third_party/libwebsockets.built\"";
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_2 = "\"$(SRCROOT)/../third_party/jansson.built\"";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "TNT Basic";
 				REZ_SCRIPT_TYPE = Roman;

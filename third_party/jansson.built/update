@@ -1,0 +1,3 @@
+cp ../jansson/src/jansson.h .
+cp ../jansson/src/jansson_config.h .
+cp ../jansson/src/.libs/libjansson.a .

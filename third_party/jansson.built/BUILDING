@@ -1,0 +1,6 @@
+cd third_party/jansson
+autoreconf -i
+./configure CC="gcc -arch i386"
+make
+cd ../third_party/jansson.built
+source update
