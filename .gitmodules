@@ -1,3 +1,6 @@
 [submodule "third_party/libwebsockets"]
 	path = third_party/libwebsockets
 	url = git@github.com:mctully/libwebsockets.git
+[submodule "third_party/jansson"]
+	path = third_party/jansson
+	url = https://github.com/akheron/jansson.git
