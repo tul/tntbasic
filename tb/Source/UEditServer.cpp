@@ -154,7 +154,7 @@ void CmdError(
 		inErrCode,
 		inStr);
 
-	ECHO("CmdError : " << reply << "\n");
+	ECHO("CmdError : " << jsonData << "\n");
 
 	int	res=libwebsocket_write(inConnection->wsi,(unsigned char*)jsonData,strlen(jsonData),LWS_WRITE_TEXT);
 	if (res!=0)
@@ -188,6 +188,7 @@ static int Callback_Cmd(
 		case LWS_CALLBACK_ESTABLISHED:
 			// init connection object here
 			memset(connection,0,sizeof(*connection));
+			connection->wsi=inWsi;
 			break;
 
 		case LWS_CALLBACK_CLOSED:
@@ -206,6 +207,8 @@ static int Callback_Cmd(
 			CmdError(connection,-1,"TOOD :)");
 			break;
 	}
+
+	return 0;
 }
 
 static libwebsocket_context *sContext=NULL;
