@@ -4,3 +4,6 @@
 [submodule "third_party/jansson"]
 	path = third_party/jansson
 	url = https://github.com/akheron/jansson.git
+[submodule "tbedit"]
+	path = tbedit
+	url = git@github.com:mctully/tbedit.git
