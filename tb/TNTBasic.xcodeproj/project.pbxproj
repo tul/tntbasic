@@ -5263,10 +5263,7 @@
 		4DB7529014C0F17800CFB9CB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(ONLY_ACTIVE_ARCH_PRE_XCODE_3_1)";
 				FRAMEWORK_SEARCH_PATHS = "$(FRAMEWORK_SEARCH_PATHS)";
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = TNTBasic.PCH;
@@ -5284,10 +5281,11 @@
 					"../third_party/BkgConsoleLibs/**",
 					"../third_party/PowerPlant/PowerPlant/**",
 					/Developer/Headers/FlatCarbon,
+					"../third_party/MoreFilesX/**",
 				);
 				INFOPLIST_FILE = Source/TB_Info.plist;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH)";
 				REZ_PREPROCESSOR_DEFINITIONS = "$(REZ_PREPROCESSOR_DEFINITIONS)";
 				USER_HEADER_SEARCH_PATHS = "../third_party/BkgConsoleLibs/** ../mr/**";
 			};
@@ -5335,10 +5333,7 @@
 		4DD0CE0209CE3E4F00E34038 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(ONLY_ACTIVE_ARCH_PRE_XCODE_3_1)";
 				FRAMEWORK_SEARCH_PATHS = "$(FRAMEWORK_SEARCH_PATHS)";
 				GCC_PREFIX_HEADER = TNTBasic.PCH;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -5355,10 +5350,11 @@
 					"../third_party/BkgConsoleLibs/**",
 					"../third_party/PowerPlant/PowerPlant/**",
 					/Developer/Headers/FlatCarbon,
+					"../third_party/MoreFilesX/**",
 				);
 				INFOPLIST_FILE = Source/TB_Info.plist;
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH)";
 				REZ_PREPROCESSOR_DEFINITIONS = "$(REZ_PREPROCESSOR_DEFINITIONS)";
 				USER_HEADER_SEARCH_PATHS = "../third_party/BkgConsoleLibs/** ../mr/**";
 			};
