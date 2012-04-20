@@ -75,6 +75,16 @@ OSErr GetAppSpec(FSSpec *spec)
 	return GetProcessInformation(&PSN, &info); // return the error
 }
 
+OSErr GetAppFSRef(FSRef *outRef)
+{
+ 	ProcessSerialNumber PSN;
+
+	PSN.highLongOfPSN = 0;
+	PSN.lowLongOfPSN = kCurrentProcess;
+	
+	return GetProcessBundleLocation(&PSN, outRef); // return the error
+}
+
 // 29/2/96
 
 // Opens a file in the applications folder
@@ -267,6 +277,18 @@ OSErr ForksExist(FSSpec *theFile, Boolean *outDataForkExists, Boolean *outResFor
 	return theErr;
 }
 
+OSErr CFURLToFSSpec(
+	CFURLRef	inUrl,
+	FSSpec		*outSpec)
+{
+	FSRef					ref;
+	if (!CFURLGetFSRef(inUrl,&ref))
+	{
+		return fnfErr;
+	}
+	return FSRefToFSSpec(&ref,outSpec);
+}
+
 // converts a fsref to a fsspec
 OSErr FSRefToFSSpec(
 	FSRef		*inRef,
@@ -385,6 +407,18 @@ OSErr MakeFSSpecFromFileSpec(FSSpec *spec,Str32 nameString)
 	
 
 	return noErr;	
+}
+
+OSErr IsFolderFSRef(const FSRef *inRef, Boolean *theResult)
+{
+	OSErr err;
+	FSCatalogInfo	info;
+	err=FSGetCatalogInfo(inRef,kFSCatInfoNodeFlags,&info,NULL,NULL,NULL);
+	if (err==noErr)
+	{
+		*theResult=((info.nodeFlags&kFSNodeIsDirectoryMask)!=0);
+	}
+	return err;
 }
 
 // returns
@@ -1076,6 +1110,42 @@ Boolean IdentifyPackage(FSSpec *target, FSSpec *mainPackageFile)
   }
     /* no matching files found */
   return false;
+}
+
+OSErr GetNameAndParentDir(
+	CFURLRef		inURL,
+	FSRef			*outParentDir,
+	HFSUniStr255	*outName)
+{
+	CFStringRef		name;
+	CFURLRef		parent;
+	CFIndex			len;
+
+	name=CFURLCopyLastPathComponent(inURL);
+	parent=CFURLCreateCopyDeletingLastPathComponent(kCFAllocatorDefault,inURL);
+
+	if (!CFURLGetFSRef(parent,outParentDir))
+	{
+		CFRelease(name);
+		CFRelease(parent);
+		return fnfErr;
+	}
+
+	len=CFStringGetLength(name);
+	if (len>255)
+	{
+		len=255;
+	}
+	{
+		CFRange range={0,len};
+		CFStringGetCharacters(name, range, outName->unicode);
+		outName->length=len;
+	}
+
+	CFRelease(name);
+	CFRelease(parent);
+
+	return noErr;
 }
 
 

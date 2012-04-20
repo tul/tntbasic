@@ -238,11 +238,13 @@ OSErr GetCreatorAndType(const FSSpec *file,OSType *creator,OSType *fileType);
 OSErr IsSystemFile(FSSpec *theSpec,Boolean *res);
 unsigned long BothForksSize(FSSpec *theFile,OSErr *err);
 OSErr GetAppSpec(FSSpec *spec);
+OSErr GetAppFSRef(FSRef *outRef);
 OSErr OpenFileInFolder(StringPtr fileName,short *fRef,Boolean resFork);
 typedef OSErr (*ScanProc)(CInfoPBPtr cipbp, long refCon);
 OSErr ScanDirectoryCInfo(CInfoPBPtr cipbp,short vRefNum,long dirID,ScanProc sp,ScanProc folderProc,long refCon);
 OSErr ScanDirectoryFSSpec(CInfoPBPtr cipbp,FSSpec *theFolder,ScanProc sp,ScanProc folderProc,long refCon);
 OSErr IsFolder(FSSpec *theFolder,Boolean *theResult);
+OSErr IsFolderFSRef(const FSRef *inRef,Boolean *theResult);	
 OSErr CInfoToFSSpec(CInfoPBRec *cipbp,FSSpec *theFile);
 void FSSpecToCInfo(FSSpec *theFile,CInfoPBRec *cipbp);
 //OSErr FlushFile(short fileRef);
@@ -268,6 +270,13 @@ OSErr SetModDate(
 	long				inDirID,
 	ConstStr255Param	inName,
 	unsigned long		inModDate);
+OSErr GetNameAndParentDir(
+	CFURLRef		    inURL,
+	FSRef			    *outParentDir,
+	HFSUniStr255	    *outName);
+OSErr CFURLToFSSpec(
+	CFURLRef	        inUrl,
+	FSSpec		        *outSpec);
 
 // Processes.c
 #pragma mark Processes.c
