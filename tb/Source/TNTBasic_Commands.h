@@ -44,3 +44,4 @@ static const CommandT		cmd_TBToggleFPS			= 3 + cmd_TBBaseCommandId;
 static const CommandT		cmd_TBConfigureControls	= 4 + cmd_TBBaseCommandId;
 static const CommandT		cmd_TBTakeScreenShot	= 5 + cmd_TBBaseCommandId;
 static const CommandT		cmd_TBRegister			= 6 + cmd_TBBaseCommandId;
+static const CommandT		cmd_TBRun				= 7 + cmd_TBBaseCommandId;

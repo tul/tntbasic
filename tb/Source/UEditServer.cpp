@@ -38,6 +38,7 @@
 #include <vector>
 #include "TNT_Debugging.h"
 #include "Root.h"
+#include "CResourceContainerCreator.h"
 
 static void do404(
 	struct libwebsocket *inWsi)
@@ -260,4 +261,11 @@ void UEditServer::Tick()
 	{
 		libwebsocket_service(sContext,0);
 	}
+}
+
+/*e*/
+void UEditServer::OpenForEdit(
+	FSSpec			*inSpec)
+{
+	//CResourceContainerCreator::GetCreatorForFile(inSpec);
 }

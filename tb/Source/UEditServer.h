@@ -60,6 +60,9 @@ namespace UEditServer
 						const char			*inCommandName,
 						TCmdCallback		inCallback);
 
+	void /*e*/		OpenForEdit(
+						FSSpec				*inSpec);
+
 	void			Tick();
 };
 

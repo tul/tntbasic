@@ -738,8 +738,12 @@ void CApplication::FindCommandStatus(
 					outEnabled=true;
 			}
 			break;
-
+			
 		case cmd_Open:
+			outEnabled=true;
+			break;
+
+		case cmd_TBRun:
 			// opens a TNT basic file
 			outEnabled=(mCurrentProgram==0);
 			break;
@@ -825,6 +829,46 @@ Boolean CApplication::ObeyCommand(
 			break;
 
 		case cmd_Open:
+			{
+				bool										askOK;
+				FSSpec										spec;
+				
+				{
+					UNavServicesDialogs::LFileChooser		chooser;
+
+					// filter for the types we can open
+					OSType									types[]={'rsrc','RBun'};
+					LFileTypeList							fileTypes(fileTypes_All);			// now that we can open resources from the data fork, there's no sensible way of checking file types, so allow everything
+					NavDialogOptionFlags					flags=(kNavDefaultNavDlogOptions|kNavSupportPackages|kNavNoTypePopup)&~(kNavAllowPreviews);
+					NavDialogCreationOptions				*options = chooser.GetDialogOptions();
+
+					flags &= ~kNavAllowMultipleFiles;		// Can't select multiple files
+					options->optionFlags = flags;
+		
+					askOK = chooser.AskOpenFile(fileTypes);
+		
+					if (askOK)
+					{
+						chooser.GetFileSpec(1,spec);
+					}
+				}
+				
+				if (askOK)
+				{
+					Try_
+					{
+						UEditServer::OpenForEdit(&spec);
+					}
+					Catch_(err)
+					{
+						// error reported
+						//std::cout << "Error opening file : " << err << endl;
+					}
+				}
+			}
+			break;
+
+		case cmd_TBRun:
 			// opens a TNT basic file
 			{
 				FSSpec										spec;
@@ -834,13 +878,14 @@ Boolean CApplication::ObeyCommand(
 					UNavServicesDialogs::LFileChooser		chooser;
 
 					// filter for the types we can open
-					OSType									types[]={'TEXT','rsrc','RBun'};
+					OSType									types[]={'rsrc','RBun'};
 					LFileTypeList							fileTypes(fileTypes_All);			// now that we can open resources from the data fork, there's no sensible way of checking file types, so allow everything
 					NavDialogOptionFlags					flags=(kNavDefaultNavDlogOptions|kNavSupportPackages|kNavNoTypePopup)&~(kNavAllowPreviews);
 					NavDialogCreationOptions				*options = chooser.GetDialogOptions();
 
 					flags &= ~kNavAllowMultipleFiles;		// Can't select multiple files
 					options->optionFlags = flags;
+					options->windowTitle=CFSTR("Run");
 		
 					askOK = chooser.AskOpenFile(fileTypes);
 		
@@ -1105,58 +1150,12 @@ bool CApplication::OpenDocument(
 	if (mCurrentProgram)
 		UTBException::ThrowProgramAlreadyRunning();
 
-	OSType							creator=0,type=0;
 	Handle							codeHandle=0;
 	OSErr							err=noErr;
 	StDeleter<CProgramInfo>			delP;
 	StDeleter<CResourceContainer>	delR;
-	Boolean							isFolder=false;
 
-	ThrowIfOSErr_(::IsFolder(inFile,&isFolder));
-	if (!isFolder)
-	{
-		ThrowIfOSErr_(::GetCreatorAndType(inFile,&creator,&type));
-	}
 
-	if (type=='TEXT')		// text file
-	{
-		// LEGACY........
-		// try and find an associated resource file if any
-		{
-			FSSpec			resFileSpec=*inFile;
-			LStr255			tempStr=resFileSpec.name;
-			
-			// Strip off the .txt if it exists
-			if (tempStr.EndsWith("\p.txt") || tempStr.EndsWith("\p.bas"))
-				tempStr[0]-=4;
-			tempStr+=".rsrc";
-			LString::CopyPString(tempStr,resFileSpec.name);		
-			Try_
-			{
-				CResourceContainerCreator		*rcc=CResourceContainerCreator::GetCreatorForFile(&resFileSpec);	
-				if (rcc)
-				{
-					delR.Adopt(rcc->OpenFile(inFile,true));
-				}
-			}
-			Catch_(err)
-			{
-				if (ErrCode_(err)!=fnfErr)
-				{
-					throw;
-				}
-			}
-		}	
-		// Load the code file
-		{
-			LFile			file(*inFile);
-			
-			file.OpenDataFork(fsRdPerm);
-
-			codeHandle=file.ReadDataFork();
-		}
-	}
-	else
 	{
 		// Open the program resource container and get the program info
 		CResourceContainerCreator		*rcc=CResourceContainerCreator::GetCreatorForFile(inFile);
