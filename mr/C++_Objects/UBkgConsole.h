@@ -37,6 +37,7 @@
 #include <iosfwd>
 
 std::ostream &operator<<(std::ostream &stream, unsigned char *inPascalString);
+std::ostream &operator<<(std::ostream &stream, CFURLRef inRef);
 
 namespace UBkgConsole
 {

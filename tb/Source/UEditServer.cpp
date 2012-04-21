@@ -39,6 +39,29 @@
 #include "TNT_Debugging.h"
 #include "Root.h"
 #include "CResourceContainerCreator.h"
+#include "CResourceContainer.h"
+#include "TNTBasic_Errors.h"
+#include "Marks Routines.h"
+
+struct SCmdHandler
+{
+	char						name[64];
+	UEditServer::TCmdCallback	callback;
+};
+
+static std::vector<SCmdHandler>			sHandlers;
+
+typedef UInt32							TProjectId;
+struct SProject
+{
+	TProjectId							id;
+	CResourceContainer					*container;
+};
+
+typedef std::vector<SProject>			TProjVector;
+static TProjVector						sOpenProj;
+static CFURLRef							sEditorURL(0);
+static TProjectId						sRollingId=1;
 
 static void do404(
 	struct libwebsocket *inWsi)
@@ -92,21 +115,13 @@ static int Callback_HTTP(
 	return 0;
 }
 
-struct SCmdHandler
-{
-	char						name[64];
-	UEditServer::TCmdCallback	callback;
-};
-
-static std::vector<SCmdHandler>			s_handlers;
-
 static int FindCmdHandler(
 	const char							*inCommandName)
 {
 	int result=-1;
-	for (int i=0, m=s_handlers.size(); i<m; i++)
+	for (int i=0, m=sHandlers.size(); i<m; i++)
 	{
-		if (strcasecmp(inCommandName,s_handlers[i].name)==0)
+		if (strcasecmp(inCommandName,sHandlers[i].name)==0)
 		{
 			result=i;
 			break;
@@ -127,7 +142,7 @@ void UEditServer::RegisterCmdHandler(
 	AssertThrowStr_(l<sizeof(h.name),"\pCmd name too long");
 	memcpy(h.name,inCommandName,l+1);
 	h.callback=inCallback;
-	s_handlers.push_back(h);
+	sHandlers.push_back(h);
 }
 
 /*e*/
@@ -138,7 +153,7 @@ void UEditServer::UnregisterCmdHandler(
 {
 	int			idx=FindCmdHandler(inCommandName);
 	AssertThrowStr_(idx!=-1,"\pCmd not registered");
-	s_handlers.erase(s_handlers.begin()+idx);
+	sHandlers.erase(sHandlers.begin()+idx);
 }
 
 void CmdError(
@@ -243,16 +258,65 @@ void UEditServer::Initialise()
 	AssertThrow_(!sContext);
 	sContext=libwebsocket_create_context(kEditServerPort,NULL,sProtocols,sExtensions,NULL,NULL,-1,-1,0);
 	ThrowIfMemFull_(sContext);
+
+	// first see if there is a folder called 'editor' in the app directory, if so, use that as our editor
+	FSRef		ref;
+	CFURLRef	url;
+	CFURLRef	baseUrl;
+	GetAppFSRef(&ref);
+	url=CFURLCreateFromFSRef(kCFAllocatorDefault,&ref);
+	baseUrl=CFURLCreateCopyDeletingLastPathComponent(kCFAllocatorDefault,url);
+	CFRelease(url);
+	url=CFURLCreateCopyAppendingPathComponent(kCFAllocatorDefault,baseUrl,CFSTR("editor/index.html"),false);
+
+	CFRelease(baseUrl);
+	Boolean		ok=CFURLGetFSRef(url,&ref);
+
+	if (ok)
+	{
+		ECHO("Found editor in app's directory\n");
+		sEditorURL=url;
+	}
+	else
+	{
+		ECHO("Using editor in app's resources\n");
+		CFRelease(url);
+
+		CFBundleRef		app=CFBundleGetMainBundle();
+		sEditorURL=CFBundleCopyResourceURL(app,CFSTR("index"),CFSTR("html"),CFSTR("editor"));
+	}
+	
+	AssertThrow_(sEditorURL);
 }
 
 void UEditServer::Shutdown()
 {
+	for (TProjVector::iterator iter=sOpenProj.begin(), eiter=sOpenProj.end(); iter!=eiter; ++iter)
+	{
+		SProject	&proj=*iter;
+		Try_
+		{
+			proj.container->Flush();
+		}
+		Catch_(err)
+		{
+			ECHO("Error flushing CResourceContainer\n");
+		}
+		delete proj.container;
+	}
+	sOpenProj.clear();
+
 	if (sContext)
 	{
 		libwebsocket_context_destroy(sContext);
 		sContext=NULL;
 	}
-	s_handlers.clear();
+	sHandlers.clear();
+	if (sEditorURL)
+	{
+		CFRelease(sEditorURL);
+		sEditorURL=0;
+	}
 }
 
 void UEditServer::Tick()
@@ -263,9 +327,36 @@ void UEditServer::Tick()
 	}
 }
 
+static void OpenEditor(
+	SProject		*inProj)
+{
+	CFMutableStringRef		mutableStr=CFStringCreateMutableCopy(kCFAllocatorDefault,512,CFURLGetString(sEditorURL));
+	CFStringAppend(mutableStr,CFSTR("?msg=raa"));
+	CFURLRef				withParams=CFURLCreateWithString(kCFAllocatorDefault,mutableStr,NULL);
+	OSStatus				err=LSOpenCFURLRef(withParams,NULL);
+	ECHO("Opening editor for " << withParams << " : ");
+	CFRelease(withParams);
+	if (err)
+	{
+		ECHO("failed " << err << "\n");
+	}
+	else
+	{
+		ECHO("OK\n");
+	}
+}
+
 /*e*/
 void UEditServer::OpenForEdit(
 	FSSpec			*inSpec)
 {
-	//CResourceContainerCreator::GetCreatorForFile(inSpec);
+	CResourceContainerCreator *rcc=CResourceContainerCreator::GetCreatorForFile(inSpec);
+	if (!rcc)
+	{
+		Throw_(kTBErr_UnrecognisedResFileFormat);
+	}
+	CResourceContainer		*rc=rcc->OpenFile(inSpec,false);
+	SProject	proj={sRollingId++,rc};
+	sOpenProj.push_back(proj);
+	OpenEditor(&sOpenProj.back());
 }

@@ -158,3 +158,11 @@ std::ostream &operator<<(std::ostream &stream, unsigned char *inPascalString)
 	}
 	return stream;
 }
+
+std::ostream &operator<<(std::ostream &stream, CFURLRef inRef)
+{
+	UInt8	str[300];
+	CFURLGetFileSystemRepresentation(inRef,false,str,sizeof(str));
+	stream << ((char*)str);
+	return stream;
+}
