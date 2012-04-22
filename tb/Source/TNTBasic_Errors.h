@@ -176,4 +176,11 @@ enum
 	kTBErr_NetworkingNotInitialised		=122 + kTBErr_BaseErrorCode,
 	kTBErr_NetworkGameAlreadyRunning	=123 + kTBErr_BaseErrorCode,
 	kTBErr_UnrecognisedResFileFormat	=124 + kTBErr_BaseErrorCode,
+
+	// UEditServer errors
+	kTBErr_EditorMissingRequiredParameter	=125 + kTBErr_BaseErrorCode,
+	kTBErr_EditorParameterTypeError			=126 + kTBErr_BaseErrorCode,
+	kTBErr_EditorInvalidProjectId			=127 + kTBErr_BaseErrorCode,
+	kTBErr_EditorJsonParseFail				=128 + kTBErr_BaseErrorCode,
+	kTBErr_EditorUnknownCmd					=129 + kTBErr_BaseErrorCode,
 };

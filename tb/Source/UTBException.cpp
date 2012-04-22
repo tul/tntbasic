@@ -426,6 +426,47 @@ void UTBException::ThrowUnknownFileFormat(
 	ThrowAEErr_(kTBErr_UnknownFileType,context);
 }
 
+/*e*/
+void UTBException::ThrowEditorMissingParameter(
+    const char		*inMissingParamName)
+{
+    // TODO pass parameters and provide descriptive message
+    Throw_(kTBErr_EditorMissingRequiredParameter);
+}
+
+/*e*/
+void UTBException::ThrowEditorParamWrongType(
+    const char		*inParamName,
+    const char		*inExpectedType,
+    const char		*inReceivedType)
+{
+    // TODO pass parameters and provide descriptive message
+    Throw_(kTBErr_EditorParameterTypeError);
+}
+
+/*e*/
+void UTBException::ThrowEditorInvalidProjectId(
+    UInt32			inProjectId)
+{
+    // TODO pass parameters and provide descriptive message
+    Throw_(kTBErr_EditorInvalidProjectId);
+}
+
+/*e*/
+void UTBException::ThrowEditorJsonParseFail()
+{
+    // TODO pass parameters and provide descriptive message
+    Throw_(kTBErr_EditorJsonParseFail);
+}
+
+/*e*/
+void UTBException::ThrowEditorUnknownCmd(
+    const char		*inCmd)
+{
+    // TODO pass parameters and provide descriptive message
+    Throw_(kTBErr_EditorUnknownCmd);
+}
+
 // ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ
 //		¥ LogThrow
 // ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ

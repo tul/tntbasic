@@ -324,6 +324,17 @@ class UTBException
 		static void /*e*/			ThrowBadLocalMoanRegId(
 										TTBInteger		inId);
 
+		static void /*e*/			ThrowEditorMissingParameter(
+										const char		*inMissingParamName);
+		static void /*e*/			ThrowEditorParamWrongType(
+										const char		*inParamName,
+										const char		*inExpectedType,
+										const char		*inReceivedType);
+		static void /*e*/			ThrowEditorInvalidProjectId(
+										UInt32			inProjectId);
+		static void /*e*/			ThrowEditorJsonParseFail();
+		static void /*e*/			ThrowEditorUnknownCmd(
+										const char		*inCmd);
 };
 
 // use to disable exception logging if a given exception occurs

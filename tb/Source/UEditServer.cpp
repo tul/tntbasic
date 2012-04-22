@@ -42,6 +42,10 @@
 #include "CResourceContainer.h"
 #include "TNTBasic_Errors.h"
 #include "Marks Routines.h"
+#include "UTBException.h"
+#include "UResources.h"
+#include "Utility Objects.h"
+#include "CResource.h"
 
 struct SCmdHandler
 {
@@ -62,6 +66,15 @@ typedef std::vector<SProject>			TProjVector;
 static TProjVector						sOpenProj;
 static CFURLRef							sEditorURL(0);
 static TProjectId						sRollingId=1;
+
+#define k_jsonOKPrefix  "{ \"status\":0, \"statusstr\":\"OK\", \"response\":\""
+#define k_jsonOKPrefixLen	(sizeof(k_jsonOKPrefix)-1)
+#define k_jsonOKPostfix "\" }"
+#define k_jsonOKPostfixLen	(sizeof(k_jsonOKPostfix)-1)
+static const int k_jsonReplyPrePadding=k_jsonOKPrefixLen+LWS_SEND_BUFFER_PRE_PADDING;
+static const int k_jsonReplyPostPadding=k_jsonOKPostfixLen+LWS_SEND_BUFFER_POST_PADDING;
+
+static json_t *GetJsonParamOfType(json_t *inObject, const char *inKeyName, json_type inExpectedType);
 
 static void do404(
 	struct libwebsocket *inWsi)
@@ -156,6 +169,25 @@ void UEditServer::UnregisterCmdHandler(
 	sHandlers.erase(sHandlers.begin()+idx);
 }
 
+// the inPayload ptr passed to this function should have k_jsonReplyPrePadding before it, and k_jsonReplyPostPadding after it
+// inPayloadLen should not include these sizes
+// the padding areas around inPayload will be written to by this function
+// if the payload contains the " character, it must be escaped, ie \"
+static void CmdPaddedReply(
+	UEditServer::SCmdConnection			*inConnection,
+	char								*inPayload,
+	size_t								inPayloadLen)
+{
+	memcpy(inPayload-k_jsonOKPrefixLen,k_jsonOKPrefix,k_jsonOKPrefixLen);
+	memcpy(inPayload+inPayloadLen,k_jsonOKPostfix,k_jsonOKPostfixLen);
+
+	int	res=libwebsocket_write(inConnection->wsi,(unsigned char*)inPayload-k_jsonOKPrefixLen,k_jsonOKPrefixLen+inPayloadLen+k_jsonOKPostfixLen,LWS_WRITE_TEXT);
+	if (res!=0)
+	{
+		ECHO("CmdError : error writing to websocket " << res << "\n");
+	}
+}
+
 void CmdError(
 	UEditServer::SCmdConnection			*inConnection,
 	int									inErrCode,
@@ -181,7 +213,7 @@ void CmdError(
 
 void CmdException(
 	UEditServer::SCmdConnection			*inConnection,
-	LException							*inErr)
+	const LException					*inErr)
 {
 	unsigned char		errStr[257];
 
@@ -209,18 +241,45 @@ static int Callback_Cmd(
 
 		case LWS_CALLBACK_CLOSED:
 			// shutdown connection object here
-			if (connection->curCmd)
-			{
-				json_decref(connection->curCmd);
-			}
 			break;
 
 		case LWS_CALLBACK_RECEIVE:
 			// process cmd here
-			ECHO("Received cmd : ");
-			UBkgConsole::gLogFile->write((const char*)inData,inLen);
-			ECHO("\n");
-			CmdError(connection,-1,"TOOD :)");
+			Try_
+			{
+				json_error_t	error;
+				json_t	*cmd=json_loadb((const char*)inData,inLen,0,&error);
+				if (!cmd)
+				{
+					ECHO("Failed to parse json \n" <<
+						"Text: " << error.text << "\n" << 
+						"Source: " << error.source << "\n" << 
+						"Line: " << error.line << "\n" << 
+						"Column: " << error.column << "\n" << 
+						"Positin: " << error.position << "\n");
+					UTBException::ThrowEditorJsonParseFail();
+				}
+				Try_
+				{
+					const char	*cmds=json_string_value(GetJsonParamOfType(cmd,"command",JSON_STRING));
+					int			h=FindCmdHandler(cmds);
+					if (h==-1)
+					{
+						UTBException::ThrowEditorUnknownCmd(cmds);
+					}
+					sHandlers[h].callback(cmd,connection);
+				}
+				Catch_(err)
+				{
+					json_decref(cmd);
+					throw;
+				}
+				json_decref(cmd);
+			}
+			Catch_(err)
+			{
+				CmdException(connection,&err);
+			}
 			break;
 	}
 
@@ -251,6 +310,242 @@ struct libwebsocket_extension sExtensions[]=
 {
 	{ NULL, NULL, 0 }
 };
+
+static size_t CalcBase64Len(size_t inOrigData)
+{
+	size_t	len=(inOrigData+2)/3;		// div 3 with roundup
+	return len*4;						// each 3 byte set produces 4 bytes of Base64 output
+}
+
+// This function was adapted from https://github.com/johnmccutchan/pal and has had minor alterations to fit into TB
+// the original licence is in the function below
+// returns 0 for success and -1 for error
+// output_length should contain the length of the output buffer on entry and will be filled out with the used
+// bytes on exit
+static int Base64Encode(const unsigned char* data, size_t input_length, char* target, size_t* output_length)
+{
+/*
+  Copyright (c) 2012 John McCutchan <john@johnmccutchan.com>
+
+  This software is provided 'as-is', without any express or implied
+  warranty. In no event will the authors be held liable for any damages
+  arising from the use of this software.
+
+  Permission is granted to anyone to use this software for any purpose,
+  including commercial applications, and to alter it and redistribute it
+  freely, subject to the following restrictions:
+
+  1. The origin of this software must not be misrepresented; you must not
+  claim that you wrote the original software. If you use this software
+  in a product, an acknowledgment in the product documentation would be
+  appreciated but is not required.
+
+  2. Altered source versions must be plainly marked as such, and must not be
+  misrepresented as being the original software.
+
+  3. This notice may not be removed or altered from any source
+  distribution.
+*/
+#define palAssert		0&sizeof
+
+	static const char Base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+	static const char Pad64 = '=';
+	size_t datalength = 0;
+	unsigned char input[3];
+	unsigned char output[4];
+	size_t i;
+	size_t srclength = input_length;
+	const unsigned char* src = data;
+
+	while (2 < srclength) {
+		input[0] = *src++;
+		input[1] = *src++;
+		input[2] = *src++;
+		srclength -= 3;
+
+		output[0] = input[0] >> 2;
+		output[1] = ((input[0] & 0x03) << 4) + (input[1] >> 4);
+		output[2] = ((input[1] & 0x0f) << 2) + (input[2] >> 6);
+		output[3] = input[2] & 0x3f;
+		palAssert(output[0] < 64);
+		palAssert(output[1] < 64);
+		palAssert(output[2] < 64);
+		palAssert(output[3] < 64);
+
+		if (datalength + 4 > *output_length)
+			return (-1);
+
+		target[datalength++] = Base64[output[0]];
+		target[datalength++] = Base64[output[1]];
+		target[datalength++] = Base64[output[2]];
+		target[datalength++] = Base64[output[3]];
+	}
+
+	if (0 != srclength) {
+		input[0] = input[1] = input[2] = '\0';
+		for (i = 0; i < srclength; i++)
+			input[i] = *src++;
+
+		output[0] = input[0] >> 2;
+		output[1] = ((input[0] & 0x03) << 4) + (input[1] >> 4);
+		output[2] = ((input[1] & 0x0f) << 2) + (input[2] >> 6);
+		palAssert(output[0] < 64);
+		palAssert(output[1] < 64);
+		palAssert(output[2] < 64);
+
+		if (datalength + 4 > *output_length)
+			return (-1);
+		target[datalength++] = Base64[output[0]];
+		target[datalength++] = Base64[output[1]];
+		if (srclength == 1)
+			target[datalength++] = Pad64;
+		else
+			target[datalength++] = Base64[output[2]];
+		target[datalength++] = Pad64;
+	}
+
+	*output_length = datalength;
+	return 0;
+}
+
+/*e*/
+// create a new handle containing the data from inHandleToCopy and convert it to base64
+// resultant handle will have inPrePadLen bytes padding before the base64 data begins and inPostPadLen bytes afterwards
+static Handle NewBase64HandleWithPadding(
+	Handle			inHandleToCopy,
+	size_t			inPrePadLen,
+	size_t			inPostPadLen)
+{
+	size_t			len=GetHandleSize(inHandleToCopy);
+	size_t			blen=CalcBase64Len(len);
+	size_t			newLen=blen;
+	Handle			out=::NewHandle(blen+inPrePadLen+inPostPadLen);
+	ThrowIfMemFull_(out);
+	int				res=Base64Encode((const unsigned char*)*inHandleToCopy,len,*out+inPrePadLen,&newLen);
+	if (res!=0 || newLen!=blen)
+	{
+		::DisposeHandle(out);
+		AssertThrow_(kTNTErr_InternalError);
+	}
+	return out;
+}
+
+/*e*/
+// get json parameter, throw if it's missing
+static json_t *GetJsonParam(
+	json_t				*inObject,
+	const char			*inKeyName)
+{
+	json_t				*res=json_object_get(inObject,inKeyName);
+	if (!res)
+	{
+		UTBException::ThrowEditorMissingParameter(inKeyName);
+	}
+	return res;
+}
+
+static const char *JsonTypeToString(
+	json_type			inType)
+{
+	switch (inType)
+	{
+		case JSON_OBJECT: return "JSON_OBJECT";
+		case JSON_ARRAY: return "JSON_ARRAY";
+		case JSON_STRING: return "JSON_STRING";
+		case JSON_INTEGER: return "JSON_INTEGER";
+		case JSON_REAL: return "JSON_REAL";
+		case JSON_TRUE: return "JSON_TRUE";
+		case JSON_FALSE: return "JSON_FALSE";
+		case JSON_NULL: return "JSON_NULL";
+	}
+	return "JSON_UNKNOWN_TYPE!";
+}
+
+/*e*/
+static json_t *GetJsonParamOfType(
+	json_t				*inObject,
+	const char			*inKeyName,
+	json_type			inExpectedType)
+{
+	json_t				*value=GetJsonParam(inObject,inKeyName);
+	if (json_typeof(value)!=inExpectedType)
+	{
+		UTBException::ThrowEditorParamWrongType(inKeyName,JsonTypeToString(inExpectedType),JsonTypeToString(json_typeof(value)));
+	}
+	return value;
+}
+
+/*e*/
+static TProjectId GetProjectId(
+	json_t				*inObject)
+{
+	json_int_t	id=json_integer_value(GetJsonParamOfType(inObject,"projectid",JSON_INTEGER));
+	return TProjectId(id);
+}
+
+/*e*/
+static CResourceContainer *GetProject(
+	json_t				*inObject)
+{
+	TProjectId			id=GetProjectId(inObject);
+	CResourceContainer	*container=NULL;
+	for (TProjVector::iterator iter=sOpenProj.begin(), eiter=sOpenProj.end(); iter!=eiter; ++iter)
+	{
+		if (iter->id==id)
+		{
+			container=iter->container;
+			break;
+		}
+	}
+	if (!container)
+	{
+		UTBException::ThrowEditorInvalidProjectId(id);
+	}
+	return container;
+}
+
+/*e*/
+static ResType GetResType(
+	json_t				*inObject,
+	const char			*inKeyName)
+{
+	json_t				*jstr=GetJsonParamOfType(inObject,inKeyName,JSON_STRING);
+	const char			*str=json_string_value(jstr);
+	if (!str || strlen(str)!=4)
+	{
+		UTBException::ThrowResTypeWrongLength();
+	}
+	ResType	t;
+	memcpy(&t,str,4);
+#if TARGET_RT_LITTLE_ENDIAN
+	t=CFSwapInt32BigToHost(t);
+#endif
+	return t;
+}
+
+/*e*/
+static TResId GetResId(
+	json_t				*inObject,
+	const char			*inKeyName)
+{
+	json_t				*v=GetJsonParamOfType(inObject,inKeyName,JSON_INTEGER);
+	return TResId(json_integer_value(v));
+}
+
+/*e*/
+static void CmdGetResource(
+	json_t						*inCmd,
+	UEditServer::SCmdConnection	*inClient)
+{
+	ResType				type=GetResType(inCmd,"type");
+	SInt32				id=GetResId(inCmd,"id");
+	CResourceContainer	*container=GetProject(inCmd);
+	StTNTResource		res(container,type,id);
+	StHandleReleaser	rel(NewBase64HandleWithPadding(res->GetReadOnlyDataHandle(),k_jsonReplyPrePadding,k_jsonReplyPostPadding));
+	UHandleLocker		lock(rel.GetHandle());
+
+	CmdPaddedReply(inClient,*rel+k_jsonReplyPrePadding,::GetHandleSize(rel.GetHandle())-k_jsonReplyPrePadding-k_jsonReplyPostPadding);
+}
 
 /*e*/
 void UEditServer::Initialise()
@@ -287,6 +582,8 @@ void UEditServer::Initialise()
 	}
 	
 	AssertThrow_(sEditorURL);
+
+	RegisterCmdHandler("getresource",CmdGetResource);
 }
 
 void UEditServer::Shutdown()
@@ -331,8 +628,9 @@ static void OpenEditor(
 	SProject		*inProj)
 {
 	CFMutableStringRef		mutableStr=CFStringCreateMutableCopy(kCFAllocatorDefault,512,CFURLGetString(sEditorURL));
-	CFStringAppend(mutableStr,CFSTR("?msg=raa"));
+	CFStringAppendFormat(mutableStr,NULL,CFSTR("?projectid=%d"),inProj->id);
 	CFURLRef				withParams=CFURLCreateWithString(kCFAllocatorDefault,mutableStr,NULL);
+	CFRelease(mutableStr);
 	OSStatus				err=LSOpenCFURLRef(withParams,NULL);
 	ECHO("Opening editor for " << withParams << " : ");
 	CFRelease(withParams);
